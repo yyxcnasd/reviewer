@@ -1,0 +1,103 @@
+/* ==========================================================================
+   复习册 — 设计令牌
+   颜色来自这门课自己的东西：试卷纸、墨、批改的红笔、讲义里的蓝黑墨水。
+   字体一套：宋体（Noto Serif SC），三个字重用来说话——正文、小标题、大字。
+   ========================================================================== */
+
+:root {
+  /* 纸与墨 */
+  --paper: #f1f1ee;
+  --paper-2: #e6e5e0;
+  --paper-3: #d8d7d1;
+  --ink: #17140f;
+  --ink-soft: #4c453b;
+  --ink-mute: #6f685c;
+  --ink-faint: #a39c8f;
+
+  /* 批改红：微积分、动作、范围里的“考” */
+  --red: #c1121f;
+  --red-deep: #8d0d17;
+  --red-soft: #f0dbd8;
+
+  /* 墨水蓝：线性代数 */
+  --indigo: #173f72;
+  --indigo-deep: #0e2a4d;
+
+  /* 只给真表格、真表单用的线 */
+  --line: rgba(23, 20, 15, 0.16);
+  --line-strong: rgba(23, 20, 15, 0.38);
+
+  /* 字体 */
+  --serif: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "SimSun", serif;
+  /* 只给两处真代码用：Markdown 编辑器与文件/issue 的原文片段 */
+  --mono: "SFMono-Regular", "JetBrains Mono", "Cascadia Mono", Consolas, monospace; /* taste-skill-ignore */
+
+  /* 字号：五级，跨度大，中间不设第六级 */
+  --fs-display: clamp(2.75rem, 7.4vw, 7.25rem);
+  --fs-h2: clamp(1.9rem, 4.4vw, 3.75rem);
+  --fs-h3: clamp(1.25rem, 2vw, 1.75rem);
+  --fs-lead: clamp(1.1875rem, 1.15vw, 1.4375rem);
+  --fs-body: clamp(1rem, 0.94rem + 0.28vw, 1.125rem);
+  --fs-small: 0.9375rem;
+  --fs-micro: 0.875rem;
+
+  /* 间距 */
+  --frame: clamp(18px, 4.4vw, 64px);
+  --gutter: clamp(14px, 1.6vw, 26px);
+  --section-y: clamp(72px, 9.5vw, 152px);
+  --stack: clamp(18px, 2.2vw, 30px);
+
+  /* 动效 */
+  --ease: cubic-bezier(0.16, 0.84, 0.44, 1);
+  --dur: 620ms;
+}
+
+/* 深色场（墨底）上，同一套角色换值 */
+.field-ink {
+  background-color: #17140f;
+  --paper: #17140f;
+  --paper-2: #221e18;
+  --paper-3: #2d2822;
+  --ink: #f3f1ec;
+  --ink-soft: #d8d3c8;
+  --ink-mute: #b3ac9f;
+  --ink-faint: #7d7568;
+  --line: rgba(243, 241, 236, 0.18);
+  --line-strong: rgba(243, 241, 236, 0.42);
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.field-red {
+  background-color: #c1121f;
+  --paper: #c1121f;
+  --paper-2: #a90f1b;
+  --paper-3: #920d17;
+  --ink: #f7f2ec;
+  --ink-soft: #f0d9d6;
+  --ink-mute: #e9c2bd;
+  --ink-faint: #d69b96;
+  --line: rgba(247, 242, 236, 0.24);
+  --line-strong: rgba(247, 242, 236, 0.5);
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.field-indigo {
+  background-color: #173f72;
+  --paper: #173f72;
+  --paper-2: #12365f;
+  --paper-3: #0e2a4d;
+  --ink: #f0f2f4;
+  --ink-soft: #cfd9e5;
+  --ink-mute: #a9bbd0;
+  --ink-faint: #7d94ad;
+  --line: rgba(240, 242, 244, 0.22);
+  --line-strong: rgba(240, 242, 244, 0.48);
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.field-paper2 {
+  background-color: #e6e5e0;
+}

@@ -1,0 +1,448 @@
+/* ==========================================================================
+   基础层：重置、排版、栅格、导航、按钮、表单、动效
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: var(--fs-body);
+  font-weight: 400;
+  line-height: 1.78;
+  font-feature-settings: "palt" 0;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* 宋体的中文与西文混排：数字用等高，标点压缩交给浏览器 */
+body { font-variant-numeric: tabular-nums; }
+
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover,
+a:focus-visible {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.2em;
+  text-decoration-color: currentColor;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+::selection {
+  background: var(--red);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 3px solid var(--red);
+  outline-offset: 3px;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+figure,
+blockquote {
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 900;
+  line-height: 1.16;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--fs-display);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: var(--fs-h2);
+}
+
+h3 {
+  font-size: var(--fs-h3);
+  font-weight: 700;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+/* ---------------------------------------------------------------- 版心 */
+
+.frame {
+  padding-inline: var(--frame);
+  margin-inline: auto;
+  width: 100%;
+  max-width: 1680px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--gutter);
+}
+
+@media (max-width: 760px) {
+  .grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+}
+
+.section {
+  padding-block: var(--section-y);
+}
+
+.section--tight {
+  padding-block: calc(var(--section-y) * 0.62);
+}
+
+/* ---------------------------------------------------------------- 导航 */
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap-md, 24px);
+  padding-block: clamp(16px, 2vw, 26px);
+  font-size: var(--fs-small);
+  font-weight: 700;
+}
+
+.nav__mark {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5em;
+  font-size: clamp(1.1rem, 1.5vw, 1.35rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.nav__mark:hover {
+  text-decoration: none;
+}
+
+.nav__mark:hover .nav__dot {
+  transform: scale(1.35);
+}
+
+.nav__dot {
+  width: 0.62em;
+  height: 0.62em;
+  border-radius: 50%;
+  background: var(--red);
+  transition: transform 260ms var(--ease);
+  flex: none;
+}
+
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: clamp(12px, 1.6vw, 28px);
+  list-style: none;
+  padding: 0;
+}
+
+.nav__links a {
+  padding-block: 0.25em;
+  border-bottom: 2px solid transparent;
+}
+
+.nav__links a:hover,
+.nav__links a[aria-current="page"] {
+  text-decoration: none;
+  border-bottom-color: currentColor;
+}
+
+.nav__links a[aria-current="page"] {
+  color: var(--red);
+}
+
+@media (max-width: 720px) {
+  .nav__links li:not(:last-child) {
+    display: none;
+  }
+}
+
+/* ---------------------------------------------------------------- 按钮 */
+
+.btn {
+  --btn-bg: var(--ink);
+  --btn-fg: var(--paper);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7em;
+  padding: 0.82em 1.35em;
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font-weight: 700;
+  font-size: var(--fs-body);
+  line-height: 1.2;
+  border: 0;
+  border-radius: 0;
+  cursor: pointer;
+  transition:
+    background-color 180ms var(--ease),
+    color 180ms var(--ease),
+    transform 180ms var(--ease);
+}
+
+.btn:hover {
+  text-decoration: none;
+  --btn-bg: var(--red);
+  --btn-fg: #fff;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn--red {
+  --btn-bg: var(--red);
+  --btn-fg: #fff;
+}
+
+.btn--red:hover {
+  --btn-bg: var(--ink);
+}
+
+.btn--tone {
+  --btn-bg: var(--paper-2);
+  --btn-fg: var(--ink);
+}
+
+.btn--tone:hover {
+  --btn-bg: var(--ink);
+  --btn-fg: var(--paper);
+}
+
+.btn--block {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* ---------------------------------------------------------------- 表单 */
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.field > label,
+.field > legend {
+  font-size: var(--fs-small);
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+
+.input,
+.select,
+.textarea {
+  width: 100%;
+  padding: 0.75em 0.85em;
+  background: transparent;
+  color: var(--ink);
+  border: 2px solid var(--line-strong);
+  border-radius: 0;
+  font-size: var(--fs-body);
+  line-height: 1.5;
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+  outline: none;
+  border-color: var(--red);
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: var(--ink-faint);
+}
+
+.textarea {
+  min-height: 8em;
+  resize: vertical;
+}
+
+.textarea--code {
+  font-family: var(--mono); /* taste-skill-ignore */
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  tab-size: 2;
+}
+
+.hint {
+  font-size: var(--fs-micro);
+  color: var(--ink-mute);
+  line-height: 1.6;
+}
+
+/* ---------------------------------------------------------------- 标记 */
+
+.tag {
+  display: inline-block;
+  padding: 0.18em 0.6em;
+  background: var(--paper-2);
+  color: var(--ink-soft);
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  line-height: 1.5;
+  transition: background-color 160ms var(--ease), color 160ms var(--ease);
+}
+
+a.tag:hover {
+  text-decoration: none;
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  list-style: none;
+  padding: 0;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55em 1.1em;
+  font-size: var(--fs-micro);
+  color: var(--ink-mute);
+}
+
+.meta__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+}
+
+/* 难度：四个方块，实心的个数就是难度 */
+.dots {
+  display: inline-flex;
+  gap: 3px;
+  vertical-align: middle;
+}
+
+.dots i {
+  width: 7px;
+  height: 7px;
+  background: var(--ink-faint);
+  display: block;
+}
+
+.dots i.on {
+  background: var(--red);
+}
+
+/* ---------------------------------------------------------------- 动效 */
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity var(--dur) var(--ease),
+    transform var(--dur) var(--ease);
+  transition-delay: var(--delay, 0ms);
+}
+
+[data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* 兜底：没有 JS 时内容必须可见 */
+.no-js [data-reveal] {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------------------------------------------------------------- 数学 */
+
+.katex {
+  font-size: 1.04em;
+}
+
+.math-display {
+  display: block;
+  margin-block: 1.1em;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-block: 0.15em;
+}
+
+.math-display .katex-display {
+  margin: 0;
+}
+
+.math-error {
+  background: var(--red-soft);
+  color: var(--red-deep);
+  padding: 0 0.2em;
+}
+
+/* 滚动条跟着纸的颜色走 */
+* {
+  scrollbar-color: var(--ink-faint) transparent;
+  scrollbar-width: thin;
+}
