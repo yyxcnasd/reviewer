@@ -1,0 +1,63 @@
+name: 构建并部署到 GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'content/**'
+      - 'src/**'
+      - 'build.mjs'
+      - 'site.config.json'
+      - 'package.json'
+      - '.github/workflows/deploy.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: 安装依赖
+        run: npm ci
+
+      - name: 校验内容
+        run: node build.mjs --check-only
+
+      - name: 生成站点
+        run: node build.mjs
+
+      - name: 检查是否部署在仓库子路径下
+        run: |
+          test -f docs/.nojekyll || (echo "缺 docs/.nojekyll，GitHub Pages 会用 Jekyll 处理而忽略下划线文件" && exit 1)
+          grep -q 'href="\./' docs/index.html || grep -q 'href="\.\./' docs/index.html || true
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

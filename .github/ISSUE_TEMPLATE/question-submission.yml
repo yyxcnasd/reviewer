@@ -1,0 +1,124 @@
+name: 题目投稿
+description: 交一道题：题面、解析、标签与难度。管理员合并后它就成为题库里的一个文件。
+title: "[题目投稿] "
+labels: ["question-submission"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        投稿之前先看两件事：
+
+        1. **数学要正确**，解析要有推导过程，不能只有答案。
+        2. **公式用 `\( \)` 写行内，`\[ \]` 写独立成行**，每个数学符号都要包进定界符。
+
+        你也可以用站里的投稿页（自动生成这份表单，带实时预览）：`<站点地址>/submit/`。
+
+        下面是题目本身，请保留每个字段名。
+
+  - type: dropdown
+    id: course
+    attributes:
+      label: 课程
+      options:
+        - 微积分 A1 (va1)
+        - 线性代数 (la)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: chapter
+    attributes:
+      label: 章节
+      description: 不在列表里的章节说明它可能是期中之后的内容，也可以照实填在正文里。
+      options:
+        - 第 1 章 (va1-1 实数系与实数列的极限)
+        - 第 2 章 (va1-2 函数极限与连续)
+        - 第 3 章 (va1-3 函数的导数)
+        - 第 4 章 (va1-4 导数应用)
+        - 第 1 章 (la-1 线性方程组与行列式)
+        - 第 2 章 (la-2 矩阵)
+        - 第 3 章 (la-3 n 维向量空间)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: difficulty
+    attributes:
+      label: 难度
+      options:
+        - 1 基础（直接套定义或公式）
+        - 2 常规（期中卷上占多数）
+        - 3 综合（两个以上知识点）
+        - 4 挑战（卷面压轴）
+    validations:
+      required: true
+
+  - type: dropdown
+    id: kind
+    attributes:
+      label: 题型
+      options:
+        - 计算题
+        - 证明题
+        - 概念题
+        - 综合题
+    validations:
+      required: true
+
+  - type: input
+    id: tags
+    attributes:
+      label: 标签
+      description: 一到四个，用逗号分开
+      placeholder: 泰勒公式, 极限计算
+    validations:
+      required: true
+
+  - type: textarea
+    id: stem
+    attributes:
+      label: 题面
+      description: Markdown，公式用 \( \) 和 \[ \]
+      placeholder: 设 \(f(x)=\dfrac{1}{1+x}\)，求 \(f^{(n)}(0)\)。
+    validations:
+      required: true
+
+  - type: textarea
+    id: hint
+    attributes:
+      label: 提示（可选）
+      description: 一句话的抓手，不要剧透答案
+    validations:
+      required: false
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: 解析
+      description: 写清为什么这样想：关键的一步、用到的条件、容易漏掉的情况
+    validations:
+      required: true
+
+  - type: input
+    id: answer
+    attributes:
+      label: 答案（可选但建议）
+      description: 一行，数学写法
+      placeholder: \((-1)^{n}n!\)
+    validations:
+      required: false
+
+  - type: textarea
+    id: mistakes
+    attributes:
+      label: 常见错误（可选）
+    validations:
+      required: false
+
+  - type: input
+    id: origin
+    attributes:
+      label: 署名（可选）
+      placeholder: 不填就是佚名
+    validations:
+      required: false
