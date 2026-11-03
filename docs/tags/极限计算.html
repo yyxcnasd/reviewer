@@ -8,7 +8,17 @@
 <meta name="color-scheme" content="light">
 <link rel="stylesheet" href="../assets/katex/katex.min.css">
 <link rel="stylesheet" href="../assets/site.css">
+<script>
+  // 先按本地设置（或系统偏好）定主题，避免刷新时闪白
+  try {
+    var saved = localStorage.getItem('reviewer.theme')
+    var dark = saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches
+    if (dark) document.documentElement.setAttribute('data-theme', 'dark')
+  } catch (e) {}
+</script>
 <script src="../assets/core.js"></script>
+<script src="../assets/theme.js" defer></script>
+<script src="../assets/term.js" defer></script>
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <meta property="og:title" content="标签：极限计算 · 复习册">
 <meta property="og:description" content="带「极限计算」标签的 27 道题。">
@@ -32,7 +42,13 @@
           <li><a href="../cheatsheet/">速查</a></li>
           <li><a href="../papers/">真题</a></li>
         </ul>
-        <a class="btn btn--red nav__action" href="../submit/">投稿</a>
+        <div class="nav__end">
+          <div class="nav__terms" role="group" aria-label="考试轮次">
+            <button class="term-btn is-on" type="button" data-term-btn="midterm">期中</button><button class="term-btn" type="button" data-term-btn="final">期末</button>
+          </div>
+          <button class="ghost nav__theme" id="theme-toggle" type="button" aria-live="polite">深色</button>
+          <a class="btn btn--red nav__action" href="../submit/">投稿</a>
+        </div>
       </nav>
     </div>
   </header>
@@ -46,189 +62,189 @@
       <div class="pagehead__scope"><p>27 道题带这个标签。</p></div>
     </div>
   </header>
-  <ul class="qlist"><li class="qrow" data-id="va1-001" data-course="va1" data-chapter="va1-4" data-difficulty="2" data-tags="泰勒公式 极限计算 等价无穷小" data-text="求极限 泰勒公式 极限计算 等价无穷小 自编">
+  <ul class="qlist"><li class="qrow" data-id="va1-001" data-course="va1" data-chapter="va1-4" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="2" data-tags="泰勒公式 极限计算 等价无穷小" data-text="求极限 泰勒公式 极限计算 等价无穷小 自编">
         <div>
           <a class="qrow__link" href="../questions/va1-001.html">求极限 · 泰勒公式</a>
           <div class="qrow__meta"><span>微积分 · 导数应用</span><span>计算题</span><span class="dots" aria-label="难度 2 / 4"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span></div>
           
         </div>
         
-      </li><li class="qrow" data-id="va1-002" data-course="va1" data-chapter="va1-1" data-difficulty="2" data-tags="ε-N 语言 极限计算" data-text="用 - 语言证明 ε-N 语言 极限计算 自编">
+      </li><li class="qrow" data-id="va1-002" data-course="va1" data-chapter="va1-1" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="2" data-tags="ε-N 语言 极限计算" data-text="用 - 语言证明 ε-N 语言 极限计算 自编">
         <div>
           <a class="qrow__link" href="../questions/va1-002.html">用 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ε</mi></mrow><annotation encoding="application/x-tex">\varepsilon</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">ε</span></span></span></span>-<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi></mrow><annotation encoding="application/x-tex">N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.109em;">N</span></span></span></span> 语言证明</a>
           <div class="qrow__meta"><span>微积分 · 实数系与实数列的极限</span><span>证明题</span><span class="dots" aria-label="难度 2 / 4"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span></div>
           
         </div>
         
-      </li><li class="qrow" data-id="va1-003" data-course="va1" data-chapter="va1-1" data-difficulty="2" data-tags="夹逼准则 极限计算" data-text="求极限 夹逼准则 极限计算 自编">
+      </li><li class="qrow" data-id="va1-003" data-course="va1" data-chapter="va1-1" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="2" data-tags="夹逼准则 极限计算" data-text="求极限 夹逼准则 极限计算 自编">
         <div>
           <a class="qrow__link" href="../questions/va1-003.html">求极限 · 夹逼准则</a>
           <div class="qrow__meta"><span>微积分 · 实数系与实数列的极限</span><span>计算题</span><span class="dots" aria-label="难度 2 / 4"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span></div>
           
         </div>
         
-      </li><li class="qrow" data-id="va1-004" data-course="va1" data-chapter="va1-1" data-difficulty="3" data-tags="单调有界 极限计算" data-text="设 ，且 证明数列 收敛，并求 。 单调有界 极限计算 自编">
+      </li><li class="qrow" data-id="va1-004" data-course="va1" data-chapter="va1-1" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="3" data-tags="单调有界 极限计算" data-text="设 ，且 证明数列 收敛，并求 。 单调有界 极限计算 自编">
         <div>
           <a class="qrow__link" href="../questions/va1-004.html">设 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>a</mi><mn>1</mn></msub><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">a_1=1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span>，且 · 单调有界</a>
           <div class="qrow__meta"><span>微积分 · 实数系与实数列的极限</span><span>证明题</span><span class="dots" aria-label="难度 3 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span></div>
           
         </div>
         
-      </li><li class="qrow" data-id="va1-006" data-course="va1" data-chapter="va1-1" data-difficulty="3" data-tags="证明题 极限计算" data-text="设 用柯西收敛准则证明数列 收敛（不必求出极限值）。 证明题 极限计算 自编">
+      </li><li class="qrow" data-id="va1-006" data-course="va1" data-chapter="va1-1" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="3" data-tags="证明题 极限计算" data-text="设 用柯西收敛准则证明数列 收敛（不必求出极限值）。 证明题 极限计算 自编">
         <div>
           <a class="qrow__link" href="../questions/va1-006.html">设 · 证明题</a>
           <div class="qrow__meta"><span>微积分 · 实数系与实数列的极限</span><span>证明题</span><span class="dots" aria-label="难度 3 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span></div>
           
         </div>
         
-      </li><li class="qrow" data-id="va1-007" data-course="va1" data-chapter="va1-1" data-difficulty="1" data-tags="极限计算" data-text="设 求 与 ，并说明 是否有最大值、最小值。 极限计算 自编">
+      </li><li class="qrow" data-id="va1-007" data-course="va1" data-chapter="va1-1" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="1" data-tags="极限计算" data-text="设 求 与 ，并说明 是否有最大值、最小值。 极限计算 自编">
         <div>
           <a class="qrow__link" href="../questions/va1-007.html">设 · 极限计算</a>
           <div class="qrow__meta"><span>微积分 · 实数系与实数列的极限</span><span>计算题</span><span class="dots" aria-label="难度 1 / 4"><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span></div>
           
         </div>
         
-      </li><li class="qrow" data-id="va1-008" data-course="va1" data-chapter="va1-1" data-difficulty="1" data-tags="极限计算" data-text="判断下列说法是否正确；正确的给出证明，错误的举出反例。 （1）若 ，且数列 有界，则 。 （2）若数列 无界，则 （这里 指：任给 ，存在 ，当 时 ）。 极限计算 自编">
+      </li><li class="qrow" data-id="va1-008" data-course="va1" data-chapter="va1-1" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="1" data-tags="极限计算" data-text="判断下列说法是否正确；正确的给出证明，错误的举出反例。 （1）若 ，且数列 有界，则 。 （2）若数列 无界，则 （这里 指：任给 ，存在 ，当 时 ）。 极限计算 自编">
         <div>
           <a class="qrow__link" href="../questions/va1-008.html">判断下列说法是否正确；正确的给出证明，错误的举出反例。</a>
           <div class="qrow__meta"><span>微积分 · 实数系与实数列的极限</span><span>概念题</span><span class="dots" aria-label="难度 1 / 4"><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span></div>
           
         </div>
         
-      </li><li class="qrow" data-id="va1-009" data-course="va1" data-chapter="va1-1" data-difficulty="1" data-tags="极限计算" data-text="求极限 极限计算 自编">
+      </li><li class="qrow" data-id="va1-009" data-course="va1" data-chapter="va1-1" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="1" data-tags="极限计算" data-text="求极限 极限计算 自编">
         <div>
           <a class="qrow__link" href="../questions/va1-009.html">求极限 · 极限计算</a>
           <div class="qrow__meta"><span>微积分 · 实数系与实数列的极限</span><span>计算题</span><span class="dots" aria-label="难度 1 / 4"><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span></div>
           
         </div>
         
-      </li><li class="qrow" data-id="va1-010" data-course="va1" data-chapter="va1-1" data-difficulty="2" data-tags="等价无穷小 极限计算" data-text="设 （1）求 ； （2）判断 与 是同阶无穷小还是等价无穷小，并说明理由。 等价无穷小 极限计算 自编">
+      </li><li class="qrow" data-id="va1-010" data-course="va1" data-chapter="va1-1" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="2" data-tags="等价无穷小 极限计算" data-text="设 （1）求 ； （2）判断 与 是同阶无穷小还是等价无穷小，并说明理由。 等价无穷小 极限计算 自编">
         <div>
           <a class="qrow__link" href="../questions/va1-010.html">设 · 等价无穷小</a>
           <div class="qrow__meta"><span>微积分 · 实数系与实数列的极限</span><span>计算题</span><span class="dots" aria-label="难度 2 / 4"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span></div>
           
         </div>
         
-      </li><li class="qrow" data-id="va1-011" data-course="va1" data-chapter="va1-1" data-difficulty="4" data-tags="单调有界 极限计算" data-text="设 证明 单调递增且有上界 ，从而收敛。 单调有界 极限计算 自编">
+      </li><li class="qrow" data-id="va1-011" data-course="va1" data-chapter="va1-1" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="4" data-tags="单调有界 极限计算" data-text="设 证明 单调递增且有上界 ，从而收敛。 单调有界 极限计算 自编">
         <div>
           <a class="qrow__link" href="../questions/va1-011.html">设 · 单调有界</a>
           <div class="qrow__meta"><span>微积分 · 实数系与实数列的极限</span><span>综合题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></div>
           
         </div>
         
-      </li><li class="qrow" data-id="va1-012" data-course="va1" data-chapter="va1-1" data-difficulty="2" data-tags="夹逼准则 极限计算" data-text="证明 夹逼准则 极限计算 自编">
+      </li><li class="qrow" data-id="va1-012" data-course="va1" data-chapter="va1-1" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="2" data-tags="夹逼准则 极限计算" data-text="证明 夹逼准则 极限计算 自编">
         <div>
           <a class="qrow__link" href="../questions/va1-012.html">证明 · 夹逼准则</a>
           <div class="qrow__meta"><span>微积分 · 实数系与实数列的极限</span><span>证明题</span><span class="dots" aria-label="难度 2 / 4"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span></div>
           
         </div>
         
-      </li><li class="qrow" data-id="va1-013" data-course="va1" data-chapter="va1-1" data-difficulty="2" data-tags="证明题 极限计算" data-text="证明数列 发散。 证明题 极限计算 自编">
+      </li><li class="qrow" data-id="va1-013" data-course="va1" data-chapter="va1-1" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="2" data-tags="证明题 极限计算" data-text="证明数列 发散。 证明题 极限计算 自编">
         <div>
           <a class="qrow__link" href="../questions/va1-013.html">证明数列 · 证明题</a>
           <div class="qrow__meta"><span>微积分 · 实数系与实数列的极限</span><span>证明题</span><span class="dots" aria-label="难度 2 / 4"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span></div>
           
         </div>
         
-      </li><li class="qrow" data-id="va1-014" data-course="va1" data-chapter="va1-2" data-difficulty="1" data-tags="极限计算 等价无穷小" data-text="求极限 极限计算 等价无穷小 自编">
+      </li><li class="qrow" data-id="va1-014" data-course="va1" data-chapter="va1-2" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="1" data-tags="极限计算 等价无穷小" data-text="求极限 极限计算 等价无穷小 自编">
         <div>
           <a class="qrow__link" href="../questions/va1-014.html">求极限 · 极限计算</a>
           <div class="qrow__meta"><span>微积分 · 函数 函数的极限与连续</span><span>计算题</span><span class="dots" aria-label="难度 1 / 4"><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span></div>
           
         </div>
         
-      </li><li class="qrow" data-id="va1-015" data-course="va1" data-chapter="va1-2" data-difficulty="1" data-tags="极限计算" data-text="求极限 极限计算 自编">
+      </li><li class="qrow" data-id="va1-015" data-course="va1" data-chapter="va1-2" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="1" data-tags="极限计算" data-text="求极限 极限计算 自编">
         <div>
           <a class="qrow__link" href="../questions/va1-015.html">求极限 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow><mi>lim</mi><mo>⁡</mo></mrow><mrow><mi>x</mi><mo>→</mo><mn>0</mn></mrow></msub><mo stretchy="false">(</mo><mn>1</mn><mo>+</mo><mn>3</mn><mi>x</mi><msup><mo stretchy="false">)</mo><mfrac><mn>1</mn><mi>x</mi></mfrac></msup><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\lim_{x\to 0}(1+3x)^{\frac{1}{x}}.</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop"><span class="mop">lim</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">x</span><span class="mrel mtight">→</span><span class="mord mtight">0</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.204em;vertical-align:-0.25em;"></span><span class="mord">3</span><span class="mord mathnormal">x</span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.954em;"><span style="top:-3.363em;margin-right:0.05em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mopen nulldelimiter sizing reset-size3 size6"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8443em;"><span style="top:-2.656em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">x</span></span></span></span><span style="top:-3.2255em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line mtight" style="border-bottom-width:0.049em;"></span></span><span style="top:-3.384em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.344em;"><span></span></span></span></span></span><span class="mclose nulldelimiter sizing reset-size3 size6"></span></span></span></span></span></span></span></span></span></span><span class="mord">.</span></span></span></span> · 极限计算</a>
           <div class="qrow__meta"><span>微积分 · 函数 函数的极限与连续</span><span>计算题</span><span class="dots" aria-label="难度 1 / 4"><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span></div>
           
         </div>
         
-      </li><li class="qrow" data-id="va1-016" data-course="va1" data-chapter="va1-2" data-difficulty="2" data-tags="极限计算 等价无穷小" data-text="求极限 极限计算 等价无穷小 自编">
+      </li><li class="qrow" data-id="va1-016" data-course="va1" data-chapter="va1-2" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="2" data-tags="极限计算 等价无穷小" data-text="求极限 极限计算 等价无穷小 自编">
         <div>
           <a class="qrow__link" href="../questions/va1-016.html">求极限 · 极限计算</a>
           <div class="qrow__meta"><span>微积分 · 函数 函数的极限与连续</span><span>计算题</span><span class="dots" aria-label="难度 2 / 4"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span></div>
           
         </div>
         
-      </li><li class="qrow" data-id="va1-018" data-course="va1" data-chapter="va1-2" data-difficulty="1" data-tags="极限计算 间断点" data-text="设 求 在 处的左极限与右极限，并判断 是否存在。 极限计算 间断点 自编">
+      </li><li class="qrow" data-id="va1-018" data-course="va1" data-chapter="va1-2" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="1" data-tags="极限计算 间断点" data-text="设 求 在 处的左极限与右极限，并判断 是否存在。 极限计算 间断点 自编">
         <div>
           <a class="qrow__link" href="../questions/va1-018.html">设 · 极限计算</a>
           <div class="qrow__meta"><span>微积分 · 函数 函数的极限与连续</span><span>计算题</span><span class="dots" aria-label="难度 1 / 4"><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span></div>
           
         </div>
         
-      </li><li class="qrow" data-id="va1-019" data-course="va1" data-chapter="va1-2" data-difficulty="2" data-tags="证明题 极限计算" data-text="用 - 语言证明 证明题 极限计算 自编">
+      </li><li class="qrow" data-id="va1-019" data-course="va1" data-chapter="va1-2" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="2" data-tags="证明题 极限计算" data-text="用 - 语言证明 证明题 极限计算 自编">
         <div>
           <a class="qrow__link" href="../questions/va1-019.html">用 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ε</mi></mrow><annotation encoding="application/x-tex">\varepsilon</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">ε</span></span></span></span>-<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>δ</mi></mrow><annotation encoding="application/x-tex">\delta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.0379em;">δ</span></span></span></span> 语言证明</a>
           <div class="qrow__meta"><span>微积分 · 函数 函数的极限与连续</span><span>证明题</span><span class="dots" aria-label="难度 2 / 4"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span></div>
           
         </div>
         
-      </li><li class="qrow" data-id="va1-020" data-course="va1" data-chapter="va1-2" data-difficulty="3" data-tags="证明题 极限计算" data-text="证明极限 不存在。 证明题 极限计算 自编">
+      </li><li class="qrow" data-id="va1-020" data-course="va1" data-chapter="va1-2" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="3" data-tags="证明题 极限计算" data-text="证明极限 不存在。 证明题 极限计算 自编">
         <div>
           <a class="qrow__link" href="../questions/va1-020.html">证明极限 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow><mi>lim</mi><mo>⁡</mo></mrow><mrow><mi>x</mi><mo>→</mo><mn>0</mn></mrow></msub><mi>sin</mi><mo>⁡</mo><mfrac><mn>1</mn><mi>x</mi></mfrac></mrow><annotation encoding="application/x-tex">\lim_{x\to 0}\sin\frac{1}{x}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.1901em;vertical-align:-0.345em;"></span><span class="mop"><span class="mop">lim</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">x</span><span class="mrel mtight">→</span><span class="mord mtight">0</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop">sin</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8451em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">x</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span> · 证明题</a>
           <div class="qrow__meta"><span>微积分 · 函数 函数的极限与连续</span><span>证明题</span><span class="dots" aria-label="难度 3 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span></div>
           
         </div>
         
-      </li><li class="qrow" data-id="va1-024" data-course="va1" data-chapter="va1-2" data-difficulty="2" data-tags="极限计算 等价无穷小" data-text="当 时，分别确定无穷小 关于 的阶，并比较两者阶的高低。 极限计算 等价无穷小 自编">
+      </li><li class="qrow" data-id="va1-024" data-course="va1" data-chapter="va1-2" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="2" data-tags="极限计算 等价无穷小" data-text="当 时，分别确定无穷小 关于 的阶，并比较两者阶的高低。 极限计算 等价无穷小 自编">
         <div>
           <a class="qrow__link" href="../questions/va1-024.html">当 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>→</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">x\to 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span> 时，分别确定无穷小</a>
           <div class="qrow__meta"><span>微积分 · 函数 函数的极限与连续</span><span>计算题</span><span class="dots" aria-label="难度 2 / 4"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span></div>
           
         </div>
         
-      </li><li class="qrow" data-id="va1-026" data-course="va1" data-chapter="va1-3" data-difficulty="1" data-tags="导数定义 极限计算" data-text="设函数 在 处可导，且 。求极限 导数定义 极限计算 自编">
+      </li><li class="qrow" data-id="va1-026" data-course="va1" data-chapter="va1-3" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="1" data-tags="导数定义 极限计算" data-text="设函数 在 处可导，且 。求极限 导数定义 极限计算 自编">
         <div>
           <a class="qrow__link" href="../questions/va1-026.html">设函数 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span></span></span></span> 在 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">x=0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span> 处可导，且 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>f</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">f&#x27;(0)=1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0019em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7519em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord">0</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span>。求极限</a>
           <div class="qrow__meta"><span>微积分 · 函数的导数</span><span>计算题</span><span class="dots" aria-label="难度 1 / 4"><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span></div>
           
         </div>
         
-      </li><li class="qrow" data-id="va1-037" data-course="va1" data-chapter="va1-4" data-difficulty="1" data-tags="洛必达法则 极限计算" data-text="求极限 洛必达法则 极限计算 自编">
+      </li><li class="qrow" data-id="va1-037" data-course="va1" data-chapter="va1-4" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="1" data-tags="洛必达法则 极限计算" data-text="求极限 洛必达法则 极限计算 自编">
         <div>
           <a class="qrow__link" href="../questions/va1-037.html">求极限 · 洛必达法则</a>
           <div class="qrow__meta"><span>微积分 · 导数应用</span><span>计算题</span><span class="dots" aria-label="难度 1 / 4"><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span></div>
           
         </div>
         
-      </li><li class="qrow" data-id="va1-039" data-course="va1" data-chapter="va1-4" data-difficulty="1" data-tags="洛必达法则 极限计算" data-text="求极限 洛必达法则 极限计算 自编">
+      </li><li class="qrow" data-id="va1-039" data-course="va1" data-chapter="va1-4" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="1" data-tags="洛必达法则 极限计算" data-text="求极限 洛必达法则 极限计算 自编">
         <div>
           <a class="qrow__link" href="../questions/va1-039.html">求极限 · 洛必达法则</a>
           <div class="qrow__meta"><span>微积分 · 导数应用</span><span>计算题</span><span class="dots" aria-label="难度 1 / 4"><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span></div>
           
         </div>
         
-      </li><li class="qrow" data-id="va1-040" data-course="va1" data-chapter="va1-4" data-difficulty="2" data-tags="洛必达法则 极限计算" data-text="求极限 洛必达法则 极限计算 自编">
+      </li><li class="qrow" data-id="va1-040" data-course="va1" data-chapter="va1-4" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="2" data-tags="洛必达法则 极限计算" data-text="求极限 洛必达法则 极限计算 自编">
         <div>
           <a class="qrow__link" href="../questions/va1-040.html">求极限 · 洛必达法则</a>
           <div class="qrow__meta"><span>微积分 · 导数应用</span><span>计算题</span><span class="dots" aria-label="难度 2 / 4"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span></div>
           
         </div>
         
-      </li><li class="qrow" data-id="va1-041" data-course="va1" data-chapter="va1-4" data-difficulty="2" data-tags="泰勒公式 极限计算" data-text="求极限 泰勒公式 极限计算 自编">
+      </li><li class="qrow" data-id="va1-041" data-course="va1" data-chapter="va1-4" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="2" data-tags="泰勒公式 极限计算" data-text="求极限 泰勒公式 极限计算 自编">
         <div>
           <a class="qrow__link" href="../questions/va1-041.html">求极限 · 泰勒公式</a>
           <div class="qrow__meta"><span>微积分 · 导数应用</span><span>计算题</span><span class="dots" aria-label="难度 2 / 4"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span></div>
           
         </div>
         
-      </li><li class="qrow" data-id="va1-043" data-course="va1" data-chapter="va1-4" data-difficulty="3" data-tags="洛必达法则 极限计算" data-text="下列三处使用洛必达法则的推理都有问题。指出问题所在，并给出正确的极限值。 （1） ； （2） ，右端不存在，故原极限不存在； （3） ，右端不存在，故原极限不存在。 洛必达法则 极限计算 自编">
+      </li><li class="qrow" data-id="va1-043" data-course="va1" data-chapter="va1-4" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="3" data-tags="洛必达法则 极限计算" data-text="下列三处使用洛必达法则的推理都有问题。指出问题所在，并给出正确的极限值。 （1） ； （2） ，右端不存在，故原极限不存在； （3） ，右端不存在，故原极限不存在。 洛必达法则 极限计算 自编">
         <div>
           <a class="qrow__link" href="../questions/va1-043.html">下列三处使用洛必达法则的推理都有问题。指出问题所在，并给出正确的极限值。</a>
           <div class="qrow__meta"><span>微积分 · 导数应用</span><span>概念题</span><span class="dots" aria-label="难度 3 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span></div>
           
         </div>
         
-      </li><li class="qrow" data-id="va1-047" data-course="va1" data-chapter="va1-4" data-difficulty="3" data-tags="泰勒公式 洛必达法则 极限计算" data-text="求极限 泰勒公式 洛必达法则 极限计算 自编">
+      </li><li class="qrow" data-id="va1-047" data-course="va1" data-chapter="va1-4" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="3" data-tags="泰勒公式 洛必达法则 极限计算" data-text="求极限 泰勒公式 洛必达法则 极限计算 自编">
         <div>
           <a class="qrow__link" href="../questions/va1-047.html">求极限 · 泰勒公式</a>
           <div class="qrow__meta"><span>微积分 · 导数应用</span><span>综合题</span><span class="dots" aria-label="难度 3 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span></div>
           
         </div>
         
-      </li><li class="qrow" data-id="va1-048" data-course="va1" data-chapter="va1-4" data-difficulty="4" data-tags="泰勒公式 极限计算" data-text="求极限 泰勒公式 极限计算 自编">
+      </li><li class="qrow" data-id="va1-048" data-course="va1" data-chapter="va1-4" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="4" data-tags="泰勒公式 极限计算" data-text="求极限 泰勒公式 极限计算 自编">
         <div>
           <a class="qrow__link" href="../questions/va1-048.html">求极限 · 泰勒公式</a>
           <div class="qrow__meta"><span>微积分 · 导数应用</span><span>综合题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></div>
@@ -282,7 +298,7 @@
         </div>
       </div>
       <div class="footer__legal">
-        <span>复习册 · 微积分 A1 · 线性代数</span>
+        <span>复习册 · 课程 · 范围 · 题库</span>
         <span>内容以 CC BY-SA 4.0 发布，题目标题与解析可自由取用，请保留出处。</span>
       </div>
     </div>

@@ -8,7 +8,17 @@
 <meta name="color-scheme" content="light">
 <link rel="stylesheet" href="../assets/katex/katex.min.css">
 <link rel="stylesheet" href="../assets/site.css">
+<script>
+  // 先按本地设置（或系统偏好）定主题，避免刷新时闪白
+  try {
+    var saved = localStorage.getItem('reviewer.theme')
+    var dark = saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches
+    if (dark) document.documentElement.setAttribute('data-theme', 'dark')
+  } catch (e) {}
+</script>
 <script src="../assets/core.js"></script>
+<script src="../assets/theme.js" defer></script>
+<script src="../assets/term.js" defer></script>
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <meta property="og:title" content="标签：行列式计算 · 复习册">
 <meta property="og:description" content="带「行列式计算」标签的 16 道题。">
@@ -32,7 +42,13 @@
           <li><a href="../cheatsheet/">速查</a></li>
           <li><a href="../papers/">真题</a></li>
         </ul>
-        <a class="btn btn--red nav__action" href="../submit/">投稿</a>
+        <div class="nav__end">
+          <div class="nav__terms" role="group" aria-label="考试轮次">
+            <button class="term-btn is-on" type="button" data-term-btn="midterm">期中</button><button class="term-btn" type="button" data-term-btn="final">期末</button>
+          </div>
+          <button class="ghost nav__theme" id="theme-toggle" type="button" aria-live="polite">深色</button>
+          <a class="btn btn--red nav__action" href="../submit/">投稿</a>
+        </div>
       </nav>
     </div>
   </header>
@@ -46,112 +62,112 @@
       <div class="pagehead__scope"><p>16 道题带这个标签。</p></div>
     </div>
   </header>
-  <ul class="qlist"><li class="qrow" data-id="la-001" data-course="la" data-chapter="la-1" data-difficulty="2" data-tags="行列式计算 递推" data-text="计算 阶三对角行列式 行列式计算 递推 自编">
+  <ul class="qlist"><li class="qrow" data-id="la-001" data-course="la" data-chapter="la-1" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="2" data-tags="行列式计算 递推" data-text="计算 阶三对角行列式 行列式计算 递推 自编">
         <div>
           <a class="qrow__link" href="../questions/la-001.html">计算 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span> 阶三对角行列式</a>
           <div class="qrow__meta"><span>线代 · 线性方程组与行列式</span><span>计算题</span><span class="dots" aria-label="难度 2 / 4"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span></div>
           
         </div>
         
-      </li><li class="qrow" data-id="la-002" data-course="la" data-chapter="la-1" data-difficulty="1" data-tags="行列式计算" data-text="用定义计算 行列式计算 自编">
+      </li><li class="qrow" data-id="la-002" data-course="la" data-chapter="la-1" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="1" data-tags="行列式计算" data-text="用定义计算 行列式计算 自编">
         <div>
           <a class="qrow__link" href="../questions/la-002.html">用定义计算 · 行列式计算</a>
           <div class="qrow__meta"><span>线代 · 线性方程组与行列式</span><span>计算题</span><span class="dots" aria-label="难度 1 / 4"><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span></div>
           
         </div>
         
-      </li><li class="qrow" data-id="la-003" data-course="la" data-chapter="la-1" data-difficulty="1" data-tags="行列式计算" data-text="计算 行列式计算 自编">
+      </li><li class="qrow" data-id="la-003" data-course="la" data-chapter="la-1" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="1" data-tags="行列式计算" data-text="计算 行列式计算 自编">
         <div>
           <a class="qrow__link" href="../questions/la-003.html">计算 · 行列式计算</a>
           <div class="qrow__meta"><span>线代 · 线性方程组与行列式</span><span>计算题</span><span class="dots" aria-label="难度 1 / 4"><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span></div>
           
         </div>
         
-      </li><li class="qrow" data-id="la-005" data-course="la" data-chapter="la-1" data-difficulty="1" data-tags="行列式计算" data-text="计算 行列式计算 自编">
+      </li><li class="qrow" data-id="la-005" data-course="la" data-chapter="la-1" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="1" data-tags="行列式计算" data-text="计算 行列式计算 自编">
         <div>
           <a class="qrow__link" href="../questions/la-005.html">计算 · 行列式计算</a>
           <div class="qrow__meta"><span>线代 · 线性方程组与行列式</span><span>计算题</span><span class="dots" aria-label="难度 1 / 4"><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span></div>
           
         </div>
         
-      </li><li class="qrow" data-id="la-006" data-course="la" data-chapter="la-1" data-difficulty="2" data-tags="行列式计算 代数余子式" data-text="计算 行列式计算 代数余子式 自编">
+      </li><li class="qrow" data-id="la-006" data-course="la" data-chapter="la-1" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="2" data-tags="行列式计算 代数余子式" data-text="计算 行列式计算 代数余子式 自编">
         <div>
           <a class="qrow__link" href="../questions/la-006.html">计算 · 行列式计算</a>
           <div class="qrow__meta"><span>线代 · 线性方程组与行列式</span><span>计算题</span><span class="dots" aria-label="难度 2 / 4"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span></div>
           
         </div>
         
-      </li><li class="qrow" data-id="la-007" data-course="la" data-chapter="la-1" data-difficulty="2" data-tags="代数余子式 行列式计算" data-text="设 求 的值。 代数余子式 行列式计算 自编">
+      </li><li class="qrow" data-id="la-007" data-course="la" data-chapter="la-1" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="2" data-tags="代数余子式 行列式计算" data-text="设 求 的值。 代数余子式 行列式计算 自编">
         <div>
           <a class="qrow__link" href="../questions/la-007.html">设 · 代数余子式</a>
           <div class="qrow__meta"><span>线代 · 线性方程组与行列式</span><span>计算题</span><span class="dots" aria-label="难度 2 / 4"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span></div>
           
         </div>
         
-      </li><li class="qrow" data-id="la-008" data-course="la" data-chapter="la-1" data-difficulty="2" data-tags="克莱姆法则 行列式计算" data-text="用克莱姆法则解线性方程组 克莱姆法则 行列式计算 自编">
+      </li><li class="qrow" data-id="la-008" data-course="la" data-chapter="la-1" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="2" data-tags="克莱姆法则 行列式计算" data-text="用克莱姆法则解线性方程组 克莱姆法则 行列式计算 自编">
         <div>
           <a class="qrow__link" href="../questions/la-008.html">用克莱姆法则解线性方程组</a>
           <div class="qrow__meta"><span>线代 · 线性方程组与行列式</span><span>计算题</span><span class="dots" aria-label="难度 2 / 4"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span></div>
           
         </div>
         
-      </li><li class="qrow" data-id="la-009" data-course="la" data-chapter="la-1" data-difficulty="2" data-tags="行列式计算" data-text="计算 行列式计算 自编">
+      </li><li class="qrow" data-id="la-009" data-course="la" data-chapter="la-1" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="2" data-tags="行列式计算" data-text="计算 行列式计算 自编">
         <div>
           <a class="qrow__link" href="../questions/la-009.html">计算 · 行列式计算</a>
           <div class="qrow__meta"><span>线代 · 线性方程组与行列式</span><span>计算题</span><span class="dots" aria-label="难度 2 / 4"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span></div>
           
         </div>
         
-      </li><li class="qrow" data-id="la-010" data-course="la" data-chapter="la-1" data-difficulty="2" data-tags="行列式计算" data-text="计算 行列式计算 自编">
+      </li><li class="qrow" data-id="la-010" data-course="la" data-chapter="la-1" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="2" data-tags="行列式计算" data-text="计算 行列式计算 自编">
         <div>
           <a class="qrow__link" href="../questions/la-010.html">计算 · 行列式计算</a>
           <div class="qrow__meta"><span>线代 · 线性方程组与行列式</span><span>计算题</span><span class="dots" aria-label="难度 2 / 4"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span></div>
           
         </div>
         
-      </li><li class="qrow" data-id="la-012" data-course="la" data-chapter="la-1" data-difficulty="2" data-tags="行列式计算" data-text="求排列 的逆序数，并写出它在 阶行列式定义中对应的项 前面的符号。 行列式计算 自编">
+      </li><li class="qrow" data-id="la-012" data-course="la" data-chapter="la-1" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="2" data-tags="行列式计算" data-text="求排列 的逆序数，并写出它在 阶行列式定义中对应的项 前面的符号。 行列式计算 自编">
         <div>
           <a class="qrow__link" href="../questions/la-012.html">求排列 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo separator="true">,</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo separator="true">,</mo><mo>…</mo><mo separator="true">,</mo><mn>2</mn><mo separator="true">,</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n,n-1,\dots,2,1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7778em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">n</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner">…</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">2</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">1</span></span></span></span> 的逆序数，并写出它在 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span> 阶行列式定义中对应的项</a>
           <div class="qrow__meta"><span>线代 · 线性方程组与行列式</span><span>概念题</span><span class="dots" aria-label="难度 2 / 4"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span></div>
           
         </div>
         
-      </li><li class="qrow" data-id="la-013" data-course="la" data-chapter="la-1" data-difficulty="2" data-tags="证明题 行列式计算" data-text="设 是 阶矩阵，且对每个 都有 证明 。 证明题 行列式计算 自编">
+      </li><li class="qrow" data-id="la-013" data-course="la" data-chapter="la-1" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="2" data-tags="证明题 行列式计算" data-text="设 是 阶矩阵，且对每个 都有 证明 。 证明题 行列式计算 自编">
         <div>
           <a class="qrow__link" href="../questions/la-013.html">设 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo>=</mo><mo stretchy="false">(</mo><msub><mi>a</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">A=(a_{ij})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">A</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.0361em;vertical-align:-0.2861em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.0572em;">ij</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span> 是 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span> 阶矩阵，且对每个 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>=</mo><mn>1</mn><mo separator="true">,</mo><mn>2</mn><mo separator="true">,</mo><mo>…</mo><mo separator="true">,</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">i=1,2,\dots,n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6595em;"></span><span class="mord mathnormal">i</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">2</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner">…</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">n</span></span></span></span> 都有</a>
           <div class="qrow__meta"><span>线代 · 线性方程组与行列式</span><span>证明题</span><span class="dots" aria-label="难度 2 / 4"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span></div>
           
         </div>
         
-      </li><li class="qrow" data-id="la-014" data-course="la" data-chapter="la-1" data-difficulty="3" data-tags="行列式计算" data-text="计算 阶三对角行列式 行列式计算 自编">
+      </li><li class="qrow" data-id="la-014" data-course="la" data-chapter="la-1" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="3" data-tags="行列式计算" data-text="计算 阶三对角行列式 行列式计算 自编">
         <div>
           <a class="qrow__link" href="../questions/la-014.html">计算 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span> 阶三对角行列式</a>
           <div class="qrow__meta"><span>线代 · 线性方程组与行列式</span><span>计算题</span><span class="dots" aria-label="难度 3 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span></div>
           
         </div>
         
-      </li><li class="qrow" data-id="la-015" data-course="la" data-chapter="la-1" data-difficulty="3" data-tags="行列式计算" data-text="设 ，计算 阶爪形行列式 行列式计算 自编">
+      </li><li class="qrow" data-id="la-015" data-course="la" data-chapter="la-1" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="3" data-tags="行列式计算" data-text="设 ，计算 阶爪形行列式 行列式计算 自编">
         <div>
           <a class="qrow__link" href="../questions/la-015.html">设 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>a</mi><mn>2</mn></msub><msub><mi>a</mi><mn>3</mn></msub><mo>⋯</mo><msub><mi>a</mi><mi>n</mi></msub><mo mathvariant="normal">≠</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">a_2a_3\cdots a_n\ne0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner">⋯</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel"><span class="mrel"><span class="mord vbox"><span class="thinbox"><span class="rlap"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="inner"><span class="mord"><span class="mrel"></span></span></span><span class="fix"></span></span></span></span></span><span class="mspace nobreak"></span><span class="mrel">=</span></span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span>，计算 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span> 阶爪形行列式</a>
           <div class="qrow__meta"><span>线代 · 线性方程组与行列式</span><span>计算题</span><span class="dots" aria-label="难度 3 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span></div>
           
         </div>
         
-      </li><li class="qrow" data-id="la-016" data-course="la" data-chapter="la-1" data-difficulty="3" data-tags="行列式计算" data-text="求满足 的所有 。 行列式计算 自编">
+      </li><li class="qrow" data-id="la-016" data-course="la" data-chapter="la-1" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="3" data-tags="行列式计算" data-text="求满足 的所有 。 行列式计算 自编">
         <div>
           <a class="qrow__link" href="../questions/la-016.html">求满足 · 行列式计算</a>
           <div class="qrow__meta"><span>线代 · 线性方程组与行列式</span><span>计算题</span><span class="dots" aria-label="难度 3 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span></div>
           
         </div>
         
-      </li><li class="qrow" data-id="la-017" data-course="la" data-chapter="la-1" data-difficulty="3" data-tags="行列式计算" data-text="计算三阶行列式 并把结果分解成最简形式。 行列式计算 自编">
+      </li><li class="qrow" data-id="la-017" data-course="la" data-chapter="la-1" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="3" data-tags="行列式计算" data-text="计算三阶行列式 并把结果分解成最简形式。 行列式计算 自编">
         <div>
           <a class="qrow__link" href="../questions/la-017.html">计算三阶行列式</a>
           <div class="qrow__meta"><span>线代 · 线性方程组与行列式</span><span>计算题</span><span class="dots" aria-label="难度 3 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span></div>
           
         </div>
         
-      </li><li class="qrow" data-id="la-020" data-course="la" data-chapter="la-2" data-difficulty="1" data-tags="行列式计算 矩阵运算" data-text="设 都是 3 阶方阵， ， ，求 行列式计算 矩阵运算 自编">
+      </li><li class="qrow" data-id="la-020" data-course="la" data-chapter="la-2" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="1" data-tags="行列式计算 矩阵运算" data-text="设 都是 3 阶方阵， ， ，求 行列式计算 矩阵运算 自编">
         <div>
           <a class="qrow__link" href="../questions/la-020.html">设 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo separator="true">,</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">A,B</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">A</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0502em;">B</span></span></span></span> 都是 3 阶方阵，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∣</mi><mi>A</mi><mi mathvariant="normal">∣</mi><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">|A|=2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∣</span><span class="mord mathnormal">A</span><span class="mord">∣</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">2</span></span></span></span>，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∣</mi><mi>B</mi><mi mathvariant="normal">∣</mi><mo>=</mo><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">|B|=-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∣</span><span class="mord mathnormal" style="margin-right:0.0502em;">B</span><span class="mord">∣</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">−</span><span class="mord">1</span></span></span></span>，求</a>
           <div class="qrow__meta"><span>线代 · 矩阵</span><span>计算题</span><span class="dots" aria-label="难度 1 / 4"><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span></div>
@@ -205,7 +221,7 @@
         </div>
       </div>
       <div class="footer__legal">
-        <span>复习册 · 微积分 A1 · 线性代数</span>
+        <span>复习册 · 课程 · 范围 · 题库</span>
         <span>内容以 CC BY-SA 4.0 发布，题目标题与解析可自由取用，请保留出处。</span>
       </div>
     </div>

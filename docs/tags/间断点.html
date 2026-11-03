@@ -8,7 +8,17 @@
 <meta name="color-scheme" content="light">
 <link rel="stylesheet" href="../assets/katex/katex.min.css">
 <link rel="stylesheet" href="../assets/site.css">
+<script>
+  // 先按本地设置（或系统偏好）定主题，避免刷新时闪白
+  try {
+    var saved = localStorage.getItem('reviewer.theme')
+    var dark = saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches
+    if (dark) document.documentElement.setAttribute('data-theme', 'dark')
+  } catch (e) {}
+</script>
 <script src="../assets/core.js"></script>
+<script src="../assets/theme.js" defer></script>
+<script src="../assets/term.js" defer></script>
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <meta property="og:title" content="标签：间断点 · 复习册">
 <meta property="og:description" content="带「间断点」标签的 2 道题。">
@@ -32,7 +42,13 @@
           <li><a href="../cheatsheet/">速查</a></li>
           <li><a href="../papers/">真题</a></li>
         </ul>
-        <a class="btn btn--red nav__action" href="../submit/">投稿</a>
+        <div class="nav__end">
+          <div class="nav__terms" role="group" aria-label="考试轮次">
+            <button class="term-btn is-on" type="button" data-term-btn="midterm">期中</button><button class="term-btn" type="button" data-term-btn="final">期末</button>
+          </div>
+          <button class="ghost nav__theme" id="theme-toggle" type="button" aria-live="polite">深色</button>
+          <a class="btn btn--red nav__action" href="../submit/">投稿</a>
+        </div>
       </nav>
     </div>
   </header>
@@ -46,14 +62,14 @@
       <div class="pagehead__scope"><p>2 道题带这个标签。</p></div>
     </div>
   </header>
-  <ul class="qlist"><li class="qrow" data-id="va1-017" data-course="va1" data-chapter="va1-2" data-difficulty="2" data-tags="间断点 连续性" data-text="求函数 的间断点，并指出每个间断点的类型。 间断点 连续性 自编">
+  <ul class="qlist"><li class="qrow" data-id="va1-017" data-course="va1" data-chapter="va1-2" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="2" data-tags="间断点 连续性" data-text="求函数 的间断点，并指出每个间断点的类型。 间断点 连续性 自编">
         <div>
           <a class="qrow__link" href="../questions/va1-017.html">求函数 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mfrac><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>1</mn></mrow><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>−</mo><mn>3</mn><mi>x</mi><mo>+</mo><mn>2</mn></mrow></mfrac></mrow><annotation encoding="application/x-tex">f(x)=\frac{x^{2}-1}{x^{2}-3x+2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.4213em;vertical-align:-0.4033em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.0179em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7463em;"><span style="top:-2.786em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span><span class="mbin mtight">−</span><span class="mord mtight">3</span><span class="mord mathnormal mtight">x</span><span class="mbin mtight">+</span><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8913em;"><span style="top:-2.931em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.4033em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span> · 间断点</a>
           <div class="qrow__meta"><span>微积分 · 函数 函数的极限与连续</span><span>计算题</span><span class="dots" aria-label="难度 2 / 4"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span></div>
           
         </div>
         
-      </li><li class="qrow" data-id="va1-018" data-course="va1" data-chapter="va1-2" data-difficulty="1" data-tags="极限计算 间断点" data-text="设 求 在 处的左极限与右极限，并判断 是否存在。 极限计算 间断点 自编">
+      </li><li class="qrow" data-id="va1-018" data-course="va1" data-chapter="va1-2" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="1" data-tags="极限计算 间断点" data-text="设 求 在 处的左极限与右极限，并判断 是否存在。 极限计算 间断点 自编">
         <div>
           <a class="qrow__link" href="../questions/va1-018.html">设 · 极限计算</a>
           <div class="qrow__meta"><span>微积分 · 函数 函数的极限与连续</span><span>计算题</span><span class="dots" aria-label="难度 1 / 4"><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span></div>
@@ -107,7 +123,7 @@
         </div>
       </div>
       <div class="footer__legal">
-        <span>复习册 · 微积分 A1 · 线性代数</span>
+        <span>复习册 · 课程 · 范围 · 题库</span>
         <span>内容以 CC BY-SA 4.0 发布，题目标题与解析可自由取用，请保留出处。</span>
       </div>
     </div>
