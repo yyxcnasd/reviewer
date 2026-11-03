@@ -1,0 +1,27 @@
+{
+  "name": "复习册",
+  "wordmark": "复习册",
+  "tagline": "微积分 A1 · 线性代数",
+  "description": "微积分 A1 与线性代数期中复习站：两门课的范围、讲义要点、一百道自编题与解析，以及一个可以投稿的题目归档。",
+  "lang": "zh-CN",
+  "owner": "your-github-name",
+  "repo": "your-github-name/reviewer",
+  "siteUrl": "https://your-github-name.github.io/reviewer/",
+  "semester": "2026 秋",
+  "exam": {
+    "name": "期中",
+    "date": "2026-11",
+    "note": "范围以任课教师的正式通知为准，本站按课本章节整理"
+  },
+  "nav": [
+    { "label": "微积分 A1", "href": "va1/" },
+    { "label": "线性代数", "href": "la/" },
+    { "label": "题库", "href": "questions/" },
+    { "label": "真题", "href": "papers/" },
+    { "label": "投稿", "href": "submit/" }
+  ],
+  "credits": {
+    "references": "历年期中试题整理自 mathsdream/THU-math-source 等公开资料；课本章节依据《高等微积分教程（上）》《线性代数与几何（第 2 版）》。",
+    "license": "内容以 CC BY-SA 4.0 发布，题目标题与解析可自由取用，请保留出处。"
+  }
+}
