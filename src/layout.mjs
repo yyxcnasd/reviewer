@@ -77,6 +77,7 @@ export function page(ctx, opts) {
             <li><a href="${base}practice/">刷题</a></li>
             <li><a href="${base}papers/">历年真题索引</a></li>
             <li><a href="${base}tags/">标签</a></li>
+            <li><a href="${base}export/">导出 PDF</a></li>
           </ul>
         </div>
         <div class="footer__col">

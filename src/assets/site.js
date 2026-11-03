@@ -344,6 +344,22 @@
       }
     }
 
+    // 导出当前筛选结果
+    const exportBtn = $('#f-export')
+    if (exportBtn) {
+      exportBtn.addEventListener('click', () => {
+        const p = new URLSearchParams()
+        const map = { course: 'course', chapter: 'chapter', tag: 'tag', difficulty: 'difficulty', q: 'q' }
+        for (const [key, param] of Object.entries(map)) {
+          const v = sel[key]?.value?.trim()
+          if (v) p.set(param, v)
+        }
+        const status = sel.status?.value
+        if (status) p.set('status', status)
+        location.href = '../export/?' + p.toString()
+      })
+    }
+
     // 进度变了（在别的行点过）就重算：状态筛选要跟着变
     document.addEventListener('progress:change', run)
 

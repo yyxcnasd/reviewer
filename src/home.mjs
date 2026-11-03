@@ -109,6 +109,7 @@ export function buildHome(ctx) {
     <li><a href="${url(0, 'practice/')}"><b>刷题</b><span>一次一道，先想再看解析</span></a></li>
     <li><a href="${url(0, 'cheatsheet/')}"><b>速查</b><span>公式与结论，一页过完</span></a></li>
     <li><a href="${url(0, 'papers/')}"><b>真题</b><span>${ctx.papers.length} 套卷的题型与考点</span></a></li>
+    <li><a href="${url(0, 'export/')}"><b>导出</b><span>挑题生成 A4 卷子，可打印</span></a></li>
   </ul>
 </section>
 

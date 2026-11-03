@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>打印版 · 复习册</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<style>@font-face {
+  font-family: "Noto Serif SC";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../../assets/fonts/noto-serif-sc-400.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Noto Serif SC";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../../assets/fonts/noto-serif-sc-700.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Noto Serif SC";
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("../../assets/fonts/noto-serif-sc-900.woff2") format("woff2");
+}</style>
+<link rel="stylesheet" href="../../assets/print-sheet.css">
+</head>
+<body class="sheet-page">
+<div class="psheet-tools">
+  <button type="button" id="ps-print">打印 / 另存为 PDF</button>
+  <button type="button" class="plain" id="ps-back">回到导出页</button>
+  <button type="button" class="plain" id="ps-copy">复制这个链接</button>
+  <span class="status" id="ps-status">正在载入题目…</span>
+</div>
+<main class="psheet" id="psheet">
+  <header class="psheet__head">
+    <h1 class="psheet__title">打印版</h1>
+    <p class="psheet__meta">复习册 · 正在载入题目…</p>
+  </header>
+  <p class="psheet-empty">正在载入题目…</p>
+</main>
+<script src="../../assets/export-print.js" defer></script>
+</body>
+</html>

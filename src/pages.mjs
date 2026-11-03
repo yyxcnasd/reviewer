@@ -6,6 +6,7 @@ import { stripMath } from './markdown.mjs'
 
 import { page, write, url, esc, attr, stateLabel, dots, tagHref, stemExcerpt } from './layout.mjs'
 import { buildHome } from './home.mjs'
+import { buildExportPages } from './export-pages.mjs'
 
 /* ==========================================================================
    复习册 · 页面生成
@@ -23,6 +24,7 @@ export async function buildSite(ctx) {
   buildQuestionPages(ctx)
   buildTagPages(ctx)
   buildCheatsheet(ctx)
+  buildExportPages(ctx)
   buildPapers(ctx)
   buildPractice(ctx)
   buildSubmit(ctx)
@@ -142,6 +144,7 @@ function buildCourses(ctx) {
             : `<div class="chapter__links">
                  ${ch.note ? `<a href="${url(1, `notes/${ch.id}.html`)}">读要点</a>` : ''}
                  ${ch.count ? `<a href="${url(1, `questions/?chapter=${ch.id}`)}">做这 ${ch.count} 道题</a>` : ''}
+                 ${ch.count ? `<a href="${url(1, `export/?chapter=${ch.id}`)}">导出</a>` : ''}
                </div>`
         return `<article class="chapter" id="ch-${ch.id}">
           <h2 class="chapter__title"><em>${esc(ch.no)}</em>${esc(ch.title)}</h2>
@@ -413,6 +416,10 @@ function buildQuestionIndex(ctx) {
       <label for="f-q">搜索</label>
       <input id="f-q" type="search" placeholder="题干、标签、出处" autocomplete="off">
     </div>
+    <div class="filters__field">
+      <label>&nbsp;</label>
+      <button class="btn btn--tone" type="button" id="f-export">导出筛选结果</button>
+    </div>
     <div class="filters__count"><b id="f-count">${questions.length}</b> 道</div>
   </form>
 
@@ -487,6 +494,7 @@ function buildQuestionPages(ctx) {
           <button class="flag flag--fav" type="button" data-flag="fav" data-id="${q.id}" aria-pressed="false"><span>收藏</span></button>
           <button class="ghost" type="button" id="expand-all">展开解析与提示</button>
           <button class="ghost" type="button" id="copy-md">复制题目</button>
+          <a class="ghost" href="${url(1, `export/?ids=${q.id}`)}">导出这道题</a>
           <span class="qactions__id">${esc(q.id.toUpperCase())} · <span class="kbd">←</span><span class="kbd">→</span> 翻题 · <span class="kbd">E</span> 展开 · <span class="kbd">D</span> 记已做</span>
         </div>
       </header>
@@ -532,6 +540,7 @@ function buildQuestionPages(ctx) {
         <ul class="sidelist">
           ${ch.note ? `<li><a href="${url(1, `notes/${ch.id}.html`)}">读这一章的要点</a></li>` : ''}
           <li><a href="${url(1, `questions/?chapter=${ch.id}`)}">这一章的 ${ctx.qByChapter.get(ch.id).length} 道题</a></li>
+          <li><a href="${url(1, `export/?chapter=${ch.id}`)}">导出这一章</a></li>
           <li><a href="${url(1, `${course.id}/#ch-${ch.id}`)}">这一章在考纲里的位置</a></li>
         </ul>
       </div>
@@ -607,7 +616,10 @@ function buildTagPages(ctx) {
     </div>
   </header>
   <ul class="qlist">${rows}</ul>
-  <p style="margin-top:32px"><a href="${url(1, 'tags/')}">← 回到全部标签</a></p>
+  <p class="more">
+    <a class="btn btn--red" href="${url(1, `export/?tag=${encodeURIComponent(tag)}`)}">导出这 ${n} 道（PDF）</a>
+    <a href="${url(1, 'tags/')}">← 回到全部标签</a>
+  </p>
 </div>`
     write(ctx, `tags/${tag}.html`, page(ctx, { depth: 1, title: `标签：${tag}`, description: `带「${tag}」标签的 ${n} 道题。`, body: tbody, bodyClass: 'detail', navActive: 'questions' }))
   }
@@ -1069,8 +1081,12 @@ function buildData(ctx) {
   }
   write(ctx, 'data/scope.json', JSON.stringify(scope))
 
-  // 刷题页只要元数据；题面与解析按题单独取，避免一进页面就下几 MB
-  const index = ctx.questions.map((q) => ({
+  // 刷题 / 导出页只要元数据；题面与解析按题单独取，避免一进页面就下几 MB
+  const courseOrder = new Map(ctx.courses.map((course, i) => [course.id, i]))
+  const ordered = ctx.questions
+    .slice()
+    .sort((a, b) => (courseOrder.get(a.course) - courseOrder.get(b.course)) || a.id.localeCompare(b.id))
+  const index = ordered.map((q) => ({
     id: q.id,
     course: q.course,
     chapter: q.chapter,
@@ -1079,6 +1095,8 @@ function buildData(ctx) {
     tags: q.tags,
     difficulty: q.difficulty,
     kind: q.kind,
+    text: q.title,
+    excerptHtml: stemExcerpt(ctx, q),
     url: `questions/${q.id}.html`,
   }))
   write(ctx, 'data/questions.json', JSON.stringify(index))
@@ -1148,7 +1166,7 @@ function copyStatic(ctx) {
     copyDir(path.join(katexDist, 'fonts'), path.join(out, 'fonts'))
   }
   // CSS 合并
-  const styles = ['tokens', 'base', 'home', 'pages', 'practical', 'sheet', 'utility']
+  const styles = ['tokens', 'base', 'home', 'pages', 'practical', 'sheet', 'export', 'utility']
     .map((n) => path.join(ctx.ROOT, 'src/styles', `${n}.css`))
     .filter((p) => fs.existsSync(p))
     .map((p) => fs.readFileSync(p, 'utf8'))
@@ -1157,8 +1175,11 @@ function copyStatic(ctx) {
   const css = [fontsCss, ...styles].join('\n')
   fs.mkdirSync(path.join(ctx.OUT, 'assets'), { recursive: true })
   fs.writeFileSync(path.join(ctx.OUT, 'assets/site.css'), css, 'utf8')
+  // 打印版样式（单独一份，不并进 site.css）
+  const sheetCss = path.join(ctx.ROOT, 'src/styles/print-sheet.css')
+  if (fs.existsSync(sheetCss)) fs.copyFileSync(sheetCss, path.join(ctx.OUT, 'assets/print-sheet.css'))
   // JS
-  for (const name of ['progress.js', 'site.js', 'submit.js', 'practice.js', 'print.js']) {
+  for (const name of ['progress.js', 'site.js', 'submit.js', 'practice.js', 'print.js', 'export.js', 'export-print.js']) {
     const p = path.join(ctx.ROOT, 'src/assets', name)
     if (fs.existsSync(p)) fs.copyFileSync(p, path.join(ctx.OUT, 'assets', name))
   }
