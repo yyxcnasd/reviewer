@@ -38,7 +38,7 @@
   ]
 
   // 长列表只给前若干行做入场，其余直接显示，避免整页一起变成 invisible
-  const rowLimit = 18
+  const rowLimit = 40
   const listRows = Array.from(document.querySelectorAll('.qlist .qrow'))
 
   if (!prefersReduced && 'IntersectionObserver' in window) {
@@ -89,13 +89,7 @@
       plate.classList.add('is-in')
       ring.classList.add('is-in')
     } else {
-      rows.slice(0, rowLimit).forEach((r) => {
-      r.setAttribute('data-reveal', '')
-      r.style.setProperty('--delay', '0ms')
-      io.observe(r)
-    })
-
-    const io = new IntersectionObserver(
+      const io = new IntersectionObserver(
         (entries) => {
           for (const e of entries) {
             if (!e.isIntersecting) continue

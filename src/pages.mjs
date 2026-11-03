@@ -1268,7 +1268,8 @@ function buildData(ctx) {
   }
   write(ctx, 'data/scope.json', JSON.stringify(scope))
 
-  const questions = ctx.questions.map((q) => ({
+  // 刷题页只要元数据；题面与解析按题单独取，避免一进页面就下几 MB
+  const index = ctx.questions.map((q) => ({
     id: q.id,
     course: q.course,
     chapter: q.chapter,
@@ -1277,16 +1278,24 @@ function buildData(ctx) {
     tags: q.tags,
     difficulty: q.difficulty,
     kind: q.kind,
-    source: q.source,
     url: `questions/${q.id}.html`,
-    stemHtml: ctx.renderMarkdown(q.stem, { errors: ctx.errors }),
-    hintHtml: q.hint ? ctx.renderMarkdown(q.hint, { errors: ctx.errors }) : '',
-    solutionHtml: ctx.renderMarkdown(q.solution, { errors: ctx.errors }),
-    mistakesHtml: q.mistakes ? ctx.renderMarkdown(q.mistakes, { errors: ctx.errors }) : '',
-    answerHtml: q.answer ? ctx.renderMarkdown(q.answer, { errors: ctx.errors }) : '',
-    text: q.searchText,
   }))
-  write(ctx, 'data/questions.json', JSON.stringify(questions))
+  write(ctx, 'data/questions.json', JSON.stringify(index))
+
+  for (const q of ctx.questions) {
+    write(
+      ctx,
+      `data/q/${q.id}.json`,
+      JSON.stringify({
+        id: q.id,
+        stemHtml: ctx.renderMarkdown(q.stem, { errors: ctx.errors }),
+        hintHtml: q.hint ? ctx.renderMarkdown(q.hint, { errors: ctx.errors }) : '',
+        solutionHtml: ctx.renderMarkdown(q.solution, { errors: ctx.errors }),
+        mistakesHtml: q.mistakes ? ctx.renderMarkdown(q.mistakes, { errors: ctx.errors }) : '',
+        answerHtml: q.answer ? ctx.renderMarkdown(q.answer, { errors: ctx.errors }) : '',
+      }),
+    )
+  }
 }
 
 /* ---------------------------------------------------------------- 其它 */

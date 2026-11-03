@@ -52,10 +52,28 @@
     render()
   }
 
-  function render() {
+  const cache = new Map()
+  async function loadBody(q) {
+    if (cache.has(q.id)) return cache.get(q.id)
+    const res = await fetch(`../data/q/${q.id}.json`)
+    if (!res.ok) throw new Error('题目没载入')
+    const data = await res.json()
+    cache.set(q.id, data)
+    return data
+  }
+
+  async function render() {
     const q = deck[pos]
     if (!q) return
     revealed = false
+    stage.innerHTML = '<p class="hint">载入中…</p>'
+    let body
+    try {
+      body = await loadBody(q)
+    } catch (e) {
+      stage.innerHTML = '<p class="hint">这道题没载入（可能是本地直接打开了文件）。用本地服务器预览即可。</p>'
+      return
+    }
     const stars = [1, 2, 3, 4].map((i) => `<i class="${i <= q.difficulty ? 'on' : ''}"></i>`).join('')
     stage.innerHTML = `
       <div class="practice__meta">
@@ -64,11 +82,13 @@
         <span>难度 <span class="dots">${stars}</span></span>
         <span>${q.tags.join(' · ')}</span>
       </div>
-      <div class="practice__stem prose">${q.stemHtml}</div>
-      ${q.answerHtml ? `<div class="practice__solution" id="p-solution" hidden><div class="answer" style="margin-bottom:18px"><span>答案</span>${q.answerHtml}</div>
-        <div class="prose">${q.solutionHtml}</div>
-        ${q.mistakesHtml ? `<details class="qblock" style="margin-top:18px"><summary>常见错误</summary><div class="qblock__body prose">${q.mistakesHtml}</div></details>` : ''}
-      </div>` : `<div class="practice__solution prose" id="p-solution" hidden>${q.solutionHtml}</div>`}
+      <div class="practice__stem prose">${body.stemHtml}</div>
+      ${body.hintHtml ? `<details class="qblock qblock--hint" style="margin-top:18px"><summary>提示</summary><div class="qblock__body prose">${body.hintHtml}</div></details>` : ''}
+      <div class="practice__solution" id="p-solution" hidden>
+        ${body.answerHtml ? `<div class="answer" style="margin-bottom:18px"><span>答案</span>${body.answerHtml}</div>` : ''}
+        <div class="prose">${body.solutionHtml}</div>
+        ${body.mistakesHtml ? `<details class="qblock" style="margin-top:18px"><summary>常见错误</summary><div class="qblock__body prose">${body.mistakesHtml}</div></details>` : ''}
+      </div>
     `
     el.index.textContent = String(pos + 1)
     el.total.textContent = String(deck.length)
