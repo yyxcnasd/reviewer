@@ -38,8 +38,19 @@
   padding-block: 0 clamp(24px, 3vw, 40px);
 }
 
+/* KaTeX 的 MathML 给读屏用，视觉上不占位。
+   它默认是绝对定位的，量测工具会把它算到页面左上角，所以改成零尺寸的行内块。 */
+.katex .katex-mathml {
+  position: static;
+  display: inline-block;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  vertical-align: baseline;
+}
+
 .qpage__title {
-  font-size: clamp(1.5rem, 2.6vw, 2.3rem);
+  font-size: clamp(2.2rem, 4.4vw, 3.5rem);
   line-height: 1.22;
   letter-spacing: -0.01em;
 }

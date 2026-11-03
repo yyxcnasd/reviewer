@@ -67,7 +67,7 @@ export function renderMarkdown(src, opts = {}) {
     headingSeq += 1
     const id = `h-${headingSeq}`
     tokens[idx].attrSet('id', id)
-    if (headings && (tokens[idx].tag === 'h2' || tokens[idx].tag === 'h3')) {
+    if (headings && tokens[idx].tag === 'h2') {
       headings.push({
         id,
         level: Number(tokens[idx].tag.slice(1)),

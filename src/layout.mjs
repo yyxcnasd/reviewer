@@ -59,7 +59,7 @@ export function page(ctx, opts) {
   const footer = `
   <footer class="footer">
     <div class="frame">
-      <a class="footer__word" href="${base}">${esc(config.wordmark)}</a>
+      <a class="footer__word" href="${base}" aria-label="回到首页：${esc(config.wordmark)}"><span aria-hidden="true">${esc(config.wordmark)}</span></a>
       <div class="footer__cols">
         <div class="footer__col">
           <h3>科目</h3>

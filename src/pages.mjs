@@ -131,9 +131,9 @@ function buildHome(ctx) {
 
   const body = `
 <section class="hero">
-  <div class="hero__discs" aria-hidden="true">
-    <i class="disc disc--red"></i>
-    <i class="disc disc--indigo"></i>
+  <div class="hero__discs">
+    <i class="disc disc--red" aria-hidden="true"></i>
+    <i class="disc disc--indigo" aria-hidden="true"></i>
   </div>
   <div class="frame hero__inner">
     <div class="hero__copy">
@@ -372,10 +372,16 @@ label: question-submission</code></pre>
 /* 列表与翻页用的短标签：把题面里的公式去掉，取开头一小段 */
 function shortLabel(q) {
   const first = q.stem.split(/\n\s*\n/)[0] || q.stem
-  const plain = stripMath(first).replace(/[#*>`|]/g, ' ').replace(/\s+/g, ' ').trim()
-  const t = plain.slice(0, 22)
-  if (t.length >= 4) return t + (plain.length > 22 ? '…' : '')
-  return q.kind + ' · 难度 ' + q.difficulty + (q.tags[0] ? ' · ' + q.tags[0] : '')
+  const plain = stripMath(first)
+    .replace(/[#*>`|]/g, ' ')
+    .replace(/[，。、；：（）()\s]+/g, ' ')
+    .trim()
+  const cjk = (plain.match(/[\u4e00-\u9fff]/g) || []).length
+  if (cjk >= 5) {
+    const t = plain.slice(0, 22).trim()
+    return t + (plain.length > 22 ? '…' : '')
+  }
+  return (q.tags[0] || q.kind) + ' · 难度 ' + q.difficulty
 }
 
 function shortTitle(ch) {
@@ -492,7 +498,7 @@ function buildCourses(ctx) {
   </div>
 </section>
 `
-    write(ctx, `${course.id}/index.html`, page(ctx, { depth: 1, title: course.name, description: `${course.name}期中复习：${course.scope_line}。${course.scope_note}`, body, navActive: course.id }))
+    write(ctx, `${course.id}/index.html`, page(ctx, { depth: 1, title: course.name, description: `${course.name}期中复习：${course.scope_line}。${course.scope_note}`, body, bodyClass: 'detail', navActive: course.id }))
   }
 }
 
@@ -562,11 +568,10 @@ function buildNotes(ctx) {
     ${
       qs.length
         ? `<div class="rule-head" style="margin-top:56px"><h2>这一章的题</h2><p>${qs.length} 道，全部带解析。</p></div>
-           <ul class="qlist">
+           <ul class="qmini">
              ${qs
                .map(
-                 (q) => `<li class="qrow"><div><a class="qrow__link" href="${url(1, `questions/${q.id}.html`)}">${stemExcerpt(ctx, q)}</a>
-                 <div class="qrow__meta"><span>${esc(q.kind)}</span>${dots(q.difficulty)}<span>${esc(q.tags.join(' · '))}</span></div></div></li>`,
+                 (q) => `<li><a href="${url(1, `questions/${q.id}.html`)}">${esc(shortLabel(q))}</a> <span>${esc(q.kind)} · ${esc(q.tags[0] || '')}</span></li>`,
                )
                .join('')}
            </ul>`
@@ -580,7 +585,7 @@ function buildNotes(ctx) {
   ${tocRail}
 </div>
 `
-    write(ctx, `notes/${note.id}.html`, page(ctx, { depth: 1, title: `${note.title} · ${note.course.name}`, description: note.lead, body, navActive: note.course.id }))
+    write(ctx, `notes/${note.id}.html`, page(ctx, { depth: 1, title: `${note.title} · ${note.course.name}`, description: note.lead, body, bodyClass: 'detail', navActive: note.course.id }))
   })
 }
 
@@ -640,7 +645,10 @@ function buildQuestionIndex(ctx) {
     </div>
   </header>
 
-  <form class="filters" id="filters" role="search" onsubmit="return false">
+  </div>
+  <div class="index-field">
+    <div class="frame">
+    <form class="filters" id="filters" role="search" onsubmit="return false">
     <div class="filters__field">
       <label for="f-course">科目</label>
       <select id="f-course"><option value="">全部</option>${courseOptions}</select>
@@ -675,9 +683,11 @@ function buildQuestionIndex(ctx) {
   </ul>
   <p class="empty" id="qlist-empty" hidden>没有符合条件的题。换个筛选条件试试。</p>
   <noscript><p class="hint">筛选需要 JavaScript；上面的列表已经包含全部 ${questions.length} 道题，可以直接点开。</p></noscript>
+    </div>
+  </div>
 </div>
 `
-  write(ctx, 'questions/index.html', page(ctx, { depth: 1, title: '题库', description: `${questions.length} 道微积分 A1 与线性代数题目，带完整解析。`, body, navActive: 'questions' }))
+  write(ctx, 'questions/index.html', page(ctx, { depth: 1, title: '题库', description: `${questions.length} 道微积分 A1 与线性代数题目，带完整解析。`, body, bodyClass: 'detail', navActive: 'questions' }))
 }
 
 /* ---------------------------------------------------------------- 题目页 */
@@ -795,6 +805,7 @@ function buildQuestionPages(ctx) {
         title: `${ch.title} · ${q.kind}`,
         description: q.searchText,
         body,
+        bodyClass: 'detail',
         navActive: 'questions',
       }),
     )
@@ -823,7 +834,7 @@ function buildTagPages(ctx) {
     </ul>
   </section>
 </div>`
-  write(ctx, 'tags/index.html', page(ctx, { depth: 1, title: '标签', description: '按考点浏览题库标签。', body }))
+  write(ctx, 'tags/index.html', page(ctx, { depth: 1, title: '标签', description: '按考点浏览题库标签。', body, bodyClass: 'detail' }))
 
   for (const [tag, n] of entries) {
     const qs = ctx.questions.filter((q) => q.tags.includes(tag))
@@ -846,7 +857,7 @@ function buildTagPages(ctx) {
   <ul class="qlist">${rows}</ul>
   <p style="margin-top:32px"><a href="${url(1, 'tags/')}">← 回到全部标签</a></p>
 </div>`
-    write(ctx, `tags/${tag}.html`, page(ctx, { depth: 1, title: `标签：${tag}`, description: `带「${tag}」标签的 ${n} 道题。`, body: tbody, navActive: 'questions' }))
+    write(ctx, `tags/${tag}.html`, page(ctx, { depth: 1, title: `标签：${tag}`, description: `带「${tag}」标签的 ${n} 道题。`, body: tbody, bodyClass: 'detail', navActive: 'questions' }))
   }
 }
 
@@ -916,7 +927,7 @@ function buildPapers(ctx) {
   ${blocks}
   <p class="hint" style="margin-top:40px">索引依据公开整理的历年试卷（mathsdream/THU-math-source 等）。范围以任课教师通知为准。</p>
 </div>`
-  write(ctx, 'papers/index.html', page(ctx, { depth: 1, title: '真题索引', description: `${papers.length} 套微积分 A1 与线性代数期中卷的题型与考点索引。`, body, navActive: 'papers' }))
+  write(ctx, 'papers/index.html', page(ctx, { depth: 1, title: '真题索引', description: `${papers.length} 套微积分 A1 与线性代数期中卷的题型与考点索引。`, body, bodyClass: 'detail', navActive: 'papers' }))
 }
 
 /* ---------------------------------------------------------------- 刷题 */
@@ -974,7 +985,7 @@ function buildPractice(ctx) {
   </div>
 </div>
 ${'<script src="' + url(1, 'assets/practice.js') + '" defer></script>'}`
-  write(ctx, 'practice/index.html', page(ctx, { depth: 1, title: '刷题', description: '随机抽题，按章节与难度筛，做完看解析。', body, navActive: 'questions' }))
+  write(ctx, 'practice/index.html', page(ctx, { depth: 1, title: '刷题', description: '随机抽题，按章节与难度筛，做完看解析。', body, bodyClass: 'detail', navActive: 'questions' }))
 }
 
 /* ---------------------------------------------------------------- 投稿 */
@@ -1117,26 +1128,29 @@ function buildSubmit(ctx) {
   <section class="section--tight">
     <div class="rule-head"><h2>投稿之后</h2><p>一道题从你写下来到出现在题库里，要过三步。</p></div>
     <div class="steps">
-      <article class="step step--1"><div class="step__plate"><div class="step__art">1. 开 issue
+      <article class="step step--1">
+        <h3 class="step__name">提</h3>
+        <div class="step__plate"><pre class="step__art"><code>1. 开 issue
    标题：[题目投稿] …
    标签：question-submission
-   正文：就是预览里那整段</div></div>
-        <h3 class="step__name">提</h3>
+   正文：就是预览里那整段</code></pre></div>
         <p class="step__text">issue 里带着完整的 frontmatter 和文件名建议。issue 太长放不下时，下载 .md 附在评论里。</p></article>
-      <article class="step step--2"><div class="step__plate"><div class="step__art">2. 管理员审
+      <article class="step step--2">
+        <h3 class="step__name">审</h3>
+        <div class="step__plate"><pre class="step__art"><code>2. 管理员审
    看数学对不对
    看标签与难度
    看有没有重复
-   必要时在 issue 里讨论</div></div>
-        <h3 class="step__name">审</h3>
+   必要时在 issue 里讨论</code></pre></div>
         <p class="step__text">管理员会把 issue 转成一个文件（scripts/issue-to-question.mjs 可以从 issue 正文直接生成），提交 PR。</p></article>
-      <article class="step step--3"><div class="step__plate"><div class="step__art">3. 合并
+      <article class="step step--3">
+        <h3 class="step__name">归档</h3>
+        <div class="step__plate"><pre class="step__art"><code>3. 合并
    git merge
    npm run build
    Pages 自动更新
 
-   新题出现在：题库 / 标签页 / 章节</div></div>
-        <h3 class="step__name">归档</h3>
+   新题出现在：题库 / 标签页 / 章节</code></pre></div>
         <p class="step__text">合并后重新构建，题目进入题库、标签页与对应章节；范围统计和首页数字一起更新。</p></article>
     </div>
   </section>
@@ -1144,7 +1158,7 @@ function buildSubmit(ctx) {
 ${'<script src="' + url(1, 'assets/vendor/markdown-it.min.js') + '"></script>'}
 ${'<script src="' + url(1, 'assets/vendor/katex.min.js') + '"></script>'}
 ${'<script src="' + url(1, 'assets/submit.js') + '" defer></script>'}`
-  write(ctx, 'submit/index.html', page(ctx, { depth: 1, title: '投稿', description: '写一道题，实时预览，一键开 issue 或下载 Markdown。', body }))
+  write(ctx, 'submit/index.html', page(ctx, { depth: 1, title: '投稿', description: '写一道题，实时预览，一键开 issue 或下载 Markdown。', body, bodyClass: 'detail' }))
 }
 
 /* ---------------------------------------------------------------- 关于 */
@@ -1193,7 +1207,7 @@ function buildAbout(ctx) {
     </table>
   </div>
 </div>`
-  write(ctx, 'about/index.html', page(ctx, { depth: 1, title: '关于', description: '范围说明、内容组织方式、许可与图片来源。', body }))
+  write(ctx, 'about/index.html', page(ctx, { depth: 1, title: '关于', description: '范围说明、内容组织方式、许可与图片来源。', body, bodyClass: 'detail' }))
 }
 
 function loadCredits() {
@@ -1228,7 +1242,7 @@ function buildNotFound(ctx) {
     </ul>
   </div>
 </div>`
-  write(ctx, '404.html', page(ctx, { depth: 0, title: '页面不存在', body }))
+  write(ctx, '404.html', page(ctx, { depth: 0, title: '页面不存在', body, bodyClass: 'detail' }))
 }
 
 /* ---------------------------------------------------------------- 数据 */

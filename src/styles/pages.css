@@ -15,14 +15,16 @@
 }
 
 .pagehead__title {
-  grid-column: 1 / 8;
+  grid-column: 1 / -1;
   font-size: clamp(2.4rem, 6vw, 5rem);
   line-height: 1.02;
 }
 
+/* 大标题下面紧跟一句「这是什么」，别让首屏只有一个名字 */
 .pagehead__scope {
-  grid-column: 8 / 13;
-  font-size: var(--fs-body);
+  grid-column: 1 / 8;
+  margin-top: clamp(18px, 2vw, 28px);
+  font-size: var(--fs-lead);
   color: var(--ink-soft);
   line-height: 1.7;
 }
@@ -155,7 +157,7 @@
 }
 
 .chapter__label--out {
-  color: var(--ink-faint);
+  color: var(--ink-mute);
   font-weight: 400;
 }
 
@@ -194,7 +196,7 @@
 
 .chapter__sections li.sec-out {
   background: transparent;
-  color: var(--ink-faint);
+  color: var(--ink-mute);
 }
 
 .chapter__links {
@@ -613,6 +615,7 @@
   padding: clamp(18px, 2vw, 28px) clamp(18px, 2vw, 26px);
   font-size: var(--fs-body);
   line-height: 1.85;
+  overflow-x: auto;
 }
 
 .qblock__body p {
@@ -743,10 +746,10 @@
 .tagcloud {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
   gap: 10px;
   list-style: none;
   padding: 0;
-  max-width: 62em;
 }
 
 .tagcloud a {
@@ -890,7 +893,7 @@
 .submit__preview h2 {
   font-size: var(--fs-micro);
   font-weight: 700;
-  color: var(--ink-mute);
+  color: var(--ink-soft);
   margin-bottom: 1em;
   display: flex;
   justify-content: space-between;
@@ -1066,6 +1069,12 @@
   .practice__side {
     grid-column: 1 / -1;
   }
+  .practice__filters {
+    padding: 16px 0;
+  }
+  .practice__card {
+    padding: 20px;
+  }
   .practice__side {
     position: static;
   }
@@ -1164,4 +1173,85 @@
 .spec--rail dd {
   font-size: var(--fs-micro);
   font-weight: 700;
+}
+/* 题库：列表落在一层更深的纸上，像印出来的索引页 */
+.index-field {
+  background: var(--paper-2);
+  padding-block: 6px var(--section-y);
+}
+
+.index-field .filters {
+  background: var(--paper-2);
+}
+
+.index-field .qrow:hover {
+  background: var(--paper-3);
+}
+/* 要点页末尾的题目索引：一行一条，不做成卡片 */
+.qmini {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0;
+}
+
+.qmini li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 18px;
+  padding-block: 11px;
+  border-bottom: 2px solid var(--line);
+  font-size: var(--fs-body);
+}
+
+.qmini li:first-child {
+  border-top: 2px solid var(--line);
+}
+
+.qmini a {
+  font-weight: 700;
+}
+
+.qmini a:hover {
+  color: var(--red);
+}
+
+.qmini li span {
+  flex: none;
+  font-size: var(--fs-micro);
+  color: var(--ink-mute);
+}
+
+@media (max-width: 760px) {
+  .qmini li {
+    flex-direction: column;
+    gap: 4px;
+  }
+}
+.about-figure {
+  margin: 0 0 clamp(30px, 4vw, 48px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(16px, 2vw, 26px);
+  align-items: end;
+}
+
+.about-figure img {
+  width: 100%;
+  height: auto;
+  filter: grayscale(1) contrast(1.04);
+}
+
+.about-figure figcaption {
+  font-size: var(--fs-small);
+  color: var(--ink-soft);
+  line-height: 1.7;
+}
+
+@media (max-width: 760px) {
+  .about-figure {
+    grid-template-columns: 1fr;
+  }
 }

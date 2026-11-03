@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN">
 
 </head>
-<body class="no-js">
+<body class="no-js detail">
 <script>document.body.classList.remove('no-js')</script>
 <a class="skip" href="#main">跳到正文</a>
 
@@ -52,7 +52,10 @@
     </div>
   </header>
 
-  <form class="filters" id="filters" role="search" onsubmit="return false">
+  </div>
+  <div class="index-field">
+    <div class="frame">
+    <form class="filters" id="filters" role="search" onsubmit="return false">
     <div class="filters__field">
       <label for="f-course">科目</label>
       <select id="f-course"><option value="">全部</option><option value="va1">微积分 A1</option><option value="la">线性代数</option></select>
@@ -1319,13 +1322,15 @@ M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
   </ul>
   <p class="empty" id="qlist-empty" hidden>没有符合条件的题。换个筛选条件试试。</p>
   <noscript><p class="hint">筛选需要 JavaScript；上面的列表已经包含全部 100 道题，可以直接点开。</p></noscript>
+    </div>
+  </div>
 </div>
 
 </main>
 
   <footer class="footer">
     <div class="frame">
-      <a class="footer__word" href="../">复习册</a>
+      <a class="footer__word" href="../" aria-label="回到首页：复习册"><span aria-hidden="true">复习册</span></a>
       <div class="footer__cols">
         <div class="footer__col">
           <h3>科目</h3>

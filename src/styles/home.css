@@ -89,16 +89,16 @@
 
 /* 两个圆各是一门课：右下角一块墨色的牌，把课名与边界写在色块上 */
 .hero__legend {
-  grid-column: 8 / 13;
-  align-self: end;
-  justify-self: end;
-  margin: 0 0 clamp(30px, 5vw, 64px);
+  position: absolute;
+  right: var(--frame);
+  bottom: clamp(40px, 6vw, 84px);
+  margin: 0;
   display: flex;
   flex-direction: column;
   gap: clamp(12px, 1.4vw, 18px);
   padding: clamp(18px, 1.8vw, 26px);
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--paper);
+  color: var(--ink);
   text-align: right;
   z-index: 3;
 }
@@ -112,19 +112,31 @@
 .hero__legend dd {
   margin: 0.25em 0 0;
   font-size: var(--fs-small);
-  color: #cfc9bd;
+  color: var(--ink-soft);
 }
 
 @media (max-width: 900px) {
   .hero__legend {
+    position: static;
     grid-column: 1 / -1;
-    justify-self: stretch;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 16px;
+    gap: 14px;
+    margin: 30px calc(var(--frame) * -1) 0;
+    padding: 22px var(--frame) 24px;
+    background: var(--red);
+    color: #fff;
     text-align: left;
-    margin: 30px 0 0;
-    position: relative;
+  }
+  .hero__legend dd {
+    color: rgba(255, 255, 255, 0.94);
+  }
+  .hero__legend dt {
+    font-size: 1rem;
+  }
+  .hero__legend dd {
+    font-size: var(--fs-micro);
+    overflow-wrap: anywhere;
   }
   .hero__legend dd {
     text-align: left;
@@ -143,12 +155,9 @@
     order: 1;
     min-height: 0;
   }
+  /* 窄屏上圆会压字，改成一条满幅的红带承载两门课 */
   .hero__discs {
-    position: relative;
-    inset: auto;
-    order: 2;
-    height: 64vw;
-    margin-top: -2vw;
+    display: none;
   }
   .hero__copy {
     grid-column: 1 / -1;
@@ -427,7 +436,7 @@
 
 /* 范围之外：明度退后，不画线 */
 .spine__row.is-out .spine__name {
-  color: var(--ink-faint);
+  color: var(--ink-mute);
 }
 
 .spine__row.is-out .spine__fact b {
@@ -654,8 +663,8 @@
 }
 
 .split__actions a + a {
-  background: var(--red-deep);
-  color: #fff;
+  background: #fff;
+  color: var(--red-deep);
 }
 
 .split__actions a:hover {
@@ -1040,7 +1049,7 @@
 .footer {
   background: var(--ink);
   color: var(--paper);
-  padding-block: clamp(48px, 6vw, 90px) clamp(28px, 3vw, 44px);
+  padding-block: clamp(140px, 15vw, 220px) clamp(28px, 3vw, 44px);
 }
 
 .footer__word {
@@ -1100,4 +1109,14 @@
   .footer__col {
     grid-column: span 6;
   }
+}
+
+/* 内页的页脚：字标收小，别跟内容抢戏 */
+.detail .footer__word {
+  font-size: clamp(1.75rem, 3.4vw, 3rem);
+  letter-spacing: -0.02em;
+}
+
+.detail .footer__cols {
+  margin-top: clamp(20px, 2.4vw, 30px);
 }

@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN">
 
 </head>
-<body class="no-js">
+<body class="no-js detail">
 <script>document.body.classList.remove('no-js')</script>
 <a class="skip" href="#main">跳到正文</a>
 
@@ -158,26 +158,29 @@
   <section class="section--tight">
     <div class="rule-head"><h2>投稿之后</h2><p>一道题从你写下来到出现在题库里，要过三步。</p></div>
     <div class="steps">
-      <article class="step step--1"><div class="step__plate"><div class="step__art">1. 开 issue
+      <article class="step step--1">
+        <h3 class="step__name">提</h3>
+        <div class="step__plate"><pre class="step__art"><code>1. 开 issue
    标题：[题目投稿] …
    标签：question-submission
-   正文：就是预览里那整段</div></div>
-        <h3 class="step__name">提</h3>
+   正文：就是预览里那整段</code></pre></div>
         <p class="step__text">issue 里带着完整的 frontmatter 和文件名建议。issue 太长放不下时，下载 .md 附在评论里。</p></article>
-      <article class="step step--2"><div class="step__plate"><div class="step__art">2. 管理员审
+      <article class="step step--2">
+        <h3 class="step__name">审</h3>
+        <div class="step__plate"><pre class="step__art"><code>2. 管理员审
    看数学对不对
    看标签与难度
    看有没有重复
-   必要时在 issue 里讨论</div></div>
-        <h3 class="step__name">审</h3>
+   必要时在 issue 里讨论</code></pre></div>
         <p class="step__text">管理员会把 issue 转成一个文件（scripts/issue-to-question.mjs 可以从 issue 正文直接生成），提交 PR。</p></article>
-      <article class="step step--3"><div class="step__plate"><div class="step__art">3. 合并
+      <article class="step step--3">
+        <h3 class="step__name">归档</h3>
+        <div class="step__plate"><pre class="step__art"><code>3. 合并
    git merge
    npm run build
    Pages 自动更新
 
-   新题出现在：题库 / 标签页 / 章节</div></div>
-        <h3 class="step__name">归档</h3>
+   新题出现在：题库 / 标签页 / 章节</code></pre></div>
         <p class="step__text">合并后重新构建，题目进入题库、标签页与对应章节；范围统计和首页数字一起更新。</p></article>
     </div>
   </section>
@@ -189,7 +192,7 @@
 
   <footer class="footer">
     <div class="frame">
-      <a class="footer__word" href="../">复习册</a>
+      <a class="footer__word" href="../" aria-label="回到首页：复习册"><span aria-hidden="true">复习册</span></a>
       <div class="footer__cols">
         <div class="footer__col">
           <h3>科目</h3>

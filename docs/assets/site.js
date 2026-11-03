@@ -15,6 +15,11 @@
     '.checker',
     '.chapter',
     '.pagehead__inner > *',
+    '.qpage__stem > *',
+    '.qblock',
+    '.pager',
+    '.qpage__side > *',
+    '.filters__field',
     '.article__main > *',
     '.step',
     '.faq__item',
@@ -26,7 +31,15 @@
     '.submit__form > *',
     '.article__toc',
     '.footer__col',
+    '.section > *',
+    '.tagcloud a',
+    '.practice__filters > *',
+    '.callout',
   ]
+
+  // 长列表只给前若干行做入场，其余直接显示，避免整页一起变成 invisible
+  const rowLimit = 18
+  const listRows = Array.from(document.querySelectorAll('.qlist .qrow'))
 
   if (!prefersReduced && 'IntersectionObserver' in window) {
     const groups = new Map()
@@ -58,6 +71,12 @@
       { rootMargin: '0px 0px -8% 0px', threshold: 0.08 },
     )
     for (const el of $$('[data-reveal]')) io.observe(el)
+
+    for (const row of listRows.slice(0, rowLimit)) {
+      row.setAttribute('data-reveal', '')
+      row.style.setProperty('--delay', '0ms')
+      io.observe(row)
+    }
   }
 
   /* 首屏两个圆由 CSS 动画展开，脚本不再插手 */
@@ -70,7 +89,13 @@
       plate.classList.add('is-in')
       ring.classList.add('is-in')
     } else {
-      const io = new IntersectionObserver(
+      rows.slice(0, rowLimit).forEach((r) => {
+      r.setAttribute('data-reveal', '')
+      r.style.setProperty('--delay', '0ms')
+      io.observe(r)
+    })
+
+    const io = new IntersectionObserver(
         (entries) => {
           for (const e of entries) {
             if (!e.isIntersecting) continue

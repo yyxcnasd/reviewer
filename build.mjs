@@ -212,6 +212,14 @@ for (const q of questions) {
 
 questions.sort((a, b) => (a.course === b.course ? a.id.localeCompare(b.id) : a.course.localeCompare(b.course)))
 
+// 部署前的提醒：仓库地址还是占位符时，投稿页的 issue 按钮会指向不存在的仓库
+if (String(config.repo).startsWith('your-github-name')) {
+  warn(
+    path.join(ROOT, 'site.config.json'),
+    'repo 还是占位符（your-github-name/reviewer）：投稿页的 issue 按钮会指向不存在的仓库，部署前把它改成你自己的 owner/repo',
+  )
+}
+
 // 统计
 const stats = {
   questions: questions.length,
