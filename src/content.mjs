@@ -183,8 +183,10 @@ export function loadContent({ ROOT, err, warn }) {
       html: renderMarkdown(body, { errors: [] }),
     })
   }
+  // 只对「有题」的章节要求要点：空分类（比如「其他」）没题就不用写
+  const chaptersWithQuestions = new Set(questions.map((q) => q.chapter))
   for (const ch of chapterById.values()) {
-    if (ch.state === 'in' && !notes.some((n) => n.id === ch.id)) {
+    if (ch.state === 'in' && chaptersWithQuestions.has(ch.id) && !notes.some((n) => n.id === ch.id)) {
       warn(path.join(CONTENT, 'notes'), `章节「${ch.title}」还没有复习要点文件（content/notes/${ch.courseId}/${ch.id}.md）`)
     }
   }
