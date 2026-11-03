@@ -47,6 +47,9 @@ jobs:
           grep -q 'href="\./' docs/index.html || grep -q 'href="\.\./' docs/index.html || true
 
       - uses: actions/configure-pages@v5
+        with:
+          # 仓库第一次推上来时自动把 Pages 打开（免去手动点 Settings）
+          enablement: true
 
       - uses: actions/upload-pages-artifact@v3
         with:
