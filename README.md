@@ -123,6 +123,12 @@ npm run check      # 只校验内容，不生成
 
 ## 部署到 GitHub Pages
 
+> 当前这个仓库已经接好了：仓库是 public，Pages 的 Source 是 **GitHub Actions**，
+> 站点在 <https://yyxcnasd.github.io/reviewer/>。改动 `content/` 推到 `main`，
+> Actions 会重新构建并发布，不需要本地跑构建。
+
+下面两种方式任选其一，换仓库或重装时用得上。
+
 **方式一：仓库设置里指定 docs/（最简单）**
 
 1. 建仓库，把本仓库推上去。
