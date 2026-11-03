@@ -273,7 +273,8 @@ p {
 }
 
 .btn--red {
-  --btn-bg: var(--red);
+  /* 深色下用更深的红做底，白字才有足够对比 */
+  --btn-bg: var(--red-bg, var(--red));
   --btn-fg: #fff;
 }
 

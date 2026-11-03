@@ -42,6 +42,7 @@
 
   /* 批改红：动作、范围里的“考” */
   --red: #c1121f;
+  --red-bg: #c1121f;
   --red-deep: #8d0d17;
   --red-soft: #f4e2e0;
   --green: #2f6b34;
@@ -86,7 +87,7 @@
 
   --paper: #16150f;
   --paper-2: #1f1d16;
-  --paper-3: #2a2740;
+  --paper-3: #332f26;
   --surface: #1b1913;
   --ink: #f4f1e8;
   --ink-soft: #d5cfc1;
@@ -94,6 +95,7 @@
   --ink-faint: #857e70;
 
   --red: #e8565e;
+  --red-bg: #b3161f;
   --red-deep: #c1121f;
   --red-soft: #3a1d1e;
   --green: #7fc48a;
@@ -479,7 +481,8 @@ p {
 }
 
 .btn--red {
-  --btn-bg: var(--red);
+  /* 深色下用更深的红做底，白字才有足够对比 */
+  --btn-bg: var(--red-bg, var(--red));
   --btn-fg: #fff;
 }
 
@@ -1307,6 +1310,12 @@ a.tag:hover {
 
 .range tr {
   transition: opacity 220ms var(--ease), background-color 220ms var(--ease);
+}
+
+/* 深色下两个圆不做正片叠底（会叠出紫色），直接覆盖 */
+:root[data-theme="dark"] .hero__discs {
+  mix-blend-mode: normal;
+  opacity: 0.9;
 }
 
 /* ==========================================================================

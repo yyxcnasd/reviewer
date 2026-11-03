@@ -598,3 +598,9 @@
 .range tr {
   transition: opacity 220ms var(--ease), background-color 220ms var(--ease);
 }
+
+/* 深色下两个圆不做正片叠底（会叠出紫色），直接覆盖 */
+:root[data-theme="dark"] .hero__discs {
+  mix-blend-mode: normal;
+  opacity: 0.9;
+}
