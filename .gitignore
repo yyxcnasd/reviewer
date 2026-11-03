@@ -2,6 +2,9 @@
 node_modules/
 .pnpm-store/
 
+# 参考资料（PDF 讲义与课本，体积大且多为版权材料，不进版本库）
+references/
+
 # 构建中间产物
 .work/
 .taste-skill/
