@@ -1,0 +1,381 @@
+# 历年真题的考点索引
+#
+# 由 .work/png/ 下的试卷图片整理而来（mathsdream/THU-math-source 整理版），
+# 只做题型与考点的索引，不抄题。字段说明：
+#   sections  按卷面题号分块：name 题型名，count 题数，points 每题分值（不同分值的块不写 points）
+#   topics    chapter 取 courses.yml 的章节 id，label 一句话概括考什么，levels 难度(1 基础 / 2 常规 / 3 综合 / 4 挑战)
+#   notes     这套卷子的一句话特点
+
+papers:
+  - id: va1-2019
+    course: va1
+    year: 2019
+    title: 2019 级微积分 A1 期中
+    date: 2019-11
+    source: mathsdream/THU-math-source 整理
+    sections:
+      - name: 填空题
+        count: 10
+        points: 3
+      - name: 计算题
+        count: 4
+        points: 10
+      - name: 证明与综合题
+        count: 4
+      - name: 附加题
+        count: 1
+        points: 5
+    topics:
+      - chapter: va1-2
+        label: 函数极限计算（等价无穷小、洛必达、待定型）
+        levels: [1, 2]
+      - chapter: va1-2
+        label: 分段函数连续与导数定义求极限
+        levels: [2, 3]
+      - chapter: va1-3
+        label: 反函数二阶导、参数方程切线与 n 阶导数
+        levels: [2, 3]
+      - chapter: va1-4
+        label: 泰勒展开定待定系数使极限存在
+        levels: [3]
+      - chapter: va1-4
+        label: 拉格朗日中值定理证不等式
+        levels: [3, 4]
+      - chapter: va1-1
+        label: 递推数列单调有界（x_{n+1} = -x_n^2 + 2x_n）
+        levels: [3, 4]
+      - chapter: va1-1
+        label: 闭区间套与不动点（附加题）
+        levels: [4]
+    notes: 样题解答版，填空里就有 ε 语言和待定系数，压轴用区间套证不动点，几乎没有送分题。
+
+  - id: va1-2020
+    course: va1
+    year: 2020
+    title: 2020 级微积分 A1 期中
+    date: 2020-11
+    source: mathsdream/THU-math-source 整理
+    sections:
+      - name: 填空题
+        count: 10
+        points: 3
+      - name: 解答题
+        count: 8
+      - name: 附加题
+        count: 1
+        points: 5
+    topics:
+      - chapter: va1-2
+        label: 函数极限（洛必达、等价无穷小、1 的无穷次幂）
+        levels: [1, 2]
+      - chapter: va1-3
+        label: 参数方程求导与带皮亚诺余项的泰勒展开
+        levels: [2, 3]
+      - chapter: va1-4
+        label: 泰勒公式求极限
+        levels: [3]
+      - chapter: va1-4
+        label: 最大值最小值、凹凸与渐近线（20 分大题）
+        levels: [2, 3]
+      - chapter: va1-4
+        label: 不等式证明（构造辅助函数）
+        levels: [3, 4]
+      - chapter: va1-1
+        label: 递推数列收敛（x_{n+1} = x_n + ln(2 - x_n)）
+        levels: [3, 4]
+      - chapter: va1-1
+        label: 数列收敛速度与无穷小比较（附加题）
+        levels: [4]
+    notes: 范围最宽的一套，20 分大题考到极值、凹凸和作图，已超出现在的 4.3 边界，做题时可只保留前两问。
+
+  - id: va1-2021
+    course: va1
+    year: 2021
+    title: 2021 级微积分 A1 期中
+    date: 2021-11
+    source: mathsdream/THU-math-source 整理
+    sections:
+      - name: 填空题
+        count: 10
+        points: 3
+      - name: 解答题
+        count: 7
+        points: 10
+    topics:
+      - chapter: va1-2
+        label: 函数极限计算（洛必达、1 的无穷次幂、无穷小阶）
+        levels: [1, 2]
+      - chapter: va1-2
+        label: 分段函数连续与可导、二阶可导判定
+        levels: [2, 3]
+      - chapter: va1-3
+        label: 反函数二阶导、参数方程切线与高阶导数
+        levels: [2, 3]
+      - chapter: va1-4
+        label: 泰勒公式求最高阶无穷小
+        levels: [3, 4]
+      - chapter: va1-4
+        label: x^x 型极限与洛必达
+        levels: [2, 3]
+      - chapter: va1-1
+        label: 调和级数部分和与交错级数的收敛
+        levels: [3, 4]
+      - chapter: va1-1
+        label: 用导数定义处理数列极限（乘积型）
+        levels: [3, 4]
+    notes: 结构最规整的十年模板，10 填空加 7 个 10 分解答，压轴是调和级数与泰勒最高阶无穷小。
+
+  - id: va1-2022
+    course: va1
+    year: 2022
+    title: 2022 级微积分 A1 期中
+    date: 2022-11
+    source: mathsdream/THU-math-source 整理
+    sections:
+      - name: 填空题
+        count: 15
+        points: 3
+      - name: 选择题
+        count: 10
+        points: 3
+      - name: 解答题
+        count: 3
+    topics:
+      - chapter: va1-2
+        label: 极限计算（15 道填空与选择题）
+        levels: [1, 2]
+      - chapter: va1-3
+        label: 高阶导数与 n 阶导公式（f 的 100 阶导）
+        levels: [2, 3]
+      - chapter: va1-3
+        label: 隐函数与反函数求导
+        levels: [2, 3]
+      - chapter: va1-4
+        label: 泰勒公式与麦克劳林展开
+        levels: [2, 3]
+      - chapter: va1-4
+        label: 方程实根个数与零点定理
+        levels: [2, 3]
+      - chapter: va1-1
+        label: 数列收敛与子列、单调有界（选择题）
+        levels: [3]
+      - chapter: va1-4
+        label: 中值定理不等式与取等情形构造
+        levels: [4]
+    notes: 唯一一套 15 填空加 10 选择的卷子，题量最大、覆盖面最广，考场上主要拼速度。
+
+  - id: va1-2023
+    course: va1
+    year: 2023
+    title: 2023 级微积分 A1 期中
+    date: 2023-11
+    source: mathsdream/THU-math-source 整理
+    sections:
+      - name: 填空题
+        count: 10
+      - name: 解答题
+        count: 7
+    topics:
+      - chapter: va1-1
+        label: 夹逼准则与数列收敛（根式、求和型）
+        levels: [2, 3]
+      - chapter: va1-1
+        label: 递推数列单调有界与 Stolz 定理
+        levels: [3, 4]
+      - chapter: va1-2
+        label: 函数极限与等价无穷小
+        levels: [1, 2]
+      - chapter: va1-2
+        label: 狄利克雷型函数的连续性与分段点可导
+        levels: [3, 4]
+      - chapter: va1-3
+        label: 高阶导数、反函数微分与参数方程切线
+        levels: [2, 3]
+      - chapter: va1-4
+        label: 泰勒展开与无穷小的阶
+        levels: [3]
+      - chapter: va1-4
+        label: 中值定理证明与最值存在性
+        levels: [4]
+    notes: 参考解答版，10 填空加 7 解答；狄利克雷型函数的连续性和「最值存在性」都搬上来了，明显偏证明。
+
+  - id: va1-2024
+    course: va1
+    year: 2024
+    title: 2024 级微积分 A1 期中
+    date: 2024-11
+    source: mathsdream/THU-math-source 整理
+    sections:
+      - name: 填空题
+        count: 10
+        points: 3
+      - name: 解答题
+        count: 7
+    topics:
+      - chapter: va1-2
+        label: 函数极限（1 的无穷次幂、等价无穷小）
+        levels: [1, 2]
+      - chapter: va1-2
+        label: 连续性与间断点分类
+        levels: [2, 3]
+      - chapter: va1-3
+        label: 反函数微分、参数方程求导与高阶导数
+        levels: [2, 3]
+      - chapter: va1-1
+        label: 递推数列单调有界求极限
+        levels: [2, 3]
+      - chapter: va1-4
+        label: 泰勒展开与无穷小的阶
+        levels: [3]
+      - chapter: va1-4
+        label: 拉格朗日余项证明不等式
+        levels: [4]
+      - chapter: va1-4
+        label: 中值定理命题辨析与举反例
+        levels: [4]
+    notes: 10 填空加 7 解答，压轴连考泰勒余项不等式和「命题是否成立」，是近年最重证明的一套。
+
+  - id: va1-2025
+    course: va1
+    year: 2025
+    title: 2025 级微积分 A1 期中
+    date: 2025-11
+    source: mathsdream/THU-math-source 整理
+    sections:
+      - name: 选择题
+        count: 25
+        points: 4
+    topics:
+      - chapter: va1-2
+        label: 函数极限与洛必达法则的适用条件
+        levels: [2, 3]
+      - chapter: va1-2
+        label: 间断点类型与连续性概念
+        levels: [2]
+      - chapter: va1-3
+        label: 反函数、隐函数与高阶导数
+        levels: [2, 3]
+      - chapter: va1-4
+        label: 泰勒公式与皮亚诺余项
+        levels: [2, 3]
+      - chapter: va1-1
+        label: 数列极限（Stolz、递推单调有界、柯西准则）
+        levels: [3, 4]
+      - chapter: va1-4
+        label: 方程实根个数与导数图像
+        levels: [2, 3]
+      - chapter: va1-2
+        label: 极限与可导性的概念辨析
+        levels: [3, 4]
+    notes: 全选择题 25 题各 4 分的改革卷，原来只在证明题里出现的理论部分全变成概念题，观感更难但均分反而上升。
+
+  - id: la-2024
+    course: la
+    year: 2024
+    title: 2024 级线性代数期中
+    date: 2024-11
+    source: mathsdream/THU-math-source 整理
+    sections:
+      - name: 填空题
+        count: 10
+        points: 3
+      - name: 计算与证明题
+        count: 7
+    topics:
+      - chapter: la-1
+        label: 数字行列式计算与多项式常数项
+        levels: [1, 2]
+      - chapter: la-1
+        label: 代数余子式与展开定理
+        levels: [2]
+      - chapter: la-1
+        label: 含参数方程组有解条件与全部解
+        levels: [3]
+      - chapter: la-2
+        label: 逆矩阵、伴随矩阵与矩阵方程
+        levels: [2, 3]
+      - chapter: la-2
+        label: 初等矩阵与初等变换求简化行阶梯形
+        levels: [2, 3]
+      - chapter: la-3
+        label: 向量组线性相关性与线性表示
+        levels: [3]
+      - chapter: la-3
+        label: 线性无关的证明（矩阵作用、递推关系）
+        levels: [4]
+    notes: 10 填空加 7 计算证明，行列式、伴随矩阵、线性相关性三分天下，最后一题考向量组线性无关的递推证明。
+
+  - id: la-2025
+    course: la
+    year: 2025
+    title: 2025 级线性代数期中
+    date: 2025-11
+    source: mathsdream/THU-math-source 整理
+    sections:
+      - name: A 类选择题
+        count: 10
+        points: 3
+      - name: B 类选择题
+        count: 10
+        points: 4
+      - name: 证明题
+        count: 2
+        points: 15
+    topics:
+      - chapter: la-1
+        label: 行列式性质与计算技巧（拆行、凑项）
+        levels: [2, 3]
+      - chapter: la-1
+        label: 含参数方程组解的判定与通解
+        levels: [2, 3]
+      - chapter: la-2
+        label: 逆矩阵、矩阵方程与矩阵幂
+        levels: [2, 3]
+      - chapter: la-2
+        label: 伴随矩阵与分块矩阵
+        levels: [3]
+      - chapter: la-2
+        label: 矩阵乘法与初等变换的命题辨析
+        levels: [2, 3]
+      - chapter: la-3
+        label: 线性表示与线性相关的判定
+        levels: [3]
+      - chapter: la-3
+        label: 由 Aα 条件证明线性无关
+        levels: [4]
+    notes: A 类 3 分选择加 B 类 4 分选择共 70 分，再加两道 15 分证明，选择题占大头、概念辨析最多。
+
+  - id: la-2026
+    course: la
+    year: 2026
+    title: 2026 秋线性代数期中样卷
+    date: 2026-11
+    source: mathsdream/THU-math-source 整理
+    sections:
+      - name: 填空题
+        count: 10
+      - name: 计算与证明题
+        count: 7
+    topics:
+      - chapter: la-1
+        label: 行列式计算与代数余子式
+        levels: [1, 2]
+      - chapter: la-1
+        label: 含参数方程组解的结构与通解
+        levels: [3]
+      - chapter: la-2
+        label: 可交换矩阵、逆矩阵与矩阵方程
+        levels: [2, 3]
+      - chapter: la-2
+        label: 初等矩阵与行列变换的关系
+        levels: [2, 3]
+      - chapter: la-2
+        label: 伴随矩阵与分块矩阵的伴随
+        levels: [3]
+      - chapter: la-3
+        label: 线性相关性的判定与线性表示
+        levels: [3]
+      - chapter: la-3
+        label: 线性无关的证明（左乘矩阵法）
+        levels: [4]
+    notes: 期中样卷，题目与 2024 卷几乎同构（填空 1 到 10 逐题对应），可以直接当最新题型模板用。
