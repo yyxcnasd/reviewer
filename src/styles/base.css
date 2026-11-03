@@ -231,6 +231,9 @@ p {
   .nav__links .btn {
     font-size: 0.9375rem;
     padding: 0.55em 0.9em;
+    position: sticky;
+    right: 0;
+    box-shadow: 0 0 0 10px var(--paper);
   }
 }
 
