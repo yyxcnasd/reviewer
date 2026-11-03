@@ -1,7 +1,6 @@
 /* 导出选题页：挑题 + 选项 → 打开打印版 */
 ;(() => {
-  const $ = (s) => document.querySelector(s)
-  const $$ = (s) => Array.from(document.querySelectorAll(s))
+  const { $, $$, escapeHtml } = window.RB
   const STORE = 'reviewer.export.v1'
 
   const el = {
@@ -162,10 +161,6 @@
       .slice(0, 24)
       .forEach((row, i) => row.style.setProperty('animation-delay', `${i * 22}ms`))
     updateCount()
-  }
-
-  function escapeHtml(s) {
-    return String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c])
   }
 
   function updateCount() {

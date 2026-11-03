@@ -1,22 +1,19 @@
-import { page, write, url, esc, attr, stateLabel, dots, tagHref, stemExcerpt } from './layout.mjs'
+import {
+  page,
+  write,
+  url,
+  esc,
+  attr,
+  stateLabel,
+  dots,
+  tagHref,
+  stemExcerpt,
+  shortTitle,
+} from '../lib/site.mjs'
 
 /* ==========================================================================
    首页：先给能用的东西（搜题、入口、范围表、题），再给设计。
    ========================================================================== */
-
-const SHORT = {
-  'va1-1': '数列极限',
-  'va1-2': '函数极限',
-  'va1-3': '导数',
-  'va1-4': '中值定理与泰勒',
-  'va1-5': '黎曼积分',
-  'va1-6': '广义积分',
-  'va1-7': '常微分方程',
-  'la-1': '行列式',
-  'la-2': '矩阵',
-  'la-3': '向量空间',
-  'la-4': '秩与解的结构',
-}
 
 const FEATURED = ['va1-001', 'va1-030', 'va1-042', 'la-001', 'la-014', 'la-050']
 
@@ -75,7 +72,7 @@ export function buildHome(ctx) {
         <a class="fq__link" href="${url(0, `questions/${q.id}.html`)}">${stemExcerpt(ctx, q)}</a>
         <div class="fq__meta">
           <span class="fq__id">${esc(q.id.toUpperCase())}</span>
-          <span>${esc(ctx.courseById.get(q.course).short)} · ${esc(SHORT[ch.id] || ch.title)}</span>
+          <span>${esc(ctx.courseById.get(q.course).short)} · ${esc(shortTitle(ch))}</span>
           <span>${esc(q.kind)}</span>
           ${dots(q.difficulty)}
         </div>

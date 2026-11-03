@@ -1,7 +1,6 @@
 /* 复习册 · 页面脚本。不加载任何外部依赖。 */
 ;(() => {
-  const $ = (sel, root = document) => root.querySelector(sel)
-  const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel))
+  const { $, $$, escapeHtml } = window.RB
 
   /* ---------------------------------------------------------------- 入场 */
 
@@ -270,10 +269,6 @@
         apply(input.value)
       })
     }
-  }
-
-  function escapeHtml(s) {
-    return String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c])
   }
 
   /* ---------------------------------------------------------------- 题库筛选 */

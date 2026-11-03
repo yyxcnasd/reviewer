@@ -1,6 +1,6 @@
 /* 投稿页：写 Markdown、实时预览、生成 issue 与文件 */
 ;(() => {
-  const $ = (s) => document.querySelector(s)
+  const { $ } = window.RB
   const form = $('#submit-form')
   if (!form) return
 

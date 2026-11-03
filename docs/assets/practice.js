@@ -2,7 +2,7 @@
 ;(() => {
   const stage = document.getElementById('stage')
   if (!stage) return
-  const $ = (s) => document.querySelector(s)
+  const { $ } = window.RB
 
   const el = {
     course: $('#p-course'),

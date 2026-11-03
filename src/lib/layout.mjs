@@ -114,6 +114,7 @@ export function page(ctx, opts) {
 <meta name="color-scheme" content="light">
 <link rel="stylesheet" href="${base}assets/katex/katex.min.css">
 <link rel="stylesheet" href="${base}assets/site.css">
+<script src="${base}assets/core.js"></script>
 <link rel="icon" href="${base}assets/favicon.svg" type="image/svg+xml">
 <meta property="og:title" content="${attr(title)}">
 <meta property="og:description" content="${attr(desc)}">

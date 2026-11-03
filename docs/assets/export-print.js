@@ -1,6 +1,6 @@
 /* 打印版：读链接参数，把题渲染成一张 A4 卷子 */
 ;(() => {
-  const $ = (s) => document.querySelector(s)
+  const { $, escapeHtml } = window.RB
   const sheet = $('#psheet')
   const status = $('#ps-status')
   if (!sheet) return
@@ -35,7 +35,7 @@
     return
   }
 
-  const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c])
+  const esc = escapeHtml
 
   const date = new Date()
   const stamp = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`

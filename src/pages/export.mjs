@@ -1,4 +1,15 @@
-import { page, write, url, esc, attr } from './layout.mjs'
+import {
+  page,
+  write,
+  url,
+  esc,
+  attr,
+  crumb,
+  courseOptions,
+  chapterOptions,
+  tagOptions,
+  difficultyOptions,
+} from '../lib/site.mjs'
 
 /* ==========================================================================
    导出：选题页 + 打印版
@@ -25,27 +36,11 @@ export function buildExportPages(ctx) {
 
 function buildSelector(ctx) {
   const { stats } = ctx
-  const courseOptions = ctx.courses.map((c) => `<option value="${c.id}">${esc(c.name)}</option>`).join('')
-  const chapterOptions = ctx.courses
-    .map((c) => {
-      const chapters = c.chapters.filter((ch) => (ctx.qByChapter.get(ch.id) || []).length)
-      if (!chapters.length) return ''
-      return `<optgroup label="${esc(c.name)}">${chapters
-        .map((ch) => `<option value="${ch.id}">第 ${esc(ch.no)} 章 ${esc(ch.title)}</option>`)
-        .join('')}</optgroup>`
-    })
-    .join('')
-  const tagOptions = [...ctx.tagCounts.entries()]
-    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'zh'))
-    .map(([t, n]) => `<option value="${attr(t)}">${esc(t)}（${n}）</option>`)
-    .join('')
+
 
   const body = `
 <div class="frame">
-  <nav class="crumb" aria-label="位置">
-    <a href="${url(1, '')}">${esc(ctx.config.wordmark)}</a><span class="crumb__sep">/</span>
-    <a href="${url(1, 'questions/')}">题库</a><span class="crumb__sep">/</span><span>导出</span>
-  </nav>
+  ${crumb(1, [{ href: '', label: ctx.config.wordmark }, { href: 'questions/', label: '题库' }, { label: '导出' }])}
 
   <header class="pagehead">
     <div class="pagehead__inner">
@@ -66,25 +61,19 @@ function buildSelector(ctx) {
       <form class="exfilters" id="ex-filters" onsubmit="return false">
         <div class="exfilters__field">
           <label for="ex-course">科目</label>
-          <select id="ex-course"><option value="">全部</option>${courseOptions}</select>
+          <select id="ex-course">${courseOptions(ctx)}</select>
         </div>
         <div class="exfilters__field">
           <label for="ex-chapter">章节</label>
-          <select id="ex-chapter"><option value="">全部</option>${chapterOptions}</select>
+          <select id="ex-chapter">${chapterOptions(ctx)}</select>
         </div>
         <div class="exfilters__field">
           <label for="ex-tag">标签</label>
-          <select id="ex-tag"><option value="">全部</option>${tagOptions}</select>
+          <select id="ex-tag">${tagOptions(ctx)}</select>
         </div>
         <div class="exfilters__field">
           <label for="ex-difficulty">难度</label>
-          <select id="ex-difficulty">
-            <option value="">全部</option>
-            <option value="1">1 基础</option>
-            <option value="2">2 常规</option>
-            <option value="3">3 综合</option>
-            <option value="4">4 挑战</option>
-          </select>
+          <select id="ex-difficulty">${difficultyOptions()}</select>
         </div>
         <div class="exfilters__field">
           <label for="ex-q">搜索</label>
@@ -174,6 +163,7 @@ function buildPrint(ctx) {
 <meta name="robots" content="noindex">
 <link rel="stylesheet" href="../../assets/katex/katex.min.css">
 <style>${FONT_FACES}</style>
+<script src="../../assets/core.js"></script>
 <link rel="stylesheet" href="../../assets/print-sheet.css">
 </head>
 <body class="sheet-page">
