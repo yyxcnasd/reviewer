@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>投稿 · 复习册</title>
+<meta name="description" content="写一道题，实时预览，一键开 issue 或下载 Markdown。">
+<meta name="color-scheme" content="light">
+<link rel="stylesheet" href="../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<meta property="og:title" content="投稿 · 复习册">
+<meta property="og:description" content="写一道题，实时预览，一键开 issue 或下载 Markdown。">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_CN">
+
+</head>
+<body class="no-js">
+<script>document.body.classList.remove('no-js')</script>
+<a class="skip" href="#main">跳到正文</a>
+
+  <header class="sitehead">
+    <div class="frame">
+      <nav class="nav" aria-label="主导航">
+        <a class="nav__mark" href="../"><span class="nav__dot" aria-hidden="true"></span>复习册</a>
+        <ul class="nav__links">
+          <li><a href="../va1/">微积分 A1</a></li>
+          <li><a href="../la/">线性代数</a></li>
+          <li><a href="../questions/">题库</a></li>
+          <li><a href="../papers/">真题</a></li>
+          <li><a class="btn btn--red" href="../submit/">投稿</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+<main id="main">
+
+<div class="frame">
+  <nav class="crumb" aria-label="位置"><a href="../">复习册</a><span class="crumb__sep">/</span><span>投稿</span></nav>
+  <header class="pagehead">
+    <div class="pagehead__inner">
+      <h1 class="pagehead__title">投稿一道题</h1>
+      <div class="pagehead__scope">
+        <p>左边写，右边实时预览。写完可以一键开一个 GitHub issue，或者把 .md 文件下载下来交给管理员。合并之后它就是一个独立的题目文件。</p>
+        <div class="pagehead__stats">
+          <span>格式 Markdown + \( \)</span>
+          <span>每题一个文件</span>
+          <span>标签与难度必填</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="submit">
+    <form class="submit__form" id="submit-form" data-repo="your-github-name/reviewer" onsubmit="return false">
+      <div class="submit__row">
+        <div class="field">
+          <label for="s-course">课程</label>
+          <select class="select" id="s-course">
+            <option value="va1">微积分 A1</option>
+            <option value="la">线性代数</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="s-chapter">章节</label>
+          <select class="select" id="s-chapter"><optgroup label="微积分 A1"><option value="va1-1">第 1 章 实数系与实数列的极限</option><option value="va1-2">第 2 章 函数 函数的极限与连续</option><option value="va1-3">第 3 章 函数的导数</option><option value="va1-4">第 4 章 导数应用</option></optgroup><optgroup label="线性代数"><option value="la-1">第 1 章 线性方程组与行列式</option><option value="la-2">第 2 章 矩阵</option><option value="la-3">第 3 章 n 维向量空间</option></optgroup></select>
+        </div>
+      </div>
+      <div class="submit__row">
+        <div class="field">
+          <label for="s-difficulty">难度</label>
+          <select class="select" id="s-difficulty">
+            <option value="1">1 基础</option>
+            <option value="2" selected>2 常规</option>
+            <option value="3">3 综合</option>
+            <option value="4">4 挑战</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="s-kind">题型</label>
+          <select class="select" id="s-kind">
+            <option>计算题</option><option>证明题</option><option>概念题</option><option>综合题</option>
+          </select>
+        </div>
+      </div>
+      <div class="submit__row">
+        <div class="field">
+          <label for="s-category">大分类</label>
+          <select class="select" id="s-category"><option value="calculus">微积分</option><option value="linear-algebra">线性代数</option><option value="other">其他</option></select>
+        </div>
+        <div class="field">
+          <label for="s-origin">署名</label>
+          <input class="input" id="s-origin" type="text" placeholder="可留空，默认佚名">
+        </div>
+      </div>
+      <div class="field">
+        <label for="s-tags">标签</label>
+        <input class="input" id="s-tags" type="text" placeholder="用逗号分开，比如：泰勒公式, 极限计算" list="tag-suggestions">
+        <datalist id="tag-suggestions">
+          <option value="极限计算"></option><option value="ε-N 语言"></option><option value="夹逼准则"></option><option value="单调有界"></option><option value="等价无穷小"></option><option value="连续性"></option><option value="间断点"></option><option value="导数定义"></option><option value="复合函数求导"></option><option value="隐函数求导"></option><option value="参数方程求导"></option><option value="高阶导数"></option><option value="微分"></option><option value="中值定理"></option><option value="辅助函数"></option><option value="洛必达法则"></option><option value="泰勒公式"></option><option value="证明题"></option><option value="行列式计算"></option><option value="递推"></option><option value="线性方程组"></option><option value="代数余子式"></option><option value="克莱姆法则"></option><option value="矩阵运算"></option><option value="逆矩阵"></option><option value="分块矩阵"></option><option value="初等变换"></option><option value="相抵标准形"></option><option value="线性相关性"></option><option value="线性表示"></option><option value="向量空间"></option>
+        </datalist>
+        <p class="hint">一到四个。管理员可以在 taxonomy.yml 里加新标签。</p>
+      </div>
+
+      <div class="field">
+        <label for="s-stem">题面</label>
+        <div class="submit__tools" aria-label="插入公式">
+          <button type="button" data-wrap="inline">行内公式</button>
+          <button type="button" data-wrap="display">独立公式</button>
+          <button type="button" data-sym="\frac{}{}">分式</button>
+          <button type="button" data-sym="\lim_{x\to 0}">极限</button>
+          <button type="button" data-sym="\int">积分</button>
+          <button type="button" data-sym="\sum_{k=1}^{n}">求和</button>
+          <button type="button" data-sym="\begin{pmatrix} & \\ & \end{pmatrix}">矩阵</button>
+          <button type="button" data-sym="\sqrt{}">根号</button>
+        </div>
+        <textarea class="textarea textarea--code" id="s-stem" rows="6" placeholder="设 \(f(x)=\dfrac{1}{1+x}\)，求 \(f^{(n)}(0)\)。"></textarea>
+      </div>
+
+      <div class="field">
+        <label for="s-hint">提示（可选）</label>
+        <textarea class="textarea textarea--code" id="s-hint" rows="2" placeholder="先算前几阶导数，找规律。"></textarea>
+      </div>
+
+      <div class="field">
+        <label for="s-solution">解析</label>
+        <textarea class="textarea textarea--code" id="s-solution" rows="8" placeholder="写出为什么这样想：关键的一步、用到的条件、容易漏掉的情况。"></textarea>
+      </div>
+
+      <div class="submit__row">
+        <div class="field">
+          <label for="s-answer">答案（可选，填空/计算题建议写）</label>
+          <input class="input" id="s-answer" type="text" placeholder="\((-1)^{n}\,n!\)">
+        </div>
+        <div class="field">
+          <label for="s-mistakes">常见错误（可选）</label>
+          <input class="input" id="s-mistakes" type="text" placeholder="两三行 Markdown 也行">
+        </div>
+      </div>
+
+      <div class="submit__actions">
+        <button class="btn btn--red" id="s-issue" type="button">在 GitHub 开 issue</button>
+        <button class="btn" id="s-download" type="button">下载 .md 文件</button>
+        <button class="btn btn--tone" id="s-copy" type="button">复制 Markdown</button>
+        <button class="btn btn--tone" id="s-reset" type="button">清空</button>
+      </div>
+      <p class="submit__status" id="s-status" aria-live="polite"></p>
+    </form>
+
+    <aside class="submit__preview">
+      <h2><span>预览</span><span id="p-file">content/questions/…</span></h2>
+      <div class="prose" id="preview">
+        <p class="hint">左边写题面，这里会同步显示排版后的样子。公式用 \( \) 写行内，\[ \] 写独立成行。</p>
+      </div>
+    </aside>
+  </div>
+
+  <section class="section--tight">
+    <div class="rule-head"><h2>投稿之后</h2><p>一道题从你写下来到出现在题库里，要过三步。</p></div>
+    <div class="steps">
+      <article class="step step--1"><div class="step__plate"><div class="step__art">1. 开 issue
+   标题：[题目投稿] …
+   标签：question-submission
+   正文：就是预览里那整段</div></div>
+        <h3 class="step__name">提</h3>
+        <p class="step__text">issue 里带着完整的 frontmatter 和文件名建议。issue 太长放不下时，下载 .md 附在评论里。</p></article>
+      <article class="step step--2"><div class="step__plate"><div class="step__art">2. 管理员审
+   看数学对不对
+   看标签与难度
+   看有没有重复
+   必要时在 issue 里讨论</div></div>
+        <h3 class="step__name">审</h3>
+        <p class="step__text">管理员会把 issue 转成一个文件（scripts/issue-to-question.mjs 可以从 issue 正文直接生成），提交 PR。</p></article>
+      <article class="step step--3"><div class="step__plate"><div class="step__art">3. 合并
+   git merge
+   npm run build
+   Pages 自动更新
+
+   新题出现在：题库 / 标签页 / 章节</div></div>
+        <h3 class="step__name">归档</h3>
+        <p class="step__text">合并后重新构建，题目进入题库、标签页与对应章节；范围统计和首页数字一起更新。</p></article>
+    </div>
+  </section>
+</div>
+<script src="../assets/vendor/markdown-it.min.js"></script>
+<script src="../assets/vendor/katex.min.js"></script>
+<script src="../assets/submit.js" defer></script>
+</main>
+
+  <footer class="footer">
+    <div class="frame">
+      <a class="footer__word" href="../">复习册</a>
+      <div class="footer__cols">
+        <div class="footer__col">
+          <h3>科目</h3>
+          <ul>
+            <li><a href="../va1/">微积分 A1</a></li>
+            <li><a href="../la/">线性代数</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h3>内容</h3>
+          <ul>
+            <li><a href="../questions/">题库（100 道）</a></li>
+            <li><a href="../practice/">刷题</a></li>
+            <li><a href="../papers/">历年真题索引</a></li>
+            <li><a href="../tags/">标签</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h3>参与</h3>
+          <ul>
+            <li><a href="../submit/">投稿一道题</a></li>
+            <li><a href="../about/">关于与范围说明</a></li>
+            <li><a href="https://github.com/your-github-name/reviewer" target="_blank" rel="noopener noreferrer">GitHub 仓库</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h3>这本册子</h3>
+          <ul>
+            <li>2026 秋 期中版</li>
+            <li>内容 CC BY-SA 4.0</li>
+            <li>构建于 2026-11-03</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__legal">
+        <span>复习册 · 微积分 A1 · 线性代数</span>
+        <span>内容以 CC BY-SA 4.0 发布，题目标题与解析可自由取用，请保留出处。</span>
+      </div>
+    </div>
+  </footer>
+<script src="../assets/site.js" defer></script>
+
+</body>
+</html>

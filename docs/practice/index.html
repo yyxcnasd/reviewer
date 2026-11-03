@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>刷题 · 复习册</title>
+<meta name="description" content="随机抽题，按章节与难度筛，做完看解析。">
+<meta name="color-scheme" content="light">
+<link rel="stylesheet" href="../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<meta property="og:title" content="刷题 · 复习册">
+<meta property="og:description" content="随机抽题，按章节与难度筛，做完看解析。">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_CN">
+
+</head>
+<body class="no-js">
+<script>document.body.classList.remove('no-js')</script>
+<a class="skip" href="#main">跳到正文</a>
+
+  <header class="sitehead">
+    <div class="frame">
+      <nav class="nav" aria-label="主导航">
+        <a class="nav__mark" href="../"><span class="nav__dot" aria-hidden="true"></span>复习册</a>
+        <ul class="nav__links">
+          <li><a href="../va1/">微积分 A1</a></li>
+          <li><a href="../la/">线性代数</a></li>
+          <li><a href="../questions/" aria-current="page">题库</a></li>
+          <li><a href="../papers/">真题</a></li>
+          <li><a class="btn btn--red" href="../submit/">投稿</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+<main id="main">
+
+<div class="frame">
+  <nav class="crumb" aria-label="位置"><a href="../">复习册</a><span class="crumb__sep">/</span><a href="../questions/">题库</a><span class="crumb__sep">/</span><span>刷题</span></nav>
+  <header class="pagehead">
+    <div class="pagehead__inner">
+      <h1 class="pagehead__title">刷题</h1>
+      <div class="pagehead__scope">
+        <p>一次一道。先自己想，想不出来看提示，做完再展开解析。按科目和章节筛，或者整册随机。</p>
+      </div>
+    </div>
+  </header>
+
+  <div class="practice">
+    <div class="practice__stage">
+      <div class="practice__card" id="stage" aria-live="polite">
+        <p class="hint">正在载入题库…</p>
+      </div>
+      <div class="practice__controls">
+        <button class="btn btn--red" id="p-reveal" type="button">看解析</button>
+        <button class="btn" id="p-next" type="button">下一题</button>
+        <button class="btn btn--tone" id="p-open" type="button">打开题目页</button>
+        <span class="practice__progress">第 <b id="p-index">0</b> / <b id="p-total">0</b> 道</span>
+      </div>
+    </div>
+    <aside class="practice__side">
+      <div class="practice__filters">
+        <div class="field"><label for="p-course">科目</label><select id="p-course"><option value="">全部</option><option value="va1">微积分 A1</option><option value="la">线性代数</option></select></div>
+        <div class="field"><label for="p-chapter">章节</label><select id="p-chapter"><option value="">全部</option><optgroup label="微积分 A1"><option value="va1-1">数列极限</option><option value="va1-2">函数极限</option><option value="va1-3">导数</option><option value="va1-4">中值定理与泰勒</option></optgroup><optgroup label="线性代数"><option value="la-1">行列式</option><option value="la-2">矩阵</option><option value="la-3">向量空间</option></optgroup></select></div>
+        <div class="field"><label for="p-difficulty">难度</label>
+          <select id="p-difficulty"><option value="">全部</option><option value="1">1 基础</option><option value="2">2 常规</option><option value="3">3 综合</option><option value="4">4 挑战</option></select>
+        </div>
+        <div class="field"><label for="p-order">顺序</label>
+          <select id="p-order"><option value="random">随机</option><option value="sequence">按题号</option></select>
+        </div>
+        <button class="btn btn--tone" id="p-apply" type="button">重新抽题</button>
+      </div>
+      <div class="callout"><b>键盘</b>空格 看解析 / 回车 下一题。</div>
+    </aside>
+  </div>
+</div>
+<script src="../assets/practice.js" defer></script>
+</main>
+
+  <footer class="footer">
+    <div class="frame">
+      <a class="footer__word" href="../">复习册</a>
+      <div class="footer__cols">
+        <div class="footer__col">
+          <h3>科目</h3>
+          <ul>
+            <li><a href="../va1/">微积分 A1</a></li>
+            <li><a href="../la/">线性代数</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h3>内容</h3>
+          <ul>
+            <li><a href="../questions/">题库（100 道）</a></li>
+            <li><a href="../practice/">刷题</a></li>
+            <li><a href="../papers/">历年真题索引</a></li>
+            <li><a href="../tags/">标签</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h3>参与</h3>
+          <ul>
+            <li><a href="../submit/">投稿一道题</a></li>
+            <li><a href="../about/">关于与范围说明</a></li>
+            <li><a href="https://github.com/your-github-name/reviewer" target="_blank" rel="noopener noreferrer">GitHub 仓库</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h3>这本册子</h3>
+          <ul>
+            <li>2026 秋 期中版</li>
+            <li>内容 CC BY-SA 4.0</li>
+            <li>构建于 2026-11-03</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__legal">
+        <span>复习册 · 微积分 A1 · 线性代数</span>
+        <span>内容以 CC BY-SA 4.0 发布，题目标题与解析可自由取用，请保留出处。</span>
+      </div>
+    </div>
+  </footer>
+<script src="../assets/site.js" defer></script>
+
+</body>
+</html>
