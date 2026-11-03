@@ -21,7 +21,10 @@ export function buildHome(ctx) {
   const featured = FEATURED.map((id) => ctx.questions.find((q) => q.id === id)).filter(Boolean)
 
   /* 范围表：每章一行，带范围状态、题数、已做进度、要点入口 */
+  const emptyCourses = courses.filter((c) => !(ctx.qByCourse.get(c.id) || []).length)
+
   const rangeCourses = courses
+    .filter((c) => (ctx.qByCourse.get(c.id) || []).length)
     .map((c) => {
       const inScope = c.chapters.filter((ch) => ch.state !== 'out')
       const rows = c.chapters
@@ -133,6 +136,12 @@ export function buildHome(ctx) {
   </ul>
   <p class="checker__verdict" id="scope-verdict" aria-live="polite">输入一个词，下面这张表会告诉你它落在哪一章、考不考。</p>
   <div class="ranges">${rangeCourses}</div>
+  ${emptyCourses
+    .map(
+      (c) =>
+        `<p class="ranges__empty">${esc(c.name)}这一类还没有题：<a href="${url(0, 'submit/')}">投一道</a>，审核通过后会自动进这里。</p>`,
+    )
+    .join('')}
 </section>
 
 <section class="frame section--tight">

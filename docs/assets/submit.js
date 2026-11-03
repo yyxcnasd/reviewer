@@ -54,6 +54,21 @@
     syncChapter()
     update()
   })
+  const CATEGORY_HINT = {
+    calculus: '课内的微积分题：选课程与章节，范围会自动跟着考纲走。',
+    'linear-algebra': '课内的线性代数题：选课程与章节，范围会自动跟着考纲走。',
+    other: '课外题、竞赛题、只是觉得有意思的题：不用选课程，落到 content/questions/other/。',
+  }
+
+  function syncCategoryHint() {
+    const hint = document.querySelector('#s-category-hint')
+    if (!hint) return
+    hint.textContent =
+      CATEGORY_HINT[el.category.value] || '选「其他」就不用挂课程，课外题、竞赛题都放这里。'
+  }
+  el.category.addEventListener('change', syncCategoryHint)
+  syncCategoryHint()
+
   el.category.addEventListener('change', () => {
     // 大分类选「其他」时，课程留空更自然
     if (el.category.options[el.category.selectedIndex]?.textContent.trim() === '其他') {

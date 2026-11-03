@@ -17,7 +17,9 @@
     if (!btn) return
     const dark = current() === 'dark'
     // 按钮上写「点了会变成什么」，不用图标
-    btn.textContent = dark ? '浅色' : '深色'
+    // 窄屏只留一个字，给导航腾地方
+    const narrow = window.matchMedia('(max-width: 480px)').matches
+    btn.textContent = narrow ? (dark ? '浅' : '深') : dark ? '浅色' : '深色'
     btn.setAttribute('aria-label', dark ? '切换到浅色模式' : '切换到深色模式')
     btn.setAttribute('aria-pressed', String(dark))
   }

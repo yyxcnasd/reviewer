@@ -604,3 +604,19 @@
   mix-blend-mode: normal;
   opacity: 0.9;
 }
+
+.ranges__empty {
+  margin-top: 16px;
+  font-size: var(--fs-small);
+  color: var(--ink-soft);
+}
+
+.ranges__empty a {
+  border-bottom: 2px solid var(--line-strong);
+}
+
+.ranges__empty a:hover {
+  color: var(--ink);
+  border-color: var(--ink);
+  text-decoration: none;
+}
