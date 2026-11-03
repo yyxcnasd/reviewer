@@ -96,19 +96,21 @@ export function buildQuestionIndex(ctx) {
       <label for="f-q">搜索</label>
       <input id="f-q" type="search" placeholder="题干、标签、出处" autocomplete="off">
     </div>
-    <div class="filters__field">
-      <label>&nbsp;</label>
-      <button class="btn btn--tone" type="button" id="f-export">导出筛选结果</button>
-    </div>
     <div class="filters__count"><b id="f-count">${questions.length}</b> 道</div>
   </form>
 
-  <p class="donebar" data-progress-ids="${attr(questions.map((q) => q.id).join(','))}">
-    已做 <b data-progress-here>0</b> / ${questions.length}
-    <span>·</span> 收藏 <b data-progress-count>0</b>
-    <span>·</span> 点每道题下面的「已做」「收藏」记录进度，只存在你自己的浏览器里
-    <span>·</span> 按 <span class="kbd">/</span> 直接搜索
-  </p>
+  <div class="donebar" data-progress-ids="${attr(questions.map((q) => q.id).join(','))}">
+    <p>
+      已做 <b data-progress-here>0</b> / ${questions.length}
+      <span>·</span> 收藏 <b data-progress-count>0</b>
+      <span>·</span> 点每道题下面的「已做」「收藏」记进度，只存在你自己的浏览器里
+      <span>·</span> 按 <span class="kbd">/</span> 搜索
+    </p>
+    <div class="donebar__actions">
+      <button class="btn btn--tone" type="button" id="f-random">随机一题</button>
+      <button class="btn btn--tone" type="button" id="f-export">导出筛选结果</button>
+    </div>
+  </div>
 
   <ul class="qlist" id="qlist">
       ${rows}

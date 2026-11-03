@@ -126,6 +126,10 @@
       const p = new URLSearchParams(location.search)
       if (p.get('course')) el.course.value = p.get('course')
       if (p.get('chapter')) el.chapter.value = p.get('chapter')
+      if (p.get('random')) {
+        el.order.value = 'random'
+        el.status.value = 'undone'
+      }
       build()
     })
     .catch(() => {

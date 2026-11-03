@@ -34,6 +34,12 @@
     '.tagcloud a',
     '.practice__filters > *',
     '.callout',
+    '.quick a',
+    '.panel',
+    '.fq',
+    '.range-course',
+    '.ticks li',
+    '.closing',
     '.sheet__body h2',
     '.sheet__body h3',
   ]
@@ -337,6 +343,18 @@
         })
         for (const el of sorted) list.appendChild(el)
       }
+    }
+
+    // 从当前筛选里随机抽一道
+    const randomBtn = $('#f-random')
+    if (randomBtn) {
+      randomBtn.addEventListener('click', () => {
+        const pool = items.filter((el) => !el.hidden)
+        if (!pool.length) return
+        const pick = pool[Math.floor(Math.random() * pool.length)]
+        const link = pick.querySelector('.qrow__link')
+        if (link) location.href = link.getAttribute('href')
+      })
     }
 
     // 导出当前筛选结果

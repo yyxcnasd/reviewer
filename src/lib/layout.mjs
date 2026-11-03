@@ -52,8 +52,8 @@ export function page(ctx, opts) {
                 `<li><a href="${base}${n.href}"${opts.navActive === n.key ? ' aria-current="page"' : ''}>${esc(n.label)}</a></li>`,
             )
             .join('\n          ')}
-          <li><a class="btn btn--red" href="${base}submit/">投稿</a></li>
         </ul>
+        <a class="btn btn--red nav__action" href="${base}submit/">投稿</a>
       </nav>
     </div>
   </header>`

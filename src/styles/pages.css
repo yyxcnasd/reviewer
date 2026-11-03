@@ -16,8 +16,8 @@
 
 .pagehead__title {
   grid-column: 1 / -1;
-  font-size: clamp(2.4rem, 6vw, 5rem);
-  line-height: 1.02;
+  font-size: clamp(1.9rem, 3.4vw, 2.8rem);
+  line-height: 1.1;
 }
 
 /* 大标题下面紧跟一句「这是什么」，别让首屏只有一个名字 */
@@ -36,10 +36,11 @@
 .pagehead__stats {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px 30px;
-  margin-top: 18px;
+  align-items: baseline;
+  gap: 8px 26px;
+  margin-top: 16px;
   font-size: var(--fs-small);
-  color: var(--ink-mute);
+  color: var(--ink-soft);
 }
 
 .pagehead__stats b {
@@ -239,8 +240,8 @@
 }
 
 .article__main {
-  grid-column: 1 / 9;
-  max-width: 40em;
+  grid-column: 1 / 10;
+  max-width: 44em;
 }
 
 .article__toc {
@@ -427,8 +428,8 @@
 .filters select,
 .filters input {
   padding: 0.5em 0.65em;
-  background: var(--paper-2);
-  border: 2px solid transparent;
+  background: var(--paper);
+  border: 2px solid var(--line-strong);
   border-radius: 0;
   font-size: var(--fs-small);
   min-width: 8em;
@@ -442,7 +443,6 @@
 .filters input:focus {
   outline: none;
   border-color: var(--red);
-  background: var(--paper);
 }
 
 .filters__count {
@@ -1391,8 +1391,8 @@
 .exfilters select,
 .exfilters input {
   padding: 0.5em 0.65em;
-  background: var(--paper-2);
-  border: 2px solid transparent;
+  background: var(--paper);
+  border: 2px solid var(--line-strong);
   border-radius: 0;
   font-size: var(--fs-small);
   font-family: inherit;
@@ -1422,17 +1422,17 @@
 .exbulk button {
   background: transparent;
   border: 0;
+  border-bottom: 2px solid transparent;
   padding: 0.25em 0;
   font: inherit;
   font-weight: 700;
   color: var(--ink-soft);
   cursor: pointer;
-  border-bottom: 2px solid var(--line-strong);
 }
 
 .exbulk button:hover {
-  color: var(--red);
-  border-color: var(--red);
+  color: var(--ink);
+  border-bottom-color: var(--ink);
 }
 
 .exbulk .count {
@@ -1641,5 +1641,17 @@
   .export__side {
     position: static;
     order: -1;
+  }
+}
+
+/* 要点正文里的行间公式：略收一点，长式子尽量不用横向滚 */
+.prose .katex-display {
+  font-size: 0.97em;
+}
+
+/* 窄屏：题库列表底部不要留一大截空白 */
+@media (max-width: 760px) {
+  .index-field {
+    padding-bottom: clamp(28px, 6vw, 48px);
   }
 }

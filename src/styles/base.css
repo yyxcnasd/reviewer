@@ -185,9 +185,19 @@ p {
 .nav__links {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: clamp(12px, 1.6vw, 28px);
   list-style: none;
   padding: 0;
+}
+
+@media (min-width: 721px) {
+  .nav__links {
+    margin-left: auto;
+  }
+  .nav__action {
+    margin-left: clamp(14px, 1.6vw, 26px);
+  }
 }
 
 .nav__links a {
@@ -205,35 +215,27 @@ p {
   color: var(--red);
 }
 
-/* 窄屏：导航折成第二行，横向滑动，六个入口都够得着 */
+/* 窄屏：字标与「投稿」一行，六个入口换到第二行并自动换行，不横向滚动 */
 @media (max-width: 720px) {
   .nav {
     flex-wrap: wrap;
-    row-gap: 4px;
+    row-gap: 10px;
   }
   .nav__links {
     order: 3;
     width: 100%;
-    overflow-x: auto;
-    flex-wrap: nowrap;
-    gap: 16px;
-    margin-top: 8px;
-    padding-bottom: 4px;
-    scrollbar-width: none;
-  }
-  .nav__links::-webkit-scrollbar {
-    display: none;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+    margin-top: 2px;
   }
   .nav__links a {
     white-space: nowrap;
     font-size: 0.9375rem;
   }
-  .nav__links .btn {
+  .nav__action {
+    margin-left: auto;
+    padding: 0.5em 0.9em;
     font-size: 0.9375rem;
-    padding: 0.55em 0.9em;
-    position: sticky;
-    right: 0;
-    box-shadow: 0 0 0 10px var(--paper);
   }
 }
 
@@ -280,7 +282,7 @@ p {
 }
 
 .btn--tone {
-  --btn-bg: var(--paper-2);
+  --btn-bg: var(--paper-3);
   --btn-fg: var(--ink);
 }
 
@@ -310,22 +312,34 @@ p {
   color: var(--ink-soft);
 }
 
+/* 所有输入控件一个样子：纸底、2px 边、方角，聚焦换成红边 */
 .input,
 .select,
-.textarea {
+.textarea,
+select,
+input[type='search'],
+input[type='text'] {
   width: 100%;
-  padding: 0.75em 0.85em;
-  background: transparent;
+  padding: 0.62em 0.8em;
+  background: var(--paper);
   color: var(--ink);
   border: 2px solid var(--line-strong);
   border-radius: 0;
-  font-size: var(--fs-body);
+  font: inherit;
+  font-size: var(--fs-small);
   line-height: 1.5;
+}
+
+select {
+  cursor: pointer;
 }
 
 .input:focus,
 .select:focus,
-.textarea:focus {
+.textarea:focus,
+select:focus,
+input[type='search']:focus,
+input[type='text']:focus {
   outline: none;
   border-color: var(--red);
 }

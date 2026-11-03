@@ -69,7 +69,6 @@
   top: 66%;
 }
 
-
 /* 两个圆各是一门课：右下角一块墨色的牌，把课名与边界写在色块上 */
 @media (max-width: 900px) {
 }
@@ -421,4 +420,181 @@
 
 .detail .footer__cols {
   margin-top: clamp(20px, 2.4vw, 30px);
+}
+/* ---------------------------------------------------------------- 范围表的「已做」列 */
+
+.range__prog {
+  width: 4.4em;
+  text-align: right;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-soft);
+}
+
+.range__prog b {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.range tr.is-out .range__prog {
+  color: var(--ink-mute);
+}
+
+/* ---------------------------------------------------------------- 速查 / 投稿两栏 */
+
+.twocol {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.panel {
+  background: var(--paper-2);
+  padding: clamp(18px, 2.2vw, 28px);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.panel h3 {
+  font-size: var(--fs-h3);
+}
+
+.panel p {
+  margin-top: auto;
+}
+
+.ticks {
+  margin: 0;
+  padding-left: 1.15em;
+  font-size: var(--fs-small);
+  line-height: 1.75;
+  color: var(--ink-soft);
+}
+
+.ticks li {
+  margin-bottom: 0.3em;
+}
+
+.ticks li::marker {
+  color: var(--red);
+}
+
+.ticks code {
+  font-size: 0.92em;
+  padding: 0.05em 0.3em;
+  background: var(--paper);
+}
+
+/* ---------------------------------------------------------------- 收尾 */
+
+.closing {
+  font-size: var(--fs-small);
+  color: var(--ink-soft);
+}
+
+.closing a {
+  border-bottom: 2px solid var(--line-strong);
+}
+
+.closing a:hover {
+  text-decoration: none;
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+@media (max-width: 760px) {
+  .twocol {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------------------------------------------------------------- 考纲判定器 */
+
+.checker {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: stretch;
+  max-width: 36em;
+}
+
+.checker__input {
+  padding: 0.7em 0.95em;
+  background: var(--paper);
+  color: var(--ink);
+  border: 2px solid var(--line-strong);
+  border-radius: 0;
+  font-size: var(--fs-body);
+}
+
+.checker__input::placeholder {
+  color: var(--ink-mute);
+}
+
+.checker__input:focus {
+  outline: none;
+  border-color: var(--red);
+}
+
+.checker__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+  list-style: none;
+  padding: 0;
+}
+
+.checker__chips button {
+  background: var(--paper-2);
+  border: 0;
+  padding: 0.24em 0.6em;
+  color: var(--ink-soft);
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 160ms var(--ease), color 160ms var(--ease);
+}
+
+.checker__chips button:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.checker__verdict {
+  margin-top: 14px;
+  font-size: var(--fs-small);
+  color: var(--ink-soft);
+  min-height: 1.5em;
+  max-width: 52em;
+}
+
+.checker__verdict b {
+  color: var(--ink);
+}
+
+.checker__verdict .yes {
+  color: #2f6b2f;
+}
+
+.checker__verdict .no {
+  color: var(--red-deep);
+}
+
+/* 表格行的高亮 */
+.range tr.is-dim {
+  opacity: 0.26;
+}
+
+.range tr.is-hit {
+  background: var(--paper-2);
+}
+
+.range tr.is-hit .range__title a {
+  color: var(--red);
+}
+
+.range tr {
+  transition: opacity 220ms var(--ease), background-color 220ms var(--ease);
 }

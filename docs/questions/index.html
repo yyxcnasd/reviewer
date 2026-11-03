@@ -31,8 +31,8 @@
           <li><a href="../practice/">刷题</a></li>
           <li><a href="../cheatsheet/">速查</a></li>
           <li><a href="../papers/">真题</a></li>
-          <li><a class="btn btn--red" href="../submit/">投稿</a></li>
         </ul>
+        <a class="btn btn--red nav__action" href="../submit/">投稿</a>
       </nav>
     </div>
   </header>
@@ -94,19 +94,21 @@
       <label for="f-q">搜索</label>
       <input id="f-q" type="search" placeholder="题干、标签、出处" autocomplete="off">
     </div>
-    <div class="filters__field">
-      <label>&nbsp;</label>
-      <button class="btn btn--tone" type="button" id="f-export">导出筛选结果</button>
-    </div>
     <div class="filters__count"><b id="f-count">100</b> 道</div>
   </form>
 
-  <p class="donebar" data-progress-ids="la-001,la-002,la-003,la-004,la-005,la-006,la-007,la-008,la-009,la-010,la-011,la-012,la-013,la-014,la-015,la-016,la-017,la-018,la-019,la-020,la-021,la-022,la-023,la-024,la-025,la-026,la-027,la-028,la-029,la-030,la-031,la-032,la-033,la-034,la-035,la-036,la-037,la-038,la-039,la-040,la-041,la-042,la-043,la-044,la-045,la-046,la-047,la-048,la-049,la-050,va1-001,va1-002,va1-003,va1-004,va1-005,va1-006,va1-007,va1-008,va1-009,va1-010,va1-011,va1-012,va1-013,va1-014,va1-015,va1-016,va1-017,va1-018,va1-019,va1-020,va1-021,va1-022,va1-023,va1-024,va1-025,va1-026,va1-027,va1-028,va1-029,va1-030,va1-031,va1-032,va1-033,va1-034,va1-035,va1-036,va1-037,va1-038,va1-039,va1-040,va1-041,va1-042,va1-043,va1-044,va1-045,va1-046,va1-047,va1-048,va1-049,va1-050">
-    已做 <b data-progress-here>0</b> / 100
-    <span>·</span> 收藏 <b data-progress-count>0</b>
-    <span>·</span> 点每道题下面的「已做」「收藏」记录进度，只存在你自己的浏览器里
-    <span>·</span> 按 <span class="kbd">/</span> 直接搜索
-  </p>
+  <div class="donebar" data-progress-ids="la-001,la-002,la-003,la-004,la-005,la-006,la-007,la-008,la-009,la-010,la-011,la-012,la-013,la-014,la-015,la-016,la-017,la-018,la-019,la-020,la-021,la-022,la-023,la-024,la-025,la-026,la-027,la-028,la-029,la-030,la-031,la-032,la-033,la-034,la-035,la-036,la-037,la-038,la-039,la-040,la-041,la-042,la-043,la-044,la-045,la-046,la-047,la-048,la-049,la-050,va1-001,va1-002,va1-003,va1-004,va1-005,va1-006,va1-007,va1-008,va1-009,va1-010,va1-011,va1-012,va1-013,va1-014,va1-015,va1-016,va1-017,va1-018,va1-019,va1-020,va1-021,va1-022,va1-023,va1-024,va1-025,va1-026,va1-027,va1-028,va1-029,va1-030,va1-031,va1-032,va1-033,va1-034,va1-035,va1-036,va1-037,va1-038,va1-039,va1-040,va1-041,va1-042,va1-043,va1-044,va1-045,va1-046,va1-047,va1-048,va1-049,va1-050">
+    <p>
+      已做 <b data-progress-here>0</b> / 100
+      <span>·</span> 收藏 <b data-progress-count>0</b>
+      <span>·</span> 点每道题下面的「已做」「收藏」记进度，只存在你自己的浏览器里
+      <span>·</span> 按 <span class="kbd">/</span> 搜索
+    </p>
+    <div class="donebar__actions">
+      <button class="btn btn--tone" type="button" id="f-random">随机一题</button>
+      <button class="btn btn--tone" type="button" id="f-export">导出筛选结果</button>
+    </div>
+  </div>
 
   <ul class="qlist" id="qlist">
       <li class="qrow" data-id="la-001" data-course="la" data-chapter="la-1" data-difficulty="2" data-tags="行列式计算 递推" data-text="计算 阶三对角行列式 行列式计算 递推 自编">

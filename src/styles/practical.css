@@ -4,25 +4,6 @@
 
 /* ---------------------------------------------------------------- 首屏（紧凑版） */
 
-.hero--compact .hero__inner {
-  min-height: min(64svh, 620px);
-}
-
-.hero--compact .hero__copy {
-  padding-block: clamp(28px, 5vw, 64px);
-}
-
-.hero--compact .hero__title {
-  font-size: clamp(2.5rem, 5.6vw, 5rem);
-  margin-bottom: clamp(16px, 1.8vw, 24px);
-}
-
-.hero--compact .hero__lead {
-  max-width: 28em;
-  font-size: var(--fs-lead);
-  line-height: 1.7;
-}
-
 /* 首屏的搜索：整站最实用的一个控件 */
 .search {
   display: grid;
@@ -33,10 +14,10 @@
 }
 
 .search__input {
-  padding: 0.8em 1em;
-  background: transparent;
+  padding: 0.7em 1em;
+  background: var(--paper);
   color: var(--ink);
-  border: 2px solid var(--ink);
+  border: 2px solid var(--line-strong);
   border-radius: 0;
   font-size: var(--fs-body);
 }
@@ -52,12 +33,6 @@
 
 .search__btn {
   padding-inline: clamp(16px, 1.6vw, 22px);
-}
-
-.hero--compact .hero__note {
-  margin-top: 14px;
-  font-size: var(--fs-small);
-  color: var(--ink-mute);
 }
 
 /* ---------------------------------------------------------------- 入口条 */
@@ -257,7 +232,6 @@
 .chip--out {
   background: transparent;
   color: var(--ink-mute);
-  box-shadow: none;
 }
 
 @media (max-width: 980px) {
@@ -550,11 +524,28 @@
 .donebar {
   display: flex;
   flex-wrap: wrap;
-  align-items: baseline;
-  gap: 8px 18px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 18px;
   font-size: var(--fs-small);
   color: var(--ink-soft);
-  padding-block: 0 14px;
+  padding-block: 4px 14px;
+}
+
+.donebar p {
+  margin: 0;
+  max-width: 46em;
+}
+
+.donebar__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.donebar__actions .btn {
+  padding: 0.45em 0.9em;
+  font-size: var(--fs-small);
 }
 
 .donebar b {
@@ -564,21 +555,25 @@
 }
 
 /* 打印按钮之类的轻量动作 */
+/* 文字型操作（展开全部、复制题目、打印…）：不画框，悬停才出现下划线 */
 .ghost {
   background: transparent;
   border: 0;
+  border-bottom: 2px solid transparent;
   padding: 0.3em 0;
   font: inherit;
   font-size: var(--fs-small);
   font-weight: 700;
   color: var(--ink-soft);
   cursor: pointer;
-  border-bottom: 2px solid var(--line-strong);
+  text-decoration: none;
 }
 
-.ghost:hover {
-  color: var(--red);
-  border-color: var(--red);
+.ghost:hover,
+.ghost:focus-visible {
+  color: var(--ink);
+  border-bottom-color: var(--ink);
+  text-decoration: none;
 }
 
 /* 键盘提示 */
@@ -588,100 +583,6 @@
   padding: 0.05em 0.35em;
   border: 2px solid var(--line-strong);
   line-height: 1.4;
-}
-
-/* 判定器在范围表上方：紧凑版 */
-.checker--inline {
-  margin-top: 4px;
-  max-width: 34em;
-}
-
-.checker--inline .checker__input {
-  font-size: var(--fs-body);
-  padding: 0.65em 0.9em;
-}
-
-.checker .checker__verdict,
-.checker__verdict {
-  margin-top: 10px;
-  font-size: var(--fs-small);
-  color: var(--ink-soft);
-  min-height: 1.5em;
-}
-
-.checker__verdict .yes {
-  color: var(--green-deep, #4d7c3a);
-}
-
-.checker__verdict .no {
-  color: var(--red-deep);
-}
-
-.range tr.is-dim {
-  opacity: 0.26;
-}
-
-.range tr.is-hit {
-  background: var(--paper-2);
-}
-
-.range tr.is-hit .range__title a {
-  color: var(--red);
-}
-
-.range tr {
-  transition: opacity 220ms var(--ease), background-color 220ms var(--ease);
-}
-
-/* 首屏再收紧一点：一屏里要能看见入口条 */
-.hero--compact .hero__inner {
-  min-height: min(56svh, 540px);
-}
-
-.hero--compact .disc--red {
-  width: 96vh;
-  left: 84%;
-}
-
-.hero--compact .disc--indigo {
-  width: 84vh;
-  left: 78%;
-  top: 62%;
-}
-
-@media (max-width: 900px) {
-  .hero--compact {
-    padding-bottom: 0;
-  }
-  .hero--compact .hero__inner {
-    min-height: 0;
-  }
-}
-/* 每行的两个小按钮：桌面上安静一点，悬停或已按下时才实心；触屏常驻 */
-@media (hover: hover) {
-  .qlist .flag {
-    opacity: 0.5;
-  }
-  .qrow:hover .flag,
-  .flag:focus-visible,
-  .flag[aria-pressed="true"] {
-    opacity: 1;
-  }
-}
-
-.qlist .flag {
-  padding: 0.15em 0.45em;
-  border-width: 1px;
-  transition: opacity 140ms var(--ease), background-color 140ms var(--ease), border-color 140ms var(--ease);
-}
-/* 首页的六道精选题：单栏索引，右侧留出题号与标签 */
-/* 范围表两侧留白收紧 */
-.ranges {
-  gap: clamp(20px, 2.6vw, 44px);
-}
-
-.range td {
-  padding-block: 6px;
 }
 
 /* ---------------------------------------------------------------- 工具类与打印 */
@@ -799,5 +700,103 @@
   .article__main {
     grid-column: 1 / -1;
     max-width: none;
+  }
+}
+
+/* 首页底部的材料带：只要一条，别占篇幅 */
+.materials--mini {
+  align-items: center;
+}
+
+.materials--mini .materials__head {
+  grid-column: 1 / 4;
+}
+
+.materials--mini .materials__head p {
+  margin-top: 0.5em;
+  font-size: var(--fs-micro);
+}
+
+.materials--mini .materials__strip {
+  grid-column: 4 / 13;
+}
+
+.materials--mini .materials__item img {
+  aspect-ratio: 16 / 10;
+  max-height: 96px;
+}
+
+.materials--mini .materials__item figcaption {
+  margin-top: 6px;
+  font-size: var(--fs-micro);
+  color: var(--ink-mute);
+}
+
+@media (max-width: 900px) {
+  .materials--mini .materials__head,
+  .materials--mini .materials__strip {
+    grid-column: 1 / -1;
+  }
+  .materials--mini .materials__item img {
+    max-height: 82px;
+  }
+}
+
+/* 首页段落之间更紧，少滚动 */
+.section--tight {
+  padding-block: clamp(40px, 5vw, 84px);
+}
+
+/* ---------------------------------------------------------------- 首页首屏（唯一一套规则，放在最后以保证生效） */
+
+.hero--compact .hero__inner {
+  min-height: min(48svh, 460px);
+}
+
+.hero--compact .hero__copy {
+  padding-block: clamp(28px, 5vw, 64px);
+}
+
+.hero--compact .hero__title {
+  font-size: clamp(2.2rem, 4.4vw, 3.6rem);
+  margin-bottom: clamp(14px, 1.6vw, 20px);
+}
+
+.hero--compact .hero__lead {
+  max-width: 28em;
+  font-size: var(--fs-lead);
+  line-height: 1.7;
+}
+
+.hero--compact .hero__note {
+  margin-top: 12px;
+  font-size: var(--fs-small);
+  color: var(--ink-mute);
+}
+
+.hero--compact .disc--red {
+  width: 74vh;
+  left: 90%;
+  top: 60%;
+}
+
+.hero--compact .disc--indigo {
+  width: 64vh;
+  left: 84%;
+  top: 76%;
+}
+
+@media (max-width: 900px) {
+  .hero--compact {
+    padding-bottom: 0;
+  }
+  .hero--compact .hero__inner {
+    min-height: 0;
+  }
+  .hero--compact .hero__copy {
+    padding-block: 18px 22px;
+  }
+  .hero--compact .hero__title {
+    font-size: clamp(2rem, 9.5vw, 3rem);
   }
 }

@@ -167,7 +167,7 @@ export function buildSubmit(ctx) {
     </aside>
   </div>
 
-  <section class="section--tight">
+  <section class="section--tight" style="margin-top:clamp(36px,4vw,64px)">
     <div class="rule-head"><h2>投稿之后</h2><p>一道题从你写下来到出现在题库里，要过三步。</p></div>
     <div class="steps">
       <article class="step step--1">

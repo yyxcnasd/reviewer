@@ -33,9 +33,9 @@
   --paper-2: #e6e5e0;
   --paper-3: #d8d7d1;
   --ink: #17140f;
-  --ink-soft: #4c453b;
-  --ink-mute: #6f685c;
-  --ink-faint: #a39c8f;
+  --ink-soft: #453e34;
+  --ink-mute: #615a4e;
+  --ink-faint: #8f887b;
 
   /* 批改红：微积分、动作、范围里的“考” */
   --red: #c1121f;
@@ -312,9 +312,19 @@ p {
 .nav__links {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: clamp(12px, 1.6vw, 28px);
   list-style: none;
   padding: 0;
+}
+
+@media (min-width: 721px) {
+  .nav__links {
+    margin-left: auto;
+  }
+  .nav__action {
+    margin-left: clamp(14px, 1.6vw, 26px);
+  }
 }
 
 .nav__links a {
@@ -332,35 +342,27 @@ p {
   color: var(--red);
 }
 
-/* 窄屏：导航折成第二行，横向滑动，六个入口都够得着 */
+/* 窄屏：字标与「投稿」一行，六个入口换到第二行并自动换行，不横向滚动 */
 @media (max-width: 720px) {
   .nav {
     flex-wrap: wrap;
-    row-gap: 4px;
+    row-gap: 10px;
   }
   .nav__links {
     order: 3;
     width: 100%;
-    overflow-x: auto;
-    flex-wrap: nowrap;
-    gap: 16px;
-    margin-top: 8px;
-    padding-bottom: 4px;
-    scrollbar-width: none;
-  }
-  .nav__links::-webkit-scrollbar {
-    display: none;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+    margin-top: 2px;
   }
   .nav__links a {
     white-space: nowrap;
     font-size: 0.9375rem;
   }
-  .nav__links .btn {
+  .nav__action {
+    margin-left: auto;
+    padding: 0.5em 0.9em;
     font-size: 0.9375rem;
-    padding: 0.55em 0.9em;
-    position: sticky;
-    right: 0;
-    box-shadow: 0 0 0 10px var(--paper);
   }
 }
 
@@ -407,7 +409,7 @@ p {
 }
 
 .btn--tone {
-  --btn-bg: var(--paper-2);
+  --btn-bg: var(--paper-3);
   --btn-fg: var(--ink);
 }
 
@@ -437,22 +439,34 @@ p {
   color: var(--ink-soft);
 }
 
+/* 所有输入控件一个样子：纸底、2px 边、方角，聚焦换成红边 */
 .input,
 .select,
-.textarea {
+.textarea,
+select,
+input[type='search'],
+input[type='text'] {
   width: 100%;
-  padding: 0.75em 0.85em;
-  background: transparent;
+  padding: 0.62em 0.8em;
+  background: var(--paper);
   color: var(--ink);
   border: 2px solid var(--line-strong);
   border-radius: 0;
-  font-size: var(--fs-body);
+  font: inherit;
+  font-size: var(--fs-small);
   line-height: 1.5;
+}
+
+select {
+  cursor: pointer;
 }
 
 .input:focus,
 .select:focus,
-.textarea:focus {
+.textarea:focus,
+select:focus,
+input[type='search']:focus,
+input[type='text']:focus {
   outline: none;
   border-color: var(--red);
 }
@@ -670,7 +684,6 @@ a.tag:hover {
   left: 74%;
   top: 66%;
 }
-
 
 /* 两个圆各是一门课：右下角一块墨色的牌，把课名与边界写在色块上 */
 @media (max-width: 900px) {
@@ -1024,6 +1037,184 @@ a.tag:hover {
 .detail .footer__cols {
   margin-top: clamp(20px, 2.4vw, 30px);
 }
+/* ---------------------------------------------------------------- 范围表的「已做」列 */
+
+.range__prog {
+  width: 4.4em;
+  text-align: right;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-soft);
+}
+
+.range__prog b {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.range tr.is-out .range__prog {
+  color: var(--ink-mute);
+}
+
+/* ---------------------------------------------------------------- 速查 / 投稿两栏 */
+
+.twocol {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.panel {
+  background: var(--paper-2);
+  padding: clamp(18px, 2.2vw, 28px);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.panel h3 {
+  font-size: var(--fs-h3);
+}
+
+.panel p {
+  margin-top: auto;
+}
+
+.ticks {
+  margin: 0;
+  padding-left: 1.15em;
+  font-size: var(--fs-small);
+  line-height: 1.75;
+  color: var(--ink-soft);
+}
+
+.ticks li {
+  margin-bottom: 0.3em;
+}
+
+.ticks li::marker {
+  color: var(--red);
+}
+
+.ticks code {
+  font-size: 0.92em;
+  padding: 0.05em 0.3em;
+  background: var(--paper);
+}
+
+/* ---------------------------------------------------------------- 收尾 */
+
+.closing {
+  font-size: var(--fs-small);
+  color: var(--ink-soft);
+}
+
+.closing a {
+  border-bottom: 2px solid var(--line-strong);
+}
+
+.closing a:hover {
+  text-decoration: none;
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+@media (max-width: 760px) {
+  .twocol {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------------------------------------------------------------- 考纲判定器 */
+
+.checker {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: stretch;
+  max-width: 36em;
+}
+
+.checker__input {
+  padding: 0.7em 0.95em;
+  background: var(--paper);
+  color: var(--ink);
+  border: 2px solid var(--line-strong);
+  border-radius: 0;
+  font-size: var(--fs-body);
+}
+
+.checker__input::placeholder {
+  color: var(--ink-mute);
+}
+
+.checker__input:focus {
+  outline: none;
+  border-color: var(--red);
+}
+
+.checker__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+  list-style: none;
+  padding: 0;
+}
+
+.checker__chips button {
+  background: var(--paper-2);
+  border: 0;
+  padding: 0.24em 0.6em;
+  color: var(--ink-soft);
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 160ms var(--ease), color 160ms var(--ease);
+}
+
+.checker__chips button:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.checker__verdict {
+  margin-top: 14px;
+  font-size: var(--fs-small);
+  color: var(--ink-soft);
+  min-height: 1.5em;
+  max-width: 52em;
+}
+
+.checker__verdict b {
+  color: var(--ink);
+}
+
+.checker__verdict .yes {
+  color: #2f6b2f;
+}
+
+.checker__verdict .no {
+  color: var(--red-deep);
+}
+
+/* 表格行的高亮 */
+.range tr.is-dim {
+  opacity: 0.26;
+}
+
+.range tr.is-hit {
+  background: var(--paper-2);
+}
+
+.range tr.is-hit .range__title a {
+  color: var(--red);
+}
+
+.range tr {
+  transition: opacity 220ms var(--ease), background-color 220ms var(--ease);
+}
+
 /* ==========================================================================
    鍐呴〉锛氱鐩〉銆佽鐐归〉銆侀搴撱€侀鐩€佹爣绛俱€佺湡棰樸€佹姇绋裤€佸埛棰樸€佸叧浜?   ========================================================================== */
 
@@ -1042,8 +1233,8 @@ a.tag:hover {
 
 .pagehead__title {
   grid-column: 1 / -1;
-  font-size: clamp(2.4rem, 6vw, 5rem);
-  line-height: 1.02;
+  font-size: clamp(1.9rem, 3.4vw, 2.8rem);
+  line-height: 1.1;
 }
 
 /* 大标题下面紧跟一句「这是什么」，别让首屏只有一个名字 */
@@ -1062,10 +1253,11 @@ a.tag:hover {
 .pagehead__stats {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px 30px;
-  margin-top: 18px;
+  align-items: baseline;
+  gap: 8px 26px;
+  margin-top: 16px;
   font-size: var(--fs-small);
-  color: var(--ink-mute);
+  color: var(--ink-soft);
 }
 
 .pagehead__stats b {
@@ -1265,8 +1457,8 @@ a.tag:hover {
 }
 
 .article__main {
-  grid-column: 1 / 9;
-  max-width: 40em;
+  grid-column: 1 / 10;
+  max-width: 44em;
 }
 
 .article__toc {
@@ -1453,8 +1645,8 @@ a.tag:hover {
 .filters select,
 .filters input {
   padding: 0.5em 0.65em;
-  background: var(--paper-2);
-  border: 2px solid transparent;
+  background: var(--paper);
+  border: 2px solid var(--line-strong);
   border-radius: 0;
   font-size: var(--fs-small);
   min-width: 8em;
@@ -1468,7 +1660,6 @@ a.tag:hover {
 .filters input:focus {
   outline: none;
   border-color: var(--red);
-  background: var(--paper);
 }
 
 .filters__count {
@@ -2417,8 +2608,8 @@ a.tag:hover {
 .exfilters select,
 .exfilters input {
   padding: 0.5em 0.65em;
-  background: var(--paper-2);
-  border: 2px solid transparent;
+  background: var(--paper);
+  border: 2px solid var(--line-strong);
   border-radius: 0;
   font-size: var(--fs-small);
   font-family: inherit;
@@ -2448,17 +2639,17 @@ a.tag:hover {
 .exbulk button {
   background: transparent;
   border: 0;
+  border-bottom: 2px solid transparent;
   padding: 0.25em 0;
   font: inherit;
   font-weight: 700;
   color: var(--ink-soft);
   cursor: pointer;
-  border-bottom: 2px solid var(--line-strong);
 }
 
 .exbulk button:hover {
-  color: var(--red);
-  border-color: var(--red);
+  color: var(--ink);
+  border-bottom-color: var(--ink);
 }
 
 .exbulk .count {
@@ -2670,30 +2861,23 @@ a.tag:hover {
   }
 }
 
+/* 要点正文里的行间公式：略收一点，长式子尽量不用横向滚 */
+.prose .katex-display {
+  font-size: 0.97em;
+}
+
+/* 窄屏：题库列表底部不要留一大截空白 */
+@media (max-width: 760px) {
+  .index-field {
+    padding-bottom: clamp(28px, 6vw, 48px);
+  }
+}
+
 /* ==========================================================================
    实用层：首页的入口、范围表、题单，以及题库里的“已做/收藏”等按钮
    ========================================================================== */
 
 /* ---------------------------------------------------------------- 首屏（紧凑版） */
-
-.hero--compact .hero__inner {
-  min-height: min(64svh, 620px);
-}
-
-.hero--compact .hero__copy {
-  padding-block: clamp(28px, 5vw, 64px);
-}
-
-.hero--compact .hero__title {
-  font-size: clamp(2.5rem, 5.6vw, 5rem);
-  margin-bottom: clamp(16px, 1.8vw, 24px);
-}
-
-.hero--compact .hero__lead {
-  max-width: 28em;
-  font-size: var(--fs-lead);
-  line-height: 1.7;
-}
 
 /* 首屏的搜索：整站最实用的一个控件 */
 .search {
@@ -2705,10 +2889,10 @@ a.tag:hover {
 }
 
 .search__input {
-  padding: 0.8em 1em;
-  background: transparent;
+  padding: 0.7em 1em;
+  background: var(--paper);
   color: var(--ink);
-  border: 2px solid var(--ink);
+  border: 2px solid var(--line-strong);
   border-radius: 0;
   font-size: var(--fs-body);
 }
@@ -2724,12 +2908,6 @@ a.tag:hover {
 
 .search__btn {
   padding-inline: clamp(16px, 1.6vw, 22px);
-}
-
-.hero--compact .hero__note {
-  margin-top: 14px;
-  font-size: var(--fs-small);
-  color: var(--ink-mute);
 }
 
 /* ---------------------------------------------------------------- 入口条 */
@@ -2929,7 +3107,6 @@ a.tag:hover {
 .chip--out {
   background: transparent;
   color: var(--ink-mute);
-  box-shadow: none;
 }
 
 @media (max-width: 980px) {
@@ -3222,11 +3399,28 @@ a.tag:hover {
 .donebar {
   display: flex;
   flex-wrap: wrap;
-  align-items: baseline;
-  gap: 8px 18px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 18px;
   font-size: var(--fs-small);
   color: var(--ink-soft);
-  padding-block: 0 14px;
+  padding-block: 4px 14px;
+}
+
+.donebar p {
+  margin: 0;
+  max-width: 46em;
+}
+
+.donebar__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.donebar__actions .btn {
+  padding: 0.45em 0.9em;
+  font-size: var(--fs-small);
 }
 
 .donebar b {
@@ -3236,21 +3430,25 @@ a.tag:hover {
 }
 
 /* 打印按钮之类的轻量动作 */
+/* 文字型操作（展开全部、复制题目、打印…）：不画框，悬停才出现下划线 */
 .ghost {
   background: transparent;
   border: 0;
+  border-bottom: 2px solid transparent;
   padding: 0.3em 0;
   font: inherit;
   font-size: var(--fs-small);
   font-weight: 700;
   color: var(--ink-soft);
   cursor: pointer;
-  border-bottom: 2px solid var(--line-strong);
+  text-decoration: none;
 }
 
-.ghost:hover {
-  color: var(--red);
-  border-color: var(--red);
+.ghost:hover,
+.ghost:focus-visible {
+  color: var(--ink);
+  border-bottom-color: var(--ink);
+  text-decoration: none;
 }
 
 /* 键盘提示 */
@@ -3260,100 +3458,6 @@ a.tag:hover {
   padding: 0.05em 0.35em;
   border: 2px solid var(--line-strong);
   line-height: 1.4;
-}
-
-/* 判定器在范围表上方：紧凑版 */
-.checker--inline {
-  margin-top: 4px;
-  max-width: 34em;
-}
-
-.checker--inline .checker__input {
-  font-size: var(--fs-body);
-  padding: 0.65em 0.9em;
-}
-
-.checker .checker__verdict,
-.checker__verdict {
-  margin-top: 10px;
-  font-size: var(--fs-small);
-  color: var(--ink-soft);
-  min-height: 1.5em;
-}
-
-.checker__verdict .yes {
-  color: var(--green-deep, #4d7c3a);
-}
-
-.checker__verdict .no {
-  color: var(--red-deep);
-}
-
-.range tr.is-dim {
-  opacity: 0.26;
-}
-
-.range tr.is-hit {
-  background: var(--paper-2);
-}
-
-.range tr.is-hit .range__title a {
-  color: var(--red);
-}
-
-.range tr {
-  transition: opacity 220ms var(--ease), background-color 220ms var(--ease);
-}
-
-/* 首屏再收紧一点：一屏里要能看见入口条 */
-.hero--compact .hero__inner {
-  min-height: min(56svh, 540px);
-}
-
-.hero--compact .disc--red {
-  width: 96vh;
-  left: 84%;
-}
-
-.hero--compact .disc--indigo {
-  width: 84vh;
-  left: 78%;
-  top: 62%;
-}
-
-@media (max-width: 900px) {
-  .hero--compact {
-    padding-bottom: 0;
-  }
-  .hero--compact .hero__inner {
-    min-height: 0;
-  }
-}
-/* 每行的两个小按钮：桌面上安静一点，悬停或已按下时才实心；触屏常驻 */
-@media (hover: hover) {
-  .qlist .flag {
-    opacity: 0.5;
-  }
-  .qrow:hover .flag,
-  .flag:focus-visible,
-  .flag[aria-pressed="true"] {
-    opacity: 1;
-  }
-}
-
-.qlist .flag {
-  padding: 0.15em 0.45em;
-  border-width: 1px;
-  transition: opacity 140ms var(--ease), background-color 140ms var(--ease), border-color 140ms var(--ease);
-}
-/* 首页的六道精选题：单栏索引，右侧留出题号与标签 */
-/* 范围表两侧留白收紧 */
-.ranges {
-  gap: clamp(20px, 2.6vw, 44px);
-}
-
-.range td {
-  padding-block: 6px;
 }
 
 /* ---------------------------------------------------------------- 工具类与打印 */
@@ -3471,5 +3575,103 @@ a.tag:hover {
   .article__main {
     grid-column: 1 / -1;
     max-width: none;
+  }
+}
+
+/* 首页底部的材料带：只要一条，别占篇幅 */
+.materials--mini {
+  align-items: center;
+}
+
+.materials--mini .materials__head {
+  grid-column: 1 / 4;
+}
+
+.materials--mini .materials__head p {
+  margin-top: 0.5em;
+  font-size: var(--fs-micro);
+}
+
+.materials--mini .materials__strip {
+  grid-column: 4 / 13;
+}
+
+.materials--mini .materials__item img {
+  aspect-ratio: 16 / 10;
+  max-height: 96px;
+}
+
+.materials--mini .materials__item figcaption {
+  margin-top: 6px;
+  font-size: var(--fs-micro);
+  color: var(--ink-mute);
+}
+
+@media (max-width: 900px) {
+  .materials--mini .materials__head,
+  .materials--mini .materials__strip {
+    grid-column: 1 / -1;
+  }
+  .materials--mini .materials__item img {
+    max-height: 82px;
+  }
+}
+
+/* 首页段落之间更紧，少滚动 */
+.section--tight {
+  padding-block: clamp(40px, 5vw, 84px);
+}
+
+/* ---------------------------------------------------------------- 首页首屏（唯一一套规则，放在最后以保证生效） */
+
+.hero--compact .hero__inner {
+  min-height: min(48svh, 460px);
+}
+
+.hero--compact .hero__copy {
+  padding-block: clamp(28px, 5vw, 64px);
+}
+
+.hero--compact .hero__title {
+  font-size: clamp(2.2rem, 4.4vw, 3.6rem);
+  margin-bottom: clamp(14px, 1.6vw, 20px);
+}
+
+.hero--compact .hero__lead {
+  max-width: 28em;
+  font-size: var(--fs-lead);
+  line-height: 1.7;
+}
+
+.hero--compact .hero__note {
+  margin-top: 12px;
+  font-size: var(--fs-small);
+  color: var(--ink-mute);
+}
+
+.hero--compact .disc--red {
+  width: 74vh;
+  left: 90%;
+  top: 60%;
+}
+
+.hero--compact .disc--indigo {
+  width: 64vh;
+  left: 84%;
+  top: 76%;
+}
+
+@media (max-width: 900px) {
+  .hero--compact {
+    padding-bottom: 0;
+  }
+  .hero--compact .hero__inner {
+    min-height: 0;
+  }
+  .hero--compact .hero__copy {
+    padding-block: 18px 22px;
+  }
+  .hero--compact .hero__title {
+    font-size: clamp(2rem, 9.5vw, 3rem);
   }
 }

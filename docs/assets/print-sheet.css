@@ -163,7 +163,7 @@ body.sheet-page {
   grid-template-columns: 2.1em minmax(0, 1fr);
   gap: 0 10px;
   padding: 14px 0 16px;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 2px solid var(--line);
 }
 
 .pq:last-child {
@@ -229,7 +229,7 @@ body.sheet-page {
 
 .pq__solution {
   padding-top: 8px;
-  border-top: 1px solid var(--line);
+  border-top: 2px solid var(--line);
 }
 
 .pq__solution .pq__label,
