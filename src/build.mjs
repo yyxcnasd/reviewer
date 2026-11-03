@@ -23,7 +23,7 @@ import { buildNotFound, buildData, buildExtras } from './pages/extras.mjs'
 const STYLE_ORDER = ['tokens', 'base', 'home', 'pages', 'practical']
 
 /** 页面脚本：都是普通 <script>，按顺序拷到 assets/ */
-const SCRIPTS = ['core.js', 'progress.js', 'site.js', 'submit.js', 'practice.js', 'export.js', 'export-print.js']
+const SCRIPTS = ['core.js', 'theme.js', 'term.js', 'progress.js', 'site.js', 'submit.js', 'practice.js', 'export.js', 'export-print.js']
 
 /** 建索引：题目按课程/章节分组，给各页面直接用 */
 export function prepare(ctx) {

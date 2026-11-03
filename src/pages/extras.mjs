@@ -64,9 +64,10 @@ export function buildData(ctx) {
         title: ch.title,
         short: shortTitle(ch),
         state: ch.state,
+        terms: ch.terms,
         href: ch.note ? `notes/${ch.id}.html` : `${c.id}/#ch-${ch.id}`,
         count: ch.count,
-        sections: ch.sections.map((s) => ({ no: s.no, title: s.title, state: s.state, keywords: s.keywords || [] })),
+        sections: ch.sections.map((s) => ({ no: s.no, title: s.title, state: s.state, terms: s.terms, keywords: s.keywords || [] })),
       })),
     })),
   }

@@ -52,13 +52,29 @@ export function loadContent({ ROOT, err, warn }) {
   const coursesDoc = readYAML(path.join(CONTENT, 'courses.yml'))
   const taxonomy = readYAML(path.join(CONTENT, 'taxonomy.yml'))
 
+  const terms = coursesDoc.terms || [{ id: 'midterm', label: '期中' }]
+  const termIds = terms.map((t) => t.id)
+  const stateOf = (states) =>
+    states.includes('in') ? 'in' : states.includes('boundary') ? 'boundary' : 'out'
+
   const courses = coursesDoc.courses.map((c) => ({
     ...c,
     chapters: c.chapters.map((ch) => {
-      const sections = ch.sections || []
-      const states = sections.map((s) => s.state)
-      const state = states.includes('in') ? 'in' : states.includes('boundary') ? 'boundary' : 'out'
-      return { ...ch, course: c.id, state, sections }
+      // 每个小节：terms 里没写的轮次按 state 兜底
+      const sections = (ch.sections || []).map((s) => {
+        const termsOfSection = {}
+        for (const id of termIds) {
+          termsOfSection[id] = s.terms?.[id] || s.state || 'out'
+        }
+        return { ...s, terms: termsOfSection, state: stateOf(Object.values(termsOfSection)) }
+      })
+      const chapterTerms = {}
+      for (const id of termIds) {
+        chapterTerms[id] = sections.length
+          ? stateOf(sections.map((s) => s.terms[id]))
+          : ch.terms?.[id] || ch.state || 'in'
+      }
+      return { ...ch, course: c.id, terms: chapterTerms, sections, state: stateOf(Object.values(chapterTerms)) }
     }),
   }))
 
@@ -190,6 +206,7 @@ export function loadContent({ ROOT, err, warn }) {
 
   return {
     ROOT,
+    terms,
     OUT: path.join(ROOT, 'docs'),
     CONTENT,
     config,

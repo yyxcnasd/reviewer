@@ -383,3 +383,16 @@ body.sheet-page {
     animation: none;
   }
 }
+
+/* 打印版：公式不滚动，长式子略缩 */
+@media print {
+  .pq .math-display,
+  .pq .katex-display {
+    overflow: visible;
+    overflow-x: visible;
+    max-width: 100%;
+  }
+  .pq .katex-display > .katex {
+    font-size: 0.96em;
+  }
+}

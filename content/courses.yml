@@ -11,6 +11,15 @@
 # keywords：考纲判定器的关键词。用户输入「极值」「基础解系」这类词时，
 # 用它判断在不在范围内。关键词尽量用学生真的会说出来的词。
 
+# 考试轮次：站点上的「期中 / 期末」开关读这里。加一门课的期末，就在下面加一项。
+terms:
+  - id: midterm
+    label: 期中
+    note: 第一轮，期中考试范围
+  - id: final
+    label: 期末
+    note: 第二轮，期末考试范围
+
 exam:
   name: 期中
   semester: 2026 秋
@@ -36,22 +45,37 @@ courses:
           - no: "1.1"
             title: 实数系
             state: in
+            terms:
+              midterm: in
+              final: in
             keywords: [实数系, 确界, 上确界, 下确界, 完备性, 阿基米德公理, 区间套]
           - no: "1.2"
             title: 数列极限的基本概念
             state: in
+            terms:
+              midterm: in
+              final: in
             keywords: [数列极限, ε-N, ε–N, 极限定义, 收敛数列, 发散]
           - no: "1.3"
             title: 收敛数列的性质
             state: in
+            terms:
+              midterm: in
+              final: in
             keywords: [极限唯一性, 有界性, 保号性, 四则运算, 夹逼, 迫敛, 子列]
           - no: "1.4"
             title: 单调数列
             state: in
+            terms:
+              midterm: in
+              final: in
             keywords: [单调有界, 单调数列, 递推数列, 压缩映射, 数列收敛]
           - no: "1.5"
             title: 关于实数系的几个基本定理
             state: in
+            terms:
+              midterm: in
+              final: in
             keywords: [柯西收敛准则, 聚点定理, 波尔查诺, 魏尔斯特拉斯, 有限覆盖, 闭区间套]
 
       - id: va1-2
@@ -63,26 +87,44 @@ courses:
           - no: "2.1"
             title: 函数
             state: in
+            terms:
+              midterm: in
+              final: in
             keywords: [函数, 定义域, 复合函数, 反函数, 初等函数, 有界性, 奇偶性, 周期性]
           - no: "2.2"
             title: 函数极限的概念
             state: in
+            terms:
+              midterm: in
+              final: in
             keywords: [函数极限, ε-δ, ε–δ, 单侧极限, 左极限, 右极限, 无穷远]
           - no: "2.3"
             title: 函数极限的性质
             state: in
+            terms:
+              midterm: in
+              final: in
             keywords: [极限性质, 夹逼, 单调有界, 海涅定理, 归结原则, 极限存在准则]
           - no: "2.4"
             title: 无穷小量与无穷大量
             state: in
+            terms:
+              midterm: in
+              final: in
             keywords: [无穷小, 无穷大, 等价无穷小, 同阶, 高阶无穷小, 无穷小的比较, 主部]
           - no: "2.5"
             title: 函数的连续与间断
             state: in
+            terms:
+              midterm: in
+              final: in
             keywords: [连续, 间断点, 第一类间断, 第二类间断, 可去间断, 跳跃间断]
           - no: "2.6"
             title: 闭区间上连续函数的性质
             state: in
+            terms:
+              midterm: in
+              final: in
             keywords: [有界性定理, 最值定理, 零点定理, 介值定理, 一致连续, 连续函数]
 
       - id: va1-3
@@ -94,14 +136,23 @@ courses:
           - no: "3.1"
             title: 导数与微分的概念
             state: in
+            terms:
+              midterm: in
+              final: in
             keywords: [导数定义, 可导, 可微, 单侧导数, 切线, 微分, 导数与连续]
           - no: "3.2"
             title: 求导法则
             state: in
+            terms:
+              midterm: in
+              final: in
             keywords: [求导法则, 链式法则, 复合函数求导, 隐函数求导, 参数方程求导, 对数求导, 反函数求导]
           - no: "3.3"
             title: 高阶导数
             state: in
+            terms:
+              midterm: in
+              final: in
             keywords: [高阶导数, 二阶导数, n阶导数, 莱布尼茨公式, 高阶微分]
 
       - id: va1-4
@@ -113,26 +164,44 @@ courses:
           - no: "4.1"
             title: 微分中值定理
             state: in
+            terms:
+              midterm: in
+              final: in
             keywords: [费马引理, 罗尔定理, 拉格朗日中值定理, 柯西中值定理, 中值定理, 辅助函数]
           - no: "4.2"
             title: 洛必达法则
             state: in
+            terms:
+              midterm: in
+              final: in
             keywords: [洛必达, 洛必达法则, 未定式, 0比0, 无穷比无穷, 待定型]
           - no: "4.3"
             title: 泰勒公式
             state: boundary
+            terms:
+              midterm: boundary
+              final: in
             keywords: [泰勒公式, 泰勒展开, 麦克劳林, 皮亚诺余项, 拉格朗日余项, 泰勒多项式]
           - no: "4.4"
             title: 函数的增减性与极值问题
             state: out
+            terms:
+              midterm: out
+              final: in
             keywords: [单调性, 增减性, 极值, 极大值, 极小值, 最值, 驻点]
           - no: "4.5"
             title: 凸函数
             state: out
+            terms:
+              midterm: out
+              final: in
             keywords: [凸函数, 凹函数, 拐点, 凹凸性, 琴生不等式]
           - no: "4.6"
             title: 函数作图
             state: out
+            terms:
+              midterm: out
+              final: in
             keywords: [渐近线, 作图, 函数图像]
 
       - id: va1-5
@@ -144,14 +213,23 @@ courses:
           - no: "5.1"
             title: 黎曼积分的概念
             state: out
+            terms:
+              midterm: out
+              final: in
             keywords: [定积分, 黎曼积分, 可积, 达布和, 积分存在条件]
           - no: "5.3"
             title: 微积分基本定理
             state: out
+            terms:
+              midterm: out
+              final: in
             keywords: [微积分基本定理, 牛顿-莱布尼茨, 变上限积分]
           - no: "5.4"
             title: 不定积分的概念与积分法
             state: out
+            terms:
+              midterm: out
+              final: in
             keywords: [不定积分, 换元积分, 分部积分, 原函数]
 
       - id: va1-6
@@ -163,6 +241,9 @@ courses:
           - no: "6.1"
             title: 广义黎曼积分的概念
             state: out
+            terms:
+              midterm: out
+              final: in
             keywords: [广义积分, 反常积分, 瑕积分, 无穷限积分, 收敛性]
 
       - id: va1-7
@@ -174,10 +255,16 @@ courses:
           - no: "7.1"
             title: 常微分方程的基本概念
             state: out
+            terms:
+              midterm: out
+              final: in
             keywords: [微分方程, 通解, 特解, 初值问题]
           - no: "7.2"
             title: 一阶常微分方程的初等解法
             state: out
+            terms:
+              midterm: out
+              final: in
             keywords: [变量分离, 一阶线性微分方程, 齐次方程]
 
   - id: la
@@ -200,18 +287,30 @@ courses:
           - no: "1.1"
             title: 线性方程组与高斯消元法
             state: in
+            terms:
+              midterm: in
+              final: in
             keywords: [线性方程组, 高斯消元, 增广矩阵, 齐次线性方程组, 消元, 阶梯形]
           - no: "1.2"
             title: n 阶行列式的定义
             state: in
+            terms:
+              midterm: in
+              final: in
             keywords: [行列式, n阶行列式, 排列, 逆序数, 对换, 定义]
           - no: "1.3"
             title: 行列式的性质与计算
             state: in
+            terms:
+              midterm: in
+              final: in
             keywords: [行列式性质, 行列式计算, 范德蒙德, 爪形, 递推, 升阶, 拆行]
           - no: "1.4"
             title: 行列式的展开定理与克莱姆法则
             state: in
+            terms:
+              midterm: in
+              final: in
             keywords: [展开定理, 代数余子式, 余子式, 克莱姆法则, 克拉默, Cramer]
 
       - id: la-2
@@ -223,22 +322,37 @@ courses:
           - no: "2.1"
             title: 矩阵及其运算
             state: in
+            terms:
+              midterm: in
+              final: in
             keywords: [矩阵运算, 矩阵乘法, 转置, 对称矩阵, 反对称, 幂, 迹, 分块]
           - no: "2.2"
             title: 逆矩阵
             state: in
+            terms:
+              midterm: in
+              final: in
             keywords: [逆矩阵, 可逆, 伴随矩阵, 逆矩阵公式, 方阵乘积的行列式, 可逆条件]
           - no: "2.3"
             title: 分块矩阵
             state: in
+            terms:
+              midterm: in
+              final: in
             keywords: [分块矩阵, 分块乘法, 分块求逆, 准对角]
           - no: "2.4"
             title: 初等变换与初等矩阵
             state: in
+            terms:
+              midterm: in
+              final: in
             keywords: [初等变换, 初等矩阵, 行变换, 列变换, 等价, 相抵, 标准形, 求逆]
           - no: "2.5"
             title: 矩阵的相抵与相抵标准形
             state: in
+            terms:
+              midterm: in
+              final: in
             keywords: [相抵, 相抵标准形, 等价关系, 初等变换求逆]
 
       - id: la-3
@@ -250,18 +364,30 @@ courses:
           - no: "3.1"
             title: n 维向量及其运算
             state: in
+            terms:
+              midterm: in
+              final: in
             keywords: [n维向量, 向量运算, 数乘, 向量空间, 数域F]
           - no: "3.2"
             title: 向量的线性表示与线性组合
             state: in
+            terms:
+              midterm: in
+              final: in
             keywords: [线性组合, 线性表示, 线性表出, 向量组的等价]
           - no: "3.3"
             title: 向量组的线性相关性
             state: boundary
+            terms:
+              midterm: boundary
+              final: in
             keywords: [线性相关, 线性无关, 相关性, 线性相关性的判定, 齐次方程组非零解]
           - no: "3.4"
             title: 向量组的秩与极大无关组
             state: out
+            terms:
+              midterm: out
+              final: in
             keywords: [向量组的秩, 极大无关组, 秩, 最大无关组]
 
       - id: la-4
@@ -273,12 +399,41 @@ courses:
           - no: "4.1"
             title: 矩阵的秩
             state: out
+            terms:
+              midterm: out
+              final: in
             keywords: [矩阵的秩, 秩的计算, 秩的性质]
           - no: "4.2"
             title: 齊次与非齐次线性方程组解的结构
             state: out
+            terms:
+              midterm: out
+              final: in
             keywords: [基础解系, 解空间, 通解, 解的结构]
           - no: "4.3"
             title: 线性空间
             state: out
+            terms:
+              midterm: out
+              final: in
             keywords: [线性空间, 基, 维数, 坐标, 过渡矩阵, 子空间]
+
+  # 「其他」：不挂任何课程的题（课外、竞赛、方法论……）。管理员可以直接在这里加新的大分类。
+  - id: other
+    name: 其他
+    short: 其他
+    accent: ink
+    book: 不限于课本的题
+    scope_line: 不受考纲限制
+    scope_note: 这一类不参与期中/期末的范围判定，投什么都可以。
+    notes_intro: 课外的、竞赛的、或者只是觉得有意思的题放这里。
+    chapters:
+      - id: other-1
+        no: ""
+        title: 其他题目
+        state: in
+        terms:
+          midterm: in
+          final: in
+        summary: 课外的、竞赛的，或者只是觉得有意思的题。
+        sections: []

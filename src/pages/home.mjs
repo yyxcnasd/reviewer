@@ -29,7 +29,7 @@ export function buildHome(ctx) {
           const note = ctx.notesByChapter.get(ch.id)
           const ids = (ctx.qByChapter.get(ch.id) || []).map((q) => q.id)
           const count = ids.length
-          return `<tr class="${ch.state === 'out' ? 'is-out' : ''}" data-chapter="${ch.id}">
+          return `<tr class="${ch.state === 'out' ? 'is-out' : ''}" data-chapter="${ch.id}" data-states="${attr(JSON.stringify(ch.terms || {}))}">
             <td class="range__no">${esc(ch.no)}</td>
             <td class="range__title">
               <a href="${url(0, `${c.id}/#ch-${ch.id}`)}">${esc(ch.title)}</a>
@@ -38,7 +38,7 @@ export function buildHome(ctx) {
                 .map((s) => esc(s.no))
                 .join(' ')}</span>
             </td>
-            <td class="range__state"><span class="chip chip--${ch.state}">${stateLabel(ch.state)}</span></td>
+            <td class="range__state"><span class="chip chip--${ch.state}" data-chip>${stateLabel(ch.state)}</span></td>
             <td class="range__count">${
               count ? `<a href="${url(0, `questions/?chapter=${ch.id}`)}">${count}</a>` : '—'
             }</td>
@@ -93,8 +93,8 @@ export function buildHome(ctx) {
   </div>
   <div class="frame hero__inner">
     <div class="hero__copy">
-      <h1 class="hero__title">期中要考的<br>都在这里</h1>
-      <p class="hero__lead">期中复习站：微积分 A1 到 4.3 节泰勒公式，线性代数到向量组的秩之前。${stats.questions} 道题带解析，${stats.notes} 篇要点，${ctx.papers.length} 套真题索引。</p>
+      <h1 class="hero__title">要考的范围<br>和题都在这里</h1>
+      <p class="hero__lead">复习册：课程范围、讲义要点、题库与解析放在一处。默认按<b data-term-label>期中</b>的范围显示，右上角可以切到期末。${stats.questions} 道题带解析，${stats.notes} 篇要点，${ctx.papers.length} 套真题索引。</p>
       <form class="search" action="${url(0, 'questions/')}" method="get" role="search">
         <label class="sr-only" for="q">搜题</label>
         <input class="search__input" id="q" name="q" type="search" placeholder="搜题：题干、标签、出处" autocomplete="off">

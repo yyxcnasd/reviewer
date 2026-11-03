@@ -29,7 +29,7 @@ export function page(ctx, opts) {
   const { config } = ctx
   const depth = opts.depth ?? 0
   const base = depth === 0 ? './' : '../'.repeat(depth)
-  const title = opts.title ? `${opts.title} · ${config.name}` : `${config.name} · 微积分 A1 与线性代数期中复习`
+  const title = opts.title ? `${opts.title} · ${config.name}` : `${config.name} · 课程复习资料与题库`
   const desc = opts.description || config.description
   const navItems = [
     { label: '微积分 A1', href: 'va1/', key: 'va1' },
@@ -53,7 +53,18 @@ export function page(ctx, opts) {
             )
             .join('\n          ')}
         </ul>
-        <a class="btn btn--red nav__action" href="${base}submit/">投稿</a>
+        <div class="nav__end">
+          <div class="nav__terms" role="group" aria-label="考试轮次">
+            ${ctx.terms
+              .map(
+                (t, i) =>
+                  `<button class="term-btn${i === 0 ? ' is-on' : ''}" type="button" data-term-btn="${t.id}">${esc(t.label)}</button>`,
+              )
+              .join('')}
+          </div>
+          <button class="ghost nav__theme" id="theme-toggle" type="button" aria-live="polite">深色</button>
+          <a class="btn btn--red nav__action" href="${base}submit/">投稿</a>
+        </div>
       </nav>
     </div>
   </header>`
@@ -114,7 +125,17 @@ export function page(ctx, opts) {
 <meta name="color-scheme" content="light">
 <link rel="stylesheet" href="${base}assets/katex/katex.min.css">
 <link rel="stylesheet" href="${base}assets/site.css">
+<script>
+  // 先按本地设置（或系统偏好）定主题，避免刷新时闪白
+  try {
+    var saved = localStorage.getItem('reviewer.theme')
+    var dark = saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches
+    if (dark) document.documentElement.setAttribute('data-theme', 'dark')
+  } catch (e) {}
+</script>
 <script src="${base}assets/core.js"></script>
+<script src="${base}assets/theme.js" defer></script>
+<script src="${base}assets/term.js" defer></script>
 <link rel="icon" href="${base}assets/favicon.svg" type="image/svg+xml">
 <meta property="og:title" content="${attr(title)}">
 <meta property="og:description" content="${attr(desc)}">

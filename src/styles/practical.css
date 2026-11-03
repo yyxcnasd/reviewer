@@ -1,3 +1,9 @@
+/* 打印一律 A4，页边距跟导出的卷子一致 */
+@page {
+  size: A4;
+  margin: 14mm 14mm 16mm;
+}
+
 /* ==========================================================================
    实用层：首页的入口、范围表、题单，以及题库里的“已做/收藏”等按钮
    ========================================================================== */
@@ -289,7 +295,7 @@
 }
 
 .fq__id {
-  font-weight: 700;
+  font-weight: 400;
   color: var(--ink-soft);
   letter-spacing: 0.02em;
 }
@@ -798,5 +804,37 @@
   }
   .hero--compact .hero__title {
     font-size: clamp(2rem, 9.5vw, 3rem);
+  }
+}
+
+/* ---------------------------------------------------------------- 打印：公式不滚动 */
+
+@media print {
+  /* 屏幕上为了长公式加的横向滚动，在纸上会变成一条条滚动条 */
+  .math-display,
+  .katex-display,
+  .prose .katex-display,
+  .sheet__body .math-display {
+    overflow: visible;
+    overflow-x: visible;
+    overflow-y: visible;
+    width: auto;
+    max-width: 100%;
+  }
+
+  /* 长公式在纸上宁可略小一点，也不要被裁掉 */
+  .katex-display > .katex {
+    font-size: 0.94em;
+    white-space: normal;
+    text-align: left;
+  }
+
+  /* 纸面上不要出现任何滚动条痕迹 */
+  .sheet,
+  .sheet__body,
+  .article__main,
+  .prose {
+    overflow: visible;
+    max-height: none;
   }
 }

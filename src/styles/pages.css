@@ -1655,3 +1655,233 @@
     padding-bottom: clamp(28px, 6vw, 48px);
   }
 }
+
+/* ---------------------------------------------------------------- 投稿页 */
+
+.fieldset {
+  border: 0;
+  border-top: 2px solid var(--line);
+  padding: 16px 0 4px;
+  margin: 0 0 18px;
+}
+
+.fieldset legend {
+  padding: 0 10px 0 0;
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+
+.submit {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
+  gap: clamp(24px, 3vw, 48px);
+  align-items: start;
+  padding-bottom: clamp(24px, 4vw, 56px);
+}
+
+.submit__form {
+  display: grid;
+  gap: 14px;
+  min-width: 0;
+}
+
+.submit__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 18px;
+}
+
+.submit .field {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.submit .field label {
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+
+.hint-inline {
+  font-weight: 400;
+  color: var(--ink-mute);
+}
+
+.submit__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.submit__status {
+  min-height: 1.4em;
+  font-size: var(--fs-small);
+  color: var(--ink-soft);
+}
+
+.submit__status.is-warn {
+  color: var(--red-deep);
+}
+
+/* 工具条 */
+.mdbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+  padding: 8px 0 10px;
+}
+
+.mdbar__group {
+  display: inline-flex;
+  border: 2px solid var(--line-strong);
+}
+
+.mdbar__group button {
+  padding: 0.3em 0.6em;
+  background: transparent;
+  border: 0;
+  border-left: 2px solid var(--line);
+  font: inherit;
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  color: var(--ink-soft);
+  cursor: pointer;
+  line-height: 1.5;
+}
+
+.mdbar__group button:first-child {
+  border-left: 0;
+}
+
+.mdbar__group button:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.mdbar__hint {
+  font-size: var(--fs-micro);
+  color: var(--ink-mute);
+}
+
+.textarea--code {
+  font-family: var(--mono);
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* 右侧预览 */
+.submit__preview {
+  position: sticky;
+  top: 18px;
+  display: grid;
+  gap: 10px;
+  background: var(--paper-2);
+  padding: clamp(14px, 1.6vw, 22px);
+  max-height: calc(100vh - 36px);
+  overflow: auto;
+}
+
+.submit__preview h2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  font-size: var(--fs-micro);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-weight: 700;
+}
+
+.submit__preview h2 span:last-child {
+  font-family: var(--mono); /* taste-skill-ignore */
+  font-size: 11px;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink-faint);
+  overflow-wrap: anywhere;
+}
+
+.submit__preview-sub {
+  margin-top: 8px;
+}
+
+.submit__fm {
+  font-family: var(--mono); /* taste-skill-ignore */
+  font-size: 12px;
+  line-height: 1.6;
+  background: var(--surface);
+  border: 2px solid var(--line);
+  padding: 10px 12px;
+  margin: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  color: var(--ink-soft);
+}
+
+@media (max-width: 960px) {
+  .submit {
+    grid-template-columns: 1fr;
+  }
+  .submit__preview {
+    position: static;
+    max-height: none;
+  }
+  .submit__row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 速查表打印 */
+@media print {
+  .sheet {
+    border: 0;
+    padding: 0;
+    background: #fff;
+    outline: 0;
+  }
+  .sheet__head {
+    margin-bottom: 8mm;
+  }
+  .sheet__head .pagehead__title,
+  .sheet h1 {
+    font-size: 20pt;
+  }
+  /* 纸上用单栏：双栏会把标题和它的内容拆到两栏，读起来跳 */
+  .sheet__body {
+    column-count: 1;
+    font-size: 9.5pt;
+    line-height: 1.55;
+    orphans: 3;
+    widows: 3;
+  }
+  /* 标题必须跟内容在同一栏里，别把标题留在一栏末尾 */
+  .sheet__body h2,
+  .sheet__body h3 {
+    break-after: avoid;
+    break-inside: avoid;
+  }
+  .sheet__body p,
+  .sheet__body ul,
+  .sheet__body ol,
+  .sheet__body li {
+    break-inside: avoid;
+  }
+  /* 行内公式不要被折行拆开 */
+  .sheet__body .katex {
+    font-size: 0.95em;
+    white-space: nowrap;
+  }
+  .sheet__body .math-display {
+    break-inside: avoid;
+    margin-block: 2mm;
+  }
+}

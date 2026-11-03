@@ -1,38 +1,42 @@
 /* ==========================================================================
    复习册 — 设计令牌
-   颜色来自这门课自己的东西：试卷纸、墨、批改的红笔、讲义里的蓝黑墨水。
-   字体一套：宋体（Noto Serif SC），三个字重用来说话——正文、小标题、大字。
+   两套值：浅色（纸与墨）与深色（夜里的自习室）。导出的 PDF 永远用浅色。
+   颜色来自学科自己的东西：试卷纸、墨、批改的红笔、讲义里的蓝黑墨水。
    ========================================================================== */
 
 :root {
-  /* 纸与墨 */
-  --paper: #f1f1ee;
-  --paper-2: #e6e5e0;
-  --paper-3: #d8d7d1;
-  --ink: #17140f;
-  --ink-soft: #453e34;
-  --ink-mute: #615a4e;
-  --ink-faint: #8f887b;
+  color-scheme: light;
 
-  /* 批改红：微积分、动作、范围里的“考” */
+  /* 纸与墨 */
+  --paper: #fbfaf7;
+  --paper-2: #f1efe9;
+  --paper-3: #e3e0d8;
+  --surface: #ffffff;
+  --ink: #12100c;
+  --ink-soft: #3b352c;
+  --ink-mute: #625b4e;
+  --ink-faint: #8b8477;
+
+  /* 批改红：动作、范围里的“考” */
   --red: #c1121f;
   --red-deep: #8d0d17;
-  --red-soft: #f0dbd8;
+  --red-soft: #f4e2e0;
+  --green: #2f6b34;
 
-  /* 墨水蓝：线性代数 */
+  /* 墨水蓝 */
   --indigo: #173f72;
   --indigo-deep: #0e2a4d;
 
-  /* 只给真表格、真表单用的线 */
-  --line: rgba(23, 20, 15, 0.16);
-  --line-strong: rgba(23, 20, 15, 0.38);
+  /* 线：比背景明显低一档，控件靠它跟纸分开 */
+  --line: rgba(23, 20, 15, 0.14);
+  --line-strong: rgba(23, 20, 15, 0.42);
 
   /* 字体 */
   --serif: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "SimSun", serif;
   /* 只给两处真代码用：Markdown 编辑器与文件/issue 的原文片段 */
   --mono: "SFMono-Regular", "JetBrains Mono", "Cascadia Mono", Consolas, monospace; /* taste-skill-ignore */
 
-  /* 字号：五级，跨度大，中间不设第六级 */
+  /* 字号 */
   --fs-display: clamp(2.75rem, 7.4vw, 7.25rem);
   --fs-h2: clamp(1.9rem, 4.4vw, 3.75rem);
   --fs-h3: clamp(1.25rem, 2vw, 1.75rem);
@@ -51,6 +55,49 @@
   --ease: cubic-bezier(0.16, 0.84, 0.44, 1);
   --dur: 620ms;
 }
+
+/* ---------------------------------------------------------------- 深色 */
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --paper: #16150f;
+  --paper-2: #1f1d16;
+  --paper-3: #2a2740;
+  --surface: #1b1913;
+  --ink: #f4f1e8;
+  --ink-soft: #d5cfc1;
+  --ink-mute: #a8a192;
+  --ink-faint: #857e70;
+
+  --red: #e8565e;
+  --red-deep: #c1121f;
+  --red-soft: #3a1d1e;
+  --green: #7fc48a;
+
+  --indigo: #6d9fdc;
+  --indigo-deep: #3c6aa0;
+
+  --line: rgba(244, 241, 232, 0.16);
+  --line-strong: rgba(244, 241, 232, 0.46);
+}
+
+/* 深色下，深色场与浅色场都反一下，别让字段底色打架 */
+:root[data-theme="dark"] .field-ink {
+  --paper: #0d0c08;
+  --paper-2: #16150f;
+  --paper-3: #1f1d16;
+  --ink: #f4f1e8;
+  --ink-soft: #d5cfc1;
+  --ink-mute: #a8a192;
+  --ink-faint: #857e70;
+}
+
+:root[data-theme="dark"] .field-paper2 {
+  background-color: var(--paper-2);
+}
+
+/* ---------------------------------------------------------------- 色场 */
 
 /* 深色场（墨底）上，同一套角色换值 */
 .field-ink {
@@ -100,4 +147,36 @@
 
 .field-paper2 {
   background-color: #e6e5e0;
+}
+
+/* ---------------------------------------------------------------- 打印永远浅色 */
+
+@media print {
+  :root,
+  :root[data-theme="dark"] {
+    color-scheme: light;
+    --paper: #ffffff;
+    --paper-2: #f2f1ec;
+    --paper-3: #e4e1d9;
+    --surface: #ffffff;
+    --ink: #000000;
+    --ink-soft: #222222;
+    --ink-mute: #444444;
+    --ink-faint: #666666;
+    --line: rgba(0, 0, 0, 0.2);
+    --line-strong: rgba(0, 0, 0, 0.5);
+    --red: #a80f1a;
+    --red-deep: #7d0a13;
+    --indigo: #122f57;
+  }
+  :root[data-theme="dark"] .field-ink,
+  :root[data-theme="dark"] .field-paper2,
+  :root[data-theme="dark"] .field-red,
+  :root[data-theme="dark"] .field-indigo {
+    background-color: #ffffff;
+    --paper: #ffffff;
+    --ink: #000000;
+    --ink-soft: #222222;
+    --ink-mute: #444444;
+  }
 }

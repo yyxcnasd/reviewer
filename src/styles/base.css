@@ -429,34 +429,9 @@ a.tag:hover {
 
 /* ---------------------------------------------------------------- 动效 */
 
-[data-reveal] {
-  opacity: 0;
-  transform: translateY(20px);
-  transition:
-    opacity var(--dur) var(--ease),
-    transform var(--dur) var(--ease);
-  transition-delay: var(--delay, 0ms);
-}
-
-[data-reveal].is-in {
-  opacity: 1;
-  transform: none;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  [data-reveal] {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
 }
 
 /* 兜底：没有 JS 时内容必须可见 */
-.no-js [data-reveal] {
-  opacity: 1;
-  transform: none;
-}
-
 /* ---------------------------------------------------------------- 数学 */
 
 .katex {
@@ -485,4 +460,44 @@ a.tag:hover {
 * {
   scrollbar-color: var(--ink-faint) transparent;
   scrollbar-width: thin;
+}
+
+/* 考试轮次开关：两个小方按钮，跟控件同一套边 */
+.nav__terms {
+  display: inline-flex;
+  border: 2px solid var(--line-strong);
+}
+
+.term-btn {
+  padding: 0.28em 0.62em;
+  background: transparent;
+  border: 0;
+  font: inherit;
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  color: var(--ink-mute);
+  cursor: pointer;
+  line-height: 1.5;
+}
+
+.term-btn + .term-btn {
+  border-left: 2px solid var(--line-strong);
+}
+
+.term-btn:hover {
+  color: var(--ink);
+}
+
+.term-btn.is-on {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* 进度数字：常规字重 + 等宽数字，避免 0/1 看着比别的字重 */
+[data-progress-here],
+[data-progress-count],
+[data-progress-total] {
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
 }

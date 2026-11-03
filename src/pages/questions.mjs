@@ -85,6 +85,14 @@ export function buildQuestionIndex(ctx) {
       </select>
     </div>
     <div class="filters__field">
+      <label for="f-scope">范围</label>
+      <select id="f-scope">
+        <option value="">全部</option>
+        <option value="in">本轮在范围内</option>
+        <option value="out">不在本轮范围</option>
+      </select>
+    </div>
+    <div class="filters__field">
       <label for="f-sort">排序</label>
       <select id="f-sort">
         <option value="chapter">按章节</option>
@@ -207,7 +215,7 @@ export function buildQuestionPages(ctx) {
           <div><dt>题型</dt><dd>${esc(q.kind)}</dd></div>
           <div><dt>难度</dt><dd>${dots(q.difficulty)}</dd></div>
           <div><dt>出处</dt><dd>${esc(q.source)}</dd></div>
-          <div><dt>范围</dt><dd>${esc(stateLabel(ch.state))}</dd></div>
+          <div><dt>范围</dt><dd><span data-chip data-states="${attr(JSON.stringify(ch.terms || {}))}">${esc(stateLabel(ch.state))}</span></dd></div>
         </dl>
       </div>
       <div>

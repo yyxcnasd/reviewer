@@ -8,7 +8,17 @@
 <meta name="color-scheme" content="light">
 <link rel="stylesheet" href="../assets/katex/katex.min.css">
 <link rel="stylesheet" href="../assets/site.css">
+<script>
+  // 先按本地设置（或系统偏好）定主题，避免刷新时闪白
+  try {
+    var saved = localStorage.getItem('reviewer.theme')
+    var dark = saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches
+    if (dark) document.documentElement.setAttribute('data-theme', 'dark')
+  } catch (e) {}
+</script>
 <script src="../assets/core.js"></script>
+<script src="../assets/theme.js" defer></script>
+<script src="../assets/term.js" defer></script>
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <meta property="og:title" content="n 维向量空间 · 综合题 · 复习册">
 <meta property="og:description" content="设向量组 满足：其中任意两个向量都线性无关，但 线性相关。 （1）证明每个向量都能由另外两个向量线性表示； （2）证明（1）中的表示式都是唯一的； （3）举一个满足上述条件的向量组作为例子。 线性相关性 线性表示 自编">
@@ -32,7 +42,13 @@
           <li><a href="../cheatsheet/">速查</a></li>
           <li><a href="../papers/">真题</a></li>
         </ul>
-        <a class="btn btn--red nav__action" href="../submit/">投稿</a>
+        <div class="nav__end">
+          <div class="nav__terms" role="group" aria-label="考试轮次">
+            <button class="term-btn is-on" type="button" data-term-btn="midterm">期中</button><button class="term-btn" type="button" data-term-btn="final">期末</button>
+          </div>
+          <button class="ghost nav__theme" id="theme-toggle" type="button" aria-live="polite">深色</button>
+          <a class="btn btn--red nav__action" href="../submit/">投稿</a>
+        </div>
       </nav>
     </div>
   </header>
@@ -116,7 +132,7 @@
           <div><dt>题型</dt><dd>综合题</dd></div>
           <div><dt>难度</dt><dd><span class="dots" aria-label="难度 3 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span></dd></div>
           <div><dt>出处</dt><dd>自编</dd></div>
-          <div><dt>范围</dt><dd>在范围内</dd></div>
+          <div><dt>范围</dt><dd><span data-chip data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}">在范围内</span></dd></div>
         </dl>
       </div>
       <div>
@@ -183,7 +199,7 @@
         </div>
       </div>
       <div class="footer__legal">
-        <span>复习册 · 微积分 A1 · 线性代数</span>
+        <span>复习册 · 课程 · 范围 · 题库</span>
         <span>内容以 CC BY-SA 4.0 发布，题目标题与解析可自由取用，请保留出处。</span>
       </div>
     </div>

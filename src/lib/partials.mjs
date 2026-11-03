@@ -79,7 +79,7 @@ export function questionRow(ctx, q, opts = {}) {
     .filter(Boolean)
     .join('')
 
-  return `<li class="qrow" data-id="${q.id}" data-course="${q.course}" data-chapter="${q.chapter}" data-difficulty="${q.difficulty}" data-tags="${attr(q.tags.join(' '))}" data-text="${attr(q.searchText || '')}">
+  return `<li class="qrow" data-id="${q.id}" data-course="${q.course}" data-chapter="${q.chapter}" data-states="${attr(JSON.stringify(ch.terms || {}))}" data-difficulty="${q.difficulty}" data-tags="${attr(q.tags.join(' '))}" data-text="${attr(q.searchText || '')}">
         <div>
           <a class="qrow__link" href="${url(depth, `questions/${q.id}.html`)}">${stemExcerpt(ctx, q)}</a>
           <div class="qrow__meta">${meta}</div>

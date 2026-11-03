@@ -2,89 +2,7 @@
 ;(() => {
   const { $, $$, escapeHtml } = window.RB
 
-  /* ---------------------------------------------------------------- 入场 */
-
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-
-  const revealTargets = [
-    '.board__mosaic > *',
-    '.board__text > *',
-    '.spine__row',
-    '.scope__head > *',
-    '.checker',
-    '.chapter',
-    '.pagehead__inner > *',
-    '.qpage__stem > *',
-    '.qblock',
-    '.pager',
-    '.qpage__side > *',
-    '.filters__field',
-    '.article__main > *',
-    '.step',
-    '.faq__item',
-    '.split__body > *',
-    '.split__figure',
-    '.materials__item',
-    '.paper',
-    '.practice__card',
-    '.submit__form > *',
-    '.article__toc',
-    '.footer__col',
-    '.section > *',
-    '.tagcloud a',
-    '.practice__filters > *',
-    '.callout',
-    '.quick a',
-    '.panel',
-    '.fq',
-    '.range-course',
-    '.ticks li',
-    '.closing',
-    '.sheet__body h2',
-    '.sheet__body h3',
-  ]
-
-  // 长列表只给前若干行做入场，其余直接显示，避免整页一起变成 invisible
-  const rowLimit = 40
-  const listRows = Array.from(document.querySelectorAll('.qlist .qrow'))
-
-  if (!prefersReduced && 'IntersectionObserver' in window) {
-    const groups = new Map()
-    for (const sel of revealTargets) {
-      for (const el of $$(sel)) {
-        if (el.dataset.reveal !== undefined) continue
-        el.setAttribute('data-reveal', '')
-        const parent = el.parentElement
-        const list = groups.get(parent) || []
-        list.push(el)
-        groups.set(parent, list)
-      }
-    }
-    for (const list of groups.values()) {
-      list.forEach((el, i) => {
-        el.style.setProperty('--delay', `${Math.min(i, 6) * 70}ms`)
-      })
-    }
-
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-in')
-            io.unobserve(entry.target)
-          }
-        }
-      },
-      { rootMargin: '0px 0px -8% 0px', threshold: 0.08 },
-    )
-    for (const el of $$('[data-reveal]')) io.observe(el)
-
-    for (const row of listRows.slice(0, rowLimit)) {
-      row.setAttribute('data-reveal', '')
-      row.style.setProperty('--delay', '0ms')
-      io.observe(row)
-    }
-  }
+  /* 内容一律直接可见：不做“滚动到才出现”的动画 */
 
   /* 首屏两个圆由 CSS 动画展开，脚本不再插手 */
 
@@ -220,8 +138,13 @@
       })
       .catch(() => {})
 
-    const stateWord = (s) =>
-      s === 'in' ? '<span class="yes">在期中范围内</span>' : s === 'boundary' ? '<span class="yes">在范围内，到此为止</span>' : '<span class="no">不在期中范围</span>'
+      const termLabel = () => document.querySelector('.term-btn.is-on')?.textContent?.trim() || '期中'
+      const stateWord = (s) =>
+        s === 'in'
+          ? '<span class="yes">在' + termLabel() + '范围内</span>'
+          : s === 'boundary'
+            ? '<span class="yes">在' + termLabel() + '范围内，到此为止</span>'
+            : '<span class="no">不在' + termLabel() + '范围</span>'
 
     const apply = (raw) => {
       const q = raw.trim().toLowerCase().replace(/\s+/g, '')
@@ -290,6 +213,7 @@
       tag: $('#f-tag'),
       difficulty: $('#f-difficulty'),
       status: $('#f-status'),
+      scope: $('#f-scope'),
       sort: $('#f-sort'),
       q: $('#f-q'),
     }
@@ -313,6 +237,7 @@
       const tag = sel.tag?.value || ''
       const difficulty = sel.difficulty?.value || ''
       const status = sel.status?.value || ''
+      const scope = sel.scope?.value || ''
       const q = (sel.q?.value || '').trim().toLowerCase()
       let shown = 0
       for (const item of items) {
@@ -326,6 +251,7 @@
           (!difficulty || item.dataset.difficulty === difficulty) &&
           (!tag || (item.dataset.tags || '').split(' ').includes(tag)) &&
           (!status || (status === 'done' ? done : status === 'undone' ? !done : fav)) &&
+          (!scope || (scope === 'in' ? item.dataset.state === 'in' || item.dataset.state === 'boundary' : item.dataset.state === 'out')) &&
           (!q || (item.dataset.text || '').toLowerCase().includes(q))
         item.hidden = !ok
         if (ok) shown += 1
@@ -375,6 +301,8 @@
 
     // 进度变了（在别的行点过）就重算：状态筛选要跟着变
     document.addEventListener('progress:change', run)
+    // 换轮次后「范围」筛选跟着变
+    document.addEventListener('term:change', run)
 
     // 按 / 直接搜索
     document.addEventListener('keydown', (ev) => {

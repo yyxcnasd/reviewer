@@ -1,8 +1,8 @@
 {
   "name": "复习册",
   "wordmark": "复习册",
-  "tagline": "微积分 A1 · 线性代数",
-  "description": "微积分 A1 与线性代数期中复习站：两门课的范围、讲义要点、一百道自编题与解析，以及一个可以投稿的题目归档。",
+  "tagline": "课程 · 范围 · 题库",
+  "description": "复习册：把课程范围、讲义要点、题库与解析放在一处的复习站。微积分 A1 与线性代数是第一批模块，考试轮次（期中 / 期末）可切换。",
   "lang": "zh-CN",
   "owner": "yyxcnasd",
   "repo": "yyxcnasd/reviewer",
@@ -14,11 +14,26 @@
     "note": "范围以任课教师的正式通知为准，本站按课本章节整理"
   },
   "nav": [
-    { "label": "微积分 A1", "href": "va1/" },
-    { "label": "线性代数", "href": "la/" },
-    { "label": "题库", "href": "questions/" },
-    { "label": "真题", "href": "papers/" },
-    { "label": "投稿", "href": "submit/" }
+    {
+      "label": "微积分 A1",
+      "href": "va1/"
+    },
+    {
+      "label": "线性代数",
+      "href": "la/"
+    },
+    {
+      "label": "题库",
+      "href": "questions/"
+    },
+    {
+      "label": "真题",
+      "href": "papers/"
+    },
+    {
+      "label": "投稿",
+      "href": "submit/"
+    }
   ],
   "credits": {
     "references": "历年期中试题整理自 mathsdream/THU-math-source 等公开资料；课本章节依据《高等微积分教程（上）》《线性代数与几何（第 2 版）》。",

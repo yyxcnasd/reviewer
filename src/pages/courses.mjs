@@ -43,7 +43,7 @@ export function buildCourses(ctx) {
         const secs = ch.sections
           .map(
             (s) =>
-              `<li class="${s.state === 'in' ? 'sec-in' : s.state === 'boundary' ? 'sec-boundary' : 'sec-out'}">${esc(s.no)} ${esc(s.title)}</li>`,
+              `<li class="${s.state === 'in' ? 'sec-in' : s.state === 'boundary' ? 'sec-boundary' : 'sec-out'}" data-states="${attr(JSON.stringify(s.terms || {}))}" data-sec>${esc(s.no)} ${esc(s.title)}</li>`,
           )
           .join('')
         const links =
@@ -55,8 +55,8 @@ export function buildCourses(ctx) {
                  ${ch.count ? `<a href="${url(1, `export/?chapter=${ch.id}`)}">导出</a>` : ''}
                </div>`
         return `<article class="chapter" id="ch-${ch.id}">
-          <h2 class="chapter__title"><em>${esc(ch.no)}</em>${esc(ch.title)}</h2>
-          <span class="chapter__label chapter__label--${ch.state}">${stateLabel(ch.state)}</span>
+          <h2 class="chapter__title">${ch.no ? `<em>${esc(ch.no)}</em>` : ''}${esc(ch.title)}</h2>
+          <span class="chapter__label chapter__label--${ch.state}" data-chip>${stateLabel(ch.state)}</span>
           <p class="chapter__summary">${esc(ch.summary || '')}</p>
           <ul class="chapter__sections">${secs}</ul>
           ${links}
