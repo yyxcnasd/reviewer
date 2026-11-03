@@ -1129,7 +1129,7 @@
 
 .rule-head p {
   font-size: var(--fs-small);
-  color: var(--ink-mute);
+  color: var(--ink-soft);
   max-width: 40ch;
 }
 

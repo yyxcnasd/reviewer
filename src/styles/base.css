@@ -205,9 +205,32 @@ p {
   color: var(--red);
 }
 
+/* 窄屏：导航折成第二行，横向滑动，六个入口都够得着 */
 @media (max-width: 720px) {
-  .nav__links li:not(:last-child) {
+  .nav {
+    flex-wrap: wrap;
+    row-gap: 4px;
+  }
+  .nav__links {
+    order: 3;
+    width: 100%;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    gap: 16px;
+    margin-top: 8px;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+  }
+  .nav__links::-webkit-scrollbar {
     display: none;
+  }
+  .nav__links a {
+    white-space: nowrap;
+    font-size: 0.9375rem;
+  }
+  .nav__links .btn {
+    font-size: 0.9375rem;
+    padding: 0.55em 0.9em;
   }
 }
 

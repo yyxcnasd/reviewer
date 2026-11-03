@@ -9,6 +9,7 @@
     chapter: $('#p-chapter'),
     difficulty: $('#p-difficulty'),
     order: $('#p-order'),
+    status: $('#p-status'),
     apply: $('#p-apply'),
     reveal: $('#p-reveal'),
     next: $('#p-next'),
@@ -35,12 +36,16 @@
     const course = el.course.value
     const chapter = el.chapter.value
     const difficulty = el.difficulty.value
-    let list = all.filter(
-      (q) =>
-        (!course || q.course === course) &&
-        (!chapter || q.chapter === chapter) &&
-        (!difficulty || String(q.difficulty) === difficulty),
-    )
+    const P = window.ReviewProgress
+    const status = el.status ? el.status.value : ''
+    let list = all.filter((q) => {
+      if (course && q.course !== course) return false
+      if (chapter && q.chapter !== chapter) return false
+      if (difficulty && String(q.difficulty) !== difficulty) return false
+      if (status === 'undone' && P && P.isDone(q.id)) return false
+      if (status === 'fav' && P && !P.isFav(q.id)) return false
+      return true
+    })
     if (!list.length) {
       stage.innerHTML = '<p class="hint">这个筛选条件下没有题，换个条件试试。</p>'
       el.total.textContent = '0'
@@ -98,6 +103,8 @@
 
   function reveal() {
     const sol = $('#p-solution')
+    // 看了解析就记成「已做」——这是刷题页对进度最自然的定义
+    if (!revealed && window.ReviewProgress && deck[pos]) window.ReviewProgress.mark(deck[pos].id, 'done', true)
     if (!sol) return
     sol.hidden = revealed
     revealed = !revealed
@@ -126,7 +133,9 @@
     })
 
   el.apply.addEventListener('click', build)
-  for (const s of [el.course, el.chapter, el.difficulty, el.order]) s.addEventListener('change', build)
+  for (const s of [el.course, el.chapter, el.difficulty, el.order, el.status]) {
+    if (s) s.addEventListener('change', build)
+  }
   el.reveal.addEventListener('click', reveal)
   el.next.addEventListener('click', next)
 

@@ -27,6 +27,8 @@
           <li><a href="../va1/">微积分 A1</a></li>
           <li><a href="../la/">线性代数</a></li>
           <li><a href="../questions/" aria-current="page">题库</a></li>
+          <li><a href="../practice/">刷题</a></li>
+          <li><a href="../cheatsheet/">速查</a></li>
           <li><a href="../papers/">真题</a></li>
           <li><a class="btn btn--red" href="../submit/">投稿</a></li>
         </ul>
@@ -56,6 +58,13 @@
           <span class="meta__item">难度 <span class="dots" aria-label="难度 2 / 4"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span></span>
           <span class="meta__item">自编</span>
           
+        </div>
+        <div class="qactions">
+          <button class="flag" type="button" data-flag="done" data-id="la-007" aria-pressed="false"><span>已做</span></button>
+          <button class="flag flag--fav" type="button" data-flag="fav" data-id="la-007" aria-pressed="false"><span>收藏</span></button>
+          <button class="ghost" type="button" id="expand-all">展开解析与提示</button>
+          <button class="ghost" type="button" id="copy-md">复制题目</button>
+          <span class="qactions__id">LA-007 · <span class="kbd">←</span><span class="kbd">→</span> 翻题 · <span class="kbd">E</span> 展开 · <span class="kbd">D</span> 记已做</span>
         </div>
       </header>
 
@@ -104,8 +113,8 @@ c-10,0,-16.667,5,-20,15z M188 15 H145 v585 v2400 v585 h43z"/></svg></span></span
       <details class="qblock"><summary>常见错误<span aria-hidden="true">展开</span></summary><div class="qblock__body prose"><p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">a</span></span></span></span>）直接把 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi></mrow><annotation encoding="application/x-tex">D</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.0278em;">D</span></span></span></span> 当成答案，忽略了系数与第一行元素不一致。<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">b</span></span></span></span>）只替换第一行中的一个元素。<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi></mrow><annotation encoding="application/x-tex">c</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">c</span></span></span></span>）同时改动了别的行：代数余子式 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>A</mi><mrow><mn>1</mn><mi>j</mi></mrow></msub></mrow><annotation encoding="application/x-tex">A_{1j}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9694em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal">A</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mathnormal mtight" style="margin-right:0.0572em;">j</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span></span> 只与第一行以外的元素有关，别的行一改，余子式就变了。</p>
 </div></details>
 
-      <div class="pager">
-        <a href="../questions/la-006.html"><span>上一题</span>行列式计算 · 难度 2</a>
+      <div class="pager" data-pager>
+        <a class="pager__prev" href="../questions/la-006.html"><span>上一题</span>行列式计算 · 难度 2</a>
         <a class="pager__next" href="../questions/la-008.html"><span>下一题</span>用克莱姆法则解线性方程组</a>
       </div>
     </div>
@@ -189,6 +198,7 @@ c-10,0,-16.667,5,-20,15z M188 15 H145 v585 v2400 v585 h43z"/></svg></span></span
       </div>
     </div>
   </footer>
+<script src="../assets/progress.js" defer></script>
 <script src="../assets/site.js" defer></script>
 
 </body>

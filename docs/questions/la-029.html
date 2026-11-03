@@ -27,6 +27,8 @@
           <li><a href="../va1/">微积分 A1</a></li>
           <li><a href="../la/">线性代数</a></li>
           <li><a href="../questions/" aria-current="page">题库</a></li>
+          <li><a href="../practice/">刷题</a></li>
+          <li><a href="../cheatsheet/">速查</a></li>
           <li><a href="../papers/">真题</a></li>
           <li><a class="btn btn--red" href="../submit/">投稿</a></li>
         </ul>
@@ -56,6 +58,13 @@
           <span class="meta__item">难度 <span class="dots" aria-label="难度 2 / 4"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span></span>
           <span class="meta__item">自编</span>
           
+        </div>
+        <div class="qactions">
+          <button class="flag" type="button" data-flag="done" data-id="la-029" aria-pressed="false"><span>已做</span></button>
+          <button class="flag flag--fav" type="button" data-flag="fav" data-id="la-029" aria-pressed="false"><span>收藏</span></button>
+          <button class="ghost" type="button" id="expand-all">展开解析与提示</button>
+          <button class="ghost" type="button" id="copy-md">复制题目</button>
+          <span class="qactions__id">LA-029 · <span class="kbd">←</span><span class="kbd">→</span> 翻题 · <span class="kbd">E</span> 展开 · <span class="kbd">D</span> 记已做</span>
         </div>
       </header>
 
@@ -147,8 +156,8 @@ l0,-1344c-2,-159.3,-10,-310.7,-24,-454c-53.3,-528,-210,-949.7,
       <details class="qblock"><summary>常见错误<span aria-hidden="true">展开</span></summary><div class="qblock__body prose"><p>分块求逆时把非对角块也写进答案，或者忘了分别检查每个对角块的行列式非零。准对角矩阵可逆当且仅当每个对角块都可逆；若某个块奇异，整个矩阵就不可逆。</p>
 </div></details>
 
-      <div class="pager">
-        <a href="../questions/la-028.html"><span>上一题</span>逆矩阵 · 难度 3</a>
+      <div class="pager" data-pager>
+        <a class="pager__prev" href="../questions/la-028.html"><span>上一题</span>逆矩阵 · 难度 3</a>
         <a class="pager__next" href="../questions/la-030.html"><span>下一题</span>分块矩阵 · 难度 3</a>
       </div>
     </div>
@@ -232,6 +241,7 @@ l0,-1344c-2,-159.3,-10,-310.7,-24,-454c-53.3,-528,-210,-949.7,
       </div>
     </div>
   </footer>
+<script src="../assets/progress.js" defer></script>
 <script src="../assets/site.js" defer></script>
 
 </body>

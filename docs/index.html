@@ -27,6 +27,8 @@
           <li><a href="./va1/">微积分 A1</a></li>
           <li><a href="./la/">线性代数</a></li>
           <li><a href="./questions/">题库</a></li>
+          <li><a href="./practice/">刷题</a></li>
+          <li><a href="./cheatsheet/">速查</a></li>
           <li><a href="./papers/">真题</a></li>
           <li><a class="btn btn--red" href="./submit/">投稿</a></li>
         </ul>
@@ -35,7 +37,7 @@
   </header>
 <main id="main">
 
-<section class="hero">
+<section class="hero hero--compact">
   <div class="hero__discs">
     <i class="disc disc--red" aria-hidden="true"></i>
     <i class="disc disc--indigo" aria-hidden="true"></i>
@@ -43,341 +45,304 @@
   <div class="frame hero__inner">
     <div class="hero__copy">
       <h1 class="hero__title">期中要考的<br>都在这里</h1>
-      <p class="hero__lead">这是一个期中复习站：微积分 A1 考到 4.3 节泰勒公式为止，线性代数考到向量组的秩之前。两门课的讲义要点、100 道自编题与逐题解析，都在这一册里。</p>
-      <div class="hero__act">
-        <a class="btn btn--red" href="#scope">从范围开始</a>
-        <a href="questions/">直接做题 →</a>
-        <span class="hero__note">100 道题 · 7 篇要点 · 10 套真题索引</span>
-      </div>
-    </div>
-    <dl class="hero__legend">
-      <div>
-        <dt>微积分 A1</dt>
-        <dd>第 1 章 – 4.3 节</dd>
-      </div>
-      <div>
-        <dt>线性代数</dt>
-        <dd>第 1 章 – 向量组的秩之前</dd>
-      </div>
-    </dl>
-  </div>
-</section>
-
-<section class="board frame">
-  <div class="board__mosaic">
-    <div class="tile tile--slogan">
-      <p>两门课<br>一张考纲</p>
-    </div>
-    <div class="tile tile--figure">
-      <span>道题，全带解析</span>
-      <b>100</b>
-    </div>
-    <div class="tile tile--photo">
-      <img src="assets/photos/taylor.jpg" width="1000" height="1000" alt="Brook Taylor 的铜版画像，下方是他的手写签名" loading="lazy" decoding="async">
-    </div>
-  </div>
-  <div class="board__text">
-    <div>
-      <p>这不是一份笔记合集。范围先画出来：微积分停在 4.3 节泰勒公式，线性代数停在向量组的秩之前。线以内的章节有要点、有题；线以外的章节灰着，等期末再补。</p>
-      <p>每一道题是一个 Markdown 文件，带标签、难度和完整解析，改一个文件就能改一道题。图片是 Brook Taylor 的铜版像——他的公式正好是这次期中的终点。</p>
+      <p class="hero__lead">期中复习站：微积分 A1 考到 4.3 节泰勒公式，线性代数考到向量组的秩之前。100 道题带解析，7 篇要点，10 套真题索引。</p>
+      <form class="search" action="questions/" method="get" role="search">
+        <label class="sr-only" for="q">搜题</label>
+        <input class="search__input" id="q" name="q" type="search" placeholder="搜题：题干、标签、出处" autocomplete="off">
+        <button class="btn btn--red search__btn" type="submit">搜题</button>
+      </form>
+      <p class="hero__note">已做 <span data-progress-total="100">0 / 100</span> · 题库 100 道，全部带解析 · 按 <span class="kbd">/</span> 在题库里搜</p>
     </div>
   </div>
 </section>
 
-<section class="scope field-ink section" id="scope">
+<section class="frame section--tight">
+  <ul class="quick">
+    <li><a href="questions/"><b>题库</b><span>100 道，按章节/标签/难度筛</span></a></li>
+    <li><a href="practice/"><b>刷题</b><span>一次一道，先想再看解析</span></a></li>
+    <li><a href="cheatsheet/"><b>速查</b><span>公式与结论，一页过完</span></a></li>
+    <li><a href="papers/"><b>真题</b><span>10 套卷的题型与考点</span></a></li>
+  </ul>
+</section>
+
+<section class="frame section--tight" id="scope">
+  <div class="rule-head">
+    <h2>范围</h2>
+    <p>按课本目录排。灰掉的是期中之后才考的章节，等期末再补。</p>
+  </div>
+  <div class="checker checker--inline">
+    <label class="sr-only" for="scope-input">查一个知识点考不考</label>
+    <input class="checker__input" id="scope-input" type="search" placeholder="查一个知识点考不考：极值 / 泰勒 / 标准形 / 一致连续" autocomplete="off" spellcheck="false">
+    <button class="btn btn--tone" id="scope-clear" type="button">清空</button>
+  </div>
+  <ul class="checker__chips" aria-label="试试这些">
+    <li><button type="button" data-try="泰勒公式">泰勒公式</button></li><li><button type="button" data-try="极值">极值</button></li><li><button type="button" data-try="向量组的秩">向量组的秩</button></li><li><button type="button" data-try="行列式">行列式</button></li><li><button type="button" data-try="一致连续">一致连续</button></li>
+  </ul>
+  <p class="checker__verdict" id="scope-verdict" aria-live="polite">输入一个词，下面这张表会告诉你它落在哪一章、考不考。</p>
+  <div class="ranges"><section class="range-course">
+        <header class="range-course__head">
+          <h3><a href="va1/">微积分 A1</a></h3>
+          <p>第 1 章 – 第 4.3 节</p>
+          <p class="range-course__links">
+            <a href="questions/?course=va1">50 道题</a>
+            <a href="va1/">完整考纲</a>
+          </p>
+        </header>
+        <table class="range">
+          <thead><tr><th>章</th><th>内容</th><th>范围</th><th>题</th><th>要点</th></tr></thead>
+          <tbody><tr class="" data-chapter="va1-1">
+            <td class="range__no">1</td>
+            <td class="range__title">
+              <a href="va1/#ch-va1-1">实数系与实数列的极限</a>
+              <span class="range__secs">1.1 1.2 1.3 1.4 1.5</span>
+            </td>
+            <td class="range__state"><span class="chip chip--in">在范围内</span></td>
+            <td class="range__count"><a href="questions/?chapter=va1-1">12</a></td>
+            <td class="range__note"><a href="notes/va1-1.html">读</a></td>
+          </tr><tr class="" data-chapter="va1-2">
+            <td class="range__no">2</td>
+            <td class="range__title">
+              <a href="va1/#ch-va1-2">函数 函数的极限与连续</a>
+              <span class="range__secs">2.1 2.2 2.3 2.4 2.5 2.6</span>
+            </td>
+            <td class="range__state"><span class="chip chip--in">在范围内</span></td>
+            <td class="range__count"><a href="questions/?chapter=va1-2">12</a></td>
+            <td class="range__note"><a href="notes/va1-2.html">读</a></td>
+          </tr><tr class="" data-chapter="va1-3">
+            <td class="range__no">3</td>
+            <td class="range__title">
+              <a href="va1/#ch-va1-3">函数的导数</a>
+              <span class="range__secs">3.1 3.2 3.3</span>
+            </td>
+            <td class="range__state"><span class="chip chip--in">在范围内</span></td>
+            <td class="range__count"><a href="questions/?chapter=va1-3">11</a></td>
+            <td class="range__note"><a href="notes/va1-3.html">读</a></td>
+          </tr><tr class="" data-chapter="va1-4">
+            <td class="range__no">4</td>
+            <td class="range__title">
+              <a href="va1/#ch-va1-4">导数应用</a>
+              <span class="range__secs">4.1 4.2 4.3</span>
+            </td>
+            <td class="range__state"><span class="chip chip--in">在范围内</span></td>
+            <td class="range__count"><a href="questions/?chapter=va1-4">15</a></td>
+            <td class="range__note"><a href="notes/va1-4.html">读</a></td>
+          </tr><tr class="is-out" data-chapter="va1-5">
+            <td class="range__no">5</td>
+            <td class="range__title">
+              <a href="va1/#ch-va1-5">黎曼积分</a>
+              <span class="range__secs"></span>
+            </td>
+            <td class="range__state"><span class="chip chip--out">期中之后</span></td>
+            <td class="range__count">—</td>
+            <td class="range__note">—</td>
+          </tr><tr class="is-out" data-chapter="va1-6">
+            <td class="range__no">6</td>
+            <td class="range__title">
+              <a href="va1/#ch-va1-6">广义黎曼积分</a>
+              <span class="range__secs"></span>
+            </td>
+            <td class="range__state"><span class="chip chip--out">期中之后</span></td>
+            <td class="range__count">—</td>
+            <td class="range__note">—</td>
+          </tr><tr class="is-out" data-chapter="va1-7">
+            <td class="range__no">7</td>
+            <td class="range__title">
+              <a href="va1/#ch-va1-7">常微分方程</a>
+              <span class="range__secs"></span>
+            </td>
+            <td class="range__state"><span class="chip chip--out">期中之后</span></td>
+            <td class="range__count">—</td>
+            <td class="range__note">—</td>
+          </tr></tbody>
+        </table>
+        <p class="range-course__foot">在范围内 4 章 · 期中之后 3 章（灰）</p>
+      </section><section class="range-course">
+        <header class="range-course__head">
+          <h3><a href="la/">线性代数</a></h3>
+          <p>第 1 章 – 第 3 章「向量组的秩」之前</p>
+          <p class="range-course__links">
+            <a href="questions/?course=la">50 道题</a>
+            <a href="la/">完整考纲</a>
+          </p>
+        </header>
+        <table class="range">
+          <thead><tr><th>章</th><th>内容</th><th>范围</th><th>题</th><th>要点</th></tr></thead>
+          <tbody><tr class="" data-chapter="la-1">
+            <td class="range__no">1</td>
+            <td class="range__title">
+              <a href="la/#ch-la-1">线性方程组与行列式</a>
+              <span class="range__secs">1.1 1.2 1.3 1.4</span>
+            </td>
+            <td class="range__state"><span class="chip chip--in">在范围内</span></td>
+            <td class="range__count"><a href="questions/?chapter=la-1">18</a></td>
+            <td class="range__note"><a href="notes/la-1.html">读</a></td>
+          </tr><tr class="" data-chapter="la-2">
+            <td class="range__no">2</td>
+            <td class="range__title">
+              <a href="la/#ch-la-2">矩阵</a>
+              <span class="range__secs">2.1 2.2 2.3 2.4 2.5</span>
+            </td>
+            <td class="range__state"><span class="chip chip--in">在范围内</span></td>
+            <td class="range__count"><a href="questions/?chapter=la-2">18</a></td>
+            <td class="range__note"><a href="notes/la-2.html">读</a></td>
+          </tr><tr class="" data-chapter="la-3">
+            <td class="range__no">3</td>
+            <td class="range__title">
+              <a href="la/#ch-la-3">n 维向量空间</a>
+              <span class="range__secs">3.1 3.2 3.3</span>
+            </td>
+            <td class="range__state"><span class="chip chip--in">在范围内</span></td>
+            <td class="range__count"><a href="questions/?chapter=la-3">14</a></td>
+            <td class="range__note"><a href="notes/la-3.html">读</a></td>
+          </tr><tr class="is-out" data-chapter="la-4">
+            <td class="range__no">4</td>
+            <td class="range__title">
+              <a href="la/#ch-la-4">向量组的秩之后</a>
+              <span class="range__secs"></span>
+            </td>
+            <td class="range__state"><span class="chip chip--out">期中之后</span></td>
+            <td class="range__count">—</td>
+            <td class="range__note">—</td>
+          </tr></tbody>
+        </table>
+        <p class="range-course__foot">在范围内 3 章 · 期中之后 1 章（灰）</p>
+      </section></div>
+</section>
+
+<section class="frame section--tight">
+  <div class="rule-head">
+    <h2>先做这几道</h2>
+    <p>每章一道，难度从常规到综合，都是卷面上最常见的形状。</p>
+  </div>
+  <ul class="fqlist"><li class="fq">
+        <a class="fq__link" href="questions/va1-001.html">求极限 · 泰勒公式</a>
+        <div class="fq__meta">
+          <span class="fq__id">VA1-001</span>
+          <span>微积分 · 中值定理与泰勒</span>
+          <span>计算题</span>
+          <span class="dots" aria-label="难度 2 / 4"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
+        </div>
+      </li><li class="fq">
+        <a class="fq__link" href="questions/va1-030.html">设 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><mi>y</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">y=y(x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">y</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">y</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span></span></span></span> 是由方程 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mi>x</mi><mi>y</mi><mo>+</mo><msup><mi>y</mi><mn>2</mn></msup><mo>=</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">x^{2}+xy+y^{2}=3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7778em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">x</span><span class="mord mathnormal" style="margin-right:0.0359em;">y</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.0085em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">y</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">3</span></span></span></span></a>
+        <div class="fq__meta">
+          <span class="fq__id">VA1-030</span>
+          <span>微积分 · 导数</span>
+          <span>计算题</span>
+          <span class="dots" aria-label="难度 2 / 4"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
+        </div>
+      </li><li class="fq">
+        <a class="fq__link" href="questions/va1-042.html">设 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span></span></span></span> 在 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">[</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[0,1]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">1</span><span class="mclose">]</span></span></span></span> 上连续，在 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(0,1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span> 内可导，且 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo><mo>=</mo><mi>f</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">f(0)=f(1)=0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mopen">(</span><span class="mord">0</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span>。证明：存在 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ξ</mi><mo>∈</mo><mo stretchy="false">(</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\xi\in(0,1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.046em;">ξ</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span>，使得</a>
+        <div class="fq__meta">
+          <span class="fq__id">VA1-042</span>
+          <span>微积分 · 中值定理与泰勒</span>
+          <span>证明题</span>
+          <span class="dots" aria-label="难度 2 / 4"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
+        </div>
+      </li><li class="fq">
+        <a class="fq__link" href="questions/la-001.html">计算 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span> 阶三对角行列式</a>
+        <div class="fq__meta">
+          <span class="fq__id">LA-001</span>
+          <span>线代 · 行列式</span>
+          <span>计算题</span>
+          <span class="dots" aria-label="难度 2 / 4"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
+        </div>
+      </li><li class="fq">
+        <a class="fq__link" href="questions/la-014.html">计算 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span> 阶三对角行列式</a>
+        <div class="fq__meta">
+          <span class="fq__id">LA-014</span>
+          <span>线代 · 行列式</span>
+          <span>计算题</span>
+          <span class="dots" aria-label="难度 3 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
+        </div>
+      </li><li class="fq">
+        <a class="fq__link" href="questions/la-050.html">设 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>α</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>α</mi><mn>2</mn></msub><mo separator="true">,</mo><mo>…</mo><mo separator="true">,</mo><msub><mi>α</mi><mi>s</mi></msub></mrow><annotation encoding="application/x-tex">\alpha_1,\alpha_2,\dots,\alpha_s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0037em;">α</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0037em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0037em;">α</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0037em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner">…</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0037em;">α</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0037em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">s</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 线性无关。令</a>
+        <div class="fq__meta">
+          <span class="fq__id">LA-050</span>
+          <span>线代 · 向量空间</span>
+          <span>证明题</span>
+          <span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span>
+        </div>
+      </li></ul>
+  <p class="more"><a class="btn btn--tone" href="questions/">看全部 100 道题</a></p>
+</section>
+
+<section class="section--tight field-paper2">
   <div class="frame">
-    <div class="scope__head">
-      <h2>范围</h2>
-      <p>期中不是「整本书」，是一条线。下面这条脊是两门课的全部章节，颜色停在考纲的边界上。</p>
+    <div class="rule-head">
+      <h2>三条必背</h2>
+      <p>考场上真的会用到的三条。完整版在速查页，可以打印。</p>
     </div>
-    <div class="checker">
-      <label class="sr-only" for="scope-input">查一个知识点考不考</label>
-      <input class="checker__input" id="scope-input" type="search" placeholder="输入一个知识点，比如「极值」「特征值」「泰勒」" autocomplete="off" spellcheck="false">
-      <button class="btn" id="scope-clear" type="button">清空</button>
+    <div class="threeup">
+      <article class="three">
+        <h3>泰勒公式</h3>
+        <p><strong>若 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span></span></span></span> 在 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">x_0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 处 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span> 阶可导</strong>：</p>
+<p><span class="math-display"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>0</mn></mrow><mi>n</mi></munderover><mfrac><mrow><msup><mi>f</mi><mrow><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow></msup><mo stretchy="false">(</mo><msub><mi>x</mi><mn>0</mn></msub><mo stretchy="false">)</mo></mrow><mrow><mi>k</mi><mo stretchy="false">!</mo></mrow></mfrac><mo stretchy="false">(</mo><mi>x</mi><mo>−</mo><msub><mi>x</mi><mn>0</mn></msub><msup><mo stretchy="false">)</mo><mi>k</mi></msup><mo>+</mo><mi>o</mi><mo fence="false" stretchy="true" minsize="1.2em" maxsize="1.2em">(</mo><mo stretchy="false">(</mo><mi>x</mi><mo>−</mo><msub><mi>x</mi><mn>0</mn></msub><msup><mo stretchy="false">)</mo><mi>n</mi></msup><mo fence="false" stretchy="true" minsize="1.2em" maxsize="1.2em">)</mo></mrow><annotation encoding="application/x-tex">f(x)=\sum_{k=0}^{n}\frac{f^{(k)}(x_0)}{k!}(x-x_0)^k+o\big((x-x_0)^n\big)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.9535em;vertical-align:-1.3021em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.6514em;"><span style="top:-1.8479em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.0315em;">k</span><span class="mrel mtight">=</span><span class="mord mtight">0</span></span></span></span><span style="top:-3.05em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.3em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.3021em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.565em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0315em;">k</span><span class="mclose">!</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.888em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.0315em;">k</span><span class="mclose mtight">)</span></span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.1491em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8991em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0315em;">k</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.2em;vertical-align:-0.35em;"></span><span class="mord mathnormal">o</span><span class="mord"><span class="delimsizing size1">(</span></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.2em;vertical-align:-0.35em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7144em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span><span class="mord"><span class="delimsizing size1">)</span></span></span></span></span></span></span></p>
+<p>皮亚诺余项用来算极限；换成拉格朗日余项 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle scriptlevel="0" displaystyle="true"><mfrac><mrow><msup><mi>f</mi><mrow><mo stretchy="false">(</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></msup><mo stretchy="false">(</mo><mi>ξ</mi><mo stretchy="false">)</mo></mrow><mrow><mo stretchy="false">(</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo><mo stretchy="false">!</mo></mrow></mfrac></mstyle><mo stretchy="false">(</mo><mi>x</mi><mo>−</mo><msub><mi>x</mi><mn>0</mn></msub><msup><mo stretchy="false">)</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">\dfrac{f^{(n+1)}(\xi)}{(n+1)!}(x-x_0)^{n+1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.501em;vertical-align:-0.936em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.565em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">1</span><span class="mclose">)!</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.888em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight">n</span><span class="mbin mtight">+</span><span class="mord mtight">1</span><span class="mclose mtight">)</span></span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.046em;">ξ</span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.0641em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span> 才能估误差、证不等式。</p>
+
+      </article>
+      <article class="three">
+        <h3>拉格朗日中值定理</h3>
+        <p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span></span></span></span> 在 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">[</mo><mi>a</mi><mo separator="true">,</mo><mi>b</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[a,b]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord mathnormal">a</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">b</span><span class="mclose">]</span></span></span></span> 连续、<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>a</mi><mo separator="true">,</mo><mi>b</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(a,b)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal">a</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">b</span><span class="mclose">)</span></span></span></span> 内可导，则存在 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ξ</mi><mo>∈</mo><mo stretchy="false">(</mo><mi>a</mi><mo separator="true">,</mo><mi>b</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\xi\in(a,b)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.046em;">ξ</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal">a</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">b</span><span class="mclose">)</span></span></span></span>：</p>
+<p><span class="math-display"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>f</mi><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo><mo>−</mo><mi>f</mi><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo><mo>=</mo><msup><mi>f</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo stretchy="false">(</mo><mi>ξ</mi><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mi>b</mi><mo>−</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">f(b)-f(a)=f&#x27;(\xi)(b-a)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mopen">(</span><span class="mord mathnormal">b</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mopen">(</span><span class="mord mathnormal">a</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.0519em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8019em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.046em;">ξ</span><span class="mclose">)</span><span class="mopen">(</span><span class="mord mathnormal">b</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">a</span><span class="mclose">)</span></span></span></span></span></span></p>
+<p>条件缺一不可。见到 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>f</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup></mrow><annotation encoding="application/x-tex">f&#x27;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9463em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7519em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span></span> 与 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span></span></span></span> 同时出现，试乘 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>e</mi><mrow><mi>λ</mi><mi>x</mi></mrow></msup></mrow><annotation encoding="application/x-tex">e^{\lambda x}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8491em;"></span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">λ</span><span class="mord mathnormal mtight">x</span></span></span></span></span></span></span></span></span></span></span></span> 造辅助函数。</p>
+
+      </article>
+      <article class="three">
+        <h3>线性相关</h3>
+        <p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>α</mi><mn>1</mn></msub><mo separator="true">,</mo><mo>…</mo><mo separator="true">,</mo><msub><mi>α</mi><mi>s</mi></msub></mrow><annotation encoding="application/x-tex">\alpha_1,\dots,\alpha_s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0037em;">α</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0037em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner">…</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0037em;">α</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0037em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">s</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> <strong>线性相关</strong>，就是存在不全为零的 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>k</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">k_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0315em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0315em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 使 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∑</mo><msub><mi>k</mi><mi>i</mi></msub><msub><mi>α</mi><mi>i</mi></msub><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\sum k_i\alpha_i=0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop op-symbol small-op" style="position:relative;top:0em;">∑</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0315em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0315em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0037em;">α</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0037em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span>。</p>
+<p>等价说法：某个向量可由其余表示；向量个数大于维数；含零向量。换成方程组，就是齐次方程有非零解。</p>
+
+      </article>
     </div>
-    <ul class="checker__chips" aria-label="试试这些">
-      <li><button type="button" data-try="泰勒公式">泰勒公式</button></li><li><button type="button" data-try="极值">极值</button></li><li><button type="button" data-try="向量组的秩">向量组的秩</button></li><li><button type="button" data-try="行列式">行列式</button></li><li><button type="button" data-try="一致连续">一致连续</button></li>
-    </ul>
-    <ul class="spine">
-      
-        <li class="spine__row" data-chapter="va1-1" data-state="in">
-          <a href="va1/">
-            <span class="spine__name">数列极限</span>
-            <span class="spine__fact">
-              <b>在范围内</b>
-              微积分 · 第 1 章
-            </span>
-          </a>
-        </li>
-        <li class="spine__row" data-chapter="va1-2" data-state="in">
-          <a href="va1/">
-            <span class="spine__name">函数极限</span>
-            <span class="spine__fact">
-              <b>在范围内</b>
-              微积分 · 第 2 章
-            </span>
-          </a>
-        </li>
-        <li class="spine__row" data-chapter="va1-3" data-state="in">
-          <a href="va1/">
-            <span class="spine__name">导数</span>
-            <span class="spine__fact">
-              <b>在范围内</b>
-              微积分 · 第 3 章
-            </span>
-          </a>
-        </li>
-        <li class="spine__row" data-chapter="va1-4" data-state="in">
-          <a href="va1/">
-            <span class="spine__name">中值定理与泰勒</span>
-            <span class="spine__fact">
-              <b>在范围内</b>
-              微积分 · 第 4 章
-            </span>
-          </a>
-        </li>
-        <li class="spine__row is-out" data-chapter="va1-5" data-state="out">
-          <a href="va1/#ch-va1-5">
-            <span class="spine__name">黎曼积分</span>
-            <span class="spine__fact">
-              <b>期中之后</b>
-              微积分 · 第 5 章
-            </span>
-          </a>
-        </li>
-        <li class="spine__row is-out" data-chapter="va1-6" data-state="out">
-          <a href="va1/#ch-va1-6">
-            <span class="spine__name">广义积分</span>
-            <span class="spine__fact">
-              <b>期中之后</b>
-              微积分 · 第 6 章
-            </span>
-          </a>
-        </li>
-        <li class="spine__row is-out" data-chapter="va1-7" data-state="out">
-          <a href="va1/#ch-va1-7">
-            <span class="spine__name">常微分方程</span>
-            <span class="spine__fact">
-              <b>期中之后</b>
-              微积分 · 第 7 章
-            </span>
-          </a>
-        </li>
-        <li class="spine__row" data-chapter="la-1" data-state="in">
-          <a href="la/">
-            <span class="spine__name">行列式</span>
-            <span class="spine__fact">
-              <b>在范围内</b>
-              线代 · 第 1 章
-            </span>
-          </a>
-        </li>
-        <li class="spine__row" data-chapter="la-2" data-state="in">
-          <a href="la/">
-            <span class="spine__name">矩阵</span>
-            <span class="spine__fact">
-              <b>在范围内</b>
-              线代 · 第 2 章
-            </span>
-          </a>
-        </li>
-        <li class="spine__row" data-chapter="la-3" data-state="in">
-          <a href="la/">
-            <span class="spine__name">向量空间</span>
-            <span class="spine__fact">
-              <b>在范围内</b>
-              线代 · 第 3 章
-            </span>
-          </a>
-        </li>
-        <li class="spine__row is-out" data-chapter="la-4" data-state="out">
-          <a href="la/#ch-la-4">
-            <span class="spine__name">秩与解的结构</span>
-            <span class="spine__fact">
-              <b>期中之后</b>
-              线代 · 第 4 章
-            </span>
-          </a>
-        </li>
-    </ul>
-    <div class="checker__verdict" id="scope-verdict" aria-live="polite">这条脊就是考纲。输入一个词，看它落在哪一章、考不考。</div>
-    <div class="scope__foot">
-      <span>灰掉的 4 章期中不考，期末会补上。</span>
-      <span><a href="va1/">微积分 A1 的完整考纲</a> · <a href="la/">线性代数的完整考纲</a></span>
-    </div>
+    <p class="more"><a href="cheatsheet/">打开速查表 →</a></p>
   </div>
 </section>
 
-<section class="split field-red section">
-  <div class="frame">
-    <div class="split__figure">
-      <div class="split__plate" id="plate">
-        <img src="assets/photos/principia.jpg" width="1050" height="1450" alt="牛顿《自然哲学的数学原理》1687 年初版扉页" loading="lazy" decoding="async">
-        <div class="split__ring" id="ring" aria-hidden="true"></div>
-      </div>
-      <p class="split__caption">牛顿《自然哲学的数学原理》1687 年初版扉页，公有领域。微积分从这一页开始，你的期中停在 4.3 节。</p>
-    </div>
-    <div class="split__body">
-      <div class="split__tabs" role="tablist" aria-label="三条常用结论">
-        <button type="button" role="tab" aria-selected="true" aria-controls="tab-1" id="tabbtn-1">泰勒公式</button>
-        <button type="button" role="tab" aria-selected="false" aria-controls="tab-2" id="tabbtn-2">拉格朗日</button>
-        <button type="button" role="tab" aria-selected="false" aria-controls="tab-3" id="tabbtn-3">洛必达</button>
-      </div>
-      <h2 class="split__title">你真正要背的是这三行</h2>
-      <div class="split__panel" role="tabpanel" id="tab-1" aria-labelledby="tabbtn-1"><p><strong>若 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span></span></span></span> 在 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">x_0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 处 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span> 阶可导</strong>，则</p>
-<p><span class="math-display"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><msub><mi>T</mi><mi>n</mi></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>+</mo><mi>o</mi><mo fence="false" stretchy="true" minsize="1.2em" maxsize="1.2em">(</mo><mo stretchy="false">(</mo><mi>x</mi><mo>−</mo><msub><mi>x</mi><mn>0</mn></msub><msup><mo stretchy="false">)</mo><mi>n</mi></msup><mo fence="false" stretchy="true" minsize="1.2em" maxsize="1.2em">)</mo><mo separator="true">,</mo><mspace width="2em"/><msub><mi>T</mi><mi>n</mi></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>0</mn></mrow><mi>n</mi></munderover><mstyle scriptlevel="0" displaystyle="true"><mfrac><mrow><msup><mi>f</mi><mrow><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow></msup><mo stretchy="false">(</mo><msub><mi>x</mi><mn>0</mn></msub><mo stretchy="false">)</mo></mrow><mrow><mi>k</mi><mo stretchy="false">!</mo></mrow></mfrac></mstyle><mo stretchy="false">(</mo><mi>x</mi><mo>−</mo><msub><mi>x</mi><mn>0</mn></msub><msup><mo stretchy="false">)</mo><mi>k</mi></msup></mrow><annotation encoding="application/x-tex">f(x)=T_n(x)+o\big((x-x_0)^n\big),\qquad T_n(x)=\sum_{k=0}^{n}\dfrac{f^{(k)}(x_0)}{k!}(x-x_0)^k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.1389em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.2em;vertical-align:-0.35em;"></span><span class="mord mathnormal">o</span><span class="mord"><span class="delimsizing size1">(</span></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.2em;vertical-align:-0.35em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7144em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span><span class="mord"><span class="delimsizing size1">)</span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:2em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.1389em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.9535em;vertical-align:-1.3021em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.6514em;"><span style="top:-1.8479em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.0315em;">k</span><span class="mrel mtight">=</span><span class="mord mtight">0</span></span></span></span><span style="top:-3.05em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.3em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.3021em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.565em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0315em;">k</span><span class="mclose">!</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.888em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.0315em;">k</span><span class="mclose mtight">)</span></span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.1491em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8991em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0315em;">k</span></span></span></span></span></span></span></span></span></span></span></span></span></p>
-<p>这是<strong>皮亚诺余项</strong>：只要求 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span> 阶导数存在，用来算极限。</p>
-<p>要<strong>估计误差</strong>，需要 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span></span></span></span> 在区间上有 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n+1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span> 阶导数，余项换成拉格朗日形式</p>
-<p><span class="math-display"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>R</mi><mi>n</mi></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mstyle scriptlevel="0" displaystyle="true"><mfrac><mrow><msup><mi>f</mi><mrow><mo stretchy="false">(</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></msup><mo stretchy="false">(</mo><mi>ξ</mi><mo stretchy="false">)</mo></mrow><mrow><mo stretchy="false">(</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo><mo stretchy="false">!</mo></mrow></mfrac></mstyle><mo stretchy="false">(</mo><mi>x</mi><mo>−</mo><msub><mi>x</mi><mn>0</mn></msub><msup><mo stretchy="false">)</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">R_n(x)=\dfrac{f^{(n+1)}(\xi)}{(n+1)!}(x-x_0)^{n+1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0077em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.501em;vertical-align:-0.936em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.565em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">1</span><span class="mclose">)!</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.888em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight">n</span><span class="mbin mtight">+</span><span class="mord mtight">1</span><span class="mclose mtight">)</span></span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.046em;">ξ</span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.1141em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span></span></span></p>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ξ</mi></mrow><annotation encoding="application/x-tex">\xi</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.046em;">ξ</span></span></span></span> 介于 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">x_0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 与 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span></span></span></span> 之间。考试里「证明不等式」几乎都用这一条。</p>
-</div>
-      <div class="split__panel" role="tabpanel" id="tab-2" aria-labelledby="tabbtn-2" hidden><p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span></span></span></span> 在 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">[</mo><mi>a</mi><mo separator="true">,</mo><mi>b</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[a,b]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord mathnormal">a</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">b</span><span class="mclose">]</span></span></span></span> 连续、<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>a</mi><mo separator="true">,</mo><mi>b</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(a,b)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal">a</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">b</span><span class="mclose">)</span></span></span></span> 内可导，则存在 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ξ</mi><mo>∈</mo><mo stretchy="false">(</mo><mi>a</mi><mo separator="true">,</mo><mi>b</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\xi\in(a,b)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.046em;">ξ</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal">a</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">b</span><span class="mclose">)</span></span></span></span> 使</p>
-<p><span class="math-display"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>f</mi><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo><mo>−</mo><mi>f</mi><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo><mo>=</mo><msup><mi>f</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo stretchy="false">(</mo><mi>ξ</mi><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mi>b</mi><mo>−</mo><mi>a</mi><mo stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">f(b)-f(a)=f&#x27;(\xi)(b-a).</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mopen">(</span><span class="mord mathnormal">b</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mopen">(</span><span class="mord mathnormal">a</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.0519em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8019em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.046em;">ξ</span><span class="mclose">)</span><span class="mopen">(</span><span class="mord mathnormal">b</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">a</span><span class="mclose">)</span><span class="mord">.</span></span></span></span></span></span></p>
-<p>条件里<strong>端点连续、内部可导</strong>缺一不可。用到它的题九成要先造辅助函数：见到 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>f</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup></mrow><annotation encoding="application/x-tex">f&#x27;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9463em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7519em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span></span> 与 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span></span></span></span> 同时出现，试乘 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>e</mi><mrow><mi>λ</mi><mi>x</mi></mrow></msup></mrow><annotation encoding="application/x-tex">e^{\lambda x}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8491em;"></span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">λ</span><span class="mord mathnormal mtight">x</span></span></span></span></span></span></span></span></span></span></span></span>；见到两个函数之差，作差之后对差用罗尔。</p>
-</div>
-      <div class="split__panel" role="tabpanel" id="tab-3" aria-labelledby="tabbtn-3" hidden><p>只有 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle scriptlevel="0" displaystyle="true"><mfrac><mn>0</mn><mn>0</mn></mfrac></mstyle></mrow><annotation encoding="application/x-tex">\dfrac{0}{0}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.0074em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span> 与 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle scriptlevel="0" displaystyle="true"><mfrac><mi mathvariant="normal">∞</mi><mi mathvariant="normal">∞</mi></mfrac></mstyle></mrow><annotation encoding="application/x-tex">\dfrac{\infty}{\infty}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.7936em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.1076em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">∞</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">∞</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span> 两种未定式可以直接用。用之前确认三件事：分子分母都可导、分母导数不为零、<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>lim</mi><mo>⁡</mo><mstyle scriptlevel="0" displaystyle="true"><mfrac><msup><mi>f</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><msup><mi>g</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup></mfrac></mstyle></mrow><annotation encoding="application/x-tex">\lim\dfrac{f&#x27;}{g&#x27;}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.3093em;vertical-align:-0.8804em;"></span><span class="mop">lim</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.4289em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">g</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6779em;"><span style="top:-2.989em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7519em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.8804em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span> 存在（或为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∞</mi></mrow><annotation encoding="application/x-tex">\infty</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord">∞</span></span></span></span>）。</p>
-<p>失效的典型：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><munder><mrow><mi>lim</mi><mo>⁡</mo></mrow><mrow><mi>x</mi><mo>→</mo><mi mathvariant="normal">∞</mi></mrow></munder><mstyle scriptlevel="0" displaystyle="true"><mfrac><mrow><mi>x</mi><mo>+</mo><mi>sin</mi><mo>⁡</mo><mi>x</mi></mrow><mi>x</mi></mfrac></mstyle></mrow><annotation encoding="application/x-tex">\lim\limits_{x\to\infty}\dfrac{x+\sin x}{x}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.0449em;vertical-align:-0.7em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6944em;"><span style="top:-2.4em;margin-left:0em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">x</span><span class="mrel mtight">→</span><span class="mord mtight">∞</span></span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mop">lim</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3449em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">x</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mop">sin</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">x</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>，求导后 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>+</mo><mi>cos</mi><mo>⁡</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">1+\cos x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mop">cos</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">x</span></span></span></span> 没有极限，可原极限是 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span>，这时用夹逼或直接除以 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span></span></span></span>。</p>
-</div>
-      <div class="split__actions">
-        <a href="notes/va1-4.html"><span>读第 4 章要点</span><span aria-hidden="true">→</span></a>
-        <a href="questions/?chapter=va1-4"><span>做这一章的题</span><span aria-hidden="true">→</span></a>
-      </div>
-    </div>
+<section class="frame section--tight">
+  <div class="rule-head">
+    <h2>投稿</h2>
+    <p>你出的题也可以在这里。写完是 issue，管理员合并后就变成题库里的一个文件。</p>
   </div>
+  <ol class="flow">
+    <li><b>写</b><span>Markdown + 公式，题面、提示、解析分开写</span></li>
+    <li><b>提</b><span>投稿页实时预览，一键开 GitHub issue 或下载 .md</span></li>
+    <li><b>归档</b><span>合并后自动进题库、标签页和对应章节</span></li>
+  </ol>
+  <p class="more"><a class="btn" href="submit/">去投稿</a></p>
 </section>
 
-<section class="section frame">
-  <div class="materials">
+<section class="frame section--tight">
+  <div class="materials materials--slim">
     <div class="materials__head">
-      <h2>这一册的材料</h2>
-      <p>考的东西都有出处。壳子里翻出来的几页纸，比任何一句「数学很美」都合适。</p>
+      <h2>材料</h2>
+      <p>考的东西都有出处。四张纸，配着这个站点的调子。</p>
     </div>
     <div class="materials__strip">
       <figure class="materials__item">
-        <img src="assets/photos/arithmetic.jpg" width="900" height="1220" alt="十八世纪的一页算术手稿，写满算式与批注" loading="lazy" decoding="async">
-        <figcaption>一页十八世纪的算术手稿，公有领域。你的卷面跟它隔了三百年，题型其实没怎么变。</figcaption>
+        <img src="assets/photos/arithmetic.jpg" width="900" height="1220" alt="十八世纪的一页算术手稿" loading="lazy" decoding="async">
+        <figcaption>十八世纪算术手稿</figcaption>
       </figure>
       <figure class="materials__item">
         <img src="assets/photos/euler.jpg" width="1000" height="1320" alt="欧拉《无穷小分析引论》1748 年初版扉页" loading="lazy" decoding="async">
-        <figcaption>欧拉《无穷小分析引论》1748 年初版扉页，公有领域。极限和无穷小的语言从这里长出来。</figcaption>
+        <figcaption>欧拉《无穷小分析引论》1748</figcaption>
       </figure>
       <figure class="materials__item">
-        <img src="assets/photos/slide-rule.jpg" width="1400" height="840" alt="一把木制计算尺的特写" loading="lazy" decoding="async">
-        <figcaption>计算尺，Jacek Halicki 摄，CC BY-SA 4.0。没有计算器的年代，近似值与误差就是这么算的。</figcaption>
+        <img src="assets/photos/slide-rule.jpg" width="1400" height="840" alt="一把木制计算尺" loading="lazy" decoding="async">
+        <figcaption>计算尺</figcaption>
       </figure>
       <figure class="materials__item">
         <img src="assets/photos/chalkboard.jpg" width="1400" height="788" alt="黑板上写着绝对值不等式的例子" loading="lazy" decoding="async">
-        <figcaption>黑板上的绝对值例子，Manuelzapata04 摄，CC BY-SA 4.0。习题课上最常见的那种一行推导。</figcaption>
+        <figcaption>黑板上的绝对值例子</figcaption>
       </figure>
     </div>
   </div>
+  <p class="more"><a href="about/">出处与许可、常见问题 →</a></p>
 </section>
 
-<section class="section frame">
-  <div class="steps">
-    <div class="steps__intro">
-      <h2>一题怎么进来</h2>
-      <p>题目不是写死在页面里的。它先是一个 Markdown 文件，再是一个 issue，最后才变成你看到的这一页。</p>
-    </div>
-    <article class="step step--1">
-      <div class="step__plate">
-        <pre class="step__art"><code>---
-course: va1
-chapter: va1-4
-tags: [泰勒公式]
-difficulty: 2
-answer: $-\dfrac{1}{3}$
----
-求极限……</code></pre>
-      </div>
-      <h3 class="step__name">写成文件</h3>
-      <p class="step__text">一道题一个 Markdown 文件。开头几行写清章节、标签、难度和答案，正文就是题面和解析。</p>
-    </article>
-    <article class="step step--2">
-      <div class="step__plate">
-        <pre class="step__art"><code>[题目投稿] 泰勒公式求极限
-
-课程  微积分 A1
-章节  导数应用
-难度  2 / 4
-标签  泰勒公式 · 极限计算
-
-题面  \( ... \)
-解析  \( ... \)
-
-label: question-submission</code></pre>
-      </div>
-      <h3 class="step__name">提成 issue</h3>
-      <p class="step__text">投稿页把这些填好，一键打开 GitHub 的 issue 表单；也可以下载 .md 直接交给管理员。</p>
-    </article>
-    <article class="step step--3">
-      <div class="step__plate">
-        <pre class="step__art"><code>content/
-  questions/
-    va1/
-      va1-001.md
-      va1-002.md
-      …
-    la/
-      la-001.md
-      …
-  notes/
-    va1/va1-4.md
-
-合并后自动出现在：
-  题库 / 标签页 / 第 4 章</code></pre>
-      </div>
-      <h3 class="step__name">归档进去</h3>
-      <p class="step__text">管理员合并后重新构建，题目进入题库、标签页和对应章节，范围和统计一起更新。</p>
-    </article>
-  </div>
-</section>
-
-<section class="section field-paper2" id="faq">
-  <div class="frame">
-    <div class="faq">
-      <div class="faq__head">
-        <h2>常见问题</h2>
-        <p>关于范围、题目来源和投稿，你大概会先问这几件事。</p>
-      </div>
-      <div class="faq__list">
-        <details class="faq__item" name="faq">
-          <summary>期中范围以哪个为准？<span class="plus" aria-hidden="true"></span></summary>
-          <div class="faq__answer">以任课教师的正式通知为准。本站按课本目录整理：微积分 A1 到 4.3 节「泰勒公式」（含），线性代数到第三章向量组的秩之前。如果你手上的通知与此不同，以通知为准。</div>
-        </details>
-        <details class="faq__item" name="faq">
-          <summary>这 100 道题是哪来的？<span class="plus" aria-hidden="true"></span></summary>
-          <div class="faq__answer">全部自编，格式与难度参考 2019–2025 历年期中卷与 2026 期中样卷；题目标注了章节、考点、难度和题型，但不整题抄录真题。历年卷只在「真题」页做考点索引。</div>
-        </details>
-        <details class="faq__item" name="faq">
-          <summary>为什么有些章节是灰的？<span class="plus" aria-hidden="true"></span></summary>
-          <div class="faq__answer">灰掉的是期中之后才考的内容。这门课的后半学期还有积分、常微分方程和向量组的秩、特征值，等期末那一版会补上颜色。</div>
-        </details>
-        <details class="faq__item" name="faq">
-          <summary>解析会不会直接剧透？<span class="plus" aria-hidden="true"></span></summary>
-          <div class="faq__answer">解析默认收起，提示也只是一句话的抓手，先自己做一遍再展开。每道题最后还写了一条最常见的错法。</div>
-        </details>
-        <details class="faq__item" name="faq">
-          <summary>投稿要写什么格式？<span class="plus" aria-hidden="true"></span></summary>
-          <div class="faq__answer">Markdown，公式用 \( \) 和 \[ \]。投稿页有实时预览，写的时候就能看到排版结果，也会顺手生成 frontmatter 和文件名。</div>
-        </details>
-        <details class="faq__item" name="faq">
-          <summary>题目合并之后会怎样？<span class="plus" aria-hidden="true"></span></summary>
-          <div class="faq__answer">它会变成 content/questions/ 下的一个文件，出现在题库、对应的标签页和所属章节里，页脚的门类统计也会跟着变。</div>
-        </details>
-        <details class="faq__item" name="faq">
-          <summary>能打印成纸吗？<span class="plus" aria-hidden="true"></span></summary>
-          <div class="faq__answer">能。每道题和每篇要点都做了打印样式，直接 Ctrl+P 就是一页干净的题纸，解析会跟在题面后面。</div>
-        </details>
-      </div>
-    </div>
-  </div>
-</section>
-
-<a class="band" href="questions/">
-  <svg class="band__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 18 18 6M18 6H8M18 6v10"/></svg>
+<a class="band band--slim" href="questions/">
   <span class="band__word">开始</span>
-  <span class="band__note">一百道题，从哪一道开始都行。先自己做，再看解析。</span>
+  <span class="band__note">100 道题，从哪一道开始都行。先自己做，再看解析。</span>
+  <svg class="band__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 18 18 6M18 6H8M18 6v10"/></svg>
 </a>
 
 </main>
@@ -425,6 +390,7 @@ label: question-submission</code></pre>
       </div>
     </div>
   </footer>
+<script src="./assets/progress.js" defer></script>
 <script src="./assets/site.js" defer></script>
 
 </body>

@@ -35,6 +35,8 @@
     '.tagcloud a',
     '.practice__filters > *',
     '.callout',
+    '.sheet__body h2',
+    '.sheet__body h3',
   ]
 
   // 长列表只给前若干行做入场，其余直接显示，避免整页一起变成 invisible
@@ -128,12 +130,61 @@
     })
   }
 
+  /* ---------------------------------------------------------------- 题目页：展开、复制、键盘翻页 */
+
+  const pager = document.querySelector('[data-pager]')
+  if (pager) {
+    const details = Array.from(document.querySelectorAll('.qblock'))
+    const expandBtn = document.getElementById('expand-all')
+    if (expandBtn && details.length) {
+      let open = false
+      expandBtn.addEventListener('click', () => {
+        open = !open
+        for (const d of details) d.open = open
+        expandBtn.textContent = open ? '收起解析与提示' : '展开解析与提示'
+      })
+    }
+
+    const copyBtn = document.getElementById('copy-md')
+    if (copyBtn) {
+      copyBtn.addEventListener('click', async () => {
+        const stem = document.querySelector('.qpage__stem')
+        const solution = document.querySelector('#solution .qblock__body')
+        const title = document.querySelector('.qpage__title')?.textContent || ''
+        const text = `${title}\n\n${stem ? stem.innerText.trim() : ''}\n\n—— 解析 ——\n${solution ? solution.innerText.trim() : ''}\n\n（来自复习册 ${location.href}）`
+        try {
+          await navigator.clipboard.writeText(text)
+          copyBtn.textContent = '已复制'
+          setTimeout(() => (copyBtn.textContent = '复制题目'), 1600)
+        } catch {
+          copyBtn.textContent = '复制失败'
+          setTimeout(() => (copyBtn.textContent = '复制题目'), 1600)
+        }
+      })
+    }
+
+    document.addEventListener('keydown', (ev) => {
+      const t2 = ev.target
+      if (t2 instanceof Element && t2.matches('input, textarea, select')) return
+      const prev = pager.querySelector('.pager__prev[href]')
+      const next = pager.querySelector('.pager__next[href]')
+      if (ev.key === 'ArrowLeft' && prev) location.href = prev.getAttribute('href')
+      else if (ev.key === 'ArrowRight' && next) location.href = next.getAttribute('href')
+      else if (ev.key === 'e' || ev.key === 'E') {
+        const s = document.getElementById('solution')
+        if (s) s.open = !s.open
+      } else if (ev.key === 'd' || ev.key === 'D') {
+        document.querySelector('.qactions [data-flag="done"]')?.click()
+      }
+    })
+  }
+
   /* ---------------------------------------------------------------- 考纲判定器 */
 
   const input = $('#scope-input')
   const verdict = $('#scope-verdict')
   const clearBtn = $('#scope-clear')
-  const rows = $$('.spine__row')
+  const rows = $$('.spine__row').length ? $$('.spine__row') : $$('.range tr[data-chapter]')
 
   if (input && verdict) {
     const scopeUrl = document.documentElement.dataset.scope || 'data/scope.json'
@@ -237,8 +288,12 @@
       chapter: $('#f-chapter'),
       tag: $('#f-tag'),
       difficulty: $('#f-difficulty'),
+      status: $('#f-status'),
+      sort: $('#f-sort'),
       q: $('#f-q'),
     }
+    const list = $('#qlist')
+    const order = new Map(items.map((el, i) => [el, i]))
 
     const readQuery = () => {
       const p = new URLSearchParams(location.search)
@@ -247,28 +302,58 @@
       if (p.get('tag') && sel.tag) sel.tag.value = p.get('tag')
       if (p.get('difficulty') && sel.difficulty) sel.difficulty.value = p.get('difficulty')
       if (p.get('q') && sel.q) sel.q.value = p.get('q')
+      if (p.get('status') && sel.status) sel.status.value = p.get('status')
     }
 
+    const P = window.ReviewProgress
     const run = () => {
       const course = sel.course?.value || ''
       const chapter = sel.chapter?.value || ''
       const tag = sel.tag?.value || ''
       const difficulty = sel.difficulty?.value || ''
+      const status = sel.status?.value || ''
       const q = (sel.q?.value || '').trim().toLowerCase()
       let shown = 0
       for (const item of items) {
+        const id = item.dataset.id || ''
+        const done = P ? P.isDone(id) : false
+        const fav = P ? P.isFav(id) : false
+        item.classList.toggle('is-done', done)
         const ok =
           (!course || item.dataset.course === course) &&
           (!chapter || item.dataset.chapter === chapter) &&
           (!difficulty || item.dataset.difficulty === difficulty) &&
           (!tag || (item.dataset.tags || '').split(' ').includes(tag)) &&
+          (!status || (status === 'done' ? done : status === 'undone' ? !done : fav)) &&
           (!q || (item.dataset.text || '').toLowerCase().includes(q))
         item.hidden = !ok
         if (ok) shown += 1
       }
       if (countEl) countEl.textContent = String(shown)
       if (emptyEl) emptyEl.hidden = shown !== 0
+
+      // 排序
+      const sort = sel.sort?.value || 'chapter'
+      if (list) {
+        const sorted = items.slice().sort((a, b) => {
+          if (sort === 'easy') return Number(a.dataset.difficulty) - Number(b.dataset.difficulty) || order.get(a) - order.get(b)
+          if (sort === 'hard') return Number(b.dataset.difficulty) - Number(a.dataset.difficulty) || order.get(a) - order.get(b)
+          return order.get(a) - order.get(b)
+        })
+        for (const el of sorted) list.appendChild(el)
+      }
     }
+
+    // 进度变了（在别的行点过）就重算：状态筛选要跟着变
+    document.addEventListener('progress:change', run)
+
+    // 按 / 直接搜索
+    document.addEventListener('keydown', (ev) => {
+      const t = ev.target
+      if (ev.key !== '/' || (t instanceof Element && t.matches('input, textarea, select'))) return
+      ev.preventDefault()
+      sel.q?.focus()
+    })
 
     readQuery()
     for (const el of Object.values(sel)) {

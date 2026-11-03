@@ -27,6 +27,8 @@
           <li><a href="../va1/">微积分 A1</a></li>
           <li><a href="../la/">线性代数</a></li>
           <li><a href="../questions/" aria-current="page">题库</a></li>
+          <li><a href="../practice/">刷题</a></li>
+          <li><a href="../cheatsheet/">速查</a></li>
           <li><a href="../papers/">真题</a></li>
           <li><a class="btn btn--red" href="../submit/">投稿</a></li>
         </ul>
@@ -65,12 +67,15 @@
         <div class="field"><label for="p-difficulty">难度</label>
           <select id="p-difficulty"><option value="">全部</option><option value="1">1 基础</option><option value="2">2 常规</option><option value="3">3 综合</option><option value="4">4 挑战</option></select>
         </div>
+        <div class="field"><label for="p-status">状态</label>
+          <select id="p-status"><option value="">全部</option><option value="undone">还没做</option><option value="fav">收藏的</option></select>
+        </div>
         <div class="field"><label for="p-order">顺序</label>
           <select id="p-order"><option value="random">随机</option><option value="sequence">按题号</option></select>
         </div>
         <button class="btn btn--tone" id="p-apply" type="button">重新抽题</button>
       </div>
-      <div class="callout"><b>键盘</b>空格 看解析 / 回车 下一题。</div>
+      <div class="callout"><b>键盘</b>空格 看解析 / 回车 下一题。<br><span data-progress-total="100">0 / 100</span> 已做 · 看解析时自动记上。</div>
     </aside>
   </div>
 </div>
@@ -120,6 +125,7 @@
       </div>
     </div>
   </footer>
+<script src="../assets/progress.js" defer></script>
 <script src="../assets/site.js" defer></script>
 
 </body>

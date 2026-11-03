@@ -5,6 +5,7 @@ import yaml from 'js-yaml'
 import { stripMath } from './markdown.mjs'
 
 import { page, write, url, esc, attr, stateLabel, dots, tagHref, stemExcerpt } from './layout.mjs'
+import { buildHome } from './home.mjs'
 
 /* ==========================================================================
    复习册 · 页面生成
@@ -21,6 +22,7 @@ export async function buildSite(ctx) {
   buildQuestionIndex(ctx)
   buildQuestionPages(ctx)
   buildTagPages(ctx)
+  buildCheatsheet(ctx)
   buildPapers(ctx)
   buildPractice(ctx)
   buildSubmit(ctx)
@@ -80,294 +82,6 @@ function prepare(ctx) {
 }
 
 /* ---------------------------------------------------------------- 首页 */
-
-function buildHome(ctx) {
-  const { config, courses, chapterById, questions, stats } = ctx
-
-  const spineRows = []
-  for (const c of courses) {
-    for (const ch of c.chapters) {
-      const isOut = ch.state === 'out'
-      const href =
-        ch.state === 'in' || ch.state === 'boundary'
-          ? ch.note
-            ? url(0, `notes/${ch.id}.html`)
-            : url(0, `${c.id}/`)
-          : url(0, `${c.id}/#ch-${ch.id}`)
-      spineRows.push(`
-        <li class="spine__row${isOut ? ' is-out' : ''}" data-chapter="${ch.id}" data-state="${ch.state}">
-          <a href="${href}">
-            <span class="spine__name">${esc(shortTitle(ch))}</span>
-            <span class="spine__fact">
-              <b>${stateLabel(ch.state)}</b>
-              ${esc(c.short)} · 第 ${esc(ch.no)} 章${ch.count ? ` · ${ch.count} 题` : ''}
-            </span>
-          </a>
-        </li>`)
-    }
-  }
-
-  const taylorPanel = `**若 \\(f\\) 在 \\(x_0\\) 处 \\(n\\) 阶可导**，则
-
-\\[f(x)=T_n(x)+o\\big((x-x_0)^n\\big),\\qquad T_n(x)=\\sum_{k=0}^{n}\\dfrac{f^{(k)}(x_0)}{k!}(x-x_0)^k\\]
-
-这是**皮亚诺余项**：只要求 \\(n\\) 阶导数存在，用来算极限。
-
-要**估计误差**，需要 \\(f\\) 在区间上有 \\(n+1\\) 阶导数，余项换成拉格朗日形式
-
-\\[R_n(x)=\\dfrac{f^{(n+1)}(\\xi)}{(n+1)!}(x-x_0)^{n+1}\\]
-
-\\(\\xi\\) 介于 \\(x_0\\) 与 \\(x\\) 之间。考试里「证明不等式」几乎都用这一条。`
-
-  const lagrangePanel = `\\(f\\) 在 \\([a,b]\\) 连续、\\((a,b)\\) 内可导，则存在 \\(\\xi\\in(a,b)\\) 使
-
-\\[f(b)-f(a)=f'(\\xi)(b-a).\\]
-
-条件里**端点连续、内部可导**缺一不可。用到它的题九成要先造辅助函数：见到 \\(f'\\) 与 \\(f\\) 同时出现，试乘 \\(e^{\\lambda x}\\)；见到两个函数之差，作差之后对差用罗尔。`
-
-  const lhopitalPanel = `只有 \\(\\dfrac{0}{0}\\) 与 \\(\\dfrac{\\infty}{\\infty}\\) 两种未定式可以直接用。用之前确认三件事：分子分母都可导、分母导数不为零、\\(\\lim\\dfrac{f'}{g'}\\) 存在（或为 \\(\\infty\\)）。
-
-失效的典型：\\(\\lim\\limits_{x\\to\\infty}\\dfrac{x+\\sin x}{x}\\)，求导后 \\(1+\\cos x\\) 没有极限，可原极限是 \\(1\\)，这时用夹逼或直接除以 \\(x\\)。`
-
-  const body = `
-<section class="hero">
-  <div class="hero__discs">
-    <i class="disc disc--red" aria-hidden="true"></i>
-    <i class="disc disc--indigo" aria-hidden="true"></i>
-  </div>
-  <div class="frame hero__inner">
-    <div class="hero__copy">
-      <h1 class="hero__title">期中要考的<br>都在这里</h1>
-      <p class="hero__lead">这是一个期中复习站：微积分 A1 考到 4.3 节泰勒公式为止，线性代数考到向量组的秩之前。两门课的讲义要点、${stats.questions} 道自编题与逐题解析，都在这一册里。</p>
-      <div class="hero__act">
-        <a class="btn btn--red" href="#scope">从范围开始</a>
-        <a href="${url(0, 'questions/')}">直接做题 →</a>
-        <span class="hero__note">${stats.questions} 道题 · ${stats.notes} 篇要点 · ${ctx.papers.length} 套真题索引</span>
-      </div>
-    </div>
-    <dl class="hero__legend">
-      <div>
-        <dt>微积分 A1</dt>
-        <dd>第 1 章 – 4.3 节</dd>
-      </div>
-      <div>
-        <dt>线性代数</dt>
-        <dd>第 1 章 – 向量组的秩之前</dd>
-      </div>
-    </dl>
-  </div>
-</section>
-
-<section class="board frame">
-  <div class="board__mosaic">
-    <div class="tile tile--slogan">
-      <p>两门课<br>一张考纲</p>
-    </div>
-    <div class="tile tile--figure">
-      <span>道题，全带解析</span>
-      <b>${stats.questions}</b>
-    </div>
-    <div class="tile tile--photo">
-      <img src="${url(0, 'assets/photos/taylor.jpg')}" width="1000" height="1000" alt="Brook Taylor 的铜版画像，下方是他的手写签名" loading="lazy" decoding="async">
-    </div>
-  </div>
-  <div class="board__text">
-    <div>
-      <p>这不是一份笔记合集。范围先画出来：微积分停在 4.3 节泰勒公式，线性代数停在向量组的秩之前。线以内的章节有要点、有题；线以外的章节灰着，等期末再补。</p>
-      <p>每一道题是一个 Markdown 文件，带标签、难度和完整解析，改一个文件就能改一道题。图片是 Brook Taylor 的铜版像——他的公式正好是这次期中的终点。</p>
-    </div>
-  </div>
-</section>
-
-<section class="scope field-ink section" id="scope">
-  <div class="frame">
-    <div class="scope__head">
-      <h2>范围</h2>
-      <p>期中不是「整本书」，是一条线。下面这条脊是两门课的全部章节，颜色停在考纲的边界上。</p>
-    </div>
-    <div class="checker">
-      <label class="sr-only" for="scope-input">查一个知识点考不考</label>
-      <input class="checker__input" id="scope-input" type="search" placeholder="输入一个知识点，比如「极值」「特征值」「泰勒」" autocomplete="off" spellcheck="false">
-      <button class="btn" id="scope-clear" type="button">清空</button>
-    </div>
-    <ul class="checker__chips" aria-label="试试这些">
-      ${['泰勒公式', '极值', '向量组的秩', '行列式', '一致连续']
-        .map((k) => `<li><button type="button" data-try="${attr(k)}">${esc(k)}</button></li>`)
-        .join('')}
-    </ul>
-    <ul class="spine">
-      ${spineRows.join('')}
-    </ul>
-    <div class="checker__verdict" id="scope-verdict" aria-live="polite">这条脊就是考纲。输入一个词，看它落在哪一章、考不考。</div>
-    <div class="scope__foot">
-      <span>灰掉的 ${[...chapterById.values()].filter((c) => c.state === 'out').length} 章期中不考，期末会补上。</span>
-      <span><a href="${url(0, 'va1/')}">微积分 A1 的完整考纲</a> · <a href="${url(0, 'la/')}">线性代数的完整考纲</a></span>
-    </div>
-  </div>
-</section>
-
-<section class="split field-red section">
-  <div class="frame">
-    <div class="split__figure">
-      <div class="split__plate" id="plate">
-        <img src="${url(0, 'assets/photos/principia.jpg')}" width="1050" height="1450" alt="牛顿《自然哲学的数学原理》1687 年初版扉页" loading="lazy" decoding="async">
-        <div class="split__ring" id="ring" aria-hidden="true"></div>
-      </div>
-      <p class="split__caption">牛顿《自然哲学的数学原理》1687 年初版扉页，公有领域。微积分从这一页开始，你的期中停在 4.3 节。</p>
-    </div>
-    <div class="split__body">
-      <div class="split__tabs" role="tablist" aria-label="三条常用结论">
-        <button type="button" role="tab" aria-selected="true" aria-controls="tab-1" id="tabbtn-1">泰勒公式</button>
-        <button type="button" role="tab" aria-selected="false" aria-controls="tab-2" id="tabbtn-2">拉格朗日</button>
-        <button type="button" role="tab" aria-selected="false" aria-controls="tab-3" id="tabbtn-3">洛必达</button>
-      </div>
-      <h2 class="split__title">你真正要背的是这三行</h2>
-      <div class="split__panel" role="tabpanel" id="tab-1" aria-labelledby="tabbtn-1">${ctx.renderMarkdown(taylorPanel, { errors: ctx.errors })}</div>
-      <div class="split__panel" role="tabpanel" id="tab-2" aria-labelledby="tabbtn-2" hidden>${ctx.renderMarkdown(lagrangePanel, { errors: ctx.errors })}</div>
-      <div class="split__panel" role="tabpanel" id="tab-3" aria-labelledby="tabbtn-3" hidden>${ctx.renderMarkdown(lhopitalPanel, { errors: ctx.errors })}</div>
-      <div class="split__actions">
-        <a href="${url(0, 'notes/va1-4.html')}"><span>读第 4 章要点</span><span aria-hidden="true">→</span></a>
-        <a href="${url(0, 'questions/?chapter=va1-4')}"><span>做这一章的题</span><span aria-hidden="true">→</span></a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section frame">
-  <div class="materials">
-    <div class="materials__head">
-      <h2>这一册的材料</h2>
-      <p>考的东西都有出处。壳子里翻出来的几页纸，比任何一句「数学很美」都合适。</p>
-    </div>
-    <div class="materials__strip">
-      <figure class="materials__item">
-        <img src="${url(0, 'assets/photos/arithmetic.jpg')}" width="900" height="1220" alt="十八世纪的一页算术手稿，写满算式与批注" loading="lazy" decoding="async">
-        <figcaption>一页十八世纪的算术手稿，公有领域。你的卷面跟它隔了三百年，题型其实没怎么变。</figcaption>
-      </figure>
-      <figure class="materials__item">
-        <img src="${url(0, 'assets/photos/euler.jpg')}" width="1000" height="1320" alt="欧拉《无穷小分析引论》1748 年初版扉页" loading="lazy" decoding="async">
-        <figcaption>欧拉《无穷小分析引论》1748 年初版扉页，公有领域。极限和无穷小的语言从这里长出来。</figcaption>
-      </figure>
-      <figure class="materials__item">
-        <img src="${url(0, 'assets/photos/slide-rule.jpg')}" width="1400" height="840" alt="一把木制计算尺的特写" loading="lazy" decoding="async">
-        <figcaption>计算尺，Jacek Halicki 摄，CC BY-SA 4.0。没有计算器的年代，近似值与误差就是这么算的。</figcaption>
-      </figure>
-      <figure class="materials__item">
-        <img src="${url(0, 'assets/photos/chalkboard.jpg')}" width="1400" height="788" alt="黑板上写着绝对值不等式的例子" loading="lazy" decoding="async">
-        <figcaption>黑板上的绝对值例子，Manuelzapata04 摄，CC BY-SA 4.0。习题课上最常见的那种一行推导。</figcaption>
-      </figure>
-    </div>
-  </div>
-</section>
-
-<section class="section frame">
-  <div class="steps">
-    <div class="steps__intro">
-      <h2>一题怎么进来</h2>
-      <p>题目不是写死在页面里的。它先是一个 Markdown 文件，再是一个 issue，最后才变成你看到的这一页。</p>
-    </div>
-    <article class="step step--1">
-      <div class="step__plate">
-        <pre class="step__art"><code>---
-course: va1
-chapter: va1-4
-tags: [泰勒公式]
-difficulty: 2
-answer: $-\\dfrac{1}{3}$
----
-求极限……</code></pre>
-      </div>
-      <h3 class="step__name">写成文件</h3>
-      <p class="step__text">一道题一个 Markdown 文件。开头几行写清章节、标签、难度和答案，正文就是题面和解析。</p>
-    </article>
-    <article class="step step--2">
-      <div class="step__plate">
-        <pre class="step__art"><code>[题目投稿] 泰勒公式求极限
-
-课程  微积分 A1
-章节  导数应用
-难度  2 / 4
-标签  泰勒公式 · 极限计算
-
-题面  \\( ... \\)
-解析  \\( ... \\)
-
-label: question-submission</code></pre>
-      </div>
-      <h3 class="step__name">提成 issue</h3>
-      <p class="step__text">投稿页把这些填好，一键打开 GitHub 的 issue 表单；也可以下载 .md 直接交给管理员。</p>
-    </article>
-    <article class="step step--3">
-      <div class="step__plate">
-        <pre class="step__art"><code>content/
-  questions/
-    va1/
-      va1-001.md
-      va1-002.md
-      …
-    la/
-      la-001.md
-      …
-  notes/
-    va1/va1-4.md
-
-合并后自动出现在：
-  题库 / 标签页 / 第 4 章</code></pre>
-      </div>
-      <h3 class="step__name">归档进去</h3>
-      <p class="step__text">管理员合并后重新构建，题目进入题库、标签页和对应章节，范围和统计一起更新。</p>
-    </article>
-  </div>
-</section>
-
-<section class="section field-paper2" id="faq">
-  <div class="frame">
-    <div class="faq">
-      <div class="faq__head">
-        <h2>常见问题</h2>
-        <p>关于范围、题目来源和投稿，你大概会先问这几件事。</p>
-      </div>
-      <div class="faq__list">
-        ${[
-          ['期中范围以哪个为准？', '以任课教师的正式通知为准。本站按课本目录整理：微积分 A1 到 4.3 节「泰勒公式」（含），线性代数到第三章向量组的秩之前。如果你手上的通知与此不同，以通知为准。'],
-          [`这 ${stats.questions} 道题是哪来的？`, '全部自编，格式与难度参考 2019–2025 历年期中卷与 2026 期中样卷；题目标注了章节、考点、难度和题型，但不整题抄录真题。历年卷只在「真题」页做考点索引。'],
-          ['为什么有些章节是灰的？', '灰掉的是期中之后才考的内容。这门课的后半学期还有积分、常微分方程和向量组的秩、特征值，等期末那一版会补上颜色。'],
-          ['解析会不会直接剧透？', '解析默认收起，提示也只是一句话的抓手，先自己做一遍再展开。每道题最后还写了一条最常见的错法。'],
-          ['投稿要写什么格式？', 'Markdown，公式用 \\( \\) 和 \\[ \\]。投稿页有实时预览，写的时候就能看到排版结果，也会顺手生成 frontmatter 和文件名。'],
-          ['题目合并之后会怎样？', '它会变成 content/questions/ 下的一个文件，出现在题库、对应的标签页和所属章节里，页脚的门类统计也会跟着变。'],
-          ['能打印成纸吗？', '能。每道题和每篇要点都做了打印样式，直接 Ctrl+P 就是一页干净的题纸，解析会跟在题面后面。'],
-        ]
-          .map(
-            ([q, a]) => `<details class="faq__item" name="faq">
-          <summary>${esc(q)}<span class="plus" aria-hidden="true"></span></summary>
-          <div class="faq__answer">${esc(a)}</div>
-        </details>`,
-          )
-          .join('\n        ')}
-      </div>
-    </div>
-  </div>
-</section>
-
-<a class="band" href="${url(0, 'questions/')}">
-  <svg class="band__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 18 18 6M18 6H8M18 6v10"/></svg>
-  <span class="band__word">开始</span>
-  <span class="band__note">一百道题，从哪一道开始都行。先自己做，再看解析。</span>
-</a>
-`
-
-  write(
-    ctx,
-    'index.html',
-    page(ctx, {
-      depth: 0,
-      title: '',
-      description: config.description,
-      body,
-      navActive: '',
-    }),
-  )
-}
 
 /* 列表与翻页用的短标签：把题面里的公式去掉，取开头一小段 */
 function shortLabel(q) {
@@ -556,6 +270,8 @@ function buildNotes(ctx) {
         <div class="pagehead__stats">
           <span>${esc(stateLabel(ch.state))}</span>
           <span><b>${qs.length}</b>道题在这一章</span>
+          <span data-progress-ids="${attr(qs.map((q) => q.id).join(','))}">本章已做 <b data-progress-here>0</b> / ${qs.length}</span>
+          <span><button class="ghost" type="button" data-print>打印这一章</button></span>
         </div>
       </div>
     </div>
@@ -584,6 +300,7 @@ function buildNotes(ctx) {
   </div>
   ${tocRail}
 </div>
+<script src="${url(1, 'assets/print.js')}" defer></script>
 `
     write(ctx, `notes/${note.id}.html`, page(ctx, { depth: 1, title: `${note.title} · ${note.course.name}`, description: note.lead, body, bodyClass: 'detail', navActive: note.course.id }))
   })
@@ -612,14 +329,18 @@ function buildQuestionIndex(ctx) {
   const rows = questions
     .map((q) => {
       const ch = chapterById(ctx, q.chapter)
-      return `<li class="qrow" data-course="${q.course}" data-chapter="${q.chapter}" data-difficulty="${q.difficulty}" data-tags="${attr(q.tags.join(' '))}" data-text="${attr(q.searchText)}">
+      return `<li class="qrow" data-id="${q.id}" data-course="${q.course}" data-chapter="${q.chapter}" data-difficulty="${q.difficulty}" data-tags="${attr(q.tags.join(' '))}" data-text="${attr(q.searchText)}">
         <div>
           <a class="qrow__link" href="${url(1, `questions/${q.id}.html`)}">${stemExcerpt(ctx, q)}</a>
           <div class="qrow__meta">
+            <span class="fq__id">${esc(q.id.toUpperCase())}</span>
             <span>${esc(ctx.courseById.get(q.course).short)} · ${esc(ch.title)}</span>
             <span>${esc(q.kind)}</span>
             ${dots(q.difficulty)}
-            <span>${esc(q.source)}</span>
+          </div>
+          <div class="qrow__flags">
+            <button class="flag" type="button" data-flag="done" data-id="${q.id}" aria-pressed="false"><span>已做</span></button>
+            <button class="flag flag--fav" type="button" data-flag="fav" data-id="${q.id}" aria-pressed="false"><span>收藏</span></button>
           </div>
         </div>
         <div class="qrow__tags">${q.tags.map((t) => `<a class="tag" href="${tagHref(1, t)}">${esc(t)}</a>`).join('')}</div>
@@ -672,11 +393,35 @@ function buildQuestionIndex(ctx) {
       </select>
     </div>
     <div class="filters__field">
+      <label for="f-status">状态</label>
+      <select id="f-status">
+        <option value="">全部</option>
+        <option value="undone">还没做</option>
+        <option value="done">做过了</option>
+        <option value="fav">收藏的</option>
+      </select>
+    </div>
+    <div class="filters__field">
+      <label for="f-sort">排序</label>
+      <select id="f-sort">
+        <option value="chapter">按章节</option>
+        <option value="easy">难度从低到高</option>
+        <option value="hard">难度从高到低</option>
+      </select>
+    </div>
+    <div class="filters__field">
       <label for="f-q">搜索</label>
       <input id="f-q" type="search" placeholder="题干、标签、出处" autocomplete="off">
     </div>
     <div class="filters__count"><b id="f-count">${questions.length}</b> 道</div>
   </form>
+
+  <p class="donebar" data-progress-ids="${attr(questions.map((q) => q.id).join(','))}">
+    已做 <b data-progress-here>0</b> / ${questions.length}
+    <span>·</span> 收藏 <b data-progress-count>0</b>
+    <span>·</span> 点每道题下面的「已做」「收藏」记录进度，只存在你自己的浏览器里
+    <span>·</span> 按 <span class="kbd">/</span> 直接搜索
+  </p>
 
   <ul class="qlist" id="qlist">
       ${rows}
@@ -737,6 +482,13 @@ function buildQuestionPages(ctx) {
           <span class="meta__item">${esc(q.source)}</span>
           ${q.origin ? `<span class="meta__item">投稿：${esc(q.origin)}</span>` : ''}
         </div>
+        <div class="qactions">
+          <button class="flag" type="button" data-flag="done" data-id="${q.id}" aria-pressed="false"><span>已做</span></button>
+          <button class="flag flag--fav" type="button" data-flag="fav" data-id="${q.id}" aria-pressed="false"><span>收藏</span></button>
+          <button class="ghost" type="button" id="expand-all">展开解析与提示</button>
+          <button class="ghost" type="button" id="copy-md">复制题目</button>
+          <span class="qactions__id">${esc(q.id.toUpperCase())} · <span class="kbd">←</span><span class="kbd">→</span> 翻题 · <span class="kbd">E</span> 展开 · <span class="kbd">D</span> 记已做</span>
+        </div>
       </header>
 
       <div class="qpage__stem prose">${stem}</div>
@@ -753,9 +505,9 @@ function buildQuestionPages(ctx) {
 
       ${mistakes ? `<details class="qblock"><summary>常见错误<span aria-hidden="true">展开</span></summary><div class="qblock__body prose">${mistakes}</div></details>` : ''}
 
-      <div class="pager">
-        ${prev ? `<a href="${url(1, `questions/${prev.id}.html`)}"><span>上一题</span>${esc(shortLabel(prev))}</a>` : '<span></span>'}
-        ${next ? `<a class="pager__next" href="${url(1, `questions/${next.id}.html`)}"><span>下一题</span>${esc(shortLabel(next))}</a>` : '<span></span>'}
+      <div class="pager" data-pager>
+        ${prev ? `<a class="pager__prev" href="${url(1, `questions/${prev.id}.html`)}"><span>上一题</span>${esc(shortLabel(prev))}</a>` : '<span class="pager__prev"></span>'}
+        ${next ? `<a class="pager__next" href="${url(1, `questions/${next.id}.html`)}"><span>下一题</span>${esc(shortLabel(next))}</a>` : '<span class="pager__next"></span>'}
       </div>
     </div>
 
@@ -859,6 +611,43 @@ function buildTagPages(ctx) {
 </div>`
     write(ctx, `tags/${tag}.html`, page(ctx, { depth: 1, title: `标签：${tag}`, description: `带「${tag}」标签的 ${n} 道题。`, body: tbody, bodyClass: 'detail', navActive: 'questions' }))
   }
+}
+
+/* ---------------------------------------------------------------- 速查表 */
+
+function buildCheatsheet(ctx) {
+  const file = path.join(ctx.CONTENT, 'cheatsheet.md')
+  if (!fs.existsSync(file)) return
+  const src = fs.readFileSync(file, 'utf8')
+  const headings = []
+  const html = ctx.renderMarkdown(src, { errors: ctx.errors, headings })
+
+  const body = `
+<div class="frame">
+  <nav class="crumb" aria-label="位置"><a href="${url(1, '')}">${esc(ctx.config.wordmark)}</a><span class="crumb__sep">/</span><span>速查</span></nav>
+  <header class="pagehead">
+    <div class="pagehead__inner">
+      <h1 class="pagehead__title">速查表</h1>
+      <div class="pagehead__scope">
+        <p>两门课最常用的一批结论：等价无穷小、麦克劳林展开、求导与中值定理、行列式与逆矩阵、线性相关性。考前十分钟扫一遍，打印出来带走也行。</p>
+        <div class="pagehead__stats">
+          <span><b>${headings.length}</b>组结论</span>
+          <span>适合打印（A4 双栏）</span>
+          <span><button class="ghost" type="button" data-print>打印</button></span>
+          <span><a href="${url(1, 'questions/')}">去做题 →</a></span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="sheet">
+    <div class="sheet__body prose">
+      ${html}
+    </div>
+  </div>
+</div>
+${'<script src="' + url(1, 'assets/print.js') + '" defer></script>'}`
+  write(ctx, 'cheatsheet/index.html', page(ctx, { depth: 1, title: '速查表', description: '微积分 A1 与线性代数的常用结论速查：等价无穷小、麦克劳林、中值定理、行列式、逆矩阵、线性相关。', body, bodyClass: 'detail', navActive: 'cheatsheet' }))
 }
 
 /* ---------------------------------------------------------------- 真题 */
@@ -975,12 +764,15 @@ function buildPractice(ctx) {
         <div class="field"><label for="p-difficulty">难度</label>
           <select id="p-difficulty"><option value="">全部</option><option value="1">1 基础</option><option value="2">2 常规</option><option value="3">3 综合</option><option value="4">4 挑战</option></select>
         </div>
+        <div class="field"><label for="p-status">状态</label>
+          <select id="p-status"><option value="">全部</option><option value="undone">还没做</option><option value="fav">收藏的</option></select>
+        </div>
         <div class="field"><label for="p-order">顺序</label>
           <select id="p-order"><option value="random">随机</option><option value="sequence">按题号</option></select>
         </div>
         <button class="btn btn--tone" id="p-apply" type="button">重新抽题</button>
       </div>
-      <div class="callout"><b>键盘</b>空格 看解析 / 回车 下一题。</div>
+      <div class="callout"><b>键盘</b>空格 看解析 / 回车 下一题。<br><span data-progress-total="100">0 / 100</span> 已做 · 看解析时自动记上。</div>
     </aside>
   </div>
 </div>
@@ -1200,6 +992,15 @@ function buildAbout(ctx) {
     <h2>许可</h2>
     <p>本站文字与题目以 CC BY-SA 4.0 发布，代码以 MIT 发布。图片版权属于各自的收藏机构，见下表。</p>
 
+    <h2>常见问题</h2>
+    <p><b>期中范围以哪个为准？</b>以任课教师的正式通知为准。本站按课本目录整理：微积分 A1 到 4.3 节「泰勒公式」（含），线性代数到第三章向量组的秩之前。</p>
+    <p><b>这 100 道题是哪来的？</b>全部自编，格式与难度参考 2019–2025 历年期中卷与 2026 期中样卷；不整题抄录真题，历年卷只在「真题」页做考点索引。</p>
+    <p><b>为什么有些章节是灰的？</b>那是期中之后才考的内容，等期末那一版会补上颜色。</p>
+    <p><b>进度存在哪里？</b>「已做」「收藏」只存在你自己的浏览器（localStorage），不上传，换设备或清缓存就没了。</p>
+    <p><b>投稿要写什么格式？</b>Markdown，公式用 \( \) 和 \[ \]。投稿页有实时预览，会顺手生成 frontmatter 和文件名。</p>
+    <p><b>题目合并之后会怎样？</b>它会变成 content/questions/ 下的一个文件，出现在题库、对应标签页和所属章节里。</p>
+    <p><b>能打印吗？</b>能。速查表、每篇要点、每道题都做了打印样式。</p>
+
     <h2>图片来源</h2>
     <table>
       <thead><tr><th>文件</th><th>来源与授权</th><th>页面</th></tr></thead>
@@ -1347,7 +1148,7 @@ function copyStatic(ctx) {
     copyDir(path.join(katexDist, 'fonts'), path.join(out, 'fonts'))
   }
   // CSS 合并
-  const styles = ['tokens', 'base', 'home', 'pages', 'utility']
+  const styles = ['tokens', 'base', 'home', 'pages', 'practical', 'sheet', 'utility']
     .map((n) => path.join(ctx.ROOT, 'src/styles', `${n}.css`))
     .filter((p) => fs.existsSync(p))
     .map((p) => fs.readFileSync(p, 'utf8'))
@@ -1357,7 +1158,7 @@ function copyStatic(ctx) {
   fs.mkdirSync(path.join(ctx.OUT, 'assets'), { recursive: true })
   fs.writeFileSync(path.join(ctx.OUT, 'assets/site.css'), css, 'utf8')
   // JS
-  for (const name of ['site.js', 'submit.js', 'practice.js']) {
+  for (const name of ['progress.js', 'site.js', 'submit.js', 'practice.js', 'print.js']) {
     const p = path.join(ctx.ROOT, 'src/assets', name)
     if (fs.existsSync(p)) fs.copyFileSync(p, path.join(ctx.OUT, 'assets', name))
   }

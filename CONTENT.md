@@ -15,6 +15,7 @@ content/
   notes/<course>/<章节>.md  复习要点，一个章节一个文件
   questions/<course>/<id>.md 题目，一题一个文件
   papers.yml               历年真题的考点索引
+  cheatsheet.md            速查表的正文（公式与结论，A4 双栏打印）
 ```
 
 `<course>` 取 `courses.yml` 里的 `id`：`va1`（微积分 A1）、`la`（线性代数）。

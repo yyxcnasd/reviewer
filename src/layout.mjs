@@ -35,6 +35,8 @@ export function page(ctx, opts) {
     { label: '微积分 A1', href: 'va1/', key: 'va1' },
     { label: '线性代数', href: 'la/', key: 'la' },
     { label: '题库', href: 'questions/', key: 'questions' },
+    { label: '刷题', href: 'practice/', key: 'practice' },
+    { label: '速查', href: 'cheatsheet/', key: 'cheatsheet' },
     { label: '真题', href: 'papers/', key: 'papers' },
   ]
 
@@ -126,6 +128,7 @@ ${nav}
 ${opts.body}
 </main>
 ${footer}
+<script src="${base}assets/progress.js" defer></script>
 <script src="${base}assets/site.js" defer></script>
 ${opts.scripts || ''}
 </body>
