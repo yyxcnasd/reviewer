@@ -37,7 +37,6 @@ export function page(ctx, opts) {
     { label: '题库', href: 'questions/', key: 'questions' },
     { label: '刷题', href: 'practice/', key: 'practice' },
     { label: '速查', href: 'cheatsheet/', key: 'cheatsheet' },
-    { label: '真题', href: 'papers/', key: 'papers' },
     { label: '进度', href: 'stats/', key: 'stats' },
   ]
 
@@ -87,7 +86,6 @@ export function page(ctx, opts) {
           <ul>
             <li><a href="${base}questions/">题库（${ctx.stats.questions} 道）</a></li>
             <li><a href="${base}practice/">刷题</a></li>
-            <li><a href="${base}papers/">历年真题索引</a></li>
             <li><a href="${base}tags/">标签</a></li>
             <li><a href="${base}export/">导出 PDF</a></li>
             <li><a href="${base}stats/">进度</a></li>

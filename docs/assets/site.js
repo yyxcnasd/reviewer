@@ -228,6 +228,8 @@
       if (p.get('difficulty') && sel.difficulty) sel.difficulty.value = p.get('difficulty')
       if (p.get('q') && sel.q) sel.q.value = p.get('q')
       if (p.get('status') && sel.status) sel.status.value = p.get('status')
+    if (p.get('scope') && sel.scope) sel.scope.value = p.get('scope')
+    if (p.get('sort') && sel.sort) sel.sort.value = p.get('sort')
     }
 
     const P = window.ReviewProgress

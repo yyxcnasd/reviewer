@@ -12,7 +12,6 @@ import { buildNotes } from './pages/notes.mjs'
 import { buildQuestionIndex, buildQuestionPages } from './pages/questions.mjs'
 import { buildTagPages } from './pages/tags.mjs'
 import { buildCheatsheet } from './pages/cheatsheet.mjs'
-import { buildPapers } from './pages/papers.mjs'
 import { buildPractice } from './pages/practice.mjs'
 import { buildSubmit } from './pages/submit.mjs'
 import { buildAbout } from './pages/about.mjs'
@@ -48,13 +47,6 @@ export function prepare(ctx) {
   ctx.tagCounts = new Map()
   for (const q of questions) for (const t of q.tags) ctx.tagCounts.set(t, (ctx.tagCounts.get(t) || 0) + 1)
 
-  const papersFile = path.join(ctx.CONTENT, 'papers.yml')
-  ctx.papers = fs.existsSync(papersFile) ? yaml.load(fs.readFileSync(papersFile, 'utf8'))?.papers ?? [] : []
-  const papersNotesFile = path.join(ctx.CONTENT, 'papers-notes.md')
-  ctx.papersNotesHtml = fs.existsSync(papersNotesFile)
-    ? ctx.renderMarkdown(fs.readFileSync(papersNotesFile, 'utf8'), { errors: ctx.errors })
-    : ''
-
   for (const ch of chapterById.values()) {
     ch.count = (ctx.qByChapter.get(ch.id) || []).length
     ch.note = ctx.notesByChapter.get(ch.id)
@@ -74,7 +66,6 @@ export async function buildSite(ctx) {
   buildTagPages(ctx)
   buildCheatsheet(ctx)
   buildExportPages(ctx)
-  buildPapers(ctx)
   buildPractice(ctx)
   buildSubmit(ctx)
   buildAbout(ctx)

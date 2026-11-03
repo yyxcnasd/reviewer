@@ -97,7 +97,7 @@ export function buildHome(ctx) {
   <div class="frame hero__inner">
     <div class="hero__copy">
       <h1 class="hero__title">要考的范围<br>和题都在这里</h1>
-      <p class="hero__lead">课程范围、讲义要点、题库与解析都在这里。当前显示的是<b data-term-label>期中</b>的范围，右上角可以换成期末。${stats.questions} 道题，每题带提示、解析和一条常见错误；${stats.notes} 篇要点；${ctx.papers.length} 套真题的考点索引。</p>
+      <p class="hero__lead">课程范围、讲义要点、题库与解析都在这里。当前显示的是<b data-term-label>期中</b>的范围，右上角可以换成期末。${stats.questions} 道题，每题带提示、解析和一条常见错误；${stats.notes} 篇要点。</p>
       <form class="search" action="${url(0, 'questions/')}" method="get" role="search">
         <label class="sr-only" for="q">搜题</label>
         <input class="search__input" id="q" name="q" type="search" placeholder="搜题：题干、标签、出处" autocomplete="off">
@@ -114,8 +114,8 @@ export function buildHome(ctx) {
     <li><a href="${url(0, 'practice/')}"><b>刷题</b><span>一次一道，先想再看</span></a></li>
     <li><a href="${url(0, 'practice/?random=1')}"><b>随机一题</b><span>抽一道就开工</span></a></li>
     <li><a href="${url(0, 'cheatsheet/')}"><b>速查</b><span>公式与结论，可打印</span></a></li>
-    <li><a href="${url(0, 'export/')}"><b>导出</b><span>挑题生成 A4 卷子</span></a></li>
-    <li><a href="${url(0, 'papers/')}"><b>真题</b><span>${ctx.papers.length} 套卷的考点</span></a></li>
+    <li><a href="${url(0, 'questions/?difficulty=4')}"><b>难题</b><span>要动一下脑子的那些</span></a></li>
+    <li><a href="${url(0, 'export/')}"><b>导出</b><span>挑题生成 A4 卷子</span></a></li>
   </ul>
 </section>
 

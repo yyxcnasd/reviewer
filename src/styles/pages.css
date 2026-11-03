@@ -2175,3 +2175,53 @@
 .pagehead--wide .pagehead__title {
   margin-bottom: 0;
 }
+
+/* 难度分布 */
+.st-diff {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 2px;
+  max-width: 48em;
+}
+
+.st-diff a {
+  display: grid;
+  grid-template-columns: 7em 3em minmax(0, 1fr);
+  align-items: center;
+  gap: 14px;
+  padding: 9px 0;
+  border-bottom: 2px solid var(--line);
+  font-size: var(--fs-small);
+  text-decoration: none;
+}
+
+.st-diff a:hover {
+  text-decoration: none;
+}
+
+.st-diff a:hover .st-diff__label {
+  color: var(--red);
+}
+
+.st-diff__label {
+  font-weight: 700;
+}
+
+.st-diff__num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-soft);
+}
+
+.st-diff__track {
+  display: block;
+  height: 6px;
+  background: var(--paper-3);
+}
+
+.st-diff__track i {
+  display: block;
+  height: 100%;
+  background: var(--ink);
+}
