@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>进度 · 复习册</title>
+<meta name="description" content="按章节看已做、收藏与进度条；记录只存在本地浏览器。">
+<meta name="color-scheme" content="light">
+<link rel="stylesheet" href="../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../assets/site.css">
+<script>
+  // 先按本地设置（或系统偏好）定主题，避免刷新时闪白
+  try {
+    // 默认浅色（纸面）。只有你手动切过深色，才在下次打开时记住。
+    if (localStorage.getItem('reviewer.theme') === 'dark')
+      document.documentElement.setAttribute('data-theme', 'dark')
+  } catch (e) {}
+</script>
+<script src="../assets/core.js"></script>
+<script src="../assets/theme.js" defer></script>
+<script src="../assets/term.js" defer></script>
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<meta property="og:title" content="进度 · 复习册">
+<meta property="og:description" content="按章节看已做、收藏与进度条；记录只存在本地浏览器。">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_CN">
+
+</head>
+<body class="no-js detail">
+<script>document.body.classList.remove('no-js')</script>
+<a class="skip" href="#main">跳到正文</a>
+
+  <header class="sitehead">
+    <div class="frame">
+      <nav class="nav" aria-label="主导航">
+        <a class="nav__mark" href="../"><span class="nav__dot" aria-hidden="true"></span>复习册</a>
+        <ul class="nav__links">
+          <li><a href="../va1/">微积分 A1</a></li>
+          <li><a href="../la/">线性代数</a></li>
+          <li><a href="../questions/">题库</a></li>
+          <li><a href="../practice/">刷题</a></li>
+          <li><a href="../cheatsheet/">速查</a></li>
+          <li><a href="../papers/">真题</a></li>
+          <li><a href="../stats/">进度</a></li>
+        </ul>
+        <div class="nav__end">
+          <div class="nav__terms" role="group" aria-label="考试轮次">
+            <button class="term-btn is-on" type="button" data-term-btn="midterm">期中</button><button class="term-btn" type="button" data-term-btn="final">期末</button>
+          </div>
+          <button class="ghost nav__theme" id="theme-toggle" type="button" aria-live="polite">深色</button>
+          <a class="btn btn--red nav__action" href="../submit/">投稿</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+<main id="main">
+
+<div class="frame">
+  <nav class="crumb" aria-label="位置"><a href="../">复习册</a><span class="crumb__sep">/</span><span>进度</span></nav>
+
+  <header class="pagehead pagehead--wide">
+    <div class="pagehead__inner">
+      <h1 class="pagehead__title">进度</h1>
+      <div class="pagehead__scope st-head">
+        <div class="st-head__text">
+          <p>你标过「已做」「收藏」的题会汇总在这里，按章节排。这些记录只存在这台设备的浏览器里，不上传，清缓存就没了。</p>
+          <div class="pagehead__stats">
+            <span>共 114 道题</span>
+            <span data-progress-ids="la-001,la-002,la-003,la-004,la-005,la-006,la-007,la-008,la-009,la-010,la-011,la-012,la-013,la-014,la-015,la-016,la-017,la-018,la-019,la-020,la-021,la-022,la-023,la-024,la-025,la-026,la-027,la-028,la-029,la-030,la-031,la-032,la-033,la-034,la-035,la-036,la-037,la-038,la-039,la-040,la-041,la-042,la-043,la-044,la-045,la-046,la-047,la-048,la-049,la-050,la-051,la-052,la-053,la-054,la-055,la-056,la-057,va1-001,va1-002,va1-003,va1-004,va1-005,va1-006,va1-007,va1-008,va1-009,va1-010,va1-011,va1-012,va1-013,va1-014,va1-015,va1-016,va1-017,va1-018,va1-019,va1-020,va1-021,va1-022,va1-023,va1-024,va1-025,va1-026,va1-027,va1-028,va1-029,va1-030,va1-031,va1-032,va1-033,va1-034,va1-035,va1-036,va1-037,va1-038,va1-039,va1-040,va1-041,va1-042,va1-043,va1-044,va1-045,va1-046,va1-047,va1-048,va1-049,va1-050,va1-051,va1-052,va1-053,va1-054,va1-055,va1-056,va1-057">已做 <b data-progress-here>0</b> 道</span>
+            <span>收藏 <b data-progress-count>0</b></span>
+          </div>
+        </div>
+        <div class="st-head__actions">
+          <a class="btn btn--red" href="../practice/">继续刷题</a>
+          <a class="btn btn--tone" href="../practice/?random=1">随机抽一道</a>
+          <a class="btn btn--tone" href="../questions/?status=undone">只看没做的</a>
+          <a class="btn btn--tone" href="../questions/?status=fav">只看收藏的</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="section--tight">
+    <section class="st-course">
+        <header class="st-course__head">
+          <h2><a href="../va1/">微积分 A1</a></h2>
+          <p class="st-course__sum" data-progress-ids="va1-002,va1-003,va1-004,va1-005,va1-006,va1-007,va1-008,va1-009,va1-010,va1-011,va1-012,va1-013,va1-051,va1-014,va1-015,va1-016,va1-017,va1-018,va1-019,va1-020,va1-021,va1-022,va1-023,va1-024,va1-025,va1-052,va1-026,va1-027,va1-028,va1-029,va1-030,va1-031,va1-032,va1-033,va1-034,va1-035,va1-036,va1-053,va1-001,va1-037,va1-038,va1-039,va1-040,va1-041,va1-042,va1-043,va1-044,va1-045,va1-046,va1-047,va1-048,va1-049,va1-050,va1-054,va1-055,va1-056,va1-057">
+            已做 <b data-progress-here>0</b> / 57
+            <span class="st__bar st__bar--wide"><span class="st__bar-track" data-progress-bar="va1-002,va1-003,va1-004,va1-005,va1-006,va1-007,va1-008,va1-009,va1-010,va1-011,va1-012,va1-013,va1-051,va1-014,va1-015,va1-016,va1-017,va1-018,va1-019,va1-020,va1-021,va1-022,va1-023,va1-024,va1-025,va1-052,va1-026,va1-027,va1-028,va1-029,va1-030,va1-031,va1-032,va1-033,va1-034,va1-035,va1-036,va1-053,va1-001,va1-037,va1-038,va1-039,va1-040,va1-041,va1-042,va1-043,va1-044,va1-045,va1-046,va1-047,va1-048,va1-049,va1-050,va1-054,va1-055,va1-056,va1-057"><i></i></span></span>
+          </p>
+        </header>
+        <table class="st-table">
+          <thead><tr><th>章节</th><th>题</th><th>已做</th><th>收藏</th><th>进度</th><th></th></tr></thead>
+          <tbody><tr data-chapter="va1-1">
+            <td class="st__chapter"><em>1</em>实数系与实数列的极限</td>
+            <td class="st__num">13</td>
+            <td class="st__num"><span data-progress-ids="va1-002,va1-003,va1-004,va1-005,va1-006,va1-007,va1-008,va1-009,va1-010,va1-011,va1-012,va1-013,va1-051"><b data-progress-here>0</b></span></td>
+            <td class="st__num"><span data-fav-ids="va1-002,va1-003,va1-004,va1-005,va1-006,va1-007,va1-008,va1-009,va1-010,va1-011,va1-012,va1-013,va1-051"><b data-progress-count>0</b></span></td>
+            <td class="st__bar"><span class="st__bar-track" data-progress-bar="va1-002,va1-003,va1-004,va1-005,va1-006,va1-007,va1-008,va1-009,va1-010,va1-011,va1-012,va1-013,va1-051"><i></i></span></td>
+            <td class="st__go">
+              <a href="../questions/?chapter=va1-1">题目</a>
+              <a href="../notes/va1-1.html">要点</a>
+              <a href="../export/?chapter=va1-1">导出</a>
+            </td>
+          </tr><tr data-chapter="va1-2">
+            <td class="st__chapter"><em>2</em>函数 函数的极限与连续</td>
+            <td class="st__num">13</td>
+            <td class="st__num"><span data-progress-ids="va1-014,va1-015,va1-016,va1-017,va1-018,va1-019,va1-020,va1-021,va1-022,va1-023,va1-024,va1-025,va1-052"><b data-progress-here>0</b></span></td>
+            <td class="st__num"><span data-fav-ids="va1-014,va1-015,va1-016,va1-017,va1-018,va1-019,va1-020,va1-021,va1-022,va1-023,va1-024,va1-025,va1-052"><b data-progress-count>0</b></span></td>
+            <td class="st__bar"><span class="st__bar-track" data-progress-bar="va1-014,va1-015,va1-016,va1-017,va1-018,va1-019,va1-020,va1-021,va1-022,va1-023,va1-024,va1-025,va1-052"><i></i></span></td>
+            <td class="st__go">
+              <a href="../questions/?chapter=va1-2">题目</a>
+              <a href="../notes/va1-2.html">要点</a>
+              <a href="../export/?chapter=va1-2">导出</a>
+            </td>
+          </tr><tr data-chapter="va1-3">
+            <td class="st__chapter"><em>3</em>函数的导数</td>
+            <td class="st__num">12</td>
+            <td class="st__num"><span data-progress-ids="va1-026,va1-027,va1-028,va1-029,va1-030,va1-031,va1-032,va1-033,va1-034,va1-035,va1-036,va1-053"><b data-progress-here>0</b></span></td>
+            <td class="st__num"><span data-fav-ids="va1-026,va1-027,va1-028,va1-029,va1-030,va1-031,va1-032,va1-033,va1-034,va1-035,va1-036,va1-053"><b data-progress-count>0</b></span></td>
+            <td class="st__bar"><span class="st__bar-track" data-progress-bar="va1-026,va1-027,va1-028,va1-029,va1-030,va1-031,va1-032,va1-033,va1-034,va1-035,va1-036,va1-053"><i></i></span></td>
+            <td class="st__go">
+              <a href="../questions/?chapter=va1-3">题目</a>
+              <a href="../notes/va1-3.html">要点</a>
+              <a href="../export/?chapter=va1-3">导出</a>
+            </td>
+          </tr><tr data-chapter="va1-4">
+            <td class="st__chapter"><em>4</em>导数应用</td>
+            <td class="st__num">17</td>
+            <td class="st__num"><span data-progress-ids="va1-001,va1-037,va1-038,va1-039,va1-040,va1-041,va1-042,va1-043,va1-044,va1-045,va1-046,va1-047,va1-048,va1-049,va1-050,va1-054,va1-055"><b data-progress-here>0</b></span></td>
+            <td class="st__num"><span data-fav-ids="va1-001,va1-037,va1-038,va1-039,va1-040,va1-041,va1-042,va1-043,va1-044,va1-045,va1-046,va1-047,va1-048,va1-049,va1-050,va1-054,va1-055"><b data-progress-count>0</b></span></td>
+            <td class="st__bar"><span class="st__bar-track" data-progress-bar="va1-001,va1-037,va1-038,va1-039,va1-040,va1-041,va1-042,va1-043,va1-044,va1-045,va1-046,va1-047,va1-048,va1-049,va1-050,va1-054,va1-055"><i></i></span></td>
+            <td class="st__go">
+              <a href="../questions/?chapter=va1-4">题目</a>
+              <a href="../notes/va1-4.html">要点</a>
+              <a href="../export/?chapter=va1-4">导出</a>
+            </td>
+          </tr><tr data-chapter="va1-5">
+            <td class="st__chapter"><em>5</em>黎曼积分</td>
+            <td class="st__num">1</td>
+            <td class="st__num"><span data-progress-ids="va1-056"><b data-progress-here>0</b></span></td>
+            <td class="st__num"><span data-fav-ids="va1-056"><b data-progress-count>0</b></span></td>
+            <td class="st__bar"><span class="st__bar-track" data-progress-bar="va1-056"><i></i></span></td>
+            <td class="st__go">
+              <a href="../questions/?chapter=va1-5">题目</a>
+              <a href="../notes/va1-5.html">要点</a>
+              <a href="../export/?chapter=va1-5">导出</a>
+            </td>
+          </tr><tr data-chapter="va1-6">
+            <td class="st__chapter"><em>6</em>广义黎曼积分</td>
+            <td class="st__num">1</td>
+            <td class="st__num"><span data-progress-ids="va1-057"><b data-progress-here>0</b></span></td>
+            <td class="st__num"><span data-fav-ids="va1-057"><b data-progress-count>0</b></span></td>
+            <td class="st__bar"><span class="st__bar-track" data-progress-bar="va1-057"><i></i></span></td>
+            <td class="st__go">
+              <a href="../questions/?chapter=va1-6">题目</a>
+              <a href="../notes/va1-6.html">要点</a>
+              <a href="../export/?chapter=va1-6">导出</a>
+            </td>
+          </tr></tbody>
+        </table>
+      </section><section class="st-course">
+        <header class="st-course__head">
+          <h2><a href="../la/">线性代数</a></h2>
+          <p class="st-course__sum" data-progress-ids="la-001,la-002,la-003,la-004,la-005,la-006,la-007,la-008,la-009,la-010,la-011,la-012,la-013,la-014,la-015,la-016,la-017,la-018,la-051,la-055,la-057,la-019,la-020,la-021,la-022,la-023,la-024,la-025,la-026,la-027,la-028,la-029,la-030,la-031,la-032,la-033,la-034,la-035,la-036,la-052,la-054,la-056,la-037,la-038,la-039,la-040,la-041,la-042,la-043,la-044,la-045,la-046,la-047,la-048,la-049,la-050,la-053">
+            已做 <b data-progress-here>0</b> / 57
+            <span class="st__bar st__bar--wide"><span class="st__bar-track" data-progress-bar="la-001,la-002,la-003,la-004,la-005,la-006,la-007,la-008,la-009,la-010,la-011,la-012,la-013,la-014,la-015,la-016,la-017,la-018,la-051,la-055,la-057,la-019,la-020,la-021,la-022,la-023,la-024,la-025,la-026,la-027,la-028,la-029,la-030,la-031,la-032,la-033,la-034,la-035,la-036,la-052,la-054,la-056,la-037,la-038,la-039,la-040,la-041,la-042,la-043,la-044,la-045,la-046,la-047,la-048,la-049,la-050,la-053"><i></i></span></span>
+          </p>
+        </header>
+        <table class="st-table">
+          <thead><tr><th>章节</th><th>题</th><th>已做</th><th>收藏</th><th>进度</th><th></th></tr></thead>
+          <tbody><tr data-chapter="la-1">
+            <td class="st__chapter"><em>1</em>线性方程组与行列式</td>
+            <td class="st__num">21</td>
+            <td class="st__num"><span data-progress-ids="la-001,la-002,la-003,la-004,la-005,la-006,la-007,la-008,la-009,la-010,la-011,la-012,la-013,la-014,la-015,la-016,la-017,la-018,la-051,la-055,la-057"><b data-progress-here>0</b></span></td>
+            <td class="st__num"><span data-fav-ids="la-001,la-002,la-003,la-004,la-005,la-006,la-007,la-008,la-009,la-010,la-011,la-012,la-013,la-014,la-015,la-016,la-017,la-018,la-051,la-055,la-057"><b data-progress-count>0</b></span></td>
+            <td class="st__bar"><span class="st__bar-track" data-progress-bar="la-001,la-002,la-003,la-004,la-005,la-006,la-007,la-008,la-009,la-010,la-011,la-012,la-013,la-014,la-015,la-016,la-017,la-018,la-051,la-055,la-057"><i></i></span></td>
+            <td class="st__go">
+              <a href="../questions/?chapter=la-1">题目</a>
+              <a href="../notes/la-1.html">要点</a>
+              <a href="../export/?chapter=la-1">导出</a>
+            </td>
+          </tr><tr data-chapter="la-2">
+            <td class="st__chapter"><em>2</em>矩阵</td>
+            <td class="st__num">21</td>
+            <td class="st__num"><span data-progress-ids="la-019,la-020,la-021,la-022,la-023,la-024,la-025,la-026,la-027,la-028,la-029,la-030,la-031,la-032,la-033,la-034,la-035,la-036,la-052,la-054,la-056"><b data-progress-here>0</b></span></td>
+            <td class="st__num"><span data-fav-ids="la-019,la-020,la-021,la-022,la-023,la-024,la-025,la-026,la-027,la-028,la-029,la-030,la-031,la-032,la-033,la-034,la-035,la-036,la-052,la-054,la-056"><b data-progress-count>0</b></span></td>
+            <td class="st__bar"><span class="st__bar-track" data-progress-bar="la-019,la-020,la-021,la-022,la-023,la-024,la-025,la-026,la-027,la-028,la-029,la-030,la-031,la-032,la-033,la-034,la-035,la-036,la-052,la-054,la-056"><i></i></span></td>
+            <td class="st__go">
+              <a href="../questions/?chapter=la-2">题目</a>
+              <a href="../notes/la-2.html">要点</a>
+              <a href="../export/?chapter=la-2">导出</a>
+            </td>
+          </tr><tr data-chapter="la-3">
+            <td class="st__chapter"><em>3</em>n 维向量空间</td>
+            <td class="st__num">15</td>
+            <td class="st__num"><span data-progress-ids="la-037,la-038,la-039,la-040,la-041,la-042,la-043,la-044,la-045,la-046,la-047,la-048,la-049,la-050,la-053"><b data-progress-here>0</b></span></td>
+            <td class="st__num"><span data-fav-ids="la-037,la-038,la-039,la-040,la-041,la-042,la-043,la-044,la-045,la-046,la-047,la-048,la-049,la-050,la-053"><b data-progress-count>0</b></span></td>
+            <td class="st__bar"><span class="st__bar-track" data-progress-bar="la-037,la-038,la-039,la-040,la-041,la-042,la-043,la-044,la-045,la-046,la-047,la-048,la-049,la-050,la-053"><i></i></span></td>
+            <td class="st__go">
+              <a href="../questions/?chapter=la-3">题目</a>
+              <a href="../notes/la-3.html">要点</a>
+              <a href="../export/?chapter=la-3">导出</a>
+            </td>
+          </tr></tbody>
+        </table>
+      </section>
+  </section>
+</div>
+</main>
+
+  <footer class="footer">
+    <div class="frame">
+      <a class="footer__word" href="../" aria-label="回到首页：复习册"><span aria-hidden="true">复习册</span></a>
+      <div class="footer__cols">
+        <div class="footer__col">
+          <h3>科目</h3>
+          <ul>
+            <li><a href="../va1/">微积分 A1</a></li>
+            <li><a href="../la/">线性代数</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h3>内容</h3>
+          <ul>
+            <li><a href="../questions/">题库（114 道）</a></li>
+            <li><a href="../practice/">刷题</a></li>
+            <li><a href="../papers/">历年真题索引</a></li>
+            <li><a href="../tags/">标签</a></li>
+            <li><a href="../export/">导出 PDF</a></li>
+            <li><a href="../stats/">进度</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h3>参与</h3>
+          <ul>
+            <li><a href="../submit/">投稿一道题</a></li>
+            <li><a href="../about/">关于与范围说明</a></li>
+            <li><a href="https://github.com/yyxcnasd/reviewer" target="_blank" rel="noopener noreferrer">GitHub 仓库</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h3>这本册子</h3>
+          <ul>
+            <li>2026 秋 期中版</li>
+            <li>内容 CC BY-SA 4.0</li>
+            <li>构建于 2026-11-03</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__legal">
+        <span>复习册 · 课程 · 范围 · 题库</span>
+        <span>内容以 CC BY-SA 4.0 发布，题目标题与解析可自由取用，请保留出处。</span>
+      </div>
+    </div>
+  </footer>
+<script src="../assets/progress.js" defer></script>
+<script src="../assets/site.js" defer></script>
+
+</body>
+</html>

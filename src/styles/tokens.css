@@ -32,6 +32,12 @@
   --line: rgba(23, 20, 15, 0.14);
   --line-strong: rgba(23, 20, 15, 0.42);
 
+  /* 外壳（页脚、深色带）：深色页面上也保持「深底浅字」 */
+  --chrome-bg: #17140f;
+  --chrome-fg: #f3f1ec;
+  --chrome-mute: #c9c2b5;
+  --chrome-line: rgba(243, 241, 236, 0.22);
+
   /* 字体 */
   --serif: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "SimSun", serif;
   /* 只给两处真代码用：Markdown 编辑器与文件/issue 的原文片段 */
@@ -82,6 +88,12 @@
 
   --line: rgba(244, 241, 232, 0.16);
   --line-strong: rgba(244, 241, 232, 0.46);
+
+  /* 深色下外壳再暗一档，字反而更亮 */
+  --chrome-bg: #0c0b07;
+  --chrome-fg: #f6f3ea;
+  --chrome-mute: #b8b1a2;
+  --chrome-line: rgba(246, 243, 234, 0.24);
 }
 
 /* 深色下，深色场与浅色场都反一下，别让字段底色打架 */

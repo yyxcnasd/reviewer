@@ -1,6 +1,8 @@
 import MarkdownIt from 'markdown-it'
 import katex from 'katex'
 
+import { expandShorthands } from './shorthands.mjs'
+
 /**
  * 数学公式解析：支持 \( \) \[ \] $ $ $$ $$ 四种写法。
  * 先把公式切成占位符，再交给 markdown-it 渲染正文，最后把占位符换成 KaTeX 输出。
@@ -18,7 +20,7 @@ export const mdError = { current: null }
 
 function renderMath(tex, display, errors) {
   try {
-    return katex.renderToString(tex.trim(), { ...katexOptions, displayMode: display })
+    return katex.renderToString(expandShorthands(tex).trim(), { ...katexOptions, displayMode: display })
   } catch (err) {
     errors.push({ tex, message: err.message })
     return `<code class="math-error" title="${escapeAttr(err.message)}">${escapeHtml(tex)}</code>`

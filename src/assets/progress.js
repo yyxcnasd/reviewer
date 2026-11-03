@@ -96,6 +96,23 @@
       const here = el.querySelector('[data-progress-here]')
       if (here) here.textContent = String(k)
     }
+    // 收藏数（某一组）
+    for (const el of document.querySelectorAll('[data-fav-ids]')) {
+      const ids = String(el.dataset.favIds || '').split(',').filter(Boolean)
+      const k = ids.filter((id) => state.fav[id]).length
+      const here = el.querySelector('[data-progress-count]')
+      if (here) here.textContent = String(k)
+    }
+    // 进度条
+    for (const track of document.querySelectorAll('[data-progress-bar]')) {
+      const ids = String(track.dataset.progressBar || '').split(',').filter(Boolean)
+      if (!ids.length) continue
+      const done = ids.filter((id) => state.done[id]).length
+      const fill = track.querySelector('i')
+      if (fill) fill.style.width = `${Math.round((done / ids.length) * 100)}%`
+      track.setAttribute('title', `${done} / ${ids.length}`)
+      track.setAttribute('aria-label', `进度 ${done} / ${ids.length}`)
+    }
   }
 
   updateSummary()

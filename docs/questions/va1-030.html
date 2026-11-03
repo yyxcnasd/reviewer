@@ -11,9 +11,9 @@
 <script>
   // 先按本地设置（或系统偏好）定主题，避免刷新时闪白
   try {
-    var saved = localStorage.getItem('reviewer.theme')
-    var dark = saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches
-    if (dark) document.documentElement.setAttribute('data-theme', 'dark')
+    // 默认浅色（纸面）。只有你手动切过深色，才在下次打开时记住。
+    if (localStorage.getItem('reviewer.theme') === 'dark')
+      document.documentElement.setAttribute('data-theme', 'dark')
   } catch (e) {}
 </script>
 <script src="../assets/core.js"></script>
@@ -41,6 +41,7 @@
           <li><a href="../practice/">刷题</a></li>
           <li><a href="../cheatsheet/">速查</a></li>
           <li><a href="../papers/">真题</a></li>
+          <li><a href="../stats/">进度</a></li>
         </ul>
         <div class="nav__end">
           <div class="nav__terms" role="group" aria-label="考试轮次">
@@ -139,7 +140,7 @@
         <h2>往下走</h2>
         <ul class="sidelist">
           <li><a href="../notes/va1-3.html">读这一章的要点</a></li>
-          <li><a href="../questions/?chapter=va1-3">这一章的 11 道题</a></li>
+          <li><a href="../questions/?chapter=va1-3">这一章的 12 道题</a></li>
           <li><a href="../export/?chapter=va1-3">导出这一章</a></li>
           <li><a href="../va1/#ch-va1-3">这一章在考纲里的位置</a></li>
         </ul>
@@ -170,11 +171,12 @@
         <div class="footer__col">
           <h3>内容</h3>
           <ul>
-            <li><a href="../questions/">题库（100 道）</a></li>
+            <li><a href="../questions/">题库（114 道）</a></li>
             <li><a href="../practice/">刷题</a></li>
             <li><a href="../papers/">历年真题索引</a></li>
             <li><a href="../tags/">标签</a></li>
             <li><a href="../export/">导出 PDF</a></li>
+            <li><a href="../stats/">进度</a></li>
           </ul>
         </div>
         <div class="footer__col">

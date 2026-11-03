@@ -266,6 +266,13 @@ courses:
               midterm: out
               final: in
             keywords: [变量分离, 一阶线性微分方程, 齐次方程]
+          - no: "7.3"
+            title: 二阶常系数线性微分方程
+            state: out
+            terms:
+              midterm: out
+              final: in
+            keywords: [特征方程, 齐次方程通解, 特解设法, 叠加原理]
 
   - id: la
     name: 线性代数

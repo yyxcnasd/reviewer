@@ -11,9 +11,9 @@
 <script>
   // 先按本地设置（或系统偏好）定主题，避免刷新时闪白
   try {
-    var saved = localStorage.getItem('reviewer.theme')
-    var dark = saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches
-    if (dark) document.documentElement.setAttribute('data-theme', 'dark')
+    // 默认浅色（纸面）。只有你手动切过深色，才在下次打开时记住。
+    if (localStorage.getItem('reviewer.theme') === 'dark')
+      document.documentElement.setAttribute('data-theme', 'dark')
   } catch (e) {}
 </script>
 <script src="../assets/core.js"></script>
@@ -41,6 +41,7 @@
           <li><a href="../practice/">刷题</a></li>
           <li><a href="../cheatsheet/">速查</a></li>
           <li><a href="../papers/">真题</a></li>
+          <li><a href="../stats/">进度</a></li>
         </ul>
         <div class="nav__end">
           <div class="nav__terms" role="group" aria-label="考试轮次">
@@ -67,28 +68,29 @@
 
   <div class="article__main prose" style="max-width:42em;padding-bottom:var(--section-y)">
     <h2>范围</h2>
-    <p><b>微积分 A1</b>：第 1 章到第 4.3 节「泰勒公式」（含）。也就是实数系与数列极限、函数极限与连续、导数与微分、微分中值定理与洛必达法则、泰勒公式。4.4 节「函数的增减性与极值问题」及之后不在期中范围。</p>
-    <p><b>线性代数</b>：第 1 章「线性方程组与行列式」、第 2 章「矩阵」、第 3 章「n 维向量空间」中向量组的秩之前（n 维向量、线性表示、线性相关与线性无关）。向量组的秩、矩阵的秩、方程组解的结构都不在期中范围。</p>
-    <p>范围按课本章节整理，以任课教师的正式通知为准。章节与考纲状态写在 <code>content/courses.yml</code> 里，改一行就能改整站的判定。</p>
+    <p>范围写在 <code>content/courses.yml</code> 里，按考试轮次分开写。导航右上角切换轮次，范围表、考纲、题目页的范围、题库的筛选会一起变。</p>
+    <p><b>期中</b>：微积分 A1 到第 4.3 节泰勒公式（含）——实数系与数列极限、函数极限与连续、导数与微分、中值定理与洛必达、泰勒公式；线性代数到第 3 章向量组的秩之前——线性方程组与行列式、矩阵、n 维向量与线性相关。</p>
+    <p><b>期末</b>：两门课整本。微积分 A1 第 1–7 章（加上定积分、广义积分、常微分方程），线性代数第 1–4 章（加上秩与解的结构）。</p>
+    <p>以任课教师的正式通知为准。要改范围，改 <code>courses.yml</code> 里对应小节的那一行，不用动页面代码。</p>
 
     <h2>内容怎么组织的</h2>
-    <p>这个站点不是手写 HTML。所有中文内容都是仓库里的 Markdown 文件：一题一个文件放在 <code>content/questions/</code>，一章要点一个文件放在 <code>content/notes/</code>，构建脚本读它们，生成题库、标签页、章节索引和这一页。所以「投稿 → 合并 → 上线」是一条完整的路。</p>
-    <p>题目自编，格式与难度参考历年期中卷；历年真题只做考点索引，不整题收录。图片取自公有领域与开放授权的藏品，出处列在下面。</p>
+    <p>所有中文内容都是仓库里的 Markdown 文件：一题一个文件放在 <code>content/questions/</code>，一章要点一个文件放在 <code>content/notes/</code>，章节与轮次范围写在 <code>content/courses.yml</code>。构建脚本读这些文件，生成题库、标签页、章节索引和这一页。</p>
+    <p>题目自编，格式与难度参考 2019–2025 历年期中卷；历年真题只在「真题」页做考点索引，不整题收录。图片来自公有领域与开放授权的藏品，出处见下表。</p>
 
     <h2>技术</h2>
-    <p>纯静态站点，构建脚本是一个 Node 脚本，公式用 KaTeX 在构建时渲染成 HTML，运行时不需要 JavaScript 也能读题。部署在 GitHub Pages 上，所有链接都是相对路径，放在任何子路径下都能用。</p>
+    <p>纯静态站点。一个 Node 脚本把 Markdown 生成 HTML，公式用 KaTeX 在构建时渲染成 HTML，关掉 JavaScript 也能读题。部署在 GitHub Pages，链接都是相对路径，放在任何子路径下都能用。</p>
 
     <h2>许可</h2>
     <p>本站文字与题目以 CC BY-SA 4.0 发布，代码以 MIT 发布。图片版权属于各自的收藏机构，见下表。</p>
 
     <h2>常见问题</h2>
-    <p><b>期中范围以哪个为准？</b>以任课教师的正式通知为准。本站按课本目录整理：微积分 A1 到 4.3 节「泰勒公式」（含），线性代数到第三章向量组的秩之前。</p>
-    <p><b>这 100 道题是哪来的？</b>全部自编，格式与难度参考 2019–2025 历年期中卷与 2026 期中样卷；不整题抄录真题，历年卷只在「真题」页做考点索引。</p>
-    <p><b>为什么有些章节是灰的？</b>那是期中之后才考的内容，等期末那一版会补上颜色。</p>
+    <p><b>范围以哪个为准？</b>任课教师的正式通知。本站按课本目录整理，期中、期末两套范围可以在右上角切换。</p>
+    <p><b>现在有多少道题？</b>114 道，全部自编，每题都有提示、解析和一条常见错误。</p>
+    <p><b>为什么有些章节是灰的？</b>那是不在当前轮次范围里的内容。切到另一个轮次，颜色会跟着变。</p>
     <p><b>进度存在哪里？</b>「已做」「收藏」只存在你自己的浏览器（localStorage），不上传，换设备或清缓存就没了。</p>
-    <p><b>投稿要写什么格式？</b>Markdown，公式用 ( ) 和 [ ]。投稿页有实时预览，会顺手生成 frontmatter 和文件名。</p>
-    <p><b>题目合并之后会怎样？</b>它会变成 content/questions/ 下的一个文件，出现在题库、对应标签页和所属章节里。</p>
-    <p><b>能打印吗？</b>能。速查表、每篇要点、每道题都做了打印样式。</p>
+    <p><b>投稿要写什么格式？</b>Markdown，公式用 ( ) 和 [ ]。缩写（<code>e</code>、<code>d</code>、<code>abs{}</code> 之类）见<a href="../notation/">符号与缩写</a>。投稿页有实时预览，会顺手生成 frontmatter 和文件名。</p>
+    <p><b>题目合并之后会怎样？</b>它会成为 content/questions/ 下的一个文件，出现在题库、对应标签页和所属章节里。</p>
+    <p><b>能打印吗？</b>能。速查表、每篇要点、每道题都有打印样式；整份卷子在「导出」页生成，A4 排版。</p>
 
     <h2>图片来源</h2>
     <table>
@@ -96,7 +98,6 @@
       <tbody><tr><td>2026-11-03T09:19:47.233Z</td><td>&quot;Brook Taylor. Line engraving after R. Earlom.&quot;, CC BY 4.0, via Wikimedia Commons</td><td><a href="https://commons.wikimedia.org/wiki/File:Brook_Taylor._Line_engraving_after_R._Earlom._Wellcome_V0005740.jpg" target="_blank" rel="noopener noreferrer">来源</a></td></tr><tr><td>2026-11-03T09:19:47.990Z</td><td>&quot;Newton's Principia title page&quot; by The original uploader was Zhaladshar at English Wikisource ., public domain, via Wikimedia Commons</td><td><a href="https://commons.wikimedia.org/wiki/File:Newton%27s_Principia_title_page.png" target="_blank" rel="noopener noreferrer">来源</a></td></tr><tr><td>2026-11-03T09:19:48.798Z</td><td>&quot;Introductio in analysin infinitorum. T. 1 - Leonhard Euler, 1748 (title page)&quot;, public domain, via Wikimedia Commons</td><td><a href="https://commons.wikimedia.org/wiki/File:Introductio_in_analysin_infinitorum._T._1_-_Leonhard_Euler,_1748_(title_page).jpg" target="_blank" rel="noopener noreferrer">来源</a></td></tr><tr><td>2026-11-03T09:19:50.049Z</td><td>&quot;Explanations of Problems in Arithmetic with Examples&quot;, public domain, via Wikimedia Commons</td><td><a href="https://commons.wikimedia.org/wiki/File:Explanations_of_Problems_in_Arithmetic_with_Examples_WDL464.jpg" target="_blank" rel="noopener noreferrer">来源</a></td></tr><tr><td>2026-11-03T09:19:50.555Z</td><td>&quot;2023 Suwak logarytmiczny (2)&quot; by Jacek Halicki, CC BY-SA 4.0, via Wikimedia Commons</td><td><a href="https://commons.wikimedia.org/wiki/File:2023_Suwak_logarytmiczny_(2).jpg" target="_blank" rel="noopener noreferrer">来源</a></td></tr><tr><td>2026-11-03T09:19:51.902Z</td><td>&quot;Example absolute value&quot; by Manuelzapata04, CC BY-SA 4.0, via Wikimedia Commons</td><td><a href="https://commons.wikimedia.org/wiki/File:Example_absolute_value.jpg" target="_blank" rel="noopener noreferrer">来源</a></td></tr></tbody>
     </table>
   </div>
-</div>
 </main>
 
   <footer class="footer">
@@ -113,11 +114,12 @@
         <div class="footer__col">
           <h3>内容</h3>
           <ul>
-            <li><a href="../questions/">题库（100 道）</a></li>
+            <li><a href="../questions/">题库（114 道）</a></li>
             <li><a href="../practice/">刷题</a></li>
             <li><a href="../papers/">历年真题索引</a></li>
             <li><a href="../tags/">标签</a></li>
             <li><a href="../export/">导出 PDF</a></li>
+            <li><a href="../stats/">进度</a></li>
           </ul>
         </div>
         <div class="footer__col">

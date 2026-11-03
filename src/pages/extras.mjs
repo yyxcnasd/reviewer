@@ -35,14 +35,20 @@ import {
 export function buildNotFound(ctx) {
   const body = `
 <div class="frame">
-  <div class="section">
-    <h1 style="max-width:14em">这一页不在册子里</h1>
-    <p class="lede" style="margin-top:24px">地址可能写错了，或者这一章还没整理。</p>
-    <p style="margin-top:36px"><a class="btn btn--red" href="${url(0, 'questions/')}">去题库</a></p>
-    <ul style="margin-top:48px;list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:20px 40px">
-      <li><a href="${url(0, 'va1/')}">微积分 A1</a></li>
-      <li><a href="${url(0, 'la/')}">线性代数</a></li>
-      <li><a href="${url(0, 'papers/')}">真题索引</a></li>
+  <div class="section notfound">
+    <h1>这一页不在册子里</h1>
+    <p class="lede">地址可能写错了，也可能这一章还没整理。下面这两个入口最快：</p>
+    <form class="search notfound__search" action="${url(0, 'questions/')}" method="get" role="search">
+      <label class="sr-only" for="q">搜题</label>
+      <input class="search__input" id="q" name="q" type="search" placeholder="搜题：题干、标签、出处" autocomplete="off">
+      <button class="btn btn--red" type="submit">搜题</button>
+    </form>
+    <ul class="notfound__links">
+      <li><a href="${url(0, 'questions/')}">题库（${ctx.stats.questions} 道）</a></li>
+      <li><a href="${url(0, 'practice/')}">刷题</a></li>
+      <li><a href="${url(0, 'cheatsheet/')}">速查表</a></li>
+      <li><a href="${url(0, 'notation/')}">符号与缩写</a></li>
+      <li><a href="${url(0, 'export/')}">导出 PDF</a></li>
     </ul>
   </div>
 </div>`

@@ -11,9 +11,9 @@
 <script>
   // 先按本地设置（或系统偏好）定主题，避免刷新时闪白
   try {
-    var saved = localStorage.getItem('reviewer.theme')
-    var dark = saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches
-    if (dark) document.documentElement.setAttribute('data-theme', 'dark')
+    // 默认浅色（纸面）。只有你手动切过深色，才在下次打开时记住。
+    if (localStorage.getItem('reviewer.theme') === 'dark')
+      document.documentElement.setAttribute('data-theme', 'dark')
   } catch (e) {}
 </script>
 <script src="../assets/core.js"></script>
@@ -41,6 +41,7 @@
           <li><a href="../practice/">刷题</a></li>
           <li><a href="../cheatsheet/">速查</a></li>
           <li><a href="../papers/">真题</a></li>
+          <li><a href="../stats/">进度</a></li>
         </ul>
         <div class="nav__end">
           <div class="nav__terms" role="group" aria-label="考试轮次">
@@ -85,7 +86,7 @@
         
       </li><li class="qrow" data-id="va1-046" data-course="va1" data-chapter="va1-4" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="3" data-tags="泰勒公式 微分" data-text="用三阶泰勒多项式近似 ，并估计误差。 泰勒公式 微分 自编">
         <div>
-          <a class="qrow__link" href="../questions/va1-046.html">用三阶泰勒多项式近似 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>e</mi><mn>0.1</mn></msup></mrow><annotation encoding="application/x-tex">e^{0.1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">0.1</span></span></span></span></span></span></span></span></span></span></span></span>，并估计误差。</a>
+          <a class="qrow__link" href="../questions/va1-046.html">用三阶泰勒多项式近似 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi mathvariant="normal">e</mi><mn>0.1</mn></msup></mrow><annotation encoding="application/x-tex">\mathrm{e}^{0.1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathrm">e</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">0.1</span></span></span></span></span></span></span></span></span></span></span></span>，并估计误差。</a>
           <div class="qrow__meta"><span>微积分 · 导数应用</span><span>综合题</span><span class="dots" aria-label="难度 3 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span></div>
           
         </div>
@@ -140,11 +141,12 @@
         <div class="footer__col">
           <h3>内容</h3>
           <ul>
-            <li><a href="../questions/">题库（100 道）</a></li>
+            <li><a href="../questions/">题库（114 道）</a></li>
             <li><a href="../practice/">刷题</a></li>
             <li><a href="../papers/">历年真题索引</a></li>
             <li><a href="../tags/">标签</a></li>
             <li><a href="../export/">导出 PDF</a></li>
+            <li><a href="../stats/">进度</a></li>
           </ul>
         </div>
         <div class="footer__col">

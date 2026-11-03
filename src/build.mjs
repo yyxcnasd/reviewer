@@ -16,6 +16,8 @@ import { buildPapers } from './pages/papers.mjs'
 import { buildPractice } from './pages/practice.mjs'
 import { buildSubmit } from './pages/submit.mjs'
 import { buildAbout } from './pages/about.mjs'
+import { buildNotation } from './pages/notation.mjs'
+import { buildStats } from './pages/stats.mjs'
 import { buildExportPages } from './pages/export.mjs'
 import { buildNotFound, buildData, buildExtras } from './pages/extras.mjs'
 
@@ -76,6 +78,8 @@ export async function buildSite(ctx) {
   buildPractice(ctx)
   buildSubmit(ctx)
   buildAbout(ctx)
+  buildNotation(ctx)
+  buildStats(ctx)
   buildNotFound(ctx)
 
   buildData(ctx)

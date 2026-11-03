@@ -6,7 +6,7 @@
 
 \[\sin x\sim x,\quad \tan x\sim x,\quad \arcsin x\sim x,\quad \arctan x\sim x\]
 
-\[\ln(1+x)\sim x,\quad e^{x}-1\sim x,\quad (1+x)^{\alpha}-1\sim \alpha x,\quad 1-\cos x\sim \frac{x^{2}}{2}\]
+\[\ln(1+x)\sim x,\quad \e^{x}-1\sim x,\quad (1+x)^{\alpha}-1\sim \alpha x,\quad 1-\cos x\sim \frac{x^{2}}{2}\]
 
 高一阶的几个（分母是 \(x^{3}\) 时才用得上）：
 
@@ -18,7 +18,7 @@
 
 ### 麦克劳林展开（\(x\to 0\)，到 \(x^{4}\)）
 
-\[e^{x}=1+x+\frac{x^{2}}{2}+\frac{x^{3}}{6}+\frac{x^{4}}{24}+o(x^{4})\]
+\[\e^{x}=1+x+\frac{x^{2}}{2}+\frac{x^{3}}{6}+\frac{x^{4}}{24}+o(x^{4})\]
 
 \[\sin x=x-\frac{x^{3}}{6}+o(x^{4}),\qquad \cos x=1-\frac{x^{2}}{2}+\frac{x^{4}}{24}+o(x^{4})\]
 
@@ -38,13 +38,13 @@
 
 \[(\arcsin x)'=\frac{1}{\sqrt{1-x^{2}}},\quad (\arccos x)'=-\frac{1}{\sqrt{1-x^{2}}},\quad (\arctan x)'=\frac{1}{1+x^{2}}\]
 
-隐函数 \(F(x,y)=0\)：\(\dfrac{\mathrm dy}{\mathrm dx}=-\dfrac{F_x}{F_y}\)。
+隐函数 \(F(x,y)=0\)：\(\dfrac{\mathrm \d y}{\mathrm \d x}=-\dfrac{F_x}{F_y}\)。
 
-参数方程：\(\dfrac{\mathrm dy}{\mathrm dx}=\dfrac{y'(t)}{x'(t)}\)；二阶导是 \(\dfrac{\mathrm d}{\mathrm dt}\Big(\dfrac{y'}{x'}\Big)\Big/x'(t)\)，**不是** \(\dfrac{y''}{x''}\)。
+参数方程：\(\dfrac{\mathrm \d y}{\mathrm \d x}=\dfrac{y'(t)}{x'(t)}\)；二阶导是 \(\dfrac{\d{\mathrm \d t}\Big(\dfrac{y'}{x'}\Big)\Big/x'(t)\)，**不是** \(\dfrac{y''}{x''}\)。
 
 ### 高阶导数
 
-\[(x^{n})^{(n)}=n!,\qquad (e^{ax})^{(n)}=a^{n}e^{ax},\qquad (\sin x)^{(n)}=\sin\Big(x+\frac{n\pi}{2}\Big)\]
+\[(x^{n})^{(n)}=n!,\qquad (\e^{ax})^{(n)}=a^{n}\e^{ax},\qquad (\sin x)^{(n)}=\sin\Big(x+\frac{n\pi}{2}\Big)\]
 
 莱布尼茨：\((uv)^{(n)}=\sum\limits_{k=0}^{n}\binom{n}{k}u^{(k)}v^{(n-k)}\)。
 
@@ -55,7 +55,7 @@
 - **拉格朗日**：\(f(b)-f(a)=f'(\xi)(b-a)\)。
 - **柯西**：\(\dfrac{f(b)-f(a)}{g(b)-g(a)}=\dfrac{f'(\xi)}{g'(\xi)}\)，要求 \(g'\ne 0\)。
 
-三个条件缺一不可。造辅助函数：见 \(f'+\lambda f\) 试 \(e^{\lambda x}f\)；见两个函数之差，作差用罗尔。
+三个条件缺一不可。造辅助函数：见 \(f'+\lambda f\) 试 \(\e^{\lambda x}f\)；见两个函数之差，作差用罗尔。
 
 ### 洛必达
 

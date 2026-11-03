@@ -11,9 +11,9 @@
 <script>
   // 先按本地设置（或系统偏好）定主题，避免刷新时闪白
   try {
-    var saved = localStorage.getItem('reviewer.theme')
-    var dark = saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches
-    if (dark) document.documentElement.setAttribute('data-theme', 'dark')
+    // 默认浅色（纸面）。只有你手动切过深色，才在下次打开时记住。
+    if (localStorage.getItem('reviewer.theme') === 'dark')
+      document.documentElement.setAttribute('data-theme', 'dark')
   } catch (e) {}
 </script>
 <script src="./assets/core.js"></script>
@@ -41,6 +41,7 @@
           <li><a href="./practice/">刷题</a></li>
           <li><a href="./cheatsheet/">速查</a></li>
           <li><a href="./papers/">真题</a></li>
+          <li><a href="./stats/">进度</a></li>
         </ul>
         <div class="nav__end">
           <div class="nav__terms" role="group" aria-label="考试轮次">
@@ -55,14 +56,20 @@
 <main id="main">
 
 <div class="frame">
-  <div class="section">
-    <h1 style="max-width:14em">这一页不在册子里</h1>
-    <p class="lede" style="margin-top:24px">地址可能写错了，或者这一章还没整理。</p>
-    <p style="margin-top:36px"><a class="btn btn--red" href="questions/">去题库</a></p>
-    <ul style="margin-top:48px;list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:20px 40px">
-      <li><a href="va1/">微积分 A1</a></li>
-      <li><a href="la/">线性代数</a></li>
-      <li><a href="papers/">真题索引</a></li>
+  <div class="section notfound">
+    <h1>这一页不在册子里</h1>
+    <p class="lede">地址可能写错了，也可能这一章还没整理。下面这两个入口最快：</p>
+    <form class="search notfound__search" action="questions/" method="get" role="search">
+      <label class="sr-only" for="q">搜题</label>
+      <input class="search__input" id="q" name="q" type="search" placeholder="搜题：题干、标签、出处" autocomplete="off">
+      <button class="btn btn--red" type="submit">搜题</button>
+    </form>
+    <ul class="notfound__links">
+      <li><a href="questions/">题库（114 道）</a></li>
+      <li><a href="practice/">刷题</a></li>
+      <li><a href="cheatsheet/">速查表</a></li>
+      <li><a href="notation/">符号与缩写</a></li>
+      <li><a href="export/">导出 PDF</a></li>
     </ul>
   </div>
 </div>
@@ -82,11 +89,12 @@
         <div class="footer__col">
           <h3>内容</h3>
           <ul>
-            <li><a href="./questions/">题库（100 道）</a></li>
+            <li><a href="./questions/">题库（114 道）</a></li>
             <li><a href="./practice/">刷题</a></li>
             <li><a href="./papers/">历年真题索引</a></li>
             <li><a href="./tags/">标签</a></li>
             <li><a href="./export/">导出 PDF</a></li>
+            <li><a href="./stats/">进度</a></li>
           </ul>
         </div>
         <div class="footer__col">

@@ -11,9 +11,9 @@
 <script>
   // 先按本地设置（或系统偏好）定主题，避免刷新时闪白
   try {
-    var saved = localStorage.getItem('reviewer.theme')
-    var dark = saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches
-    if (dark) document.documentElement.setAttribute('data-theme', 'dark')
+    // 默认浅色（纸面）。只有你手动切过深色，才在下次打开时记住。
+    if (localStorage.getItem('reviewer.theme') === 'dark')
+      document.documentElement.setAttribute('data-theme', 'dark')
   } catch (e) {}
 </script>
 <script src="../assets/core.js"></script>
@@ -41,6 +41,7 @@
           <li><a href="../practice/">刷题</a></li>
           <li><a href="../cheatsheet/">速查</a></li>
           <li><a href="../papers/">真题</a></li>
+          <li><a href="../stats/">进度</a></li>
         </ul>
         <div class="nav__end">
           <div class="nav__terms" role="group" aria-label="考试轮次">
@@ -70,8 +71,8 @@
         <p>线性组合与线性表示、向量组等价，以及线性相关性的定义与判定套路。</p>
         <div class="pagehead__stats">
           <span>在范围内</span>
-          <span><b>14</b>道题在这一章</span>
-          <span data-progress-ids="la-037,la-038,la-039,la-040,la-041,la-042,la-043,la-044,la-045,la-046,la-047,la-048,la-049,la-050">本章已做 <b data-progress-here>0</b> / 14</span>
+          <span><b>15</b>道题在这一章</span>
+          <span data-progress-ids="la-037,la-038,la-039,la-040,la-041,la-042,la-043,la-044,la-045,la-046,la-047,la-048,la-049,la-050,la-053">本章已做 <b data-progress-here>0</b> / 15</span>
           <span><button class="ghost" type="button" data-print>打印这一章</button></span>
         </div>
       </div>
@@ -228,13 +229,13 @@ c-10,0,-16.667,5,-20,15z M188 15 H145 v585 v2400 v585 h43z"/></svg></span></span
 </ul>
 <p>结论：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo mathvariant="normal">≠</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">t\ne1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel"><span class="mrel"><span class="mord vbox"><span class="thinbox"><span class="rlap"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="inner"><span class="mord"><span class="mrel"></span></span></span><span class="fix"></span></span></span></span></span><span class="mspace nobreak"></span><span class="mrel">=</span></span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span> 且 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo mathvariant="normal">≠</mo><mo>−</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">t\ne-2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel"><span class="mrel"><span class="mord vbox"><span class="thinbox"><span class="rlap"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="inner"><span class="mord"><span class="mrel"></span></span></span><span class="fix"></span></span></span></span></span><span class="mspace nobreak"></span><span class="mrel">=</span></span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">−</span><span class="mord">2</span></span></span></span> 时线性无关，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">t=1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6151em;"></span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span> 或 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo>=</mo><mo>−</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">t=-2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6151em;"></span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">−</span><span class="mord">2</span></span></span></span> 时线性相关。参数值要代回验证，只报&quot;相关&quot;或&quot;无关&quot;都不算完整。</p>
 
-    <div class="rule-head" style="margin-top:56px"><h2>这一章的题</h2><p>14 道，全部带解析。</p></div>
+    <div class="rule-head" style="margin-top:56px"><h2>这一章的题</h2><p>15 道，全部带解析。</p></div>
            <ul class="qmini">
-             <li><a href="../questions/la-037.html">线性表示 · 难度 1</a> <span>计算题 · 线性表示</span></li><li><a href="../questions/la-038.html">判断下列命题是否正确 正确的说明理由 错误的…</a> <span>概念题 · 线性相关性</span></li><li><a href="../questions/la-039.html">判断向量组</a> <span>计算题 · 线性相关性</span></li><li><a href="../questions/la-040.html">线性表示 · 难度 2</a> <span>计算题 · 线性表示</span></li><li><a href="../questions/la-041.html">线性相关性 · 难度 2</a> <span>计算题 · 线性相关性</span></li><li><a href="../questions/la-042.html">线性表示 · 难度 2</a> <span>计算题 · 线性表示</span></li><li><a href="../questions/la-043.html">设向量组 中有一部分 例如 其中 线性相关…</a> <span>证明题 · 线性相关性</span></li><li><a href="../questions/la-044.html">设向量组 线性无关 向量 可由它们线性表示</a> <span>证明题 · 线性表示</span></li><li><a href="../questions/la-045.html">线性相关性 · 难度 2</a> <span>计算题 · 线性相关性</span></li><li><a href="../questions/la-046.html">设向量组 线性无关 令</a> <span>证明题 · 线性相关性</span></li><li><a href="../questions/la-047.html">线性相关性 · 难度 3</a> <span>计算题 · 线性相关性</span></li><li><a href="../questions/la-048.html">设 线性无关 令</a> <span>综合题 · 线性表示</span></li><li><a href="../questions/la-049.html">设向量组 满足 其中任意两个向量都线性无关…</a> <span>综合题 · 线性相关性</span></li><li><a href="../questions/la-050.html">设 线性无关 令</a> <span>证明题 · 线性相关性</span></li>
+             <li><a href="../questions/la-037.html">线性表示 · 难度 1</a> <span>计算题 · 线性表示</span></li><li><a href="../questions/la-038.html">判断下列命题是否正确 正确的说明理由 错误的…</a> <span>概念题 · 线性相关性</span></li><li><a href="../questions/la-039.html">判断向量组</a> <span>计算题 · 线性相关性</span></li><li><a href="../questions/la-040.html">线性表示 · 难度 2</a> <span>计算题 · 线性表示</span></li><li><a href="../questions/la-041.html">线性相关性 · 难度 2</a> <span>计算题 · 线性相关性</span></li><li><a href="../questions/la-042.html">线性表示 · 难度 2</a> <span>计算题 · 线性表示</span></li><li><a href="../questions/la-043.html">设向量组 中有一部分 例如 其中 线性相关…</a> <span>证明题 · 线性相关性</span></li><li><a href="../questions/la-044.html">设向量组 线性无关 向量 可由它们线性表示</a> <span>证明题 · 线性表示</span></li><li><a href="../questions/la-045.html">线性相关性 · 难度 2</a> <span>计算题 · 线性相关性</span></li><li><a href="../questions/la-046.html">设向量组 线性无关 令</a> <span>证明题 · 线性相关性</span></li><li><a href="../questions/la-047.html">线性相关性 · 难度 3</a> <span>计算题 · 线性相关性</span></li><li><a href="../questions/la-048.html">设 线性无关 令</a> <span>综合题 · 线性表示</span></li><li><a href="../questions/la-049.html">设向量组 满足 其中任意两个向量都线性无关…</a> <span>综合题 · 线性相关性</span></li><li><a href="../questions/la-050.html">设 线性无关 令</a> <span>证明题 · 线性相关性</span></li><li><a href="../questions/la-053.html">设 为 实矩阵 为 实矩阵</a> <span>证明题 · 秩不等式</span></li>
            </ul>
     <div class="article__pager">
       <a href="../notes/la-2.html">← 第 2 章 矩阵</a>
-      <span></span>
+      <a href="../notes/la-4.html">第 4 章 秩与解的结构 →</a>
     </div>
   </div>
   <nav class="article__toc" data-ui aria-label="本页目录">
@@ -243,7 +244,7 @@ c-10,0,-16.667,5,-20,15z M188 15 H145 v585 v2400 v585 h43z"/></svg></span></span
           <dl class="spec spec--rail">
             <div><dt>章节</dt><dd>第 3 章</dd></div>
             <div><dt>节</dt><dd>4 节在范围内</dd></div>
-            <div><dt>题</dt><dd>14 道</dd></div>
+            <div><dt>题</dt><dd>15 道</dd></div>
             <div><dt>范围</dt><dd>在范围内</dd></div>
           </dl>
         </nav>
@@ -265,11 +266,12 @@ c-10,0,-16.667,5,-20,15z M188 15 H145 v585 v2400 v585 h43z"/></svg></span></span
         <div class="footer__col">
           <h3>内容</h3>
           <ul>
-            <li><a href="../questions/">题库（100 道）</a></li>
+            <li><a href="../questions/">题库（114 道）</a></li>
             <li><a href="../practice/">刷题</a></li>
             <li><a href="../papers/">历年真题索引</a></li>
             <li><a href="../tags/">标签</a></li>
             <li><a href="../export/">导出 PDF</a></li>
+            <li><a href="../stats/">进度</a></li>
           </ul>
         </div>
         <div class="footer__col">

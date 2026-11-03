@@ -11,9 +11,9 @@
 <script>
   // 先按本地设置（或系统偏好）定主题，避免刷新时闪白
   try {
-    var saved = localStorage.getItem('reviewer.theme')
-    var dark = saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches
-    if (dark) document.documentElement.setAttribute('data-theme', 'dark')
+    // 默认浅色（纸面）。只有你手动切过深色，才在下次打开时记住。
+    if (localStorage.getItem('reviewer.theme') === 'dark')
+      document.documentElement.setAttribute('data-theme', 'dark')
   } catch (e) {}
 </script>
 <script src="../assets/core.js"></script>
@@ -41,6 +41,7 @@
           <li><a href="../practice/">刷题</a></li>
           <li><a href="../cheatsheet/">速查</a></li>
           <li><a href="../papers/">真题</a></li>
+          <li><a href="../stats/">进度</a></li>
         </ul>
         <div class="nav__end">
           <div class="nav__terms" role="group" aria-label="考试轮次">
@@ -80,7 +81,7 @@
     <aside class="practice__side">
       <div class="practice__filters">
         <div class="field"><label for="p-course">科目</label><select id="p-course"><option value="">全部</option><option value="va1">微积分 A1</option><option value="la">线性代数</option><option value="other">其他</option></select></div>
-        <div class="field"><label for="p-chapter">章节</label><select id="p-chapter"><option value="">全部</option><optgroup label="微积分 A1"><option value="va1-1">数列极限</option><option value="va1-2">函数极限</option><option value="va1-3">导数</option><option value="va1-4">中值定理与泰勒</option></optgroup><optgroup label="线性代数"><option value="la-1">行列式</option><option value="la-2">矩阵</option><option value="la-3">向量空间</option></optgroup></select></div>
+        <div class="field"><label for="p-chapter">章节</label><select id="p-chapter"><option value="">全部</option><optgroup label="微积分 A1"><option value="va1-1">数列极限</option><option value="va1-2">函数极限</option><option value="va1-3">导数</option><option value="va1-4">中值定理与泰勒</option><option value="va1-5">黎曼积分</option><option value="va1-6">广义积分</option></optgroup><optgroup label="线性代数"><option value="la-1">行列式</option><option value="la-2">矩阵</option><option value="la-3">向量空间</option></optgroup></select></div>
         <div class="field"><label for="p-difficulty">难度</label>
           <select id="p-difficulty"><option value="">全部</option><option value="1">1 基础</option><option value="2">2 常规</option><option value="3">3 综合</option><option value="4">4 挑战</option></select>
         </div>
@@ -113,11 +114,12 @@
         <div class="footer__col">
           <h3>内容</h3>
           <ul>
-            <li><a href="../questions/">题库（100 道）</a></li>
+            <li><a href="../questions/">题库（114 道）</a></li>
             <li><a href="../practice/">刷题</a></li>
             <li><a href="../papers/">历年真题索引</a></li>
             <li><a href="../tags/">标签</a></li>
             <li><a href="../export/">导出 PDF</a></li>
+            <li><a href="../stats/">进度</a></li>
           </ul>
         </div>
         <div class="footer__col">

@@ -97,13 +97,13 @@ export function buildHome(ctx) {
   <div class="frame hero__inner">
     <div class="hero__copy">
       <h1 class="hero__title">要考的范围<br>和题都在这里</h1>
-      <p class="hero__lead">复习册：课程范围、讲义要点、题库与解析放在一处。默认按<b data-term-label>期中</b>的范围显示，右上角可以切到期末。${stats.questions} 道题带解析，${stats.notes} 篇要点，${ctx.papers.length} 套真题索引。</p>
+      <p class="hero__lead">课程范围、讲义要点、题库与解析都在这里。当前显示的是<b data-term-label>期中</b>的范围，右上角可以换成期末。${stats.questions} 道题，每题带提示、解析和一条常见错误；${stats.notes} 篇要点；${ctx.papers.length} 套真题的考点索引。</p>
       <form class="search" action="${url(0, 'questions/')}" method="get" role="search">
         <label class="sr-only" for="q">搜题</label>
         <input class="search__input" id="q" name="q" type="search" placeholder="搜题：题干、标签、出处" autocomplete="off">
         <button class="btn btn--red search__btn" type="submit">搜题</button>
       </form>
-      <p class="hero__note">已做 <span data-progress-total="${stats.questions}">0 / ${stats.questions}</span> · 按 <span class="kbd">/</span> 在题库里搜</p>
+      <p class="hero__note">已做 <span data-progress-total="${stats.questions}">0 / ${stats.questions}</span> · <a href="${url(0, 'stats/')}">看进度</a> · 按 <span class="kbd">/</span> 在题库里搜</p>
     </div>
   </div>
 </section>
@@ -122,7 +122,7 @@ export function buildHome(ctx) {
 <section class="frame section--tight" id="scope">
   <div class="rule-head">
     <h2>范围</h2>
-    <p>按课本目录排。灰掉的是期中之后才考的章节；「已做」跟着你的进度变。</p>
+    <p>按课本目录排。灰的是不在当前轮次范围的章节；「已做」跟着你的进度变。</p>
   </div>
   <div class="checker checker--inline">
     <label class="sr-only" for="scope-input">查一个知识点考不考</label>
@@ -147,7 +147,7 @@ export function buildHome(ctx) {
 <section class="frame section--tight">
   <div class="rule-head">
     <h2>先做这几道</h2>
-    <p>每章一道，难度从常规到综合，都是卷面上最常见的形状。</p>
+    <p>每章挑一道，常规到综合都有，都是卷子上常见的题型。</p>
   </div>
   <ul class="fqlist">${featuredRows}</ul>
   <p class="more">
@@ -159,7 +159,7 @@ export function buildHome(ctx) {
 <section class="frame section--tight">
   <div class="rule-head">
     <h2>速查与投稿</h2>
-    <p>考前十分钟能扫完的那一页，和一道题从写下来到进题库的三步。</p>
+    <p>考前十分钟能扫完的公式页，和一道题从写下来到进题库的流程。</p>
   </div>
   <div class="twocol">
     <div class="panel">
@@ -209,7 +209,7 @@ export function buildHome(ctx) {
     </div>
   </div>
   <p class="closing">
-    <a href="${url(0, 'about/')}">关于这本册子：范围说明、内容怎么组织、许可与图片出处 →</a>
+    <a href="${url(0, 'about/')}">关于这本册子：范围说明、内容怎么组织、许可与图片来源 →</a>
   </p>
 </section>
 `

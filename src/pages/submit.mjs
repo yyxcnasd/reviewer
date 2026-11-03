@@ -123,7 +123,7 @@ export function buildSubmit(ctx) {
         </div>
         <label class="sr-only" for="s-stem">题面</label>
         <textarea class="textarea textarea--code" id="s-stem" rows="7" spellcheck="false" placeholder="设 \(f(x)=\dfrac{1}{1+x}\)，求 \(f^{(n)}(0)\)。"></textarea>
-        <p class="hint">括号、$、反引号会自动配对；Tab 跳出；Ctrl+Z 可以撤销工具条插入的内容。</p>
+        <p class="hint">括号、$、反引号会自动配对；Tab 跳出；Ctrl+Z 可以撤销工具条插入的内容。数学可以用缩写：<code>\e</code>、<code>\d</code>、<code>\abs{}</code>、<code>\R</code>，见<a href="${url(1, 'notation/')}">符号与缩写</a>。</p>
       </div>
 
       <div class="submit__row">

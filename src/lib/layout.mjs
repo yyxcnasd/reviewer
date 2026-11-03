@@ -38,6 +38,7 @@ export function page(ctx, opts) {
     { label: '刷题', href: 'practice/', key: 'practice' },
     { label: '速查', href: 'cheatsheet/', key: 'cheatsheet' },
     { label: '真题', href: 'papers/', key: 'papers' },
+    { label: '进度', href: 'stats/', key: 'stats' },
   ]
 
   const nav = `
@@ -89,6 +90,7 @@ export function page(ctx, opts) {
             <li><a href="${base}papers/">历年真题索引</a></li>
             <li><a href="${base}tags/">标签</a></li>
             <li><a href="${base}export/">导出 PDF</a></li>
+            <li><a href="${base}stats/">进度</a></li>
           </ul>
         </div>
         <div class="footer__col">
@@ -128,9 +130,9 @@ export function page(ctx, opts) {
 <script>
   // 先按本地设置（或系统偏好）定主题，避免刷新时闪白
   try {
-    var saved = localStorage.getItem('reviewer.theme')
-    var dark = saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches
-    if (dark) document.documentElement.setAttribute('data-theme', 'dark')
+    // 默认浅色（纸面）。只有你手动切过深色，才在下次打开时记住。
+    if (localStorage.getItem('reviewer.theme') === 'dark')
+      document.documentElement.setAttribute('data-theme', 'dark')
   } catch (e) {}
 </script>
 <script src="${base}assets/core.js"></script>

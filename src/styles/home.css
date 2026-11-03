@@ -348,8 +348,8 @@
 /* ---------------------------------------------------------------- 页脚 */
 
 .footer {
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--chrome-bg);
+  color: var(--chrome-fg);
   padding-block: clamp(140px, 15vw, 220px) clamp(28px, 3vw, 44px);
 }
 
@@ -358,7 +358,7 @@
   font-weight: 900;
   line-height: 0.86;
   letter-spacing: -0.04em;
-  color: var(--paper);
+  color: var(--chrome-fg);
   display: block;
 }
 

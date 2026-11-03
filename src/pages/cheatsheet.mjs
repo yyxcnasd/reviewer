@@ -47,7 +47,7 @@ export function buildCheatsheet(ctx) {
       <h1 class="pagehead__title">速查表</h1>
       <div class="pagehead__scope">
         <p>两门课最常用的一批结论：等价无穷小、麦克劳林展开、求导与中值定理、行列式与逆矩阵、线性相关性。考前十分钟扫一遍，打印出来带走也行。</p>
-        <div class="pagehead__stats">
+        <div class="pagehead__stats" data-cheat-stats>
           <span><b>${headings.length}</b>组结论</span>
           <span>适合打印（A4 双栏）</span>
           <span><button class="ghost" type="button" data-print>打印</button></span>
