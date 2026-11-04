@@ -100,7 +100,9 @@
       const item = store[Number(i)]
       if (!item) return ''
       try {
-        return window.katex.renderToString(item.tex.trim(), {
+        // 站点支持的缩写（\e、\d、\abs{…} 之类）在预览里也要生效
+        const expanded = window.RBExpandShorthands ? window.RBExpandShorthands(item.tex) : item.tex
+        return window.katex.renderToString(expanded.trim(), {
           displayMode: item.display,
           throwOnError: false,
           output: 'htmlAndMathml',
@@ -204,6 +206,7 @@
     if (!stem) problems.push('题面还没写')
     if (!sol) problems.push('解析还没写')
     if (!tags().length) problems.push('至少一个标签')
+    updateCount()
     el.status.textContent = problems.length ? `还差：${problems.join('、')}` : '可以提交了。'
     el.status.classList.toggle('is-warn', problems.length > 0)
   }
@@ -219,6 +222,45 @@
     el[key].addEventListener('input', () => {
       clearTimeout(timer)
       timer = setTimeout(update, 120)
+    })
+  }
+
+  /* ---------------------------------------------------------------- 编辑体验 */
+
+  const counter = document.querySelector('#s-count')
+
+  /** 文本框随内容长高（最高到视口六成） */
+  function grow(area) {
+    if (!area) return
+    area.style.height = 'auto'
+    const max = Math.round(window.innerHeight * 0.6)
+    area.style.height = Math.min(area.scrollHeight + 4, max) + 'px'
+  }
+
+  /** 题面 / 解析的字数与行数 */
+  function updateCount() {
+    if (!counter) return
+    const count = (s) => (s || '').replace(/\s/g, '').length
+    const stem = el.stem.value
+    const lines = stem ? stem.split('\n').length : 0
+    const total = count(stem) + count(el.solution.value) + count(el.hint.value) + count(el.mistakes.value)
+    counter.textContent = `题面 ${count(stem)} 字 · ${lines} 行 · 全文 ${total} 字`
+  }
+
+  for (const area of ALL) {
+    grow(area)
+    area.addEventListener('input', () => grow(area))
+  }
+  window.addEventListener('resize', () => ALL.forEach(grow))
+
+  const focusBtn = document.querySelector('[data-md="focus"]')
+  if (focusBtn) {
+    focusBtn.addEventListener('mousedown', (ev) => ev.preventDefault())
+    focusBtn.addEventListener('click', () => {
+      const on = document.body.classList.toggle('is-focus')
+      focusBtn.textContent = on ? '退出专注' : '专注'
+      focusBtn.classList.toggle('is-on', on)
+      ALL.forEach(grow)
     })
   }
 

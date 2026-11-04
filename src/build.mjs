@@ -17,6 +17,7 @@ import { buildSubmit } from './pages/submit.mjs'
 import { buildAbout } from './pages/about.mjs'
 import { buildNotation } from './pages/notation.mjs'
 import { buildStats } from './pages/stats.mjs'
+import { browserSource } from './shorthands.mjs'
 import { buildExportPages } from './pages/export.mjs'
 import { buildNotFound, buildData, buildExtras } from './pages/extras.mjs'
 
@@ -108,6 +109,9 @@ export function copyStatic(ctx) {
   // 打印版单独一份（只有 /export/print/ 用）
   const sheetCss = path.join(stylesDir, 'print-sheet.css')
   if (fs.existsSync(sheetCss)) fs.copyFileSync(sheetCss, path.join(ctx.OUT, 'assets/print-sheet.css'))
+
+  // 缩写展开器（投稿页预览用），与构建时同一份规则
+  fs.writeFileSync(path.join(ctx.OUT, 'assets/shorthands.js'), browserSource(), 'utf8')
 
   for (const name of SCRIPTS) {
     const file = path.join(ctx.ROOT, 'src/assets', name)

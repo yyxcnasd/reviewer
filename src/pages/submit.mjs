@@ -120,10 +120,16 @@ export function buildSubmit(ctx) {
             <button type="button" data-md="quote" title="引用">引用</button>
             <button type="button" data-md="heading" title="小标题">小标题</button>
           </div>
+          <div class="mdbar__group mdbar__group--right">
+            <button type="button" data-md="focus" title="专注写作：隐藏右侧预览">专注</button>
+          </div>
         </div>
         <label class="sr-only" for="s-stem">题面</label>
         <textarea class="textarea textarea--code" id="s-stem" rows="7" spellcheck="false" placeholder="设 \(f(x)=\dfrac{1}{1+x}\)，求 \(f^{(n)}(0)\)。"></textarea>
-        <p class="hint">括号、$、反引号会自动配对；Tab 跳出；Ctrl+Z 可以撤销工具条插入的内容。数学可以用缩写：<code>\e</code>、<code>\d</code>、<code>\abs{}</code>、<code>\R</code>，见<a href="${url(1, 'notation/')}">符号与缩写</a>。</p>
+        <div class="mdmeta">
+          <p class="hint">括号、$、反引号自动配对 · Tab 跳出 · Ctrl+B 加粗 · Ctrl+I 斜体 · Ctrl+Z 撤销。数学可用缩写 <code>\e</code> <code>\d</code> <code>\abs{}</code> <code>\R</code>，见<a href="${url(1, 'notation/')}">符号与缩写</a>。</p>
+          <p class="mdcount" id="s-count" aria-live="polite"></p>
+        </div>
       </div>
 
       <div class="submit__row">
@@ -175,6 +181,7 @@ export function buildSubmit(ctx) {
     </ol>
   </section>
 </div>
+<script src="${url(1, 'assets/shorthands.js')}"></script>
 <script>window.__CHAPTERS__ = ${JSON.stringify(chaptersByCourse).replace(/</g, '\\u003c')}</script>
 <script src="${url(1, 'assets/vendor/markdown-it.min.js')}"></script>
 <script src="${url(1, 'assets/vendor/katex.min.js')}"></script>

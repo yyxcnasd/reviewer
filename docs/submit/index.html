@@ -146,10 +146,16 @@
             <button type="button" data-md="quote" title="引用">引用</button>
             <button type="button" data-md="heading" title="小标题">小标题</button>
           </div>
+          <div class="mdbar__group mdbar__group--right">
+            <button type="button" data-md="focus" title="专注写作：隐藏右侧预览">专注</button>
+          </div>
         </div>
         <label class="sr-only" for="s-stem">题面</label>
         <textarea class="textarea textarea--code" id="s-stem" rows="7" spellcheck="false" placeholder="设 (f(x)=dfrac{1}{1+x})，求 (f^{(n)}(0))。"></textarea>
-        <p class="hint">括号、$、反引号会自动配对；Tab 跳出；Ctrl+Z 可以撤销工具条插入的内容。数学可以用缩写：<code>e</code>、<code>d</code>、<code>abs{}</code>、<code>R</code>，见<a href="../notation/">符号与缩写</a>。</p>
+        <div class="mdmeta">
+          <p class="hint">括号、$、反引号自动配对 · Tab 跳出 · Ctrl+B 加粗 · Ctrl+I 斜体 · Ctrl+Z 撤销。数学可用缩写 <code>e</code> <code>d</code> <code>abs{}</code> <code>R</code>，见<a href="../notation/">符号与缩写</a>。</p>
+          <p class="mdcount" id="s-count" aria-live="polite"></p>
+        </div>
       </div>
 
       <div class="submit__row">
@@ -201,6 +207,7 @@
     </ol>
   </section>
 </div>
+<script src="../assets/shorthands.js"></script>
 <script>window.__CHAPTERS__ = {"va1":"\u003coption value=\"va1-1\">第 1 章 实数系与实数列的极限\u003c/option>\u003coption value=\"va1-2\">第 2 章 函数 函数的极限与连续\u003c/option>\u003coption value=\"va1-3\">第 3 章 函数的导数\u003c/option>\u003coption value=\"va1-4\">第 4 章 导数应用\u003c/option>\u003coption value=\"va1-5\">第 5 章 黎曼积分\u003c/option>\u003coption value=\"va1-6\">第 6 章 广义黎曼积分\u003c/option>\u003coption value=\"va1-7\">第 7 章 常微分方程\u003c/option>","la":"\u003coption value=\"la-1\">第 1 章 线性方程组与行列式\u003c/option>\u003coption value=\"la-2\">第 2 章 矩阵\u003c/option>\u003coption value=\"la-3\">第 3 章 n 维向量空间\u003c/option>\u003coption value=\"la-4\">第 4 章 向量组的秩之后\u003c/option>","other":"\u003coption value=\"other-1\">其他题目\u003c/option>"}</script>
 <script src="../assets/vendor/markdown-it.min.js"></script>
 <script src="../assets/vendor/katex.min.js"></script>
@@ -241,7 +248,7 @@
           <ul>
             <li>2026 秋 期中版</li>
             <li>内容 CC BY-SA 4.0</li>
-            <li>构建于 2026-11-03</li>
+            <li>构建于 2026-11-04</li>
           </ul>
         </div>
       </div>

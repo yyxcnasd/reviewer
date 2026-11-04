@@ -82,7 +82,7 @@ export function questionRow(ctx, q, opts = {}) {
   return `<li class="qrow" data-id="${q.id}" data-course="${q.course}" data-chapter="${q.chapter}" data-states="${attr(JSON.stringify(ch.terms || {}))}" data-difficulty="${q.difficulty}" data-tags="${attr(q.tags.join(' '))}" data-text="${attr(q.searchText || '')}">
         <div>
           <a class="qrow__link" href="${url(depth, `questions/${q.id}.html`)}">${stemExcerpt(ctx, q)}</a>
-          <div class="qrow__meta">${meta}</div>
+          <div class="qrow__meta">${meta}<span class="qrow__term" hidden>不在本轮范围</span></div>
           ${flags ? progressFlags(q) : ''}
         </div>
         ${tags ? `<div class="qrow__tags">${tagChips(q.tags, depth)}</div>` : ''}

@@ -28,6 +28,9 @@
     if (el.matches('.range tr, .chapter, .qrow')) {
       el.classList.toggle('is-out', state === 'out')
       el.classList.toggle('is-boundary', state === 'boundary')
+      // 题目行：不在本轮范围的，把标记露出来
+      const badge = el.querySelector('.qrow__term')
+      if (badge) badge.hidden = state !== 'out'
     }
     if (el.matches('[data-sec]')) {
       el.classList.toggle('sec-in', state === 'in')

@@ -502,3 +502,8 @@ a.tag:hover {
   font-variant-numeric: tabular-nums;
   color: var(--ink);
 }
+
+/* 用属性控制显隐时必须压过组件自己的 display（.qrow 是 grid，会盖掉浏览器默认的 [hidden]） */
+[hidden] {
+  display: none !important;
+}

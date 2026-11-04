@@ -228,7 +228,16 @@
       if (p.get('difficulty') && sel.difficulty) sel.difficulty.value = p.get('difficulty')
       if (p.get('q') && sel.q) sel.q.value = p.get('q')
       if (p.get('status') && sel.status) sel.status.value = p.get('status')
-    if (p.get('scope') && sel.scope) sel.scope.value = p.get('scope')
+    if (sel.scope) {
+      sel.scope.addEventListener('change', () => {
+        try {
+          localStorage.setItem('reviewer.bankScope', sel.scope.value)
+        } catch (e) {}
+      })
+    }
+    // 地址里明确写了 scope（哪怕是空值）就照它来；否则按上次选择，或默认只显示本轮范围
+    if (p.has('scope') && sel.scope) sel.scope.value = p.get('scope') || ''
+    else if (sel.scope && !localStorage.getItem('reviewer.bankScope')) sel.scope.value = 'in'
     if (p.get('sort') && sel.sort) sel.sort.value = p.get('sort')
     }
 
@@ -300,6 +309,17 @@
         location.href = '../export/?' + p.toString()
       })
     }
+
+    // 范围说明：本轮范围内有多少道
+    const scopeNote = document.querySelector('#q-scope-note')
+    const paintScopeNote = () => {
+      if (!scopeNote) return
+      const termLabel = document.querySelector('.term-btn.is-on')?.textContent?.trim() || '期中'
+      const inScope = items.filter((el) => el.dataset.state === 'in' || el.dataset.state === 'boundary').length
+      scopeNote.textContent = `当前轮次「${termLabel}」：范围内 ${inScope} 道，范围外 ${items.length - inScope} 道。默认只看范围内，把「范围」改成「全部」可以看另一轮次的内容。`
+    }
+    paintScopeNote()
+    document.addEventListener('term:change', paintScopeNote)
 
     // 进度变了（在别的行点过）就重算：状态筛选要跟着变
     document.addEventListener('progress:change', run)

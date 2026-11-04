@@ -109,6 +109,8 @@ export function buildQuestionIndex(ctx) {
     <div class="filters__count"><b id="f-count">${questions.length}</b> 道</div>
   </form>
 
+  <p class="questions__scope" id="q-scope-note"></p>
+
   <div class="donebar" data-progress-ids="${attr(questions.map((q) => q.id).join(','))}">
     <p>
       已做 <b data-progress-here>0</b> / ${questions.length}

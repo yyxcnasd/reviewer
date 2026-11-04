@@ -2225,3 +2225,83 @@
   height: 100%;
   background: var(--ink);
 }
+
+/* ---------------------------------------------------------------- 投稿编辑器体验 */
+
+/* 软换行：长句不横向滚动 */
+.textarea--code {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  tab-size: 2;
+  resize: none;
+  overflow-y: auto;
+  min-height: 132px;
+}
+
+.mdbar__group--right {
+  margin-left: auto;
+  border-color: var(--line);
+}
+
+.mdbar__group--right button.is-on {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.mdmeta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 6px 18px;
+  align-items: baseline;
+}
+
+.mdcount {
+  font-size: var(--fs-micro);
+  color: var(--ink-mute);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* 专注：隐掉预览，编辑区铺满 */
+body.is-focus .submit {
+  grid-template-columns: 1fr;
+}
+
+body.is-focus .submit__preview {
+  display: none;
+}
+
+/* 预览：长公式与长词都不撑破右栏 */
+.submit__preview .prose {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.submit__preview .prose pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.submit__preview .prose .math-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+/* 题目行：不在本轮范围的标记 */
+.qrow__term {
+  display: inline-block;
+  padding: 0.1em 0.45em;
+  background: var(--paper-3);
+  color: var(--ink-soft);
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.questions__scope {
+  margin: 0 0 6px;
+  font-size: var(--fs-micro);
+  color: var(--ink-mute);
+}
