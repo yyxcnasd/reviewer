@@ -105,42 +105,52 @@ f'(x_0)=\lim_{h\to 0}\frac{f(x_0+h)-f(x_0)}{h}
       <h2>区块</h2>
       <p>定义、定理、例、注意这类内容，用 <code>:::</code> 包起来。第一行写类型（可带标题），最后一行单独一个 <code>:::</code> 收尾。区块里可以照常写公式、列表、代码。</p>
       <div class="mdx-block">
+      <div class="mdx-block__code"><pre>:::theorem[中值定理]
+若 $f$ 在 $[a,b]$ 上连续、在 $(a,b)$ 内可导……
+:::</pre></div>
+      <div class="mdx-block__note"><b>:::theorem[中值定理]</b><span>英文类型 + 方括号标题。类型决定颜色，标题随便写。</span></div>
+    </div><div class="mdx-block">
+      <div class="mdx-block__code"><pre>:::definition
+设 $f$ 在 $x_0$ 的邻域内有定义……
+:::</pre></div>
+      <div class="mdx-block__note"><b>:::definition</b><span>定义。也可以写 :::定义，不给标题。</span></div>
+    </div><div class="mdx-block">
+      <div class="mdx-block__code"><pre>:::example[3.1]
+求 $x^2$ 的导数。
+:::</pre></div>
+      <div class="mdx-block__note"><b>:::example[3.1]</b><span>例题，标题写编号。</span></div>
+    </div><div class="mdx-block">
+      <div class="mdx-block__code"><pre>:::warning[易错]
+分子必须同时出现 $f(x_0+h)$ 与 $f(x_0)$。
+:::</pre></div>
+      <div class="mdx-block__note"><b>:::warning[易错]</b><span>注意 / 易错，红色线。danger、caution 同色。</span></div>
+    </div><div class="mdx-block">
+      <div class="mdx-block__code"><pre>:::info[提示]
+先把公式配成标准形式再算。
+:::</pre></div>
+      <div class="mdx-block__note"><b>:::info[提示]</b><span>提示、小技巧，蓝色线。tip、remark 同色。</span></div>
+    </div><div class="mdx-block">
+      <div class="mdx-block__code"><pre>:::proof
+由中值定理……
+:::</pre></div>
+      <div class="mdx-block__note"><b>:::proof</b><span>证明过程。</span></div>
+    </div><div class="mdx-block">
       <div class="mdx-block__code"><pre>:::定义
 设 $f$ 在 $x_0$ 的邻域内有定义……
 :::</pre></div>
-      <div class="mdx-block__note"><b>定义</b><span>定义、约定。最深的一档，用墨色线。</span></div>
-    </div><div class="mdx-block">
-      <div class="mdx-block__code"><pre>:::定理 中值定理
-若 $f$ 在 $[a,b]$ 上连续、在 $(a,b)$ 内可导……
-:::</pre></div>
-      <div class="mdx-block__note"><b>定理</b><span>定理、命题、引理（写「引理」「命题」等价）。</span></div>
-    </div><div class="mdx-block">
-      <div class="mdx-block__code"><pre>:::结论
-$\sin x\sim x$（$x\to 0$）。
-:::</pre></div>
-      <div class="mdx-block__note"><b>结论</b><span>可以直接拿来用的结论、公式。</span></div>
-    </div><div class="mdx-block">
-      <div class="mdx-block__code"><pre>:::例 3.1
-求 $x^2$ 的导数。
-:::</pre></div>
-      <div class="mdx-block__note"><b>例</b><span>例题、示例（写「例题」等价），可带编号。</span></div>
-    </div><div class="mdx-block">
-      <div class="mdx-block__code"><pre>:::注意
-分子必须同时出现 $f(x_0+h)$ 与 $f(x_0)$。
-:::</pre></div>
-      <div class="mdx-block__note"><b>注意</b><span>易错点、警告（写「易错」「警告」等价），红色线。</span></div>
-    </div><div class="mdx-block">
-      <div class="mdx-block__code"><pre>:::提示
-先把公式配成标准形式再算。
-:::</pre></div>
-      <div class="mdx-block__note"><b>提示</b><span>小技巧、提示，蓝色线。</span></div>
-    </div><div class="mdx-block">
-      <div class="mdx-block__code"><pre>:::证明
-由中值定理……
-:::</pre></div>
-      <div class="mdx-block__note"><b>证明</b><span>证明过程，浅灰线，收敛一点。</span></div>
+      <div class="mdx-block__note"><b>:::定义</b><span>中文类型也能直接写，兼容更短的写法。</span></div>
     </div>
-      <p>英文别名也能用：<code>definition</code>、<code>theorem</code>、<code>example</code>、<code>note</code>、<code>warn</code>、<code>tip</code>、<code>proof</code>。</p>
+      <p>类型词决定颜色与默认标题，标题写在方括号里（可省略）：</p>
+      <table class="nt-table"><thead><tr><th>类型</th><th>显示</th><th>颜色</th></tr></thead><tbody>
+        <tr><td><code>theorem</code> <code>lemma</code> <code>proposition</code></td><td>定理 / 引理 / 命题</td><td>墨色</td></tr>
+        <tr><td><code>definition</code></td><td>定义</td><td>墨色</td></tr>
+        <tr><td><code>corollary</code> <code>conclusion</code></td><td>推论 / 结论</td><td>墨色</td></tr>
+        <tr><td><code>example</code></td><td>例</td><td>蓝色</td></tr>
+        <tr><td><code>warning</code> <code>danger</code> <code>caution</code> <code>note</code></td><td>注意</td><td>红色</td></tr>
+        <tr><td><code>info</code> <code>tip</code> <code>remark</code></td><td>提示</td><td>蓝色</td></tr>
+        <tr><td><code>proof</code></td><td>证明</td><td>灰色</td></tr>
+        <tr><td>中文：<code>定义 定理 引理 命题 性质 结论 推论 例 注意 易错 警告 提示 证明</code></td><td>同上</td><td>同上</td></tr>
+      </tbody></table>
     </section>
 
     <section class="mdx__sec">
