@@ -88,14 +88,18 @@
 
 <div class="frame article">
   <div class="article__main prose">
+    <div class="note-glance">
+        <h2>本章速览</h2>
+        <ol><li><a href="#h-2">栈与 call/ret</a></li><li><a href="#h-3">参数传递（System V AMD64）</a></li><li><a href="#h-4">谁该保存寄存器</a></li><li><a href="#h-5">栈帧与 16 字节对齐</a></li><li><a href="#h-7">局部变量放在哪</a></li><li><a href="#h-8">递归与栈</a></li></ol>
+      </div>
     <h2 id="h-1">4.1 栈帧与调用约定</h2>
 <h3 id="h-2">栈与 call/ret</h3>
 <p>栈向低地址增长，<code>%rsp</code> 指向栈顶。</p>
 <ul>
-<li><code>pushq %rbx</code>：先把 <code>%rsp</code> 减 8，再把 <code>%rbx</code> 存入栈顶；</li>
-<li><code>popq %rbx</code>：先从栈顶读出，再把 <code>%rsp</code> 加 8；</li>
-<li><code>call f</code>：把<strong>返回地址</strong>（<code>call</code> 的下一条指令的地址）压栈，然后跳到 <code>f</code>；</li>
-<li><code>ret</code>：从栈顶弹出返回地址，跳回去。</li>
+<li<code>pushq %rbx</code>：先把 <code>%rsp</code> 减 8，再把 <code>%rbx</code> 存入栈顶；</li>
+<li<code>popq %rbx</code>：先从栈顶读出，再把 <code>%rsp</code> 加 8；</li>
+<li<code>call f</code>：把<strong>返回地址</strong>（<code>call</code> 的下一条指令的地址）压栈，然后跳到 <code>f</code>；</li>
+<li<code>ret</code>：从栈顶弹出返回地址，跳回去。</li>
 </ul>
 <p><strong>最容易错的一步</strong>：<code>call</code> 之后、刚进入被调用函数时，栈顶已经是返回地址，<code>%rsp</code> 比调用前小了 8。所以「函数入口处 <code>%rsp % 16 = 8</code>」——后面所有对齐规则都是从这来的。</p>
 <h3 id="h-3">参数传递（System V AMD64）</h3>
@@ -110,15 +114,15 @@
 </thead>
 <tbody>
 <tr>
-<td><code>0(%rsp)</code></td>
+<td<code>0(%rsp)</code></td>
 <td>返回地址</td>
 </tr>
 <tr>
-<td><code>8(%rsp)</code></td>
+<td<code>8(%rsp)</code></td>
 <td>第 7 个参数</td>
 </tr>
 <tr>
-<td><code>16(%rsp)</code></td>
+<td<code>16(%rsp)</code></td>
 <td>第 8 个参数</td>
 </tr>
 </tbody>
@@ -134,14 +138,13 @@
 <p><strong>最容易错的一步</strong>：在函数里用了 <code>%rbx</code> 却没 <code>push</code>/<code>pop</code>。这会悄悄改坏调用者的数据，表现为「程序在别处莫名出错」，是缓存区、递归类题目常见的坑点。</p>
 <h3 id="h-5">栈帧与 16 字节对齐</h3>
 <p>典型函数的开头和结尾：</p>
-<pre><code>f:
+<p><pre class="code-block"><code class="language-text">f:
     pushq %rbp            # 保存调用者的 rbp
     movq %rsp, %rbp       # 建立当前帧基址
     subq $32, %rsp        # 给局部变量和临时值留空间（16 的倍数）
     ...
     leave                 # 等价于 movq %rbp, %rsp; popq %rbp
-    ret
-</code></pre>
+    ret</code></pre></p>
 <p><strong>为什么 <code>sub</code> 的量必须是 16 的倍数</strong>：调用 <code>call</code> 前 <code>%rsp</code> 必须满足 <code>%rsp % 16 = 0</code>（ABI 要求）。进入函数时 <code>%rsp % 16 = 8</code>，<code>push %rbp</code> 后变成 0，再减一个 16 的倍数，调用下一个函数时仍然对齐。局部变量需要 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi></mrow><annotation encoding="application/x-tex">N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.109em;">N</span></span></span></span> 字节时，<code>sub</code> 取「不小于 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi></mrow><annotation encoding="application/x-tex">N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.109em;">N</span></span></span></span> 的最小 16 的倍数」。</p>
 <h2 id="h-6">4.2 局部变量与递归</h2>
 <h3 id="h-7">局部变量放在哪</h3>
@@ -152,13 +155,12 @@
 </ul>
 <h3 id="h-8">递归与栈</h3>
 <p>每次递归调用都新建一个栈帧，所以栈深度等于递归深度。以</p>
-<pre><code class="language-c">long sum(long n) {
+<p><pre class="code-block"><code class="language-c">long sum(long n) {
     if (n &lt;= 0) return 0;
     return n + sum(n - 1);
-}
-</code></pre>
+}</code></pre></p>
 <p>为例，典型汇编是</p>
-<pre><code>sum:
+<p><pre class="code-block"><code class="language-text">sum:
     testq %rdi, %rdi
     jle .L2
     pushq %rbx
@@ -170,8 +172,7 @@
     ret
 .L2:
     movl $0, %eax
-    ret
-</code></pre>
+    ret</code></pre></p>
 <p><strong>为什么用 <code>%rbx</code></strong>：递归调用 <code>sum</code> 会覆盖调用者保存寄存器（包括 <code>%rcx</code>），而 <code>%rbx</code> 是被调用者保存的，<code>sum</code> 自己负责保存和恢复，所以把 <code>n</code> 放在 <code>%rbx</code> 里最省事。</p>
 <p><strong>最容易错的一步</strong>：算递归的栈深度。<code>sum(3)</code> 会依次调用 <code>sum(2)</code>、<code>sum(1)</code>、<code>sum(0)</code>，最深时栈上同时有 4 个返回地址、3 个保存的 <code>%rbx</code>（<code>sum(0)</code> 立刻返回，还没 <code>push</code>）。</p>
 <p><strong>递归 vs 迭代</strong>：递归的栈开销是 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0278em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span> 空间。<code>sum(1000000)</code> 若每层占 32 字节，栈就要约 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>32</mn><mtext> MB</mtext></mrow><annotation encoding="application/x-tex">32\ \text{MB}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">32</span><span class="mspace"> </span><span class="mord text"><span class="mord">MB</span></span></span></span></span>，而默认栈大小通常 8 MB，结果就是栈溢出。尾递归在 <code>-O2</code> 下可能被优化成循环（复用同一个栈帧）。</p>
@@ -187,7 +188,7 @@
   </div>
   <nav class="article__toc" data-ui aria-label="本页目录">
           <h2>本页</h2>
-          <ol><li class=""><a href="#h-1">4.1 栈帧与调用约定</a></li><li class=""><a href="#h-6">4.2 局部变量与递归</a></li></ol>
+          <ol><li class=""><a href="#h-1">4.1 栈帧与调用约定</a></li><li class="is-sub"><a href="#h-2">栈与 call/ret</a></li><li class="is-sub"><a href="#h-3">参数传递（System V AMD64）</a></li><li class="is-sub"><a href="#h-4">谁该保存寄存器</a></li><li class="is-sub"><a href="#h-5">栈帧与 16 字节对齐</a></li><li class=""><a href="#h-6">4.2 局部变量与递归</a></li><li class="is-sub"><a href="#h-7">局部变量放在哪</a></li><li class="is-sub"><a href="#h-8">递归与栈</a></li></ol>
           <dl class="spec spec--rail">
             <div><dt>章节</dt><dd>第 4 章</dd></div>
             <div><dt>节</dt><dd>2 节在范围内</dd></div>

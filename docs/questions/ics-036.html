@@ -81,12 +81,13 @@
           <button class="ghost" type="button" id="expand-all">展开解析与提示</button>
           <button class="ghost" type="button" id="copy-md">复制题目</button>
           <a class="ghost" href="../export/?ids=ics-036">导出这道题</a>
+          <button class="ghost" type="button" data-print>打印这道题</button>
           <span class="qactions__id">ICS-036 · <span class="kbd">←</span><span class="kbd">→</span> 翻题 · <span class="kbd">E</span> 展开 · <span class="kbd">D</span> 记已做</span>
         </div>
       </header>
 
       <div class="qpage__stem prose"><p>函数 <code>sum</code> 的汇编实现如下（参数 <code>a</code> 在 <code>%rdi</code>，<code>n</code> 在 <code>%rsi</code>，返回值在 <code>%rax</code>）：</p>
-<pre><code>sum:
+<p><pre class="code-block"><code class="language-text">sum:
     movl  $0, %eax
     movl  $0, %ecx
     jmp   .L2
@@ -98,8 +99,7 @@
     cmpq  %rsi, %rax
     jl    .L3
     movq  %rcx, %rax
-    ret
-</code></pre>
+    ret</code></pre></p>
 <p>（1）写出与之等价的 C 代码（用 <code>while</code> 或 <code>for</code>）。</p>
 <p>（2）若 <code>a = {1, -2, 3, -4}</code>、<code>n = 4</code>，函数返回多少？</p>
 <p>（3）如果把 <code>jl</code> 改成 <code>jle</code>，循环会怎样变化？会带来什么问题？</p>
@@ -116,7 +116,7 @@
 </div>
           <p><strong>关键的那一步为什么能想到。</strong> 汇编里的循环通常由「初始化 → 跳到条件判断 → 循环体 → 条件判断」四块组成。先找出哪个寄存器在递增（<code>%rax</code>，即 <code>i</code>）、哪个在累加（<code>%rcx</code>，即 <code>s</code>）、哪个数在控制终止（<code>%rsi</code>，即 <code>n</code>），再按 <code>cmp</code> 的操作数方向读出条件是 <code>i &lt; n</code>。把这三件事对上，C 代码就出来了。</p>
 <p>（1）等价 C 代码：</p>
-<pre><code class="language-c">long sum(long *a, long n) {
+<p><pre class="code-block"><code class="language-c">long sum(long *a, long n) {
     long i = 0;
     long s = 0;
     while (i &lt; n) {
@@ -124,8 +124,7 @@
         i++;
     }
     return s;
-}
-</code></pre>
+}</code></pre></p>
 <p>（2）逐项累加：
 <span class="math-display"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mn>1</mn><mo>+</mo><mo stretchy="false">(</mo><mo>−</mo><mn>2</mn><mo stretchy="false">)</mo><mo>+</mo><mn>3</mn><mo>+</mo><mo stretchy="false">(</mo><mo>−</mo><mn>4</mn><mo stretchy="false">)</mo><mo>=</mo><mo>−</mo><mn>2.</mn></mrow><annotation encoding="application/x-tex">1+(-2)+3+(-4)=-2.</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">−</span><span class="mord">2</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">3</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">−</span><span class="mord">4</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">−</span><span class="mord">2.</span></span></span></span></span></span>
 所以返回 <code>-2</code>。</p>

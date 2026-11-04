@@ -81,16 +81,16 @@
           <button class="ghost" type="button" id="expand-all">展开解析与提示</button>
           <button class="ghost" type="button" id="copy-md">复制题目</button>
           <a class="ghost" href="../export/?ids=ics-023">导出这道题</a>
+          <button class="ghost" type="button" data-print>打印这道题</button>
           <span class="qactions__id">ICS-023 · <span class="kbd">←</span><span class="kbd">→</span> 翻题 · <span class="kbd">E</span> 展开 · <span class="kbd">D</span> 记已做</span>
         </div>
       </header>
 
       <div class="qpage__stem prose"><p>递归函数</p>
-<pre><code class="language-c">long f(long n) {
+<p><pre class="code-block"><code class="language-c">long f(long n) {
     if (n &lt;= 1) return 1;
     return f(n - 1) + f(n - 2);
-}
-</code></pre>
+}</code></pre></p>
 <p>回答：</p>
 <p>(1) <code>f(5)</code> 的值是多少？</p>
 <p>(2) 计算 <code>f(5)</code> 的整个过程中，<code>f</code> 一共被调用多少次（包括最初的一次）？</p>

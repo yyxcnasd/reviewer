@@ -88,6 +88,10 @@
 
 <div class="frame article">
   <div class="article__main prose">
+    <div class="note-glance">
+        <h2>本章速览</h2>
+        <ol><li><a href="#h-2">位、字节、字</a></li><li><a href="#h-3">无符号与补码</a></li><li><a href="#h-4">符号扩展与截断</a></li><li><a href="#h-5">移位</a></li><li><a href="#h-6">溢出判断</a></li><li><a href="#h-8">IEEE 754 的字段</a></li><li><a href="#h-9">范围与精度</a></li><li><a href="#h-10">舍入与「算不准」</a></li><li><a href="#h-11">精度、吸收与结合律</a></li></ol>
+      </div>
     <h2 id="h-1">2.1 整数</h2>
 <h3 id="h-2">位、字节、字</h3>
 <p>1 字节 = 8 位。x86-64 的字长是 64 位。常用类型的大小：<code>char</code> 1 字节、<code>short</code> 2、<code>int</code> 4、<code>long</code> 8、指针 8。</p>
@@ -113,8 +117,8 @@
 <li>左移 <code>x &lt;&lt; k</code>：低位补 0，等价于乘 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mi>k</mi></msup></mrow><annotation encoding="application/x-tex">2^{k}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8491em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.0315em;">k</span></span></span></span></span></span></span></span></span></span></span></span> 再截断。</li>
 <li>右移分两种：<strong>逻辑右移</strong>高位补 0（无符号），<strong>算术右移</strong>高位补符号位（有符号）。
 <ul>
-<li><code>-8 &gt;&gt; 1</code> 是 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">-4</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">−</span><span class="mord">4</span></span></span></span>（算术右移，x86-64 的 <code>sar</code>）；</li>
-<li><code>(unsigned)(-8) &gt;&gt; 1</code> 得 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2147483644</mn></mrow><annotation encoding="application/x-tex">2147483644</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">2147483644</span></span></span></span>（逻辑右移，<code>shr</code>）。</li>
+<li<code>-8 &gt;&gt; 1</code> 是 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">-4</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">−</span><span class="mord">4</span></span></span></span>（算术右移，x86-64 的 <code>sar</code>）；</li>
+<li<code>(unsigned)(-8) &gt;&gt; 1</code> 得 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2147483644</mn></mrow><annotation encoding="application/x-tex">2147483644</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">2147483644</span></span></span></span>（逻辑右移，<code>shr</code>）。</li>
 </ul>
 </li>
 </ul>
@@ -183,7 +187,7 @@
   </div>
   <nav class="article__toc" data-ui aria-label="本页目录">
           <h2>本页</h2>
-          <ol><li class=""><a href="#h-1">2.1 整数</a></li><li class=""><a href="#h-7">2.2 浮点数</a></li></ol>
+          <ol><li class=""><a href="#h-1">2.1 整数</a></li><li class="is-sub"><a href="#h-2">位、字节、字</a></li><li class="is-sub"><a href="#h-3">无符号与补码</a></li><li class="is-sub"><a href="#h-4">符号扩展与截断</a></li><li class="is-sub"><a href="#h-5">移位</a></li><li class="is-sub"><a href="#h-6">溢出判断</a></li><li class=""><a href="#h-7">2.2 浮点数</a></li><li class="is-sub"><a href="#h-8">IEEE 754 的字段</a></li><li class="is-sub"><a href="#h-9">范围与精度</a></li><li class="is-sub"><a href="#h-10">舍入与「算不准」</a></li><li class="is-sub"><a href="#h-11">精度、吸收与结合律</a></li></ol>
           <dl class="spec spec--rail">
             <div><dt>章节</dt><dd>第 2 章</dd></div>
             <div><dt>节</dt><dd>2 节在范围内</dd></div>

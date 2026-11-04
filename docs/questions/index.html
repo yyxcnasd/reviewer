@@ -775,7 +775,8 @@
       </li>
       <li class="qrow" data-id="ics-024" data-course="ics" data-chapter="ics-4" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="4" data-tags="函数调用 栈帧 汇编" data-text="`g` 是外部函数，参数和返回值都是 `long`。`f` 在 `-O0` 下的汇编如下： ``` f: pushq %rbp movq %rsp, %rbp pushq %rbx subq $24, %rsp movq %rdi, %rbx movq %rdi, -32(%rbp) call g movq %rax, -24(%rbp) movq -32(%rbp), %rax addq -24(%rbp), %rax addq $24, %rsp popq %rbx popq %rbp ret ``` 回答： (1) 还原 `f` 的 C 代码。 (2) 局部变量区（从 `-32(%rbp)` 到 `-9(%rbp)`）共多少字节？其中数组占多少、填充占多少？ (3) 若 ，求 `f(7)`。 (4) 如果删掉 `pushq %rbx` 和 `popq %rbx`，会出什么问题？ (5">
         <div>
-          <a class="qrow__link" href="../questions/ics-024.html"><code>g</code> 是外部函数，参数和返回值都是 <code>long</code>。<code>f</code> 在 <code>-O0</code> 下的汇编如下：</a>
+          <a class="qrow__link" href="../questions/ics-024.html"><code>g</code> 是外部函数，参数和返回值都是 <code>long</code>。<code>f</code> 在 <code>-O0</code> 下的汇编如下：</p>
+</a>
           <div class="qrow__meta"><span class="fq__id">ICS-024</span><span>计系概 · 函数调用</span><span>综合题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           <div class="qrow__flags">
     <button class="flag" type="button" data-flag="done" data-id="ics-024" aria-pressed="false"><span>已做</span></button>
@@ -786,10 +787,8 @@
       </li>
       <li class="qrow" data-id="ics-025" data-course="ics" data-chapter="ics-5" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="3" data-tags="数组 多维数组 寻址方式" data-text="有二维数组 ```c int a[3][4]; ``` `int` 占 4 字节，数组按行优先存放，`&amp;a[0][0] = 0x1000`。回答： (1) `sizeof(a)` 是多少字节？每一行占多少字节？ (2) `&amp;a[1][2]` 的地址是多少？相对 `&amp;a[0][0]` 偏移多少字节？ (3) 设 在 `%rdi`、 在 `%rsi`，用两条指令算出 `a[i][j]` 相对 `&amp;a[0][0]` 的字节偏移。 (4) 偏移 44 字节处是哪个元素？ 数组 多维数组 寻址方式 自编">
         <div>
-          <a class="qrow__link" href="../questions/ics-025.html"><p>有二维数组 ```c
-int a[3][4];</p>
-<pre><code></code></pre>
-</a>
+          <a class="qrow__link" href="../questions/ics-025.html">有二维数组
+<pre class="code-block"><code class="language-c">int a[3][4];</code></pre></a>
           <div class="qrow__meta"><span class="fq__id">ICS-025</span><span>计系概 · 数组与结构体</span><span>计算题</span><span class="dots" aria-label="难度 3 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           <div class="qrow__flags">
     <button class="flag" type="button" data-flag="done" data-id="ics-025" aria-pressed="false"><span>已做</span></button>

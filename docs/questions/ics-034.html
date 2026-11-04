@@ -81,13 +81,14 @@
           <button class="ghost" type="button" id="expand-all">展开解析与提示</button>
           <button class="ghost" type="button" id="copy-md">复制题目</button>
           <a class="ghost" href="../export/?ids=ics-034">导出这道题</a>
+          <button class="ghost" type="button" data-print>打印这道题</button>
           <span class="qactions__id">ICS-034 · <span class="kbd">←</span><span class="kbd">→</span> 翻题 · <span class="kbd">E</span> 展开 · <span class="kbd">D</span> 记已做</span>
         </div>
       </header>
 
       <div class="qpage__stem prose"><p>已知寄存器与内存的初值：</p>
 <ul>
-<li><code>%rax = 0x1000</code>，<code>%rbx = 0x20</code>，<code>%rcx = 0x8</code>；</li>
+<li<code>%rax = 0x1000</code>，<code>%rbx = 0x20</code>，<code>%rcx = 0x8</code>；</li>
 <li>内存地址 <code>0x1048</code> 处存放 8 字节的值 <code>0xCAFEBABE</code>。</li>
 </ul>
 <p>回答下列问题。</p>
@@ -105,7 +106,7 @@
       <details class="qblock" id="solution">
         <summary>解析（先自己做一遍再看）<span aria-hidden="true">展开</span></summary>
         <div class="qblock__body prose">
-          <div class="answer"><span>答案</span><p>（1）<code>0x1010</code>；（2）<code>0x1080</code>；（3）<code>rdx=0x1048</code>，不访问内存；（4）从 <code>0x1048</code> 读出 <code>0xCAFEBABE</code>；（5）非法，比例因子只能取 1、2、4、8；（6）<code>0xFF8</code></p>
+          <div class="answer"><span>答案</span><p>（1）<code>0x1010</code>；（2）<code>0x1080</code>；（3）<code>rdx=0x1048</code>，不访问内存；（4）从 <code>0x1048</code> 读出 <code>0xCAFEBABE</code>；（5）非法，比例因子只能取 1、2、4、8；（6）<code>0xFF8</code>
 </div>
           <p><strong>关键的那一步为什么能想到。</strong> 先把 AT&amp;T 操作数拆成四块：<code>位移(基址, 变址, 比例)</code>，缺哪块就按 0（比例缺省为 1）处理；代进公式算地址。再区分指令：<code>lea</code> 的目的是「算地址」，所以只做算术；<code>mov</code> 的目的是「取数」，所以算完地址还要到内存里读一次。把「算地址」和「访问内存」分成两步，就不会把 <code>lea</code> 的结果当成内存内容。</p>
 <p>（1）只有基址和位移：

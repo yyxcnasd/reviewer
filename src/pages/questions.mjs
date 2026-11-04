@@ -186,6 +186,7 @@ export function buildQuestionPages(ctx) {
           <button class="ghost" type="button" id="expand-all">展开解析与提示</button>
           <button class="ghost" type="button" id="copy-md">复制题目</button>
           <a class="ghost" href="${url(1, `export/?ids=${q.id}`)}">导出这道题</a>
+          <button class="ghost" type="button" data-print>打印这道题</button>
           <span class="qactions__id">${esc(q.id.toUpperCase())} · <span class="kbd">←</span><span class="kbd">→</span> 翻题 · <span class="kbd">E</span> 展开 · <span class="kbd">D</span> 记已做</span>
         </div>
       </header>

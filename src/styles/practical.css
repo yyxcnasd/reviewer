@@ -844,3 +844,116 @@
   color: var(--red-deep);
   border: 2px solid var(--red);
 }
+
+/* ---------------------------------------------------------------- 打印：只留正文 */
+
+@media print {
+  /* 站点外壳与交互件 */
+  .sitehead,
+  .footer,
+  .crumb,
+  .skip,
+  .sitehead .nav__terms,
+  .article__toc,
+  .article__pager,
+  .qpage__side,
+  .qactions,
+  .qactions__id,
+  .qpage__actions,
+  .qmini,
+  .note-glance,
+  .rule-head,
+  .more,
+  .tag,
+  .btn,
+  button,
+  .kbd,
+  .pagehead__stats,
+  .filters,
+  .index-field,
+  .donebar,
+  .questions__scope,
+  .st-actions,
+  .sheet-tools,
+  .exactions,
+  .exbulk {
+    display: none !important;
+  }
+
+  /* 单列、满宽 */
+  .article,
+  .qpage,
+  .submit {
+    display: block !important;
+  }
+
+  .article__main,
+  .qpage__main {
+    grid-column: auto !important;
+    max-width: none !important;
+    width: auto !important;
+  }
+
+  /* 折叠块在纸上展开 */
+  details > summary {
+    display: none !important;
+  }
+
+  details:not([open]) > *:not(summary) {
+    display: block !important;
+  }
+
+  /* 正文排版按纸面重排 */
+  body {
+    font-size: 10.5pt;
+    line-height: 1.6;
+  }
+
+  .pagehead {
+    padding-block: 0 8mm !important;
+  }
+
+  .pagehead__title {
+    font-size: 18pt !important;
+  }
+
+  .prose h2 {
+    font-size: 13pt !important;
+    margin: 6mm 0 2mm !important;
+    padding-top: 3mm !important;
+  }
+
+  .prose h3 {
+    font-size: 11pt !important;
+    margin: 4mm 0 1.5mm !important;
+  }
+
+  .prose p,
+  .nb {
+    break-inside: avoid;
+  }
+
+  .nb {
+    padding-left: 3mm;
+  }
+
+  .math-display,
+  .katex-display {
+    break-inside: avoid;
+  }
+
+  pre {
+    border-left-width: 2pt !important;
+  }
+
+  /* 链接不打印下划线与地址 */
+  .prose a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .article__main,
+  .qpage__main {
+    padding-bottom: 0 !important;
+  }
+}

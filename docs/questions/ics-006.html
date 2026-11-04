@@ -81,12 +81,13 @@
           <button class="ghost" type="button" id="expand-all">展开解析与提示</button>
           <button class="ghost" type="button" id="copy-md">复制题目</button>
           <a class="ghost" href="../export/?ids=ics-006">导出这道题</a>
+          <button class="ghost" type="button" data-print>打印这道题</button>
           <span class="qactions__id">ICS-006 · <span class="kbd">←</span><span class="kbd">→</span> 翻题 · <span class="kbd">E</span> 展开 · <span class="kbd">D</span> 记已做</span>
         </div>
       </header>
 
       <div class="qpage__stem prose"><p>某函数按整数参数 <code>x</code> 分派到不同分支，<code>x</code> 放在 <code>%rdi</code>。它的汇编片段是</p>
-<pre><code>    cmpq $6, %rdi
+<p><pre class="code-block"><code class="language-text">    cmpq $6, %rdi
     ja .L8
     jmp *.L4(,%rdi,8)
 .L4:
@@ -96,14 +97,13 @@
     .quad .L6
     .quad .L6
     .quad .L7
-    .quad .L7
-</code></pre>
+    .quad .L7</code></pre></p>
 <p>(1) 前两条指令在做什么？为什么用 <code>ja</code> 而不是 <code>jg</code>？</p>
 <p>(2) 当 <code>x = 3</code>、<code>x = 6</code>、<code>x = -1</code> 时分别跳到哪个标签？</p>
 <p>(3) 如果把 <code>case</code> 值改成 0、10、20、30，这段跳转表还合适吗？为什么？</p>
 </div>
 
-      <details class="qblock qblock--hint"><summary>提示<span aria-hidden="true">+</span></summary><div class="qblock__body prose"><p><code>ja</code> 是「无符号大于」。把 <code>x</code> 看成无符号数时，负数会变成巨大的值，这条指令就同时完成了「上界检查」和「排除负数」两件事。跳转表按 8 字节一项存放地址，用 <code>%rdi</code> 当下标。</p>
+      <details class="qblock qblock--hint"><summary>提示<span aria-hidden="true">+</span></summary><div class="qblock__body prose"><code>ja</code> 是「无符号大于」。把 <code>x</code> 看成无符号数时，负数会变成巨大的值，这条指令就同时完成了「上界检查」和「排除负数」两件事。跳转表按 8 字节一项存放地址，用 <code>%rdi</code> 当下标。</p>
 </div></details>
 
       <details class="qblock" id="solution">

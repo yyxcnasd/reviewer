@@ -88,6 +88,10 @@
 
 <div class="frame article">
   <div class="article__main prose">
+    <div class="note-glance">
+        <h2>本章速览</h2>
+        <ol><li><a href="#h-3">栈帧里的危险邻居</a></li><li><a href="#h-4">一个例子</a></li><li><a href="#h-5">攻击怎么发生</a></li><li><a href="#h-6">三层防御，各挡一种</a></li></ol>
+      </div>
     <h2 id="h-1">6.1 进程的内存布局</h2>
 <p>按课程要求这一节不考，只需记住一句话：一个进程的地址空间里有代码段、数据段、栈和堆几块区域，栈在高地址、向低地址增长。下面直接进入 6.2。</p>
 <h2 id="h-2">6.2 缓冲区溢出</h2>
@@ -95,14 +99,13 @@
 <p>回忆函数调用：局部数组放在栈帧里，返回地址在 <code>8(%rbp)</code>。数组如果写得比分配的长度多，就会往高地址方向依次覆盖：相邻局部变量 → 保存的 <code>%rbp</code> → <strong>返回地址</strong>。</p>
 <p>顺序很重要，因为 <code>ret</code> 只做一件事：从栈顶弹出 8 个字节当地址跳过去。返回地址被改，控制流就被劫持。</p>
 <h3 id="h-4">一个例子</h3>
-<pre><code class="language-c">void echo(void) {
+<p><pre class="code-block"><code class="language-c">void echo(void) {
     char buf[16];
     gets(buf);
     puts(buf);
-}
-</code></pre>
-<p><code>gets</code> 不检查长度，输入多长就往 <code>buf</code> 里写多长。典型汇编是</p>
-<pre><code>echo:
+}</code></pre></p>
+<code>gets</code> 不检查长度，输入多长就往 <code>buf</code> 里写多长。典型汇编是</p>
+<p><pre class="code-block"><code class="language-text">echo:
     pushq %rbp
     movq %rsp, %rbp
     subq $16, %rsp        # buf 从 rbp-16 开始
@@ -111,9 +114,8 @@
     movq %rsp, %rdi
     call puts
     leave
-    ret
-</code></pre>
-<p><code>buf</code> 占 <code>rbp-16</code> 到 <code>rbp-1</code>，再往上 8 字节是保存的 <code>%rbp</code>，再往上 8 字节是返回地址。所以输入的第 25–32 个字节会改写返回地址：</p>
+    ret</code></pre></p>
+<code>buf</code> 占 <code>rbp-16</code> 到 <code>rbp-1</code>，再往上 8 字节是保存的 <code>%rbp</code>，再往上 8 字节是返回地址。所以输入的第 25–32 个字节会改写返回地址：</p>
 <table>
 <thead>
 <tr>
@@ -124,7 +126,7 @@
 <tbody>
 <tr>
 <td>0–15</td>
-<td><code>buf</code> 本身</td>
+<td<code>buf</code> 本身</td>
 </tr>
 <tr>
 <td>16–23</td>
@@ -159,7 +161,7 @@
   </div>
   <nav class="article__toc" data-ui aria-label="本页目录">
           <h2>本页</h2>
-          <ol><li class=""><a href="#h-1">6.1 进程的内存布局</a></li><li class=""><a href="#h-2">6.2 缓冲区溢出</a></li></ol>
+          <ol><li class=""><a href="#h-1">6.1 进程的内存布局</a></li><li class=""><a href="#h-2">6.2 缓冲区溢出</a></li><li class="is-sub"><a href="#h-3">栈帧里的危险邻居</a></li><li class="is-sub"><a href="#h-4">一个例子</a></li><li class="is-sub"><a href="#h-5">攻击怎么发生</a></li><li class="is-sub"><a href="#h-6">三层防御，各挡一种</a></li></ol>
           <dl class="spec spec--rail">
             <div><dt>章节</dt><dd>第 6 章</dd></div>
             <div><dt>节</dt><dd>1 节在范围内</dd></div>

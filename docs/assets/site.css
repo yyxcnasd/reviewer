@@ -51,9 +51,9 @@
   --indigo: #173f72;
   --indigo-deep: #0e2a4d;
 
-  /* 代码块：比正文略暗一档，不要纯黑 */
-  --code-bg: #2b2822;
-  --code-fg: #f2eee4;
+  /* 代码块：比正文纸稍深一档，像打印稿上的衬底 */
+  --code-bg: #eceae1;
+  --code-fg: #1c1913;
 
   /* 线：比背景明显低一档，控件靠它跟纸分开 */
   --line: rgba(23, 20, 15, 0.14);
@@ -1847,6 +1847,7 @@ a.tag:hover {
 .prose pre {
   background: var(--code-bg);
   color: var(--code-fg);
+  border-left: 3px solid var(--line-strong);
   font-family: var(--mono); /* taste-skill-ignore */
   font-variant-numeric: normal;
   font-feature-settings: normal;
@@ -3787,6 +3788,7 @@ body.is-focus .submit__preview {
   padding: 14px 16px;
   background: var(--code-bg);
   color: var(--code-fg);
+  border-left: 3px solid var(--line-strong);
   font-family: var(--mono); /* taste-skill-ignore */
   font-variant-numeric: normal;
   font-size: 0.875rem;
@@ -3891,6 +3893,159 @@ body.is-focus .submit__preview {
   body.printing-ics .sheet-course:not([data-sheet='ics']),
   body.printing-other .sheet-course:not([data-sheet='other']) {
     display: none;
+  }
+}
+
+/* ---------------------------------------------------------------- 要点页：学习笔记排版 */
+
+/* 比正文稍紧一点，像一份整理过的笔记而不是文章 */
+.article__main.prose {
+  font-size: 1.0625rem;
+  line-height: 1.72;
+  max-width: 42em;
+}
+
+.article__main.prose p {
+  margin: 0 0 0.72em;
+}
+
+.article__main.prose h2 {
+  font-size: clamp(1.25rem, 1.6vw, 1.5rem);
+  margin: 2.1em 0 0.55em;
+  padding-top: 0.5em;
+  border-top: 2px solid var(--line-strong);
+  letter-spacing: 0.01em;
+}
+
+.article__main.prose h2:first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+}
+
+.article__main.prose h3 {
+  font-size: 1.0625rem;
+  margin: 1.5em 0 0.35em;
+  letter-spacing: 0.01em;
+}
+
+.article__main.prose h3 + p {
+  margin-top: 0;
+}
+
+.article__main.prose .math-display {
+  margin-block: 0.85em;
+}
+
+.article__main.prose ul,
+.article__main.prose ol {
+  margin: 0 0 0.8em;
+  padding-left: 1.2em;
+}
+
+.article__main.prose li {
+  margin-bottom: 0.3em;
+}
+
+/* 定义 / 定理 / 注意 这类标签：小红字 + 稍缩进，扫读时一眼能定位 */
+.nb {
+  padding-left: 0.9em;
+  border-left: 3px solid var(--line-strong);
+}
+
+.nb--定义,
+.nb--定理,
+.nb--性质,
+.nb--结论,
+.nb--推论 {
+  border-left-color: var(--ink);
+}
+
+.nb--注意,
+.nb--易错,
+.nb--警告 {
+  border-left-color: var(--red);
+}
+
+.nb--例,
+.nb--例题 {
+  border-left-color: var(--indigo);
+}
+
+.nb__label {
+  display: inline-block;
+  margin-right: 0.55em;
+  font-size: 0.78em;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--ink-soft);
+  vertical-align: 0.06em;
+}
+
+.nb--注意 .nb__label,
+.nb--易错 .nb__label,
+.nb--警告 .nb__label {
+  color: var(--red-deep);
+}
+
+.nb--例 .nb__label,
+.nb--例题 .nb__label {
+  color: var(--indigo);
+}
+
+/* 本章速览 */
+.note-glance {
+  margin: 0 0 1.6em;
+  padding: 14px 16px;
+  background: var(--paper-2);
+}
+
+.note-glance h2 {
+  margin: 0 0 0.5em;
+  padding: 0;
+  border: 0;
+  font-size: var(--fs-micro);
+  letter-spacing: 0.12em;
+  color: var(--ink-mute);
+}
+
+.note-glance ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px 18px;
+  font-size: var(--fs-small);
+  counter-reset: g;
+}
+
+.note-glance li {
+  margin: 0;
+  display: flex;
+  gap: 0.6em;
+  align-items: baseline;
+}
+
+.note-glance li::before {
+  counter-increment: g;
+  content: counter(g);
+  color: var(--red);
+  font-variant-numeric: tabular-nums;
+  min-width: 1.2em;
+}
+
+.note-glance a {
+  color: var(--ink);
+}
+
+.note-glance a:hover {
+  color: var(--red);
+}
+
+@media (max-width: 700px) {
+  .note-glance ol {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -4739,4 +4894,117 @@ body.is-focus .submit__preview {
   background: transparent;
   color: var(--red-deep);
   border: 2px solid var(--red);
+}
+
+/* ---------------------------------------------------------------- 打印：只留正文 */
+
+@media print {
+  /* 站点外壳与交互件 */
+  .sitehead,
+  .footer,
+  .crumb,
+  .skip,
+  .sitehead .nav__terms,
+  .article__toc,
+  .article__pager,
+  .qpage__side,
+  .qactions,
+  .qactions__id,
+  .qpage__actions,
+  .qmini,
+  .note-glance,
+  .rule-head,
+  .more,
+  .tag,
+  .btn,
+  button,
+  .kbd,
+  .pagehead__stats,
+  .filters,
+  .index-field,
+  .donebar,
+  .questions__scope,
+  .st-actions,
+  .sheet-tools,
+  .exactions,
+  .exbulk {
+    display: none !important;
+  }
+
+  /* 单列、满宽 */
+  .article,
+  .qpage,
+  .submit {
+    display: block !important;
+  }
+
+  .article__main,
+  .qpage__main {
+    grid-column: auto !important;
+    max-width: none !important;
+    width: auto !important;
+  }
+
+  /* 折叠块在纸上展开 */
+  details > summary {
+    display: none !important;
+  }
+
+  details:not([open]) > *:not(summary) {
+    display: block !important;
+  }
+
+  /* 正文排版按纸面重排 */
+  body {
+    font-size: 10.5pt;
+    line-height: 1.6;
+  }
+
+  .pagehead {
+    padding-block: 0 8mm !important;
+  }
+
+  .pagehead__title {
+    font-size: 18pt !important;
+  }
+
+  .prose h2 {
+    font-size: 13pt !important;
+    margin: 6mm 0 2mm !important;
+    padding-top: 3mm !important;
+  }
+
+  .prose h3 {
+    font-size: 11pt !important;
+    margin: 4mm 0 1.5mm !important;
+  }
+
+  .prose p,
+  .nb {
+    break-inside: avoid;
+  }
+
+  .nb {
+    padding-left: 3mm;
+  }
+
+  .math-display,
+  .katex-display {
+    break-inside: avoid;
+  }
+
+  pre {
+    border-left-width: 2pt !important;
+  }
+
+  /* 链接不打印下划线与地址 */
+  .prose a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .article__main,
+  .qpage__main {
+    padding-bottom: 0 !important;
+  }
 }

@@ -81,19 +81,19 @@
           <button class="ghost" type="button" id="expand-all">展开解析与提示</button>
           <button class="ghost" type="button" id="copy-md">复制题目</button>
           <a class="ghost" href="../export/?ids=ics-012">导出这道题</a>
+          <button class="ghost" type="button" data-print>打印这道题</button>
           <span class="qactions__id">ICS-012 · <span class="kbd">←</span><span class="kbd">→</span> 翻题 · <span class="kbd">E</span> 展开 · <span class="kbd">D</span> 记已做</span>
         </div>
       </header>
 
       <div class="qpage__stem prose"><p>下面的函数用 <code>gets</code> 读入一行字符串：</p>
-<pre><code class="language-c">void echo(void) {
+<p><pre class="code-block"><code class="language-c">void echo(void) {
     char buf[16];
     gets(buf);
     puts(buf);
-}
-</code></pre>
+}</code></pre></p>
 <p>编译后的汇编是</p>
-<pre><code>echo:
+<p><pre class="code-block"><code class="language-text">echo:
     pushq %rbp
     movq %rsp, %rbp
     subq $16, %rsp
@@ -102,8 +102,7 @@
     movq %rsp, %rdi
     call puts
     leave
-    ret
-</code></pre>
+    ret</code></pre></p>
 <p>(1) 数组 <code>buf</code> 的起始地址相对 <code>%rbp</code> 是多少？</p>
 <p>(2) 输入至少要多少个字节才能完整改写返回地址？输入的哪一段分别覆盖了 <code>buf</code>、保存的 <code>%rbp</code>、返回地址？</p>
 <p>(3) 已知当前栈上保存的返回地址是 <code>0x00000000004005a6</code>，攻击者想把它改成 <code>0x00000000004005f0</code>，应当怎样构造输入？说明每段的长度与字节序。</p>

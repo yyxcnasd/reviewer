@@ -81,18 +81,18 @@
           <button class="ghost" type="button" id="expand-all">展开解析与提示</button>
           <button class="ghost" type="button" id="copy-md">复制题目</button>
           <a class="ghost" href="../export/?ids=ics-027">导出这道题</a>
+          <button class="ghost" type="button" data-print>打印这道题</button>
           <span class="qactions__id">ICS-027 · <span class="kbd">←</span><span class="kbd">→</span> 翻题 · <span class="kbd">E</span> 展开 · <span class="kbd">D</span> 记已做</span>
         </div>
       </header>
 
       <div class="qpage__stem prose"><p>函数</p>
-<pre><code class="language-c">void f(void) {
+<p><pre class="code-block"><code class="language-c">void f(void) {
     char buf[24];
     gets(buf);
-}
-</code></pre>
+}</code></pre></p>
 <p>编译后的汇编是</p>
-<pre><code>f:
+<p><pre class="code-block"><code class="language-text">f:
     pushq %rbp
     movq %rsp, %rbp
     subq $32, %rsp
@@ -106,8 +106,7 @@
     call __stack_chk_fail
 .L2:
     leave
-    ret
-</code></pre>
+    ret</code></pre></p>
 <p>已知 canary 的最低字节固定为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span>。回答：</p>
 <p>(1) <code>buf</code>、canary、保存的 <code>%rbp</code>、返回地址分别在栈的什么位置？</p>
 <p>(2) 输入多少个字符会开始破坏 canary？为什么恰好输入 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>24</mn></mrow><annotation encoding="application/x-tex">24</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">24</span></span></span></span> 个字符时不一定破坏？</p>
@@ -126,7 +125,7 @@
 </div>
           <p><strong>(1)</strong> 由 <code>subq $32, %rsp</code> 和 <code>leaq -32(%rbp), %rdi</code> 可知：</p>
 <ul>
-<li><code>buf</code>：<code>%rbp-32</code> 到 <code>%rbp-9</code>，共 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>24</mn></mrow><annotation encoding="application/x-tex">24</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">24</span></span></span></span> 字节；</li>
+<li<code>buf</code>：<code>%rbp-32</code> 到 <code>%rbp-9</code>，共 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>24</mn></mrow><annotation encoding="application/x-tex">24</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">24</span></span></span></span> 字节；</li>
 <li>canary：<code>%rbp-8</code> 到 <code>%rbp-1</code>，共 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>8</mn></mrow><annotation encoding="application/x-tex">8</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">8</span></span></span></span> 字节；</li>
 <li>保存的 <code>%rbp</code>：<code>%rbp</code> 到 <code>%rbp+7</code>；</li>
 <li>返回地址：<code>%rbp+8</code> 到 <code>%rbp+15</code>。</li>

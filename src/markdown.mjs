@@ -47,6 +47,22 @@ export function renderMarkdown(src, opts = {}) {
     return `${PH}${store.length - 1}\uE001`
   }
 
+  // 代码先行：围栏与行内代码整段保护起来，里面的 $ 不当公式（汇编里的 $3 很常见）
+  const codeStore = []
+  const CODE_INLINE = '\uE100'
+  const CODE_BLOCK = '\uE102'
+  const pushInline = (s) => {
+    codeStore.push({ html: `<code>${escapeHtml(s)}</code>` })
+    return `${CODE_INLINE}${codeStore.length - 1}\uE101`
+  }
+  text = text.replace(/```(\w*)\n([\s\S]*?)```/g, (m, lang, body) => {
+    codeStore.push({
+      html: `<pre class="code-block"><code class="language-${escapeAttr(lang || 'text')}">${escapeHtml(body.replace(/\n$/, ''))}</code></pre>`,
+    })
+    return `\n${CODE_BLOCK}${codeStore.length - 1}\uE103\n`
+  })
+  text = text.replace(/`([^`\n]+)`/g, (m, body) => pushInline(body))
+
   // 行间公式先行，避免 \[ \] 里的内容被行内规则拆开
   text = text.replace(/\\\[([\s\S]*?)\\\]/g, (_, tex) => push(tex, true))
   text = text.replace(/\$\$([\s\S]*?)\$\$/g, (_, tex) => push(tex, true))
@@ -69,7 +85,7 @@ export function renderMarkdown(src, opts = {}) {
     headingSeq += 1
     const id = `h-${headingSeq}`
     tokens[idx].attrSet('id', id)
-    if (headings && tokens[idx].tag === 'h2') {
+    if (headings && (tokens[idx].tag === 'h2' || tokens[idx].tag === 'h3')) {
       headings.push({
         id,
         level: Number(tokens[idx].tag.slice(1)),
@@ -96,6 +112,13 @@ export function renderMarkdown(src, opts = {}) {
     const out = renderMath(tex, display, errors)
     return display ? `<span class="math-display">${out}</span>` : out
   })
+
+  // 还原代码块
+  html = html.replace(/\uE102(\d+)\uE103/g, (_, i) => codeStore[Number(i)].html)
+  html = html.replace(
+    /(?:<p>|>)?\uE100(\d+)\uE101(?:<\/p>)?/g,
+    (m, i) => codeStore[Number(i)].html,
+  )
 
   return html
 }

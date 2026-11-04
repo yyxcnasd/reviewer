@@ -43,10 +43,28 @@
       }
     },
 
+    /**
+     * 打印：先把折叠块全部展开（纸上不该有「点击展开」），
+     * 打印结束后恢复原状。
+     */
+    printAll() {
+      const closed = []
+      for (const d of document.querySelectorAll('details:not([open])')) {
+        d.open = true
+        closed.push(d)
+      }
+      const restore = () => {
+        for (const d of closed) d.open = false
+        window.removeEventListener('afterprint', restore)
+      }
+      window.addEventListener('afterprint', restore)
+      window.print()
+    },
+
     /** 打印按钮：页面上任何 [data-print] 都生效 */
     bindPrintButtons() {
       for (const btn of document.querySelectorAll('[data-print]')) {
-        btn.addEventListener('click', () => window.print())
+        btn.addEventListener('click', () => window.RB.printAll())
       }
     },
   }

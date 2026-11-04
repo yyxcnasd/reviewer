@@ -81,6 +81,7 @@
           <button class="ghost" type="button" id="expand-all">展开解析与提示</button>
           <button class="ghost" type="button" id="copy-md">复制题目</button>
           <a class="ghost" href="../export/?ids=ics-031">导出这道题</a>
+          <button class="ghost" type="button" data-print>打印这道题</button>
           <span class="qactions__id">ICS-031 · <span class="kbd">←</span><span class="kbd">→</span> 翻题 · <span class="kbd">E</span> 展开 · <span class="kbd">D</span> 记已做</span>
         </div>
       </header>
@@ -88,11 +89,10 @@
       <div class="qpage__stem prose"><p>x86-64 上 <code>int</code> 的除法用 <code>sarl</code>（算术右移）与一个偏置来实现。回答：</p>
 <p>（1）设 <code>int x = -7;</code>，分别求 <code>x / 4</code> 与 <code>x &gt;&gt; 2</code> 的值（假设 <code>&gt;&gt;</code> 是算术右移），并解释为什么编译器不能把 <code>x / 4</code> 直接编译成 <code>sarq $2</code>。</p>
 <p>（2）编译器对 <code>x / 4</code>（<code>x</code> 为 <code>int</code>）常生成下面的序列：</p>
-<pre><code>    leal 3(%rdi), %eax
+<p><pre class="code-block"><code class="language-text">    leal 3(%rdi), %eax
     testl %edi, %edi
     cmovs %eax, %edi
-    sarl $2, %edi
-</code></pre>
+    sarl $2, %edi</code></pre></p>
 <p>说明偏置 <code>3</code> 是怎么来的，并验证 <code>x / 8</code> 的偏置应为 <code>7</code>、<code>x = -9</code> 时结果为 <code>-1</code>。</p>
 <p>（3）如果 <code>x</code> 是 <code>unsigned</code>，为什么编译器可以直接用 <code>shrl $2</code>？</p>
 <p>（4）分别求 <code>-1 &gt;&gt; 1</code>、<code>-1 / 2</code>、<code>-6 &gt;&gt; 2</code>、<code>-6 / 4</code> 的值。</p>

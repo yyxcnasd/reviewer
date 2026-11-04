@@ -36,7 +36,17 @@ export function buildNotes(ctx) {
   const ordered = [...ctx.notes].sort((a, b) => a.chapter.order - b.chapter.order)
   ordered.forEach((note, idx) => {
     const headings = []
-    const html = ctx.renderMarkdown(note.body, { errors: ctx.errors, headings })
+    const rawHtml = ctx.renderMarkdown(note.body, { errors: ctx.errors, headings })
+    const html = withLabels(rawHtml)
+
+    // 本章速览：把小节（h3）列在正文前面，手机上也有个索引
+    const subs = headings.filter((h) => h.level === 3)
+    const glance = subs.length
+      ? `<div class="note-glance">
+        <h2>本章速览</h2>
+        <ol>${subs.map((h) => `<li><a href="#${h.id}">${esc(h.text)}</a></li>`).join('')}</ol>
+      </div>`
+      : ''
     const prev = ordered[idx - 1]
     const next = ordered[idx + 1]
     const ch = note.chapter
@@ -90,6 +100,7 @@ export function buildNotes(ctx) {
 
 <div class="frame article">
   <div class="article__main prose">
+    ${glance}
     ${html}
     ${
       qs.length
@@ -113,4 +124,18 @@ export function buildNotes(ctx) {
 `
     write(ctx, `notes/${note.id}.html`, page(ctx, { depth: 1, title: `${note.title} · ${note.course.name}`, description: note.lead, body, bodyClass: 'detail', navActive: note.course.id }))
   })
+}
+
+/**
+ * 把「定义：」「定理：」「注意：」这类开头包成带标签的段落，
+ * 只是给已有的写法加一层可扫读的结构，不改内容。
+ */
+const LABELS = ['定义', '定理', '性质', '结论', '推论', '注意', '易错', '警告', '例', '例题', '常用手法', '记法', '提示']
+
+function withLabels(html) {
+  const names = LABELS.join('|')
+  return html.replace(
+    new RegExp(`<p>(${names})([：:])\\s*`, 'g'),
+    (m, label) => `<p class="nb nb--${label}"><span class="nb__label">${label}</span>`,
+  )
 }

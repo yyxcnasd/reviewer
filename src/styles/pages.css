@@ -356,6 +356,7 @@
 .prose pre {
   background: var(--code-bg);
   color: var(--code-fg);
+  border-left: 3px solid var(--line-strong);
   font-family: var(--mono); /* taste-skill-ignore */
   font-variant-numeric: normal;
   font-feature-settings: normal;
@@ -2296,6 +2297,7 @@ body.is-focus .submit__preview {
   padding: 14px 16px;
   background: var(--code-bg);
   color: var(--code-fg);
+  border-left: 3px solid var(--line-strong);
   font-family: var(--mono); /* taste-skill-ignore */
   font-variant-numeric: normal;
   font-size: 0.875rem;
@@ -2400,5 +2402,158 @@ body.is-focus .submit__preview {
   body.printing-ics .sheet-course:not([data-sheet='ics']),
   body.printing-other .sheet-course:not([data-sheet='other']) {
     display: none;
+  }
+}
+
+/* ---------------------------------------------------------------- 要点页：学习笔记排版 */
+
+/* 比正文稍紧一点，像一份整理过的笔记而不是文章 */
+.article__main.prose {
+  font-size: 1.0625rem;
+  line-height: 1.72;
+  max-width: 42em;
+}
+
+.article__main.prose p {
+  margin: 0 0 0.72em;
+}
+
+.article__main.prose h2 {
+  font-size: clamp(1.25rem, 1.6vw, 1.5rem);
+  margin: 2.1em 0 0.55em;
+  padding-top: 0.5em;
+  border-top: 2px solid var(--line-strong);
+  letter-spacing: 0.01em;
+}
+
+.article__main.prose h2:first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+}
+
+.article__main.prose h3 {
+  font-size: 1.0625rem;
+  margin: 1.5em 0 0.35em;
+  letter-spacing: 0.01em;
+}
+
+.article__main.prose h3 + p {
+  margin-top: 0;
+}
+
+.article__main.prose .math-display {
+  margin-block: 0.85em;
+}
+
+.article__main.prose ul,
+.article__main.prose ol {
+  margin: 0 0 0.8em;
+  padding-left: 1.2em;
+}
+
+.article__main.prose li {
+  margin-bottom: 0.3em;
+}
+
+/* 定义 / 定理 / 注意 这类标签：小红字 + 稍缩进，扫读时一眼能定位 */
+.nb {
+  padding-left: 0.9em;
+  border-left: 3px solid var(--line-strong);
+}
+
+.nb--定义,
+.nb--定理,
+.nb--性质,
+.nb--结论,
+.nb--推论 {
+  border-left-color: var(--ink);
+}
+
+.nb--注意,
+.nb--易错,
+.nb--警告 {
+  border-left-color: var(--red);
+}
+
+.nb--例,
+.nb--例题 {
+  border-left-color: var(--indigo);
+}
+
+.nb__label {
+  display: inline-block;
+  margin-right: 0.55em;
+  font-size: 0.78em;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--ink-soft);
+  vertical-align: 0.06em;
+}
+
+.nb--注意 .nb__label,
+.nb--易错 .nb__label,
+.nb--警告 .nb__label {
+  color: var(--red-deep);
+}
+
+.nb--例 .nb__label,
+.nb--例题 .nb__label {
+  color: var(--indigo);
+}
+
+/* 本章速览 */
+.note-glance {
+  margin: 0 0 1.6em;
+  padding: 14px 16px;
+  background: var(--paper-2);
+}
+
+.note-glance h2 {
+  margin: 0 0 0.5em;
+  padding: 0;
+  border: 0;
+  font-size: var(--fs-micro);
+  letter-spacing: 0.12em;
+  color: var(--ink-mute);
+}
+
+.note-glance ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px 18px;
+  font-size: var(--fs-small);
+  counter-reset: g;
+}
+
+.note-glance li {
+  margin: 0;
+  display: flex;
+  gap: 0.6em;
+  align-items: baseline;
+}
+
+.note-glance li::before {
+  counter-increment: g;
+  content: counter(g);
+  color: var(--red);
+  font-variant-numeric: tabular-nums;
+  min-width: 1.2em;
+}
+
+.note-glance a {
+  color: var(--ink);
+}
+
+.note-glance a:hover {
+  color: var(--red);
+}
+
+@media (max-width: 700px) {
+  .note-glance ol {
+    grid-template-columns: 1fr;
   }
 }

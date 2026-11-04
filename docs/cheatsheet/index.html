@@ -459,84 +459,84 @@ A_4&amp;:(q\to r)\to((p\vee q)\to(p\vee r)),
 </thead>
 <tbody>
 <tr>
-<td><code>mov</code></td>
+<td<code>mov</code></td>
 <td>传送，不写标志</td>
-<td><code>mov %eax, %ebx</code></td>
+<td<code>mov %eax, %ebx</code></td>
 </tr>
 <tr>
-<td><code>lea</code></td>
+<td<code>lea</code></td>
 <td>算有效地址，不访存</td>
-<td><code>lea 8(%rdi,%rsi,4), %rax</code></td>
+<td<code>lea 8(%rdi,%rsi,4), %rax</code></td>
 </tr>
 <tr>
-<td><code>add</code>/<code>sub</code></td>
+<td<code>add</code>/<code>sub</code></td>
 <td>加/减，写条件码</td>
-<td><code>add $1, %rax</code></td>
+<td<code>add $1, %rax</code></td>
 </tr>
 <tr>
-<td><code>imul</code></td>
+<td<code>imul</code></td>
 <td>有符号乘</td>
-<td><code>imul %rsi, %rax</code></td>
+<td<code>imul %rsi, %rax</code></td>
 </tr>
 <tr>
-<td><code>sal</code>/<code>shl</code></td>
+<td<code>sal</code>/<code>shl</code></td>
 <td>左移</td>
-<td><code>sal $2, %eax</code></td>
+<td<code>sal $2, %eax</code></td>
 </tr>
 <tr>
-<td><code>sar</code></td>
+<td<code>sar</code></td>
 <td>算术右移</td>
-<td><code>sar %cl, %eax</code></td>
+<td<code>sar %cl, %eax</code></td>
 </tr>
 <tr>
-<td><code>shr</code></td>
+<td<code>shr</code></td>
 <td>逻辑右移</td>
-<td><code>shr $1, %eax</code></td>
+<td<code>shr $1, %eax</code></td>
 </tr>
 <tr>
-<td><code>and</code>/<code>or</code>/<code>xor</code>/<code>not</code></td>
+<td<code>and</code>/<code>or</code>/<code>xor</code>/<code>not</code></td>
 <td>位运算</td>
-<td><code>xor %eax, %eax</code>（清零）</td>
+<td<code>xor %eax, %eax</code>（清零）</td>
 </tr>
 <tr>
-<td><code>cmp</code></td>
+<td<code>cmp</code></td>
 <td>做减法但不写回，只设标志</td>
-<td><code>cmp %rsi, %rdi</code></td>
+<td<code>cmp %rsi, %rdi</code></td>
 </tr>
 <tr>
-<td><code>test</code></td>
+<td<code>test</code></td>
 <td>做与但不写回，只设标志</td>
-<td><code>test %rax, %rax</code></td>
+<td<code>test %rax, %rax</code></td>
 </tr>
 <tr>
-<td><code>jmp</code></td>
+<td<code>jmp</code></td>
 <td>无条件跳转</td>
-<td><code>jmp .L1</code></td>
+<td<code>jmp .L1</code></td>
 </tr>
 <tr>
-<td><code>jcc</code></td>
+<td<code>jcc</code></td>
 <td>条件跳转</td>
-<td><code>je .L1</code></td>
+<td<code>je .L1</code></td>
 </tr>
 <tr>
-<td><code>call</code></td>
+<td<code>call</code></td>
 <td>压返回地址并跳转</td>
-<td><code>call foo</code></td>
+<td<code>call foo</code></td>
 </tr>
 <tr>
-<td><code>ret</code></td>
+<td<code>ret</code></td>
 <td>弹出返回地址并跳转</td>
-<td><code>ret</code></td>
+<td<code>ret</code></td>
 </tr>
 <tr>
-<td><code>push</code>/<code>pop</code></td>
+<td<code>push</code>/<code>pop</code></td>
 <td>压栈/出栈，<code>rsp</code> 减/加 8</td>
-<td><code>push %rbp</code></td>
+<td<code>push %rbp</code></td>
 </tr>
 <tr>
-<td><code>inc</code>/<code>dec</code></td>
+<td<code>inc</code>/<code>dec</code></td>
 <td>自增/自减</td>
-<td><code>inc %eax</code></td>
+<td<code>inc %eax</code></td>
 </tr>
 </tbody>
 </table>
@@ -559,62 +559,62 @@ A_4&amp;:(q\to r)\to((p\vee q)\to(p\vee r)),
 </thead>
 <tbody>
 <tr>
-<td><code>je</code>/<code>jz</code></td>
+<td<code>je</code>/<code>jz</code></td>
 <td>等于/为零</td>
 <td>ZF=1</td>
 </tr>
 <tr>
-<td><code>jne</code>/<code>jnz</code></td>
+<td<code>jne</code>/<code>jnz</code></td>
 <td>不等</td>
 <td>ZF=0</td>
 </tr>
 <tr>
-<td><code>jg</code>/<code>jnle</code></td>
+<td<code>jg</code>/<code>jnle</code></td>
 <td>有符号大于</td>
 <td>ZF=0 且 SF=OF</td>
 </tr>
 <tr>
-<td><code>jge</code>/<code>jnl</code></td>
+<td<code>jge</code>/<code>jnl</code></td>
 <td>有符号大于等于</td>
 <td>SF=OF</td>
 </tr>
 <tr>
-<td><code>jl</code>/<code>jnge</code></td>
+<td<code>jl</code>/<code>jnge</code></td>
 <td>有符号小于</td>
 <td>SF≠OF</td>
 </tr>
 <tr>
-<td><code>jle</code>/<code>jng</code></td>
+<td<code>jle</code>/<code>jng</code></td>
 <td>有符号小于等于</td>
 <td>ZF=1 或 SF≠OF</td>
 </tr>
 <tr>
-<td><code>ja</code>/<code>jnbe</code></td>
+<td<code>ja</code>/<code>jnbe</code></td>
 <td>无符号大于</td>
 <td>CF=0 且 ZF=0</td>
 </tr>
 <tr>
-<td><code>jae</code>/<code>jnb</code></td>
+<td<code>jae</code>/<code>jnb</code></td>
 <td>无符号大于等于</td>
 <td>CF=0</td>
 </tr>
 <tr>
-<td><code>jb</code>/<code>jnae</code></td>
+<td<code>jb</code>/<code>jnae</code></td>
 <td>无符号小于</td>
 <td>CF=1</td>
 </tr>
 <tr>
-<td><code>jbe</code>/<code>jna</code></td>
+<td<code>jbe</code>/<code>jna</code></td>
 <td>无符号小于等于</td>
 <td>CF=1 或 ZF=1</td>
 </tr>
 <tr>
-<td><code>js</code>/<code>jns</code></td>
+<td<code>js</code>/<code>jns</code></td>
 <td>符号位为 1/0</td>
 <td>SF=1 / SF=0</td>
 </tr>
 <tr>
-<td><code>jo</code>/<code>jno</code></td>
+<td<code>jo</code>/<code>jno</code></td>
 <td>溢出/未溢出</td>
 <td>OF=1 / OF=0</td>
 </tr>

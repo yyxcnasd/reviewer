@@ -81,12 +81,13 @@
           <button class="ghost" type="button" id="expand-all">展开解析与提示</button>
           <button class="ghost" type="button" id="copy-md">复制题目</button>
           <a class="ghost" href="../export/?ids=ics-030">导出这道题</a>
+          <button class="ghost" type="button" data-print>打印这道题</button>
           <span class="qactions__id">ICS-030 · <span class="kbd">←</span><span class="kbd">→</span> 翻题 · <span class="kbd">E</span> 展开 · <span class="kbd">D</span> 记已做</span>
         </div>
       </header>
 
       <div class="qpage__stem prose"><p>在 32 位 <code>int</code>（补码）环境下，执行下面的 C 代码（<code>x86-64</code> 上分别由 <code>imull</code>、<code>mull</code> 与截断实现）：</p>
-<pre><code class="language-c">int      x = 65536;
+<p><pre class="code-block"><code class="language-c">int      x = 65536;
 int      y = 65536;
 int      z = x * y;
 
@@ -94,8 +95,7 @@ unsigned u = 0x40000000u;
 unsigned v = u * 4u;
 
 short a = 1000, b = 100;
-short s = a * b;
-</code></pre>
+short s = a * b;</code></pre></p>
 <p>（1）求 <code>z</code> 的十六进制值，并说明执行 <code>imull</code> 后 OF 是否为 1。</p>
 <p>（2）求 <code>v</code> 的十六进制值；若编译器用 <code>mull</code> 得到 64 位积 <code>EDX:EAX</code>，写出 EDX 与 EAX，并说明 CF、OF 的状态。</p>
 <p>（3）求 <code>s</code> 的值（写成十进制，并指出其 16 位补码）。</p>

@@ -81,12 +81,13 @@
           <button class="ghost" type="button" id="expand-all">展开解析与提示</button>
           <button class="ghost" type="button" id="copy-md">复制题目</button>
           <a class="ghost" href="../export/?ids=ics-008">导出这道题</a>
+          <button class="ghost" type="button" data-print>打印这道题</button>
           <span class="qactions__id">ICS-008 · <span class="kbd">←</span><span class="kbd">→</span> 翻题 · <span class="kbd">E</span> 展开 · <span class="kbd">D</span> 记已做</span>
         </div>
       </header>
 
       <div class="qpage__stem prose"><p>函数 <code>sum</code> 的参数 <code>n</code> 放在 <code>%rdi</code>，返回值放在 <code>%rax</code>。汇编是</p>
-<pre><code>sum:
+<p><pre class="code-block"><code class="language-text">sum:
     testq %rdi, %rdi
     jle .L2
     pushq %rbx
@@ -98,14 +99,13 @@
     ret
 .L2:
     movl $0, %eax
-    ret
-</code></pre>
+    ret</code></pre></p>
 <p>(1) 这个函数计算的是什么？求 <code>sum(4)</code>。</p>
 <p>(2) 为什么把 <code>n</code> 存在 <code>%rbx</code> 里，而不是随便用一个 <code>%rcx</code>？</p>
 <p>(3) 执行 <code>sum(3)</code> 的过程中，栈上最多同时有几个返回地址、几个保存的 <code>%rbx</code>？若 <code>main</code> 调用 <code>sum</code> 前 <code>%rsp = 0x1000</code>，每层占「8 字节返回地址 + 8 字节 rbx」，求最深时的 <code>%rsp</code>。</p>
 </div>
 
-      <details class="qblock qblock--hint"><summary>提示<span aria-hidden="true">+</span></summary><div class="qblock__body prose"><p><code>testq</code> 判断 <code>n &lt;= 0</code>，是递归的出口。注意 <code>call sum</code> 会覆盖调用者保存寄存器，<code>%rbx</code> 则是被调用者保存的。数栈深度时，别漏掉 <code>main</code> 调用 <code>sum(3)</code> 的那一次。</p>
+      <details class="qblock qblock--hint"><summary>提示<span aria-hidden="true">+</span></summary><div class="qblock__body prose"><code>testq</code> 判断 <code>n &lt;= 0</code>，是递归的出口。注意 <code>call sum</code> 会覆盖调用者保存寄存器，<code>%rbx</code> 则是被调用者保存的。数栈深度时，别漏掉 <code>main</code> 调用 <code>sum(3)</code> 的那一次。</p>
 </div></details>
 
       <details class="qblock" id="solution">
@@ -115,7 +115,7 @@
 </div>
           <p><strong>(1)</strong> 逐句看：</p>
 <ul>
-<li><code>testq %rdi, %rdi; jle .L2</code>：<code>n &lt;= 0</code> 时返回 0；</li>
+<li<code>testq %rdi, %rdi; jle .L2</code>：<code>n &lt;= 0</code> 时返回 0；</li>
 <li>否则先把 <code>n</code> 存进 <code>%rbx</code>，令参数变成 <code>n-1</code>，递归调用 <code>sum(n-1)</code>；</li>
 <li>返回后执行 <code>addq %rbx, %rax</code>，即把 <code>n</code> 加到 <code>sum(n-1)</code> 的结果上。</li>
 </ul>
@@ -126,11 +126,11 @@
 <p><strong>(2)</strong> 关键在于 <code>call sum</code> 之后还要用 <code>n</code>。<code>%rcx</code> 是<strong>调用者保存</strong>寄存器，被调用者（这里就是 <code>sum</code> 自己，以及它调用的其他函数）可以随意覆盖它，返回后 <code>%rcx</code> 里的值不可信。<code>%rbx</code> 是<strong>被调用者保存</strong>寄存器：谁要用它，谁就必须先 <code>push</code>、返回前 <code>pop</code> 恢复。这段代码正是 <code>pushq %rbx</code> 保存旧值、<code>popq %rbx</code> 恢复旧值，于是 <code>%rbx</code> 在当前帧里能稳定地保存 <code>n</code>。</p>
 <p><strong>(3)</strong> 逐层展开：</p>
 <ul>
-<li><code>main</code> 调用 <code>sum(3)</code>：压入 1 个返回地址；</li>
-<li><code>sum(3)</code>：<code>push %rbx</code>（存 3），<code>call sum(2)</code>（压返回地址）；</li>
-<li><code>sum(2)</code>：<code>push %rbx</code>（存 2），<code>call sum(1)</code>（压返回地址）；</li>
-<li><code>sum(1)</code>：<code>push %rbx</code>（存 1），<code>call sum(0)</code>（压返回地址）；</li>
-<li><code>sum(0)</code> 直接返回，不再压栈。</li>
+<li<code>main</code> 调用 <code>sum(3)</code>：压入 1 个返回地址；</li>
+<li<code>sum(3)</code>：<code>push %rbx</code>（存 3），<code>call sum(2)</code>（压返回地址）；</li>
+<li<code>sum(2)</code>：<code>push %rbx</code>（存 2），<code>call sum(1)</code>（压返回地址）；</li>
+<li<code>sum(1)</code>：<code>push %rbx</code>（存 1），<code>call sum(0)</code>（压返回地址）；</li>
+<li<code>sum(0)</code> 直接返回，不再压栈。</li>
 </ul>
 <p>最深时栈上有 <strong>4 个返回地址</strong>、<strong>3 个保存的 <code>%rbx</code></strong>（<code>sum(0)</code> 还没执行到 <code>push</code>）。</p>
 <p>地址计算：从 <code>%rsp=0x1000</code> 开始，<code>main</code> 的 <code>call</code> 减 8，之后每层减 16：</p>

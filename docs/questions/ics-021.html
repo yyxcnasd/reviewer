@@ -81,12 +81,13 @@
           <button class="ghost" type="button" id="expand-all">展开解析与提示</button>
           <button class="ghost" type="button" id="copy-md">复制题目</button>
           <a class="ghost" href="../export/?ids=ics-021">导出这道题</a>
+          <button class="ghost" type="button" data-print>打印这道题</button>
           <span class="qactions__id">ICS-021 · <span class="kbd">←</span><span class="kbd">→</span> 翻题 · <span class="kbd">E</span> 展开 · <span class="kbd">D</span> 记已做</span>
         </div>
       </header>
 
       <div class="qpage__stem prose"><p>编译器把下面的求和循环展开 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>4</mn></mrow><annotation encoding="application/x-tex">4</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">4</span></span></span></span> 次，并用了两个累加器：</p>
-<pre><code class="language-c">long sum(long *a, long n) {
+<p><pre class="code-block"><code class="language-c">long sum(long *a, long n) {
     long i = 0, s0 = 0, s1 = 0;
     for (; i + 3 &lt; n; i += 4) {
         s0 += a[i] + a[i + 2];
@@ -95,8 +96,7 @@
     for (; i &lt; n; i++)
         s0 += a[i];
     return s0 + s1;
-}
-</code></pre>
+}</code></pre></p>
 <p>回答：</p>
 <p>(1) 当 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>10</mn></mrow><annotation encoding="application/x-tex">n=10</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">10</span></span></span></span> 时，第一个循环执行几次？第二个循环处理哪些下标？</p>
 <p>(2) 为什么用两个累加器，而不是只用一个 <code>s</code>？</p>
