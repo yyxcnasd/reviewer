@@ -40,7 +40,7 @@ export function buildNotes(ctx) {
     const html = withLabels(rawHtml)
 
     // 本章速览：把小节（h3）列在正文前面，手机上也有个索引
-    const subs = headings.filter((h) => h.level === 3)
+    const subs = headings.filter((h) => h.level === 2)
     const glance = subs.length
       ? `<div class="note-glance">
         <h2>本章速览</h2>
@@ -59,7 +59,7 @@ export function buildNotes(ctx) {
               ? `<ol>${headings
                   .map(
                     (h) =>
-                      `<li class="${h.level === 3 ? 'is-sub' : ''}"><a href="#${h.id}">${esc(h.text)}</a></li>`,
+                      `<li class="${h.level === 3 ? 'is-sub' : ''}${h.label ? ' is-label' : ''}"><a href="#${h.id}">${esc(h.text)}</a></li>`,
                   )
                   .join('')}</ol>`
               : ''
@@ -132,10 +132,20 @@ export function buildNotes(ctx) {
  */
 const LABELS = ['定义', '定理', '性质', '结论', '推论', '注意', '易错', '警告', '例', '例题', '常用手法', '记法', '提示']
 
+const GENERIC_HEADINGS = new Set([
+  '定义', '定理', '性质', '结论', '推论', '注意', '易错点', '最容易错的一步',
+  '例题', '例', '步骤', '套路', '套路：列真值表', '常见写法', '提示',
+])
+
 function withLabels(html) {
   const names = LABELS.join('|')
-  return html.replace(
+  let out = html.replace(
     new RegExp(`<p>(${names})([：:])\\s*`, 'g'),
     (m, label) => `<p class="nb nb--${label}"><span class="nb__label">${label}</span>`,
   )
+  // 把「### 定义」这种通用小标题降级成标签行，别当章节标题用
+  out = out.replace(/<h3[^>]*>([^<]{1,10})<\/h3>/g, (m, text) =>
+    GENERIC_HEADINGS.has(text.trim()) ? `<h3 class="is-label">${text}</h3>` : m,
+  )
+  return out
 }

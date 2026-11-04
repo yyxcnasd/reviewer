@@ -39,7 +39,7 @@
           <details class="navmenu">
             <summary>课程</summary>
             <ul class="navmenu__list">
-              <li><a href="../va1/">微积分 A1</a></li><li><a href="../la/">线性代数</a></li><li><a href="../dm/">离散数学<span class="navmenu__tag">仅期末</span></a></li><li><a href="../ics/" aria-current="page">计算机系统概论</a></li>
+              <li><a href="../va1/">微积分 A1</a></li><li><a href="../la/">线性代数</a></li><li><a href="../dm1/">离散数学1<span class="navmenu__tag">仅期末</span></a></li><li><a href="../ics/" aria-current="page">计算机系统概论</a></li>
               <li class="navmenu__sep"><a href="../questions/">题库（全部课程）</a></li>
             </ul>
           </details>
@@ -90,7 +90,7 @@
   <div class="article__main prose">
     <div class="note-glance">
         <h2>本章速览</h2>
-        <ol><li><a href="#h-2">栈与 call/ret</a></li><li><a href="#h-3">参数传递（System V AMD64）</a></li><li><a href="#h-4">谁该保存寄存器</a></li><li><a href="#h-5">栈帧与 16 字节对齐</a></li><li><a href="#h-7">局部变量放在哪</a></li><li><a href="#h-8">递归与栈</a></li></ol>
+        <ol><li><a href="#h-1">4.1 栈帧与调用约定</a></li><li><a href="#h-6">4.2 局部变量与递归</a></li></ol>
       </div>
     <h2 id="h-1">4.1 栈帧与调用约定</h2>
 <h3 id="h-2">栈与 call/ret</h3>
@@ -105,8 +105,7 @@
 <h3 id="h-3">参数传递（System V AMD64）</h3>
 <p>前 6 个整型/指针参数依次放在 <code>%rdi</code>、<code>%rsi</code>、<code>%rdx</code>、<code>%rcx</code>、<code>%r8</code>、<code>%r9</code>，浮点参数用 <code>%xmm0</code>–<code>%xmm7</code>。超过 6 个的整型参数<strong>从右往左</strong>压栈，返回值放在 <code>%rax</code>（更大的整数用 <code>%rax:%rdx</code>）。</p>
 <p>进入被调用函数、还没执行 <code>pushq %rbp</code> 时，栈的布局是：</p>
-<table>
-<thead>
+<div class="table-wrap"><table><thead>
 <tr>
 <th>地址</th>
 <th>内容</th>
@@ -126,8 +125,7 @@
 <td>第 8 个参数</td>
 </tr>
 </tbody>
-</table>
-<p>所以执行 <code>pushq %rbp; movq %rsp, %rbp</code> 之后，返回地址在 <code>8(%rbp)</code>，第 7 个参数在 <code>16(%rbp)</code>，第 8 个在 <code>24(%rbp)</code>。</p>
+</table></div><p>所以执行 <code>pushq %rbp; movq %rsp, %rbp</code> 之后，返回地址在 <code>8(%rbp)</code>，第 7 个参数在 <code>16(%rbp)</code>，第 8 个在 <code>24(%rbp)</code>。</p>
 <p><strong>例</strong>：进入函数时 <code>%rsp = 0x7fffffffe008</code>，则返回地址在 <code>0x7fffffffe008</code>；<code>pushq %rbp</code> 把旧 <code>%rbp</code> 存到 <code>0x7fffffffe000</code>，然后 <code>%rbp = 0x7fffffffe000</code>。于是第 7 个参数在 <code>0x7fffffffe010</code>，第 8 个在 <code>0x7fffffffe018</code>。这类「给一个 <code>%rsp</code> 求各参数地址」的题，只要记住「返回地址在 0，参数从 8 开始」就不会错。</p>
 <h3 id="h-4">谁该保存寄存器</h3>
 <p>寄存器分两类：</p>

@@ -1,0 +1,671 @@
+/* ---------------------------------------------------------------- 投稿页 */
+
+.fieldset {
+  border: 0;
+  border-top: 2px solid var(--line);
+  padding: 16px 0 4px;
+  margin: 0 0 18px;
+}
+
+.fieldset legend {
+  padding: 0 10px 0 0;
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+
+.submit {
+  display: grid;
+  /* 百分比列不会被内容的 min-content 撑开，输入时宽度是固定的 */
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 36%);
+  gap: clamp(24px, 3vw, 48px);
+  align-items: start;
+  padding-bottom: clamp(24px, 4vw, 56px);
+}
+
+.submit__form {
+  display: grid;
+  gap: 14px;
+  min-width: 0;
+}
+
+.submit__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 18px;
+}
+
+.submit .field {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.submit .field label {
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+
+.hint-inline {
+  font-weight: 400;
+  color: var(--ink-mute);
+}
+
+.submit__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.submit__status {
+  min-height: 1.4em;
+  font-size: var(--fs-small);
+  color: var(--ink-soft);
+}
+
+.submit__status.is-warn {
+  color: var(--red-deep);
+}
+
+/* 工具条 */
+.mdbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+  padding: 8px 0 10px;
+}
+
+.mdbar__group {
+  display: inline-flex;
+  border: 2px solid var(--line-strong);
+}
+
+.mdbar__group button {
+  padding: 0.3em 0.6em;
+  background: transparent;
+  border: 0;
+  border-left: 2px solid var(--line);
+  font: inherit;
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  color: var(--ink-soft);
+  cursor: pointer;
+  line-height: 1.5;
+}
+
+.mdbar__group button:first-child {
+  border-left: 0;
+}
+
+.mdbar__group button:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.mdbar__hint {
+  font-size: var(--fs-micro);
+  color: var(--ink-mute);
+}
+
+.textarea--code {
+  font-family: var(--mono);
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* 右侧预览 */
+.submit__preview {
+  position: sticky;
+  top: 18px;
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  background: var(--paper-2);
+  padding: clamp(14px, 1.6vw, 22px);
+  max-height: calc(100vh - 36px);
+  overflow: auto;
+}
+
+.submit__preview h2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  font-size: var(--fs-micro);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-weight: 700;
+}
+
+.submit__preview h2 span:last-child {
+  font-family: var(--mono); /* taste-skill-ignore */
+  font-size: 11px;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink-faint);
+  overflow-wrap: anywhere;
+}
+
+.submit__preview-sub {
+  margin-top: 8px;
+}
+
+.submit__fm {
+  font-family: var(--mono); /* taste-skill-ignore */
+  font-size: 12px;
+  line-height: 1.6;
+  background: var(--surface);
+  border: 2px solid var(--line);
+  padding: 10px 12px;
+  margin: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  color: var(--ink-soft);
+}
+
+@media (max-width: 960px) {
+  .submit {
+    grid-template-columns: 1fr;
+  }
+  .submit__preview {
+    position: static;
+    max-height: none;
+  }
+  .submit__row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 速查表打印 */
+@media print {
+  .sheet {
+    border: 0;
+    padding: 0;
+    background: #fff;
+    outline: 0;
+  }
+  .sheet__head {
+    margin-bottom: 8mm;
+  }
+  .sheet__head .pagehead__title,
+  .sheet h1 {
+    font-size: 20pt;
+  }
+  /* 纸上用单栏：双栏会把标题和它的内容拆到两栏，读起来跳 */
+  .sheet__body {
+    column-count: 1;
+    font-size: 9.5pt;
+    line-height: 1.55;
+    orphans: 3;
+    widows: 3;
+  }
+  /* 标题必须跟内容在同一栏里，别把标题留在一栏末尾 */
+  .sheet__body h2,
+  .sheet__body h3 {
+    break-after: avoid;
+    break-inside: avoid;
+  }
+  .sheet__body p,
+  .sheet__body ul,
+  .sheet__body ol,
+  .sheet__body li {
+    break-inside: avoid;
+  }
+  /* 行内公式不要被折行拆开 */
+  .sheet__body .katex {
+    font-size: 0.95em;
+    white-space: nowrap;
+  }
+  .sheet__body .math-display {
+    break-inside: avoid;
+    margin-block: 2mm;
+  }
+}
+
+/* ---------------------------------------------------------------- 符号页 */
+
+.nt-why {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(18px, 2.4vw, 36px);
+}
+
+.nt-why__item h3 {
+  font-size: var(--fs-h3);
+  margin-bottom: 0.5em;
+}
+
+.nt-why__item p {
+  font-size: var(--fs-small);
+  line-height: 1.8;
+  color: var(--ink-soft);
+  max-width: 40em;
+}
+
+.nt-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-small);
+}
+
+.nt-table th {
+  text-align: left;
+  font-size: var(--fs-micro);
+  letter-spacing: 0.08em;
+  color: var(--ink-mute);
+  padding: 8px 12px 8px 0;
+  border-bottom: 2px solid var(--line-strong);
+  font-weight: 700;
+}
+
+.nt-table td {
+  padding: 10px 12px 10px 0;
+  border-bottom: 2px solid var(--line);
+  vertical-align: middle;
+}
+
+.nt-table code {
+  font-family: var(--mono); /* taste-skill-ignore */
+  font-size: 0.85em;
+  background: var(--paper-2);
+  padding: 0.15em 0.4em;
+}
+
+.nt__demo {
+  font-size: 1.05em;
+  min-width: 8em;
+}
+
+.nt__note {
+  color: var(--ink-soft);
+}
+
+.nt__bad {
+  color: var(--ink-mute);
+  text-decoration: line-through;
+  text-decoration-color: var(--red);
+  text-decoration-thickness: 2px;
+}
+
+.nt__good {
+  font-weight: 700;
+}
+
+.nt-table--short td:nth-child(2) code {
+  background: transparent;
+  padding: 0;
+  color: var(--ink-mute);
+}
+
+@media (max-width: 820px) {
+  .nt-why {
+    grid-template-columns: 1fr;
+  }
+  .nt-table thead th:nth-child(2),
+  .nt-table--short thead th:nth-child(2),
+  .nt-table--short td:nth-child(2) {
+    display: none;
+  }
+}
+
+/* ---------------------------------------------------------------- 进度页 */
+
+.st-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.st-course {
+  margin-bottom: clamp(30px, 4vw, 52px);
+}
+
+.st-course__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 20px;
+  margin-bottom: 10px;
+}
+
+.st-course__head h2 {
+  font-size: var(--fs-h3);
+}
+
+.st-course__sum {
+  font-size: var(--fs-small);
+  color: var(--ink-soft);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.st-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-small);
+}
+
+.st-table th {
+  text-align: left;
+  font-size: var(--fs-micro);
+  letter-spacing: 0.08em;
+  color: var(--ink-mute);
+  padding: 6px 10px 8px 0;
+  border-bottom: 2px solid var(--line-strong);
+  font-weight: 700;
+}
+
+.st-table td {
+  padding: 9px 10px 9px 0;
+  border-bottom: 2px solid var(--line);
+  vertical-align: middle;
+}
+
+.st__chapter em {
+  font-style: italic;
+  color: var(--red);
+  margin-right: 0.4em;
+}
+
+.st__num {
+  width: 4.5em;
+  text-align: right;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.st__bar {
+  width: 18%;
+  min-width: 90px;
+}
+
+.st__bar-track {
+  display: block;
+  height: 6px;
+  background: var(--paper-3);
+  position: relative;
+}
+
+.st__bar-track i {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--red);
+  transition: width 260ms var(--ease);
+}
+
+.st__bar--wide {
+  display: inline-block;
+  width: min(190px, 40vw);
+}
+
+.st__go {
+  white-space: nowrap;
+}
+
+.st__go a {
+  margin-right: 0.8em;
+  border-bottom: 2px solid var(--line-strong);
+}
+
+.st__go a:hover {
+  color: var(--red);
+  border-color: var(--red);
+  text-decoration: none;
+}
+
+@media (max-width: 760px) {
+  .st-table th:nth-child(4),
+  .st-table td:nth-child(4),
+  .st-table th:nth-child(5),
+  .st-table td:nth-child(5) {
+    display: none;
+  }
+}
+
+/* ---------------------------------------------------------------- 404 */
+
+.notfound {
+  padding-block: clamp(48px, 8vw, 120px);
+}
+
+.notfound h1 {
+  font-size: clamp(2rem, 4.4vw, 3.4rem);
+  max-width: 14em;
+}
+
+.notfound__search {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0;
+  max-width: 30em;
+  margin-top: clamp(20px, 3vw, 32px);
+}
+
+.notfound__links {
+  list-style: none;
+  padding: 0;
+  margin-top: clamp(28px, 4vw, 48px);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 32px;
+  font-size: var(--fs-small);
+}
+
+.notfound__links a {
+  border-bottom: 2px solid var(--line-strong);
+}
+
+.notfound__links a:hover {
+  color: var(--red);
+  border-color: var(--red);
+  text-decoration: none;
+}
+
+.st-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: clamp(18px, 3vw, 40px);
+  align-items: start;
+  margin-top: 4px;
+}
+
+.st-head__text p {
+  max-width: 34em;
+}
+
+.st-head__actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  justify-self: end;
+  min-width: 17em;
+}
+
+.st-head__actions .btn {
+  text-align: center;
+}
+
+@media (max-width: 760px) {
+  .st-head {
+    grid-template-columns: 1fr;
+  }
+  .st-head__actions {
+    grid-template-columns: 1fr 1fr;
+    min-width: 0;
+  }
+}
+
+/* 进度页：页头用满宽，右边放常用动作 */
+.pagehead--wide .pagehead__inner {
+  row-gap: clamp(16px, 2vw, 24px);
+}
+
+.pagehead--wide .pagehead__scope {
+  grid-column: 1 / -1;
+}
+
+.pagehead--wide .pagehead__title {
+  margin-bottom: 0;
+}
+
+/* 难度分布 */
+.st-diff {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 2px;
+  max-width: 48em;
+}
+
+.st-diff a {
+  display: grid;
+  grid-template-columns: 7em 3em minmax(0, 1fr);
+  align-items: center;
+  gap: 14px;
+  padding: 9px 0;
+  border-bottom: 2px solid var(--line);
+  font-size: var(--fs-small);
+  text-decoration: none;
+}
+
+.st-diff a:hover {
+  text-decoration: none;
+}
+
+.st-diff a:hover .st-diff__label {
+  color: var(--red);
+}
+
+.st-diff__label {
+  font-weight: 700;
+}
+
+.st-diff__num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-soft);
+}
+
+.st-diff__track {
+  display: block;
+  height: 6px;
+  background: var(--paper-3);
+}
+
+.st-diff__track i {
+  display: block;
+  height: 100%;
+  background: var(--ink);
+}
+
+/* ---------------------------------------------------------------- 投稿编辑器体验 */
+
+/* 软换行：长句不横向滚动 */
+.textarea--code {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  tab-size: 2;
+  resize: none;
+  overflow-y: auto;
+  min-height: 132px;
+}
+
+.mdbar__group--right {
+  margin-left: auto;
+  border-color: var(--line);
+}
+
+.mdbar__group--right button.is-on {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.mdmeta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 6px 18px;
+  align-items: baseline;
+}
+
+.mdcount {
+  font-size: var(--fs-micro);
+  color: var(--ink-mute);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* 专注：隐掉预览，编辑区铺满 */
+body.is-focus .submit {
+  grid-template-columns: 1fr;
+}
+
+body.is-focus .submit__preview {
+  display: none;
+}
+
+/* 预览：长公式与长词都不撑破右栏 */
+.submit__preview .prose {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  min-width: 0;
+}
+
+.submit__preview > * {
+  min-width: 0;
+}
+
+.submit__form {
+  min-width: 0;
+}
+
+.submit__preview .prose pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.submit__preview .prose .math-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+/* 题目行：不在本轮范围的标记 */
+.qrow__term {
+  display: inline-block;
+  padding: 0.1em 0.45em;
+  background: var(--paper-3);
+  color: var(--ink-soft);
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.questions__scope {
+  margin: 0 0 6px;
+  font-size: var(--fs-micro);
+  color: var(--ink-mute);
+}
+
+.course__term-less {
+  margin-bottom: 14px;
+  padding: 10px 12px;
+  background: var(--paper-2);
+  border-left: 4px solid var(--red);
+  font-size: var(--fs-small);
+  color: var(--ink-soft);
+}

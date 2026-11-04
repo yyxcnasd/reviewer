@@ -1,0 +1,389 @@
+/* ---------------------------------------------------------------- 窄屏排版 */
+
+/* 窄屏：筛选两列网格，搜索与操作整行 */
+@media (max-width: 760px) {
+  .filters {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 12px;
+    position: static;
+    padding-block: 16px 18px;
+  }
+
+  .filters__field {
+    min-width: 0;
+  }
+
+  /* 搜索框、按钮组、计数、批量操作占整行 */
+  .filters__field:has(input[type='search']),
+  .filters__count,
+  .donebar,
+  .questions__scope {
+    grid-column: 1 / -1;
+  }
+
+  .filters select,
+  .filters input {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .pagehead__stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 12px;
+  }
+
+  .pagehead__stats span {
+    white-space: nowrap;
+  }
+
+  .donebar__actions {
+    grid-column: 1 / -1;
+  }
+}
+
+/* 页头统计：单项不换行（桌面也一样） */
+.pagehead__stats span {
+  white-space: nowrap;
+}
+
+/* 要点页：页头到正文的空白收紧 */
+.article {
+  padding-top: 0;
+}
+
+.article__main {
+  padding-top: 4px;
+}
+
+/* 代码块：窄屏横向滚动，不撑破页面 */
+.prose pre,
+.qblock__body pre {
+  overflow-x: auto;
+  padding: 14px 16px;
+  background: var(--code-bg);
+  color: var(--code-fg);
+  border-left: 3px solid var(--line-strong);
+  font-family: var(--mono); /* taste-skill-ignore */
+  font-variant-numeric: normal;
+  font-size: 0.875rem;
+  line-height: 1.7;
+  margin: 1.1em 0;
+  max-width: 100%;
+}
+
+.prose pre code,
+.qblock__body pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+  font-size: inherit;
+}
+
+/* 键位提示：一个字符也要看得见 */
+.kbd {
+  min-width: 1.5em;
+  text-align: center;
+  padding: 0.05em 0.35em;
+}
+
+/* ---------------------------------------------------------------- 速查表（分科目） */
+
+.sheet-course {
+  margin-bottom: clamp(32px, 4vw, 56px);
+}
+
+.sheet-course__title {
+  font-size: clamp(1.25rem, 2vw, 1.6rem);
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--line-strong);
+  margin-bottom: 18px;
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.sheet-course .sheet__body {
+  column-count: 2;
+  column-gap: clamp(24px, 3vw, 48px);
+}
+
+.sheet-course .sheet__body h3 {
+  break-after: avoid;
+}
+
+.sheet-course .sheet__body p,
+.sheet-course .sheet__body ul,
+.sheet-course .sheet__body ol {
+  break-inside: avoid;
+}
+
+/* 纸上：A4 横向、三栏、小字号 */
+@media print {
+  @page {
+    size: A4 landscape;
+    margin: 10mm 10mm 12mm;
+  }
+
+  body {
+    font-size: 9pt;
+  }
+
+  .sheet-course {
+    margin: 0;
+    break-after: page;
+  }
+
+  .sheet-course:last-of-type {
+    break-after: auto;
+  }
+
+  .sheet-course__title {
+    font-size: 13pt;
+    border-bottom-width: 1.5pt;
+    margin-bottom: 4mm;
+    padding-bottom: 2mm;
+  }
+
+  .sheet-course .sheet__body {
+    column-count: 3;
+    column-gap: 8mm;
+    font-size: 8.6pt;
+    line-height: 1.5;
+  }
+
+  .sheet-course .sheet__body h3 {
+    font-size: 9.6pt;
+    margin: 3mm 0 1mm;
+  }
+
+  .sheet-course .sheet__body p {
+    margin: 0 0 1.6mm;
+  }
+
+  /* 只打印某一门 */
+  body.printing-va1 .sheet-course:not([data-sheet='va1']),
+  body.printing-la .sheet-course:not([data-sheet='la']),
+  body.printing-dm .sheet-course:not([data-sheet='dm']),
+  body.printing-ics .sheet-course:not([data-sheet='ics']),
+  body.printing-other .sheet-course:not([data-sheet='other']) {
+    display: none;
+  }
+}
+
+/* ---------------------------------------------------------------- 要点页：学习笔记排版 */
+
+/* 比正文稍紧一点，像一份整理过的笔记而不是文章 */
+.article__main.prose {
+  font-size: 1.0625rem;
+  line-height: 1.72;
+  max-width: 42em;
+}
+
+.article__main.prose p {
+  margin: 0 0 0.72em;
+}
+
+.article__main.prose h2 {
+  font-size: clamp(1.25rem, 1.6vw, 1.5rem);
+  margin: 2.1em 0 0.55em;
+  padding-top: 0.5em;
+  border-top: 2px solid var(--line-strong);
+  letter-spacing: 0.01em;
+}
+
+.article__main.prose h2:first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+}
+
+.article__main.prose h3 {
+  font-size: 1.0625rem;
+  margin: 1.5em 0 0.35em;
+  letter-spacing: 0.01em;
+}
+
+.article__main.prose h3 + p {
+  margin-top: 0;
+}
+
+.article__main.prose .math-display {
+  margin-block: 0.85em;
+}
+
+.article__main.prose ul,
+.article__main.prose ol {
+  margin: 0 0 0.8em;
+  padding-left: 1.2em;
+}
+
+.article__main.prose li {
+  margin-bottom: 0.3em;
+}
+
+/* 定义 / 定理 / 注意 这类标签：小红字 + 稍缩进，扫读时一眼能定位 */
+.nb {
+  padding-left: 0.9em;
+  border-left: 3px solid var(--line-strong);
+}
+
+.nb--定义,
+.nb--定理,
+.nb--性质,
+.nb--结论,
+.nb--推论 {
+  border-left-color: var(--ink);
+}
+
+.nb--注意,
+.nb--易错,
+.nb--警告 {
+  border-left-color: var(--red);
+}
+
+.nb--例,
+.nb--例题 {
+  border-left-color: var(--indigo);
+}
+
+.nb__label {
+  display: inline-block;
+  margin-right: 0.55em;
+  font-size: 0.78em;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--ink-soft);
+  vertical-align: 0.06em;
+}
+
+.nb--注意 .nb__label,
+.nb--易错 .nb__label,
+.nb--警告 .nb__label {
+  color: var(--red-deep);
+}
+
+.nb--例 .nb__label,
+.nb--例题 .nb__label {
+  color: var(--indigo);
+}
+
+/* 本章速览 */
+.note-glance {
+  margin: 0 0 1.6em;
+  padding: 14px 16px;
+  background: var(--paper-2);
+}
+
+.note-glance h2 {
+  margin: 0 0 0.5em;
+  padding: 0;
+  border: 0;
+  font-size: var(--fs-micro);
+  letter-spacing: 0.12em;
+  color: var(--ink-mute);
+}
+
+.note-glance ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px 18px;
+  font-size: var(--fs-small);
+  counter-reset: g;
+}
+
+.note-glance li {
+  margin: 0;
+  display: flex;
+  gap: 0.6em;
+  align-items: baseline;
+}
+
+.note-glance li::before {
+  counter-increment: g;
+  content: counter(g);
+  color: var(--red);
+  font-variant-numeric: tabular-nums;
+  min-width: 1.2em;
+}
+
+.note-glance a {
+  color: var(--ink);
+}
+
+.note-glance a:hover {
+  color: var(--red);
+}
+
+@media (max-width: 700px) {
+  .note-glance ol {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 通用小标题（定义 / 定理 / 易错点）当标签用，别当章节标题 */
+.article__main.prose h3.is-label {
+  font-size: var(--fs-micro);
+  letter-spacing: 0.12em;
+  color: var(--ink-mute);
+  margin: 1.3em 0 0.25em;
+}
+
+.article__toc li.is-label {
+  display: none;
+}
+
+/* 速查表头部：一行下拉 + 打印，课再多也不会撑爆 */
+.sheet-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 24px;
+}
+
+.sheet-toolbar__lead {
+  margin: 0;
+  max-width: 34em;
+}
+
+.sheet-toolbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.sheet-toolbar__actions .select {
+  width: auto;
+  min-width: 16em;
+}
+
+/* 章节标题可点：整块标题就是进要点的入口 */
+.chapter__title a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: border-color 160ms var(--ease), color 160ms var(--ease);
+}
+
+.chapter__title a:hover,
+.chapter__title a:focus-visible {
+  color: var(--red);
+  border-bottom-color: var(--red);
+  text-decoration: none;
+}
+
+.chapter {
+  cursor: pointer;
+}
+
+.chapter .chapter__sections,
+.chapter .chapter__links,
+.chapter .chapter__summary {
+  cursor: auto;
+}

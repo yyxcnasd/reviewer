@@ -22,7 +22,7 @@ import { buildExportPages } from './pages/export.mjs'
 import { buildNotFound, buildData, buildExtras } from './pages/extras.mjs'
 
 /** CSS 的拼接顺序（fonts.css 由字体脚本生成，排在最前） */
-const STYLE_ORDER = ['tokens', 'base', 'home', 'pages', 'practical']
+const STYLE_ORDER = ['tokens', 'base', 'home', 'pages-browse', 'pages-tools', 'pages-detail', 'pages-misc', 'practical']
 
 /** 页面脚本：都是普通 <script>，按顺序拷到 assets/ */
 const SCRIPTS = ['core.js', 'theme.js', 'term.js', 'progress.js', 'site.js', 'submit.js', 'practice.js', 'export.js', 'export-print.js']
@@ -77,6 +77,7 @@ export async function buildSite(ctx) {
   buildData(ctx)
   buildExtras(ctx)
   copyStatic(ctx)
+  cleanStale(ctx)
 }
 
 /* ---------------------------------------------------------------- 静态资源 */
@@ -127,5 +128,39 @@ export function copyDir(src, dst) {
     const d = path.join(dst, entry.name)
     if (entry.isDirectory()) copyDir(s, d)
     else fs.copyFileSync(s, d)
+  }
+}
+
+/** 删掉 docs 里这次没有重新生成的页面，避免改名/下线后留下旧 URL */
+export function cleanStale(ctx) {
+  const keep = new Set(ctx.written.map((w) => path.resolve(ctx.OUT, w)))
+  const walk = (dir) => {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const abs = path.join(dir, entry.name)
+      if (entry.isDirectory()) {
+        walk(abs)
+        if (fs.readdirSync(abs).length === 0) fs.rmdirSync(abs)
+        continue
+      }
+      if (!entry.name.endsWith('.html')) continue
+      if (keep.has(path.resolve(abs))) continue
+      // 顶层 404 与 data/ 里的 json 不在 written 里，别误删
+      if (entry.name === '404.html') continue
+      fs.unlinkSync(abs)
+      console.log('  清理旧页面', path.relative(ctx.ROOT, abs).replace(/\\/g, '/'))
+    }
+  }
+  if (fs.existsSync(ctx.OUT)) walk(ctx.OUT)
+
+  // data/q 里的题目 JSON 同理
+  const qDir = path.join(ctx.OUT, 'data/q')
+  if (fs.existsSync(qDir)) {
+    const live = new Set(ctx.questions.map((q) => q.id + '.json'))
+    for (const f of fs.readdirSync(qDir)) {
+      if (!live.has(f)) {
+        fs.unlinkSync(path.join(qDir, f))
+        console.log('  清理旧题目', f)
+      }
+    }
   }
 }

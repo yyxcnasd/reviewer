@@ -445,12 +445,12 @@ courses:
         summary: 课外的、竞赛的，或者只是觉得有意思的题。
         sections: []
 
-  # 离散数学：只有期末，没有期中。
-  - id: dm
-    name: 离散数学
-    short: 离散
+  # 离散数学1：只有期末，没有期中。
+  - id: dm1
+    name: 离散数学1
+    short: 离散 1
     accent: indigo
-    book: 《数理逻辑与集合论》石纯一 王家廞 · 马昱春 讲义
+    book: 《数理逻辑与集合论》石纯一 王家廞 · 马昱春 讲义（离散数学 1）
     terms: [final]
     scope_line: 期末考试：第 1 章 – 第 5 章
     scope_note: 这门课没有期中，只有期末；范围按讲义章节整理。
@@ -458,7 +458,7 @@ courses:
       从命题逻辑讲到谓词逻辑：联结词、真值表、等值演算、范式、推理演算、归结，
       再到谓词、量词、前束范式。
     chapters:
-      - id: dm-1
+      - id: dm1-1
         no: "1"
         title: 命题逻辑的基本概念
         state: in
@@ -497,7 +497,7 @@ courses:
             state: in
             terms: { midterm: in, final: in }
             keywords: [波兰表达式, 前缀表达式, 无括号记号]
-      - id: dm-2
+      - id: dm1-2
         no: "2"
         title: 命题逻辑的等值和推理演算
         state: in
@@ -556,7 +556,7 @@ courses:
             state: in
             terms: { midterm: out, final: in }
             keywords: [归结, 子句, 空子句, 归结反演, 海伯伦]
-      - id: dm-3
+      - id: dm1-3
         no: "3"
         title: 命题逻辑的公理化
         state: in
@@ -595,7 +595,7 @@ courses:
             state: in
             terms: { midterm: out, final: in }
             keywords: [模态逻辑, 多值逻辑, 非标准逻辑]
-      - id: dm-4
+      - id: dm1-4
         no: "4"
         title: 谓词逻辑的基本概念
         state: in
@@ -634,7 +634,7 @@ courses:
             state: in
             terms: { midterm: out, final: in }
             keywords: [普遍有效, 可满足, 判定问题, 不可判定]
-      - id: dm-5
+      - id: dm1-5
         no: "5"
         title: 谓词逻辑的等值和推理演算
         state: in

@@ -39,7 +39,7 @@
           <details class="navmenu">
             <summary>课程</summary>
             <ul class="navmenu__list">
-              <li><a href="../va1/">微积分 A1</a></li><li><a href="../la/">线性代数</a></li><li><a href="../dm/">离散数学<span class="navmenu__tag">仅期末</span></a></li><li><a href="../ics/" aria-current="page">计算机系统概论</a></li>
+              <li><a href="../va1/">微积分 A1</a></li><li><a href="../la/">线性代数</a></li><li><a href="../dm1/">离散数学1<span class="navmenu__tag">仅期末</span></a></li><li><a href="../ics/" aria-current="page">计算机系统概论</a></li>
               <li class="navmenu__sep"><a href="../questions/">题库（全部课程）</a></li>
             </ul>
           </details>
@@ -90,7 +90,7 @@
   <div class="article__main prose">
     <div class="note-glance">
         <h2>本章速览</h2>
-        <ol><li><a href="#h-3">栈帧里的危险邻居</a></li><li><a href="#h-4">一个例子</a></li><li><a href="#h-5">攻击怎么发生</a></li><li><a href="#h-6">三层防御，各挡一种</a></li></ol>
+        <ol><li><a href="#h-1">6.1 进程的内存布局</a></li><li><a href="#h-2">6.2 缓冲区溢出</a></li></ol>
       </div>
     <h2 id="h-1">6.1 进程的内存布局</h2>
 <p>按课程要求这一节不考，只需记住一句话：一个进程的地址空间里有代码段、数据段、栈和堆几块区域，栈在高地址、向低地址增长。下面直接进入 6.2。</p>
@@ -116,8 +116,7 @@
     leave
     ret</code></pre></p>
 <code>buf</code> 占 <code>rbp-16</code> 到 <code>rbp-1</code>，再往上 8 字节是保存的 <code>%rbp</code>，再往上 8 字节是返回地址。所以输入的第 25–32 个字节会改写返回地址：</p>
-<table>
-<thead>
+<div class="table-wrap"><table><thead>
 <tr>
 <th>输入偏移</th>
 <th>覆盖的位置</th>
@@ -137,8 +136,7 @@
 <td>返回地址</td>
 </tr>
 </tbody>
-</table>
-<p><strong>最容易错的一步</strong>：算错「覆盖到返回地址要多少字节」。必须先把 <code>buf</code> 的大小、保存的 <code>%rbp</code> 的 8 字节都算进去；顺序差一个位置，构造出来的输入就完全失效。</p>
+</table></div><p><strong>最容易错的一步</strong>：算错「覆盖到返回地址要多少字节」。必须先把 <code>buf</code> 的大小、保存的 <code>%rbp</code> 的 8 字节都算进去；顺序差一个位置，构造出来的输入就完全失效。</p>
 <h3 id="h-5">攻击怎么发生</h3>
 <p>精心构造输入，把返回地址改成一段恶意代码（shellcode）的地址，或者改成进程里已有函数（例如 <code>system</code>）的地址，<code>ret</code> 时 CPU 就跳到那里执行。地址要按<strong>小端</strong>字节序写（x86-64 低字节在前），这是构造溢出字符串时最容易写反的一步。</p>
 <h3 id="h-6">三层防御，各挡一种</h3>

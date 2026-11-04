@@ -1,0 +1,427 @@
+/* ---------------------------------------------------------------- 速查表 */
+/* ==========================================================================
+   速查表：A4 双栏，打印优先
+   ========================================================================== */
+
+.sheet {
+  padding-bottom: var(--section-y);
+}
+
+.sheet__body {
+  max-width: none;
+}
+
+/* 屏幕上两栏，像一张印出来的小抄；窄屏回到单栏 */
+@media (min-width: 1000px) {
+  .sheet__body {
+    column-count: 2;
+    column-gap: clamp(28px, 4vw, 64px);
+    column-rule: 0;
+  }
+  .sheet__body h2,
+  .sheet__body h3 {
+    break-after: avoid;
+    column-span: none;
+  }
+  .sheet__body p,
+  .sheet__body ul,
+  .sheet__body ol {
+    break-inside: avoid;
+  }
+  .sheet__body .math-display {
+    break-inside: avoid;
+  }
+  /* 课程标题横跨两栏 */
+  .sheet__body h2 {
+    column-span: all;
+    margin-top: 0.6em;
+    padding-top: 0.5em;
+    border-top: 2px solid var(--line-strong);
+  }
+  .sheet__body h2:first-of-type {
+    border-top: 0;
+    margin-top: 0;
+  }
+}
+
+.sheet__body h2 {
+  font-size: clamp(1.35rem, 2vw, 1.75rem);
+  margin-top: 1.4em;
+}
+
+.sheet__body h3 {
+  font-size: var(--fs-body);
+  font-weight: 900;
+  margin-top: 1.3em;
+  margin-bottom: 0.35em;
+}
+
+.sheet__body p {
+  font-size: var(--fs-small);
+  line-height: 1.7;
+  margin-bottom: 0.7em;
+}
+
+.sheet__body .math-display {
+  margin-block: 0.5em;
+  font-size: 0.98em;
+}
+
+.sheet__body ul,
+.sheet__body ol {
+  margin: 0 0 0.8em 1.15em;
+  padding: 0;
+  font-size: var(--fs-small);
+}
+
+.sheet__body li {
+  margin-bottom: 0.3em;
+}
+
+@media print {
+  .sheet__body {
+    column-count: 2;
+    column-gap: 40px;
+    font-size: 9.5pt;
+  }
+  .sheet__body h2 {
+    font-size: 13pt;
+    margin-top: 10pt;
+  }
+  .sheet__body h3 {
+    font-size: 10.5pt;
+  }
+  .sheet__body p,
+  .sheet__body ul,
+  .sheet__body ol {
+    font-size: 9pt;
+    line-height: 1.5;
+  }
+  .sheet__tools,
+  .pagehead__stats {
+    display: none;
+  }
+}
+
+/* 打印时不做入场，全部直接可见 */
+@media print {
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+
+/* ---------------------------------------------------------------- 导出选题页 */
+/* ==========================================================================
+   导出选题页
+   ========================================================================== */
+
+.export {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: clamp(20px, 3vw, 44px);
+  align-items: start;
+  padding-bottom: var(--section-y);
+}
+
+.export__list {
+  min-width: 0;
+}
+
+.export__side {
+  position: sticky;
+  top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* 筛选条 */
+.exfilters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  align-items: end;
+  padding-bottom: 16px;
+}
+
+.exfilters__field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.exfilters__field label {
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  color: var(--ink-mute);
+}
+
+.exfilters select,
+.exfilters input {
+  padding: 0.5em 0.65em;
+  background: var(--paper);
+  border: 2px solid var(--line-strong);
+  border-radius: 0;
+  font-size: var(--fs-small);
+  font-family: inherit;
+}
+
+.exfilters input {
+  min-width: 14em;
+}
+
+.exfilters select:focus,
+.exfilters input:focus {
+  outline: none;
+  border-color: var(--red);
+  background: var(--paper);
+}
+
+.exbulk {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+  padding: 10px 0 14px;
+  border-top: 2px solid var(--line);
+  font-size: var(--fs-small);
+}
+
+.exbulk button {
+  background: transparent;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  padding: 0.25em 0;
+  font: inherit;
+  font-weight: 700;
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+
+.exbulk button:hover {
+  color: var(--ink);
+  border-bottom-color: var(--ink);
+}
+
+.exbulk .count {
+  margin-left: auto;
+  color: var(--ink-mute);
+}
+
+.exbulk .count b {
+  color: var(--ink);
+  font-size: 1.1em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* 题目清单 */
+.exgroup {
+  margin-top: 18px;
+}
+
+.exgroup__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 6px 0;
+  border-bottom: 2px solid var(--line-strong);
+  font-size: var(--fs-small);
+  font-weight: 700;
+}
+
+.exgroup__head span {
+  font-weight: 400;
+  color: var(--ink-mute);
+  font-size: var(--fs-micro);
+}
+
+.exrow {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: baseline;
+  padding: 9px 0;
+  border-bottom: 2px solid var(--line);
+  cursor: pointer;
+  animation: exrow-in 320ms var(--ease, ease) both;
+}
+
+@keyframes exrow-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .exrow {
+    animation: none;
+  }
+}
+
+.exrow:hover {
+  background: var(--paper-2);
+}
+
+.exrow input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--red);
+  margin: 0;
+  align-self: start;
+  margin-top: 5px;
+}
+
+.exrow__text {
+  font-size: var(--fs-small);
+  line-height: 1.6;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.exrow__text .katex {
+  font-size: 0.98em;
+}
+
+.exrow__text .math-display {
+  display: inline;
+  margin: 0;
+}
+
+.exrow__id {
+  font-size: var(--fs-micro);
+  color: var(--ink-mute);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.exrow.is-picked {
+  background: var(--paper-2);
+}
+
+/* 选项面板 */
+.exopts {
+  background: var(--paper-2);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.exopts h2 {
+  font-size: var(--fs-small);
+  font-weight: 900;
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.exopts__group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.exopts__group > p {
+  margin: 0;
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  color: var(--ink-mute);
+}
+
+.excheck {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--fs-small);
+  cursor: pointer;
+}
+
+.excheck input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--red);
+  margin: 0;
+}
+
+.exopts__presets {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.exopts__presets button {
+  flex: 1 1 auto;
+  padding: 0.45em 0.6em;
+  background: var(--paper);
+  border: 2px solid transparent;
+  font: inherit;
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.exopts__presets button:hover,
+.exopts__presets button[aria-pressed="true"] {
+  border-color: var(--ink);
+}
+
+.exactions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.exactions .btn {
+  justify-content: center;
+}
+
+.exsum {
+  font-size: var(--fs-micro);
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
+.exsum b {
+  color: var(--ink);
+}
+
+.exnote {
+  font-size: var(--fs-micro);
+  color: var(--ink-mute);
+  line-height: 1.6;
+}
+
+@media (max-width: 1000px) {
+  .export {
+    grid-template-columns: 1fr;
+  }
+  .export__side {
+    position: static;
+    order: -1;
+  }
+}
+
+/* 要点正文里的行间公式：略收一点，长式子尽量不用横向滚 */
+.prose .katex-display {
+  font-size: 0.97em;
+}
+
+/* 窄屏：题库列表底部不要留一大截空白 */
+@media (max-width: 760px) {
+  .index-field {
+    padding-bottom: clamp(28px, 6vw, 48px);
+  }
+}

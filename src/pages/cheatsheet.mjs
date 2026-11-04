@@ -39,26 +39,17 @@ export function buildCheatsheet(ctx) {
   <header class="pagehead pagehead--wide">
     <div class="pagehead__inner">
       <h1 class="pagehead__title">速查表</h1>
-      <div class="pagehead__scope st-head">
-        <div class="st-head__text">
-          <p>每门课最常用的一批结论。A4 横向、三栏，打印出来是一张可折叠的纸。</p>
-          <div class="pagehead__stats">
-            <span>${sheets.length} 门课</span>
-            <span>${total} 组结论</span>
-            <span>打印时按科目分开</span>
-          </div>
-        </div>
-        <div class="st-head__actions">
-          <button class="btn btn--red" type="button" data-print-sheet="">打印全部</button>
-          ${sheets
-            .map(
-              (s) =>
-                `<button class="btn btn--tone" type="button" data-print-sheet="${s.id}">只打印${esc(s.name)}</button>`,
-            )
-            .join('')}
+      <div class="pagehead__scope sheet-toolbar">
+        <p class="sheet-toolbar__lead">每门课最常用的一批结论。A4 横向三栏，一张纸一门课，打印时自动分页。</p>
+        <div class="sheet-toolbar__actions">
+          <label class="sr-only" for="sheet-pick">选择科目</label>
+          <select class="select" id="sheet-pick">
+            <option value="">全部 ${sheets.length} 门课（${total} 组结论）</option>
+            ${sheets.map((s) => `<option value="${s.id}">${esc(s.name)}（${s.headings} 组）</option>`).join('')}
+          </select>
+          <button class="btn btn--red" type="button" id="sheet-print">打印</button>
         </div>
       </div>
-    </div>
   </header>
 
   ${sheets
@@ -71,17 +62,19 @@ export function buildCheatsheet(ctx) {
     .join('')}
 </div>
 <script>
-  // 打印时只保留选中的那一门
-  for (const btn of document.querySelectorAll('[data-print-sheet]')) {
+  ;(() => {
+    const pick = document.getElementById('sheet-pick')
+    const btn = document.getElementById('sheet-print')
+    if (!pick || !btn) return
     btn.addEventListener('click', () => {
-      const id = btn.getAttribute('data-print-sheet')
-      document.body.classList.forEach((c) => {
-        if (c.startsWith('printing-')) document.body.classList.remove(c)
-      })
-      if (id) document.body.classList.add('printing-' + id)
-      window.print()
+      for (const cls of [...document.body.classList]) {
+        if (cls.startsWith('printing-')) document.body.classList.remove(cls)
+      }
+      if (pick.value) document.body.classList.add('printing-' + pick.value)
+      if (window.RB && window.RB.printAll) window.RB.printAll()
+      else window.print()
     })
-  }
+  })()
 </script>`
 
   write(

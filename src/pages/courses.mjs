@@ -55,7 +55,15 @@ export function buildCourses(ctx) {
                  ${ch.count ? `<a href="${url(1, `export/?chapter=${ch.id}`)}">导出</a>` : ''}
                </div>`
         return `<article class="chapter" id="ch-${ch.id}">
-          <h2 class="chapter__title">${ch.no ? `<em>${esc(ch.no)}</em>` : ''}${esc(ch.title)}</h2>
+          <h2 class="chapter__title">${(() => {
+          const href = ch.note
+            ? url(1, `notes/${ch.id}.html`)
+            : ch.count
+              ? url(1, `questions/?chapter=${ch.id}`)
+              : ''
+          const inner = `${ch.no ? `<em>${esc(ch.no)}</em>` : ''}${esc(ch.title)}`
+          return href ? `<a href="${href}">${inner}</a>` : inner
+        })()}</h2>
           <span class="chapter__label chapter__label--${ch.state}" data-chip>${stateLabel(ch.state)}</span>
           <p class="chapter__summary">${esc(ch.summary || '')}</p>
           <ul class="chapter__sections">${secs}</ul>

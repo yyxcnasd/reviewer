@@ -39,7 +39,7 @@
           <details class="navmenu">
             <summary>课程</summary>
             <ul class="navmenu__list">
-              <li><a href="../va1/">微积分 A1</a></li><li><a href="../la/">线性代数</a></li><li><a href="../dm/">离散数学<span class="navmenu__tag">仅期末</span></a></li><li><a href="../ics/">计算机系统概论</a></li>
+              <li><a href="../va1/">微积分 A1</a></li><li><a href="../la/">线性代数</a></li><li><a href="../dm1/">离散数学1<span class="navmenu__tag">仅期末</span></a></li><li><a href="../ics/">计算机系统概论</a></li>
               <li class="navmenu__sep"><a href="../questions/">题库（全部课程）</a></li>
             </ul>
           </details>
@@ -109,8 +109,7 @@
           <div class="answer"><span>答案</span><p>(1) 偏移 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo separator="true">,</mo><mn>4</mn><mo separator="true">,</mo><mn>8</mn><mo separator="true">,</mo><mn>16</mn><mo separator="true">,</mo><mn>24</mn></mrow><annotation encoding="application/x-tex">0,4,8,16,24</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">4</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">8</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">16</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">24</span></span></span></span>，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="monospace">sizeof</mtext><mo>=</mo><mn>32</mn></mrow><annotation encoding="application/x-tex">\texttt{sizeof}=32</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6111em;"></span><span class="mord text"><span class="mord texttt">sizeof</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">32</span></span></span></span>；(2) 顺序 <code>double x; int i; short s; char c; char d;</code>，大小 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>16</mn></mrow><annotation encoding="application/x-tex">16</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">16</span></span></span></span>；(3) <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>64</mn></mrow><annotation encoding="application/x-tex">64</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">64</span></span></span></span>；(4) 仍是 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>32</mn></mrow><annotation encoding="application/x-tex">32</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">32</span></span></span></span></p>
 </div>
           <p><strong>(1)</strong> 最大对齐是 <code>double</code> 的 8，所以结构体总大小要是 8 的倍数。</p>
-<table>
-<thead>
+<div class="table-wrap"><table><thead>
 <tr>
 <th>成员</th>
 <th>大小</th>
@@ -150,8 +149,7 @@
 <td>24</td>
 </tr>
 </tbody>
-</table>
-<p>成员占到偏移 25，结构体大小向上取到 8 的倍数：</p>
+</table></div><p>成员占到偏移 25，结构体大小向上取到 8 的倍数：</p>
 <p><span class="math-display"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mrow><mtext mathvariant="monospace">sizeof(struct</mtext><mtext> </mtext><mtext mathvariant="monospace">S)</mtext></mrow><mo>=</mo><mn>32.</mn></mrow><annotation encoding="application/x-tex">\texttt{sizeof(struct S)}=32.</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7778em;vertical-align:-0.0833em;"></span><span class="mord text"><span class="mord texttt">sizeof(struct S)</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">32.</span></span></span></span></span></span></p>
 <p><strong>(2)</strong> 原则是「大的在前、小的在后」，让填充尽量少：</p>
 <p><pre class="code-block"><code class="language-c">struct T {

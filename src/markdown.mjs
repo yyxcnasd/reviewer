@@ -104,6 +104,10 @@ export function renderMarkdown(src, opts = {}) {
     return self.renderToken(tokens, idx, options)
   }
 
+  // 表格套一层滚动容器：列多的时候在窄屏横向滚动，不撑破正文
+  md.renderer.rules.table_open = () => '<div class="table-wrap"><table>'
+  md.renderer.rules.table_close = () => '</table></div>'
+
   let html = md.render(text, opts.env || {})
 
   // 还原公式

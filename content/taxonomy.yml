@@ -19,9 +19,9 @@ categories:
     desc: 方程组与行列式、矩阵、n 维向量空间
     course: la
   - id: discrete
-    label: 离散数学
+    label: 离散数学1
     desc: 命题逻辑、谓词逻辑、等值与推理演算、范式与归结
-    course: dm
+    course: dm1
   - id: cs
     label: 计算机系统
     desc: 数据表示、汇编与寻址、控制流、函数调用、数组与结构体、缓冲区溢出

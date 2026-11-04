@@ -2,14 +2,14 @@
 
 课程范围、讲义要点、题库与解析放在一处的静态复习站。考试轮次（期中 / 期末）可切换，题目可以投稿归档，公式在构建时渲染成 HTML，关掉 JavaScript 也能读题。
 
-现在的课程：微积分 A1、线性代数、离散数学（只有期末）、计算机系统概论。共 149 道题、22 篇要点。
+现在的课程：微积分 A1、线性代数、离散数学 1（只有期末）、计算机系统概论。共 149 道题、22 篇要点。
 
 ## 页面
 
 | 路径 | 内容 |
 | --- | --- |
 | `/` | 首页：搜题、入口条、按轮次的范围表、六道精选题、速查与投稿 |
-| `/va1/` `/la/` `/dm/` `/ics/` | 每门课的考纲：章节、小节、范围状态、本章题数与要点入口 |
+| `/va1/` `/la/` `/dm1/` `/ics/` | 每门课的考纲：章节、小节、范围状态、本章题数与要点入口 |
 | `/notes/<章节>/` | 复习要点：定义怎么叙述、定理的适用条件、最容易算错的那一步 |
 | `/questions/` | 题库：按科目 / 章节 / 标签 / 难度 / 范围 / 状态筛，可按难度排序 |
 | `/questions/<id>.html` | 单题页：题面、提示、解析、常见错误、答案，同章题目与上一题 / 下一题 |
@@ -107,7 +107,7 @@ src/
   pages/                 一个页面一个模块
     home courses notes questions tags cheatsheet
     practice submit about notation stats export extras
-  styles/                tokens → base → home → pages → practical（构建时拼接）
+  styles/                tokens → base → home → pages-browse/tools/detail/misc → practical
   assets/                core.js / theme.js / term.js / 各页面脚本 / 字体 / 图片
 content/
   courses.yml            课程、章节、轮次与范围
