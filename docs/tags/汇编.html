@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>标签：汇编 · 复习册</title>
-<meta name="description" content="带「汇编」标签的 10 道题。">
+<meta name="description" content="带「汇编」标签的 13 道题。">
 <meta name="color-scheme" content="light">
 <link rel="stylesheet" href="../assets/katex/katex.min.css">
 <link rel="stylesheet" href="../assets/site.css">
@@ -21,7 +21,7 @@
 <script src="../assets/term.js" defer></script>
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <meta property="og:title" content="标签：汇编 · 复习册">
-<meta property="og:description" content="带「汇编」标签的 10 道题。">
+<meta property="og:description" content="带「汇编」标签的 13 道题。">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="zh_CN">
 
@@ -66,7 +66,7 @@
   <header class="pagehead">
     <div class="pagehead__inner">
       <h1 class="pagehead__title">汇编</h1>
-      <div class="pagehead__scope"><p>10 道题带这个标签。</p></div>
+      <div class="pagehead__scope"><p>13 道题带这个标签。</p></div>
     </div>
   </header>
   <ul class="qlist"><li class="qrow" data-id="ics-005" data-course="ics" data-chapter="ics-3" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="3" data-tags="汇编 寻址方式" data-text="函数 `f` 的参数 `x` 放在 `%rdi`，返回值放在 `%rax`。它的汇编实现是 ``` f: testq %rdi, %rdi jle .L1 salq $3, %rdi leaq 4(%rdi), %rax ret .L1: movq %rdi, %rax negq %rax ret ``` (1) 写出 `f` 的 C 语言等价实现。 (2) 求 `f(-3)` 与 `f(2)`。 (3) 如果把 `salq 3, %rdi`，语义会不会变？如果换成 32 位的 `sall $3, %edi`，结果会不会变？各说明理由。 汇编 寻址方式 自编">
@@ -140,9 +140,31 @@
           
         </div>
         
+      </li><li class="qrow" data-id="ics-037" data-course="ics" data-chapter="ics-3" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="3" data-tags="条件码 浮点数 汇编" data-text="C 函数 `int less(float a, float b) { return a &lt; b; }` 的 `a`、`b` 分别放在 `%xmm0`、`%xmm1`。编译器生成的汇编是 ``` less: comiss %xmm1, %xmm0 setb %al setnp %dl andb %dl, %al movzbl %al, %eax ret ``` 回答： （1）`comiss` 比较的是哪两个数？它设置哪些标志位？ （2）为什么不能只用 `setb %al`（把中间两条去掉）？ （3）当 `a` 为 NaN、`b = 1.0f` 时，CF、ZF、PF 各是什么？函数最终返回多少？ （4）如果函数改成 `a &gt; b`，可以只用 `comiss %xmm1, %xmm0; seta %al`。为什么这里不需要再加 `setnp`？ （5）如果要判断 `a == b`，应该怎样组合 ">
+        <div>
+          <a class="qrow__link" href="../questions/ics-037.html">C 函数 <code>int less(float a, float b) { return a &lt; b; }</code> 的 <code>a</code>、<code>b</code> 分别放在 <code>%xmm0</code>、<code>%xmm1</code>。编译器生成的汇编是</a>
+          <div class="qrow__meta"><span>计系概 · 汇编语言与程序的机器级表示</span><span>概念题</span><span class="dots" aria-label="难度 3 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          
+        </div>
+        
+      </li><li class="qrow" data-id="ics-044" data-course="ics" data-chapter="ics-4" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="4" data-tags="函数调用 栈帧 汇编" data-text="`g` 是外部函数，参数与返回值都是 `int`。`f` 的汇编如下： ``` f: pushq %rbp movq %rsp, %rbp pushq %rbx subq $16, %rsp movq %rdi, %rbx movq %rdi, -24(%rbp) movl $1, %edi call g movl $2, %edi call g movq -24(%rbp), %rax addq %rbx, %rax addq $16, %rsp popq %rbx popq %rbp ret ``` `g` 的内部有这样一条指令： ``` movaps %xmm0, (%rsp) ``` 运行 `f(5)` 时程序在 `g` 里崩溃（SIGSEGV）。回答： (1) 逐条跟踪 `%rsp` 除以 16 的余数（从进入 `f` 开始），说明崩溃的直接原因； (2) 为什么 `movaps">
+        <div>
+          <a class="qrow__link" href="../questions/ics-044.html"><code>g</code> 是外部函数，参数与返回值都是 <code>int</code>。<code>f</code> 的汇编如下：</p>
+</a>
+          <div class="qrow__meta"><span>计系概 · 函数调用</span><span>综合题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          
+        </div>
+        
+      </li><li class="qrow" data-id="ics-065" data-course="ics" data-chapter="ics-3" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="4" data-tags="汇编 条件码 跳转表" data-text="某函数对整数参数 `x`（放在 `%rdi`）做多分支分派，编译器生成的汇编片段是 ``` leal -10(%rdi), %eax cmpl $2, %eax ja .L8 jmp *.L4(,%rax,8) .L4: .quad .L5 .quad .L6 .quad .L5 ``` (1) 这段代码支持的 `case` 值是哪些？每个值分别跳到哪个标签？其他值呢？ (2) 为什么不直接 `cmpl $12, %rdi` 再用 `%rdi` 查表？`leal -10(%rdi), %eax` 这一步的作用是什么？ (3) 当 `x` 分别取 9、10、12、13 时跳到哪个标签？如果 `x` 是负数呢？ (4) 如果 C 源码里 `x` 是 `long`，而有人照抄了这段 32 位的汇编，那么 `x = 2^{32}+10` 会发生什么？为什么？ (5) 跳转表每一项为什么用 `.qu">
+        <div>
+          <a class="qrow__link" href="../questions/ics-065.html">某函数对整数参数 <code>x</code>（放在 <code>%rdi</code>）做多分支分派，编译器生成的汇编片段是</a>
+          <div class="qrow__meta"><span>计系概 · 汇编语言与程序的机器级表示</span><span>综合题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          
+        </div>
+        
       </li></ul>
   <p class="more">
-    <a class="btn btn--red" href="../export/?tag=%E6%B1%87%E7%BC%96">导出这 10 道（PDF）</a>
+    <a class="btn btn--red" href="../export/?tag=%E6%B1%87%E7%BC%96">导出这 13 道（PDF）</a>
     <a href="../tags/">← 回到全部标签</a>
   </p>
 </div>
@@ -162,7 +184,7 @@
         <div class="footer__col">
           <h3>内容</h3>
           <ul>
-            <li><a href="../questions/">题库（195 道）</a></li>
+            <li><a href="../questions/">题库（250 道）</a></li>
             <li><a href="../practice/">刷题</a></li>
             <li><a href="../tags/">标签</a></li>
             <li><a href="../export/">导出 PDF</a></li>

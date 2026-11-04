@@ -77,8 +77,8 @@
         <p>栈帧里数组与返回地址的位置关系、缓冲区溢出如何改写返回地址、以及栈保护、不可执行栈、ASLR 这几层防御各自挡住什么。</p>
         <div class="pagehead__stats">
           <span>部分在范围</span>
-          <span><b>3</b>道题在这一章</span>
-          <span data-progress-ids="ics-012,ics-027,ics-028">本章已做 <b data-progress-here>0</b> / 3</span>
+          <span><b>4</b>道题在这一章</span>
+          <span data-progress-ids="ics-012,ics-027,ics-028,ics-049">本章已做 <b data-progress-here>0</b> / 4</span>
           <span><button class="ghost" type="button" data-print>打印这一章</button></span>
         </div>
       </div>
@@ -148,9 +148,9 @@
 <p>此外还有<strong>安全函数与检查</strong>：用 <code>fgets</code>、<code>strncpy</code> 代替 <code>gets</code>、<code>strcpy</code>，打开编译器警告和 <code>-D_FORTIFY_SOURCE</code>。</p>
 <p><strong>注意</strong>：canary 只保护返回地址，挡不住「覆盖局部变量导致逻辑被改」这类问题；ASLR 只提高猜测难度，不是绝对安全。答题时问「哪种防御挡住了哪种攻击」，要一条对一条地说。</p>
 
-    <div class="rule-head" style="margin-top:56px"><h2>这一章的题</h2><p>3 道，全部带解析。</p></div>
+    <div class="rule-head" style="margin-top:56px"><h2>这一章的题</h2><p>4 道，全部带解析。</p></div>
            <ul class="qmini">
-             <li><a href="../questions/ics-012.html">下面的函数用 gets 读入一行字符串</a> <span>综合题 · 缓冲区溢出</span></li><li><a href="../questions/ics-027.html">缓冲区溢出 · 难度 4</a> <span>计算题 · 缓冲区溢出</span></li><li><a href="../questions/ics-028.html">下面这段代码把网络包复制到栈上的缓冲区</a> <span>综合题 · 缓冲区溢出</span></li>
+             <li><a href="../questions/ics-012.html">下面的函数用 gets 读入一行字符串</a> <span>综合题 · 缓冲区溢出</span></li><li><a href="../questions/ics-027.html">缓冲区溢出 · 难度 4</a> <span>计算题 · 缓冲区溢出</span></li><li><a href="../questions/ics-028.html">下面这段代码把网络包复制到栈上的缓冲区</a> <span>综合题 · 缓冲区溢出</span></li><li><a href="../questions/ics-049.html">有下面的 C 代码</a> <span>综合题 · 缓冲区溢出</span></li>
            </ul>
     <div class="article__pager">
       <a href="../notes/ics-5.html">← 第 5 章 数组与结构体</a>
@@ -163,7 +163,7 @@
           <dl class="spec spec--rail">
             <div><dt>章节</dt><dd>第 6 章</dd></div>
             <div><dt>节</dt><dd>1 节在范围内</dd></div>
-            <div><dt>题</dt><dd>3 道</dd></div>
+            <div><dt>题</dt><dd>4 道</dd></div>
             <div><dt>范围</dt><dd>部分在范围</dd></div>
           </dl>
         </nav>
@@ -185,7 +185,7 @@
         <div class="footer__col">
           <h3>内容</h3>
           <ul>
-            <li><a href="../questions/">题库（195 道）</a></li>
+            <li><a href="../questions/">题库（250 道）</a></li>
             <li><a href="../practice/">刷题</a></li>
             <li><a href="../tags/">标签</a></li>
             <li><a href="../export/">导出 PDF</a></li>

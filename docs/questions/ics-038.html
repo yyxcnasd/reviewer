@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>函数调用 · 计算题 · 复习册</title>
+<meta name="description" content="考虑递归函数 ```c long f(long n) { char buf[64]; buf[0] = (char)n; if (n &lt;= 1) return 1; return f(n - 1) + n; } ``` 它的汇编序言是 ``` f: pushq %rbp movq %rsp, %rbp subq $72, %rsp ... ``` 其中 `subq $72` 为 64 字节的 `buf` 和额外的 8 字节对齐空间。回答： （1）每进入一层 `f`，栈上至少增加多少字节？ （2）调用 `f(100)` 时，递归深度（同时存在的 `f` 栈帧层数）是多少？ （3）从进入 `f(100)` 时的 `%rsp` 算起，递归最深时栈指针共向下移动多少字节？ （4）若进程可用的栈空间为 8 MiB（ 字节），估算 最大约为多少时不会栈溢出。 函数调用 栈帧 递归 自编">
+<meta name="color-scheme" content="light">
+<link rel="stylesheet" href="../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../assets/site.css">
+<script>
+  // 先按本地设置（或系统偏好）定主题，避免刷新时闪白
+  try {
+    // 默认浅色（纸面）。只有你手动切过深色，才在下次打开时记住。
+    if (localStorage.getItem('reviewer.theme') === 'dark')
+      document.documentElement.setAttribute('data-theme', 'dark')
+  } catch (e) {}
+</script>
+<script src="../assets/core.js"></script>
+<script src="../assets/theme.js" defer></script>
+<script src="../assets/term.js" defer></script>
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<meta property="og:title" content="函数调用 · 计算题 · 复习册">
+<meta property="og:description" content="考虑递归函数 ```c long f(long n) { char buf[64]; buf[0] = (char)n; if (n &lt;= 1) return 1; return f(n - 1) + n; } ``` 它的汇编序言是 ``` f: pushq %rbp movq %rsp, %rbp subq $72, %rsp ... ``` 其中 `subq $72` 为 64 字节的 `buf` 和额外的 8 字节对齐空间。回答： （1）每进入一层 `f`，栈上至少增加多少字节？ （2）调用 `f(100)` 时，递归深度（同时存在的 `f` 栈帧层数）是多少？ （3）从进入 `f(100)` 时的 `%rsp` 算起，递归最深时栈指针共向下移动多少字节？ （4）若进程可用的栈空间为 8 MiB（ 字节），估算 最大约为多少时不会栈溢出。 函数调用 栈帧 递归 自编">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_CN">
+
+</head>
+<body class="no-js detail">
+<script>document.body.classList.remove('no-js')</script>
+<a class="skip" href="#main">跳到正文</a>
+
+  <header class="sitehead">
+    <div class="frame">
+      <nav class="nav" aria-label="主导航">
+        <a class="nav__mark" href="../"><span class="nav__dot" aria-hidden="true"></span>复习册</a>
+        <ul class="nav__links">
+          <li class="nav__menu-wrap">
+          <details class="navmenu">
+            <summary>课程</summary>
+            <ul class="navmenu__list">
+              <li><a href="../va1/">微积分 A1</a></li><li><a href="../la/">线性代数</a></li><li><a href="../dm1/">离散数学1<span class="navmenu__tag">仅期末</span></a></li><li><a href="../ics/">计算机系统概论</a></li>
+              <li class="navmenu__sep"><a href="../questions/">题库（全部课程）</a></li>
+            </ul>
+          </details>
+        </li>
+          <li><a href="../questions/" aria-current="page">题库</a></li>
+          <li><a href="../practice/">刷题</a></li>
+          <li><a href="../cheatsheet/">速查</a></li>
+          <li><a href="../stats/">进度</a></li>
+        </ul>
+        <div class="nav__end">
+          <div class="nav__terms" role="group" aria-label="考试轮次">
+            <button class="term-btn is-on" type="button" data-term-btn="midterm">期中</button><button class="term-btn" type="button" data-term-btn="final">期末</button>
+          </div>
+          <button class="ghost nav__theme" id="theme-toggle" type="button" aria-live="polite">深色</button>
+          <a class="btn btn--red nav__action" href="../submit/">投稿</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+<main id="main">
+
+<div class="frame">
+  <nav class="crumb" aria-label="位置"><a href="../">复习册</a><span class="crumb__sep">/</span><a href="../questions/">题库</a><span class="crumb__sep">/</span><a href="../ics/">计算机系统概论</a><span class="crumb__sep">/</span><span>第 4 章</span></nav>
+
+  <div class="qpage">
+    <div class="qpage__main">
+      <header class="pagehead pagehead--q">
+        <h1 class="qpage__title">函数调用 · 计算题</h1>
+        <div class="meta" style="margin-top:14px">
+          <span class="meta__item">计算机系统概论</span>
+          <span class="meta__item">计算题</span>
+          <span class="meta__item">难度 <span class="dots" aria-label="难度 3 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span></span>
+          <span class="meta__item">自编</span>
+          <span class="meta__item">投稿：自编</span>
+        </div>
+        <div class="qactions">
+          <button class="flag" type="button" data-flag="done" data-id="ics-038" aria-pressed="false"><span>已做</span></button>
+          <button class="flag flag--fav" type="button" data-flag="fav" data-id="ics-038" aria-pressed="false"><span>收藏</span></button>
+          <button class="ghost" type="button" id="expand-all">展开解析与提示</button>
+          <button class="ghost" type="button" id="copy-md">复制题目</button>
+          <a class="ghost" href="../export/?ids=ics-038">导出这道题</a>
+          <button class="ghost" type="button" data-print>打印这道题</button>
+          <span class="qactions__id">ICS-038 · <span class="kbd">←</span><span class="kbd">→</span> 翻题 · <span class="kbd">E</span> 展开 · <span class="kbd">D</span> 记已做</span>
+        </div>
+      </header>
+
+      <div class="qpage__stem prose"><p>考虑递归函数</p>
+<p><pre class="code-block"><code class="language-c">long f(long n) {
+    char buf[64];
+    buf[0] = (char)n;
+    if (n &lt;= 1) return 1;
+    return f(n - 1) + n;
+}</code></pre></p>
+<p>它的汇编序言是</p>
+<p><pre class="code-block"><code class="language-text">f:
+    pushq %rbp
+    movq  %rsp, %rbp
+    subq  $72, %rsp
+    ...</code></pre></p>
+<p>其中 <code>subq $72</code> 为 64 字节的 <code>buf</code> 和额外的 8 字节对齐空间。回答：</p>
+<p>（1）每进入一层 <code>f</code>，栈上至少增加多少字节？</p>
+<p>（2）调用 <code>f(100)</code> 时，递归深度（同时存在的 <code>f</code> 栈帧层数）是多少？</p>
+<p>（3）从进入 <code>f(100)</code> 时的 <code>%rsp</code> 算起，递归最深时栈指针共向下移动多少字节？</p>
+<p>（4）若进程可用的栈空间为 8 MiB（<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>8</mn><mo>×</mo><msup><mn>2</mn><mn>20</mn></msup></mrow><annotation encoding="application/x-tex">8\times2^{20}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">8</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">20</span></span></span></span></span></span></span></span></span></span></span></span> 字节），估算 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span> 最大约为多少时不会栈溢出。</p>
+</div>
+
+      <details class="qblock qblock--hint"><summary>提示<span aria-hidden="true">+</span></summary><div class="qblock__body prose"><p>一层调用的真实开销不只 <code>sub</code> 的那部分：<code>call</code> 先压 8 字节返回地址，进入函数后又 <code>pushq %rbp</code>（8 字节），再 <code>subq $72</code>。把这三块加起来才是「一层」的字节数。递归深度等于从 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span> 递减到 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span> 的层数。</p>
+</div></details>
+
+      <details class="qblock" id="solution">
+        <summary>解析（先自己做一遍再看）<span aria-hidden="true">展开</span></summary>
+        <div class="qblock__body prose">
+          <div class="answer"><span>答案</span><p>（1）每层 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>88</mn></mrow><annotation encoding="application/x-tex">88</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">88</span></span></span></span> 字节；（2）深度 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>100</mn></mrow><annotation encoding="application/x-tex">100</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">100</span></span></span></span>；（3）共 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>8800</mn></mrow><annotation encoding="application/x-tex">8800</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">8800</span></span></span></span> 字节；（4）<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>≤</mo><mn>95325</mn></mrow><annotation encoding="application/x-tex">n\le95325</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7719em;vertical-align:-0.136em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">95325</span></span></span></span></p>
+</div>
+          <p><strong>关键的那一步为什么能想到。</strong> 递归栈溢出的计算关键是「每一层到底花多少栈」。容易只盯着局部数组 <code>buf</code> 的 64 字节，但调用本身还有两笔固定开销：<code>call</code> 压入的返回地址，以及 <code>pushq %rbp</code> 保存的旧帧指针。把这三笔加起来，再乘以层数，才是总占用。层数则由递归终止条件决定：从 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span> 一路减到 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span>，共 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span> 层。</p>
+<p>（1）每层包含：</p>
+<ul>
+<li<code>call</code> 压入的返回地址：8 字节；</li>
+<li<code>pushq %rbp</code>：8 字节；</li>
+<li<code>subq $72</code>：72 字节。</li>
+</ul>
+<p>合计
+<span class="math-display"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mn>8</mn><mo>+</mo><mn>8</mn><mo>+</mo><mn>72</mn><mo>=</mo><mn>88</mn><mtext> 字节</mtext><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">8+8+72=88\ \text{字节}.</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">8</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">8</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">72</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">88</span><span class="mspace"> </span><span class="mord text"><span class="mord cjk_fallback">字节</span></span><span class="mord">.</span></span></span></span></span></span></p>
+<p>（2）<code>f(100)</code> 调用 <code>f(99)</code>，…，直到 <code>f(1)</code> 返回。同时存在的层是 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>100</mn><mo separator="true">,</mo><mn>99</mn><mo separator="true">,</mo><mo>…</mo><mo separator="true">,</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n=100,99,\dots,1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">100</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">99</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner">…</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">1</span></span></span></span>，共
+<span class="math-display"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mn>100</mn><mtext> 层</mtext><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">100\ \text{层}.</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">100</span><span class="mspace"> </span><span class="mord text"><span class="mord cjk_fallback">层</span></span><span class="mord">.</span></span></span></span></span></span></p>
+<p>（3）每层 88 字节，所以最深时栈指针下移
+<span class="math-display"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mn>100</mn><mo>×</mo><mn>88</mn><mo>=</mo><mn>8800</mn><mtext> 字节</mtext><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">100\times88=8800\ \text{字节}.</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">100</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">88</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">8800</span><span class="mspace"> </span><span class="mord text"><span class="mord cjk_fallback">字节</span></span><span class="mord">.</span></span></span></span></span></span></p>
+<p>（4）设最多 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span> 层，要求
+<span class="math-display"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mn>88</mn><mi>n</mi><mo>≤</mo><mn>8</mn><mo>×</mo><msup><mn>2</mn><mn>20</mn></msup><mo>=</mo><mn>8388608.</mn></mrow><annotation encoding="application/x-tex">88n\le8\times2^{20}=8388608.</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7804em;vertical-align:-0.136em;"></span><span class="mord">88</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">8</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8641em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">20</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">8388608.</span></span></span></span></span></span>
+计算
+<span class="math-display"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>n</mi><mo>≤</mo><mfrac><mn>8388608</mn><mn>88</mn></mfrac><mo>≈</mo><mn>95325.1</mn><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">n\le\frac{8388608}{88}\approx95325.1,</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7719em;vertical-align:-0.136em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.0074em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">88</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">8388608</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">95325.1</span><span class="mpunct">,</span></span></span></span></span></span>
+所以
+<span class="math-display"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>n</mi><mi>max</mi><mo>⁡</mo></msub><mo>=</mo><mn>95325.</mn></mrow><annotation encoding="application/x-tex">n_{\max}=95325.</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mop mtight"><span class="mtight">m</span><span class="mtight">a</span><span class="mtight">x</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">95325.</span></span></span></span></span></span>
+可以验证：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>95325</mn><mo>×</mo><mn>88</mn><mo>=</mo><mn>8388600</mn><mo>≤</mo><mn>8388608</mn></mrow><annotation encoding="application/x-tex">95325\times88=8388600\le8388608</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">95325</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">88</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7804em;vertical-align:-0.136em;"></span><span class="mord">8388600</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">8388608</span></span></span></span>，而 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>95326</mn><mo>×</mo><mn>88</mn><mo>=</mo><mn>8388688</mn><mo>&gt;</mo><mn>8388608</mn></mrow><annotation encoding="application/x-tex">95326\times88=8388688&gt;8388608</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">95326</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">88</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6835em;vertical-align:-0.0391em;"></span><span class="mord">8388688</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">8388608</span></span></span></span>。实际系统还有环境变量、启动栈等占用，真实上限会比这个估算略小。</p>
+
+        </div>
+      </details>
+
+      <details class="qblock"><summary>常见错误<span aria-hidden="true">展开</span></summary><div class="qblock__body prose"><p>一是只算 <code>subq $72</code>，漏掉 8 字节返回地址和 8 字节保存的 <code>%rbp</code>，每层少算 16 字节，总占用和 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>n</mi><mi>max</mi><mo>⁡</mo></msub></mrow><annotation encoding="application/x-tex">n_{\max}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mop mtight"><span class="mtight">m</span><span class="mtight">a</span><span class="mtight">x</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 都会偏差很大。二是把深度算成 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n+1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span>（把调用者自己的栈帧也算进去），或算成 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span>（漏掉最底层）。三是用 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>8</mn><mo>×</mo><msup><mn>10</mn><mn>6</mn></msup></mrow><annotation encoding="application/x-tex">8\times10^{6}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">8</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">6</span></span></span></span></span></span></span></span></span></span></span></span> 代替 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>8</mn><mo>×</mo><msup><mn>2</mn><mn>20</mn></msup></mrow><annotation encoding="application/x-tex">8\times2^{20}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">8</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">20</span></span></span></span></span></span></span></span></span></span></span></span> 做估算，边界值会差几千层。四是把 <code>buf[64]</code> 与 <code>subq $72</code> 混为一谈：72 里除了 64 字节数组还有 8 字节的对齐空间。</p>
+</div></details>
+
+      <div class="pager" data-pager>
+        <a class="pager__prev" href="../questions/ics-037.html"><span>上一题</span>C 函数 int less float a,…</a>
+        <a class="pager__next" href="../questions/ics-039.html"><span>下一题</span>x86-64 的调用约定要求 执行 call…</a>
+      </div>
+    </div>
+
+    <aside class="qpage__side">
+      <div>
+        <h2>这道题</h2>
+        <dl class="spec">
+          <div><dt>科目</dt><dd>计算机系统概论</dd></div>
+          <div><dt>章节</dt><dd>函数调用</dd></div>
+          <div><dt>题型</dt><dd>计算题</dd></div>
+          <div><dt>难度</dt><dd><span class="dots" aria-label="难度 3 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span></dd></div>
+          <div><dt>出处</dt><dd>自编</dd></div>
+          <div><dt>范围</dt><dd><span data-chip data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}">在范围内</span></dd></div>
+        </dl>
+      </div>
+      <div>
+        <h2>考点</h2>
+        <ul class="tag-list"><li><a class="tag" href="../tags/%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8.html">函数调用</a></li><li><a class="tag" href="../tags/%E6%A0%88%E5%B8%A7.html">栈帧</a></li><li><a class="tag" href="../tags/%E9%80%92%E5%BD%92.html">递归</a></li></ul>
+      </div>
+      <div>
+        <h2>往下走</h2>
+        <ul class="sidelist">
+          <li><a href="../notes/ics-4.html">读这一章的要点</a></li>
+          <li><a href="../questions/?chapter=ics-4">这一章的 11 道题</a></li>
+          <li><a href="../export/?chapter=ics-4">导出这一章</a></li>
+          <li><a href="../ics/#ch-ics-4">这一章在考纲里的位置</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>同一章</h2>
+        <ul class="sidelist">
+          <li><a href="../questions/ics-008.html">函数 sum 的参数 n 放在 %rdi 返…</a></li><li><a href="../questions/ics-009.html">函数调用 · 难度 3</a></li><li><a href="../questions/ics-022.html">函数 foo 的汇编开头是</a></li><li><a href="../questions/ics-023.html">递归 · 难度 3</a></li><li><a href="../questions/ics-024.html">g 是外部函数 参数和返回值都是 long…</a></li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+</div>
+
+</main>
+
+  <footer class="footer">
+    <div class="frame">
+      <a class="footer__word" href="../" aria-label="回到首页：复习册"><span aria-hidden="true">复习册</span></a>
+      <div class="footer__cols">
+        <div class="footer__col">
+          <h3>科目</h3>
+          <ul>
+            <li><a href="../va1/">微积分 A1</a></li>
+            <li><a href="../la/">线性代数</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h3>内容</h3>
+          <ul>
+            <li><a href="../questions/">题库（250 道）</a></li>
+            <li><a href="../practice/">刷题</a></li>
+            <li><a href="../tags/">标签</a></li>
+            <li><a href="../export/">导出 PDF</a></li>
+            <li><a href="../stats/">进度</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h3>参与</h3>
+          <ul>
+            <li><a href="../submit/">投稿一道题</a></li>
+            <li><a href="../about/">关于与范围说明</a></li>
+            <li><a href="https://github.com/yyxcnasd/reviewer" target="_blank" rel="noopener noreferrer">GitHub 仓库</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h3>这本册子</h3>
+          <ul>
+            <li>2026 秋 期中版</li>
+            <li>内容 CC BY-SA 4.0</li>
+            <li>构建于 2026-11-04</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__legal">
+        <span>复习册 · 课程 · 范围 · 题库</span>
+        <span>内容以 CC BY-SA 4.0 发布，题目标题与解析可自由取用，请保留出处。</span>
+      </div>
+    </div>
+  </footer>
+<script src="../assets/progress.js" defer></script>
+<script src="../assets/site.js" defer></script>
+
+</body>
+</html>

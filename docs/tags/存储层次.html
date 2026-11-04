@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>标签：存储层次 · 复习册</title>
-<meta name="description" content="带「存储层次」标签的 1 道题。">
+<meta name="description" content="带「存储层次」标签的 3 道题。">
 <meta name="color-scheme" content="light">
 <link rel="stylesheet" href="../assets/katex/katex.min.css">
 <link rel="stylesheet" href="../assets/site.css">
@@ -21,7 +21,7 @@
 <script src="../assets/term.js" defer></script>
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <meta property="og:title" content="标签：存储层次 · 复习册">
-<meta property="og:description" content="带「存储层次」标签的 1 道题。">
+<meta property="og:description" content="带「存储层次」标签的 3 道题。">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="zh_CN">
 
@@ -66,7 +66,7 @@
   <header class="pagehead">
     <div class="pagehead__inner">
       <h1 class="pagehead__title">存储层次</h1>
-      <div class="pagehead__scope"><p>1 道题带这个标签。</p></div>
+      <div class="pagehead__scope"><p>3 道题带这个标签。</p></div>
     </div>
   </header>
   <ul class="qlist"><li class="qrow" data-id="ics-001" data-course="ics" data-chapter="ics-1" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="2" data-tags="性能分析 存储层次" data-text="某程序在一台主频为 的机器上运行，动态指令数为 条，平均 CPI 为 。编译器做了一轮优化，把指令数减少了 ，但使平均 CPI 升到 ，主频不变。 求优化前后的执行时间与加速比，并说明这个结果反映了什么问题。 性能分析 存储层次 自编">
@@ -76,9 +76,23 @@
           
         </div>
         
+      </li><li class="qrow" data-id="ics-062" data-course="ics" data-chapter="ics-1" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="4" data-tags="存储层次 性能分析" data-text="一台机器有一级数据 cache，容量 ，cache line 为 ；`int` 占 字节，二维数组按行优先存放： ```c int A[1024][1024]; long sum = 0; ``` 考虑两种遍历方式： ```c /* 方式一：内层 j，行优先 */ for (int i = 0; i &lt; 1024; i++) for (int j = 0; j &lt; 1024; j++) sum += A[i][j]; /* 方式二：内层 i，列优先 */ for (int j = 0; j &lt; 1024; j++) for (int i = 0; i &lt; 1024; i++) sum += A[i][j]; ``` (1) 分别估算两种方式的 cache 缺失率。 (2) 设每次命中花 个周期、每次缺失额外花 个周期，估算两种方式每个元素的平均周期数。 (3) 两种方式的总周期数之比是多少">
+        <div>
+          <a class="qrow__link" href="../questions/ics-062.html">一台机器有一级数据 cache，容量 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>32</mn><mtext> KB</mtext></mrow><annotation encoding="application/x-tex">32\ \text{KB}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">32</span><span class="mspace"> </span><span class="mord text"><span class="mord">KB</span></span></span></span></span>，cache line 为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>64</mn><mtext> B</mtext></mrow><annotation encoding="application/x-tex">64\ \text{B}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">64</span><span class="mspace"> </span><span class="mord text"><span class="mord">B</span></span></span></span></span>；<code>int</code> 占 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>4</mn></mrow><annotation encoding="application/x-tex">4</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">4</span></span></span></span> 字节，二维数组按行优先存放：</a>
+          <div class="qrow__meta"><span>计系概 · 概论</span><span>综合题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          
+        </div>
+        
+      </li><li class="qrow" data-id="ics-064" data-course="ics" data-chapter="ics-1" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="4" data-tags="存储层次 性能分析" data-text="一台机器采用三级存储层次。设一次访存先查 L1： - L1 命中时间 个周期，命中率 ； - 未命中则查 L2：L2 命中时间 个周期，在「L1 未命中」的访问中有 能在 L2 命中； - 仍未命中则访问主存，主存访问时间 个周期。 (1) 求平均访存时间 AMAT。 (2) 程序一共产生 次访存，主频 ，求访存部分的总时间。 (3) 通过循环分块把 L1 命中率提高到 ，其他条件不变，求新的 AMAT 与总时间、加速比。 (4) 另有两个候选改进：把 L2 命中率从 提高到 ，或把主存访问时间从 个周期降到 个周期。分别算出 AMAT，并说明三者中哪个最值得做。 存储层次 性能分析 自编">
+        <div>
+          <a class="qrow__link" href="../questions/ics-064.html">一台机器采用三级存储层次。设一次访存先查 L1：</a>
+          <div class="qrow__meta"><span>计系概 · 概论</span><span>计算题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          
+        </div>
+        
       </li></ul>
   <p class="more">
-    <a class="btn btn--red" href="../export/?tag=%E5%AD%98%E5%82%A8%E5%B1%82%E6%AC%A1">导出这 1 道（PDF）</a>
+    <a class="btn btn--red" href="../export/?tag=%E5%AD%98%E5%82%A8%E5%B1%82%E6%AC%A1">导出这 3 道（PDF）</a>
     <a href="../tags/">← 回到全部标签</a>
   </p>
 </div>
@@ -98,7 +112,7 @@
         <div class="footer__col">
           <h3>内容</h3>
           <ul>
-            <li><a href="../questions/">题库（195 道）</a></li>
+            <li><a href="../questions/">题库（250 道）</a></li>
             <li><a href="../practice/">刷题</a></li>
             <li><a href="../tags/">标签</a></li>
             <li><a href="../export/">导出 PDF</a></li>

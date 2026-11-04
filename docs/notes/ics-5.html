@@ -77,8 +77,8 @@
         <p>数组的连续布局与 D(Rb,Ri,S) 寻址、指针算术的缩放、行优先的二维数组偏移、结构体的对齐填充与联合体。</p>
         <div class="pagehead__stats">
           <span>在范围内</span>
-          <span><b>4</b>道题在这一章</span>
-          <span data-progress-ids="ics-010,ics-011,ics-025,ics-026">本章已做 <b data-progress-here>0</b> / 4</span>
+          <span><b>7</b>道题在这一章</span>
+          <span data-progress-ids="ics-010,ics-011,ics-025,ics-026,ics-041,ics-047,ics-048">本章已做 <b data-progress-here>0</b> / 7</span>
           <span><button class="ghost" type="button" data-print>打印这一章</button></span>
         </div>
       </div>
@@ -151,9 +151,9 @@ char *c = (char *)a;  /* c 指向同一个字节，但 +1 只走 1 字节 */</co
 <h3 id="h-8">联合体</h3>
 <p>联合体的所有成员共享同一段内存，大小等于最大成员的大小（再按对齐取整），同一时刻只能安全地使用一个成员。常用来节省空间，或做「同一块字节的不同解释」（类型双关），但要注意字节序和对齐。考试里判断联合体大小，先取最大成员大小，再向上取整到最大对齐的倍数。</p>
 
-    <div class="rule-head" style="margin-top:56px"><h2>这一章的题</h2><p>4 道，全部带解析。</p></div>
+    <div class="rule-head" style="margin-top:56px"><h2>这一章的题</h2><p>7 道，全部带解析。</p></div>
            <ul class="qmini">
-             <li><a href="../questions/ics-010.html">有下面的 C 代码</a> <span>计算题 · 数组</span></li><li><a href="../questions/ics-011.html">考虑下面的结构体</a> <span>综合题 · 结构体</span></li><li><a href="../questions/ics-025.html">有二维数组</a> <span>计算题 · 数组</span></li><li><a href="../questions/ics-026.html">考虑下面的定义 long 占 8 字节 in…</a> <span>综合题 · 联合体</span></li>
+             <li><a href="../questions/ics-010.html">有下面的 C 代码</a> <span>计算题 · 数组</span></li><li><a href="../questions/ics-011.html">考虑下面的结构体</a> <span>综合题 · 结构体</span></li><li><a href="../questions/ics-025.html">有二维数组</a> <span>计算题 · 数组</span></li><li><a href="../questions/ics-026.html">考虑下面的定义 long 占 8 字节 in…</a> <span>综合题 · 联合体</span></li><li><a href="../questions/ics-041.html">有下面的 C 代码 int 占 4 字节 数…</a> <span>计算题 · 数组</span></li><li><a href="../questions/ics-047.html">下面三组声明里 int 占 4 字节 二维数…</a> <span>计算题 · 数组</span></li><li><a href="../questions/ics-048.html">考虑下面的代码</a> <span>综合题 · 结构体</span></li>
            </ul>
     <div class="article__pager">
       <a href="../notes/ics-4.html">← 第 4 章 函数调用</a>
@@ -166,7 +166,7 @@ char *c = (char *)a;  /* c 指向同一个字节，但 +1 只走 1 字节 */</co
           <dl class="spec spec--rail">
             <div><dt>章节</dt><dd>第 5 章</dd></div>
             <div><dt>节</dt><dd>2 节在范围内</dd></div>
-            <div><dt>题</dt><dd>4 道</dd></div>
+            <div><dt>题</dt><dd>7 道</dd></div>
             <div><dt>范围</dt><dd>在范围内</dd></div>
           </dl>
         </nav>
@@ -188,7 +188,7 @@ char *c = (char *)a;  /* c 指向同一个字节，但 +1 只走 1 字节 */</co
         <div class="footer__col">
           <h3>内容</h3>
           <ul>
-            <li><a href="../questions/">题库（195 道）</a></li>
+            <li><a href="../questions/">题库（250 道）</a></li>
             <li><a href="../practice/">刷题</a></li>
             <li><a href="../tags/">标签</a></li>
             <li><a href="../export/">导出 PDF</a></li>

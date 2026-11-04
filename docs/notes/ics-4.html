@@ -77,8 +77,8 @@
         <p>栈帧的建立与拆除、call/ret 的真实动作、六个参数寄存器与栈上参数、被调用者保存规则，以及递归的栈深度。</p>
         <div class="pagehead__stats">
           <span>在范围内</span>
-          <span><b>5</b>道题在这一章</span>
-          <span data-progress-ids="ics-008,ics-009,ics-022,ics-023,ics-024">本章已做 <b data-progress-here>0</b> / 5</span>
+          <span><b>11</b>道题在这一章</span>
+          <span data-progress-ids="ics-008,ics-009,ics-022,ics-023,ics-024,ics-038,ics-039,ics-040,ics-044,ics-045,ics-046">本章已做 <b data-progress-here>0</b> / 11</span>
           <span><button class="ghost" type="button" data-print>打印这一章</button></span>
         </div>
       </div>
@@ -175,9 +175,9 @@
 <p><strong>最容易错的一步</strong>：算递归的栈深度。<code>sum(3)</code> 会依次调用 <code>sum(2)</code>、<code>sum(1)</code>、<code>sum(0)</code>，最深时栈上同时有 4 个返回地址、3 个保存的 <code>%rbx</code>（<code>sum(0)</code> 立刻返回，还没 <code>push</code>）。</p>
 <p><strong>递归 vs 迭代</strong>：递归的栈开销是 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0278em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span> 空间。<code>sum(1000000)</code> 若每层占 32 字节，栈就要约 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>32</mn><mtext> MB</mtext></mrow><annotation encoding="application/x-tex">32\ \text{MB}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">32</span><span class="mspace"> </span><span class="mord text"><span class="mord">MB</span></span></span></span></span>，而默认栈大小通常 8 MB，结果就是栈溢出。尾递归在 <code>-O2</code> 下可能被优化成循环（复用同一个栈帧）。</p>
 
-    <div class="rule-head" style="margin-top:56px"><h2>这一章的题</h2><p>5 道，全部带解析。</p></div>
+    <div class="rule-head" style="margin-top:56px"><h2>这一章的题</h2><p>11 道，全部带解析。</p></div>
            <ul class="qmini">
-             <li><a href="../questions/ics-008.html">函数 sum 的参数 n 放在 %rdi 返…</a> <span>计算题 · 函数调用</span></li><li><a href="../questions/ics-009.html">函数调用 · 难度 3</a> <span>计算题 · 函数调用</span></li><li><a href="../questions/ics-022.html">函数 foo 的汇编开头是</a> <span>计算题 · 函数调用</span></li><li><a href="../questions/ics-023.html">递归 · 难度 3</a> <span>计算题 · 递归</span></li><li><a href="../questions/ics-024.html">g 是外部函数 参数和返回值都是 long…</a> <span>综合题 · 函数调用</span></li>
+             <li><a href="../questions/ics-008.html">函数 sum 的参数 n 放在 %rdi 返…</a> <span>计算题 · 函数调用</span></li><li><a href="../questions/ics-009.html">函数调用 · 难度 3</a> <span>计算题 · 函数调用</span></li><li><a href="../questions/ics-022.html">函数 foo 的汇编开头是</a> <span>计算题 · 函数调用</span></li><li><a href="../questions/ics-023.html">递归 · 难度 3</a> <span>计算题 · 递归</span></li><li><a href="../questions/ics-024.html">g 是外部函数 参数和返回值都是 long…</a> <span>综合题 · 函数调用</span></li><li><a href="../questions/ics-038.html">考虑递归函数</a> <span>计算题 · 函数调用</span></li><li><a href="../questions/ics-039.html">x86-64 的调用约定要求 执行 call…</a> <span>综合题 · 函数调用</span></li><li><a href="../questions/ics-040.html">下面的 C 函数调用了 g</a> <span>概念题 · 函数调用</span></li><li><a href="../questions/ics-044.html">g 是外部函数 参数与返回值都是 int f…</a> <span>综合题 · 函数调用</span></li><li><a href="../questions/ics-045.html">下面是调用者 caller 中为调用 f 准…</a> <span>计算题 · 函数调用</span></li><li><a href="../questions/ics-046.html">递归函数 rec 在 -O0 下的汇编如下…</a> <span>计算题 · 递归</span></li>
            </ul>
     <div class="article__pager">
       <a href="../notes/ics-3.html">← 第 3 章 汇编语言与程序的机器级表示</a>
@@ -190,7 +190,7 @@
           <dl class="spec spec--rail">
             <div><dt>章节</dt><dd>第 4 章</dd></div>
             <div><dt>节</dt><dd>2 节在范围内</dd></div>
-            <div><dt>题</dt><dd>5 道</dd></div>
+            <div><dt>题</dt><dd>11 道</dd></div>
             <div><dt>范围</dt><dd>在范围内</dd></div>
           </dl>
         </nav>
@@ -212,7 +212,7 @@
         <div class="footer__col">
           <h3>内容</h3>
           <ul>
-            <li><a href="../questions/">题库（195 道）</a></li>
+            <li><a href="../questions/">题库（250 道）</a></li>
             <li><a href="../practice/">刷题</a></li>
             <li><a href="../tags/">标签</a></li>
             <li><a href="../export/">导出 PDF</a></li>

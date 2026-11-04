@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>标签：跳转表 · 复习册</title>
-<meta name="description" content="带「跳转表」标签的 1 道题。">
+<meta name="description" content="带「跳转表」标签的 2 道题。">
 <meta name="color-scheme" content="light">
 <link rel="stylesheet" href="../assets/katex/katex.min.css">
 <link rel="stylesheet" href="../assets/site.css">
@@ -21,7 +21,7 @@
 <script src="../assets/term.js" defer></script>
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <meta property="og:title" content="标签：跳转表 · 复习册">
-<meta property="og:description" content="带「跳转表」标签的 1 道题。">
+<meta property="og:description" content="带「跳转表」标签的 2 道题。">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="zh_CN">
 
@@ -66,7 +66,7 @@
   <header class="pagehead">
     <div class="pagehead__inner">
       <h1 class="pagehead__title">跳转表</h1>
-      <div class="pagehead__scope"><p>1 道题带这个标签。</p></div>
+      <div class="pagehead__scope"><p>2 道题带这个标签。</p></div>
     </div>
   </header>
   <ul class="qlist"><li class="qrow" data-id="ics-006" data-course="ics" data-chapter="ics-3" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="3" data-tags="汇编 条件码 跳转表" data-text="某函数按整数参数 `x` 分派到不同分支，`x` 放在 `%rdi`。它的汇编片段是 ``` cmpq $6, %rdi ja .L8 jmp *.L4(,%rdi,8) .L4: .quad .L3 .quad .L5 .quad .L5 .quad .L6 .quad .L6 .quad .L7 .quad .L7 ``` (1) 前两条指令在做什么？为什么用 `ja` 而不是 `jg`？ (2) 当 `x = 3`、`x = 6`、`x = -1` 时分别跳到哪个标签？ (3) 如果把 `case` 值改成 0、10、20、30，这段跳转表还合适吗？为什么？ 汇编 条件码 跳转表 自编">
@@ -76,9 +76,16 @@
           
         </div>
         
+      </li><li class="qrow" data-id="ics-065" data-course="ics" data-chapter="ics-3" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="4" data-tags="汇编 条件码 跳转表" data-text="某函数对整数参数 `x`（放在 `%rdi`）做多分支分派，编译器生成的汇编片段是 ``` leal -10(%rdi), %eax cmpl $2, %eax ja .L8 jmp *.L4(,%rax,8) .L4: .quad .L5 .quad .L6 .quad .L5 ``` (1) 这段代码支持的 `case` 值是哪些？每个值分别跳到哪个标签？其他值呢？ (2) 为什么不直接 `cmpl $12, %rdi` 再用 `%rdi` 查表？`leal -10(%rdi), %eax` 这一步的作用是什么？ (3) 当 `x` 分别取 9、10、12、13 时跳到哪个标签？如果 `x` 是负数呢？ (4) 如果 C 源码里 `x` 是 `long`，而有人照抄了这段 32 位的汇编，那么 `x = 2^{32}+10` 会发生什么？为什么？ (5) 跳转表每一项为什么用 `.qu">
+        <div>
+          <a class="qrow__link" href="../questions/ics-065.html">某函数对整数参数 <code>x</code>（放在 <code>%rdi</code>）做多分支分派，编译器生成的汇编片段是</a>
+          <div class="qrow__meta"><span>计系概 · 汇编语言与程序的机器级表示</span><span>综合题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          
+        </div>
+        
       </li></ul>
   <p class="more">
-    <a class="btn btn--red" href="../export/?tag=%E8%B7%B3%E8%BD%AC%E8%A1%A8">导出这 1 道（PDF）</a>
+    <a class="btn btn--red" href="../export/?tag=%E8%B7%B3%E8%BD%AC%E8%A1%A8">导出这 2 道（PDF）</a>
     <a href="../tags/">← 回到全部标签</a>
   </p>
 </div>
@@ -98,7 +105,7 @@
         <div class="footer__col">
           <h3>内容</h3>
           <ul>
-            <li><a href="../questions/">题库（195 道）</a></li>
+            <li><a href="../questions/">题库（250 道）</a></li>
             <li><a href="../practice/">刷题</a></li>
             <li><a href="../tags/">标签</a></li>
             <li><a href="../export/">导出 PDF</a></li>

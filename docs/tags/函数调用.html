@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>标签：函数调用 · 复习册</title>
-<meta name="description" content="带「函数调用」标签的 5 道题。">
+<meta name="description" content="带「函数调用」标签的 11 道题。">
 <meta name="color-scheme" content="light">
 <link rel="stylesheet" href="../assets/katex/katex.min.css">
 <link rel="stylesheet" href="../assets/site.css">
@@ -21,7 +21,7 @@
 <script src="../assets/term.js" defer></script>
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <meta property="og:title" content="标签：函数调用 · 复习册">
-<meta property="og:description" content="带「函数调用」标签的 5 道题。">
+<meta property="og:description" content="带「函数调用」标签的 11 道题。">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="zh_CN">
 
@@ -66,7 +66,7 @@
   <header class="pagehead">
     <div class="pagehead__inner">
       <h1 class="pagehead__title">函数调用</h1>
-      <div class="pagehead__scope"><p>5 道题带这个标签。</p></div>
+      <div class="pagehead__scope"><p>11 道题带这个标签。</p></div>
     </div>
   </header>
   <ul class="qlist"><li class="qrow" data-id="ics-008" data-course="ics" data-chapter="ics-4" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="3" data-tags="函数调用 栈帧" data-text="函数 `sum` 的参数 `n` 放在 `%rdi`，返回值放在 `%rax`。汇编是 ``` sum: testq %rdi, %rdi jle .L2 pushq %rbx movq %rdi, %rbx leaq -1(%rdi), %rdi call sum addq %rbx, %rax popq %rbx ret .L2: movl $0, %eax ret ``` (1) 这个函数计算的是什么？求 `sum(4)`。 (2) 为什么把 `n` 存在 `%rbx` 里，而不是随便用一个 `%rcx`？ (3) 执行 `sum(3)` 的过程中，栈上最多同时有几个返回地址、几个保存的 `%rbx`？若 `main` 调用 `sum` 前 `%rsp = 0x1000`，每层占「8 字节返回地址 + 8 字节 rbx」，求最深时的 `%rsp`。 函数调用 栈帧 自编">
@@ -105,9 +105,52 @@
           
         </div>
         
+      </li><li class="qrow" data-id="ics-038" data-course="ics" data-chapter="ics-4" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="3" data-tags="函数调用 栈帧 递归" data-text="考虑递归函数 ```c long f(long n) { char buf[64]; buf[0] = (char)n; if (n &lt;= 1) return 1; return f(n - 1) + n; } ``` 它的汇编序言是 ``` f: pushq %rbp movq %rsp, %rbp subq $72, %rsp ... ``` 其中 `subq $72` 为 64 字节的 `buf` 和额外的 8 字节对齐空间。回答： （1）每进入一层 `f`，栈上至少增加多少字节？ （2）调用 `f(100)` 时，递归深度（同时存在的 `f` 栈帧层数）是多少？ （3）从进入 `f(100)` 时的 `%rsp` 算起，递归最深时栈指针共向下移动多少字节？ （4）若进程可用的栈空间为 8 MiB（ 字节），估算 最大约为多少时不会栈溢出。 函数调用 栈帧 递归 自编">
+        <div>
+          <a class="qrow__link" href="../questions/ics-038.html">考虑递归函数</a>
+          <div class="qrow__meta"><span>计系概 · 函数调用</span><span>计算题</span><span class="dots" aria-label="难度 3 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          
+        </div>
+        
+      </li><li class="qrow" data-id="ics-039" data-course="ics" data-chapter="ics-4" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="4" data-tags="函数调用 栈帧 数据对齐" data-text="x86-64 的调用约定要求：执行 `call` 指令时 `%rsp` 必须是 16 的倍数（因此函数入口处 `%rsp ≡ 8 (mod 16)`）。某函数 `f` 需要 3 个 `long` 的局部空间（24 字节），并且要调用函数 `g`。回答： （1）进入 `f` 时 `%rsp` 模 16 的余数是多少？为什么？ （2）编译器生成 `subq $X, %rsp`。求使调用 `g` 前满足 16 字节对齐的 `X` 的最小值。 （3）若局部空间需要 32 字节，`X` 应为多少？ （4）若 `f` 在 `pushq %rbp` 之后只 `push` 了 `%rbx` 一个寄存器，且还需要 16 字节局部空间，`X` 最小是多少？ （5）为什么一定要满足 16 字节对齐？举一个未对齐会出错的指令。 函数调用 栈帧 数据对齐 自编">
+        <div>
+          <a class="qrow__link" href="../questions/ics-039.html">x86-64 的调用约定要求：执行 <code>call</code> 指令时 <code>%rsp</code> 必须是 16 的倍数（因此函数入口处 <code>%rsp ≡ 8 (mod 16)</code>）。某函数 <code>f</code> 需要 3 个 <code>long</code> 的局部空间（24 字节），并且要调用函数 <code>g</code>。回答：</a>
+          <div class="qrow__meta"><span>计系概 · 函数调用</span><span>综合题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          
+        </div>
+        
+      </li><li class="qrow" data-id="ics-040" data-course="ics" data-chapter="ics-4" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="2" data-tags="函数调用 栈帧" data-text="下面的 C 函数调用了 `g`： ```c long h(long x) { long t = 3 * x; long u = g(x); return t + u; } ``` 编译后的汇编是 ``` h: pushq %rbx leaq (%rdi,%rdi,2), %rbx call g addq %rbx, %rax popq %rbx ret ``` 回答： （1）为什么把 `t` 放在 `%rbx`，而不是 `%rax`、`%rdi` 或 `%r10`？ （2）`pushq %rbx` 与 `popq %rbx` 的作用是什么？如果删掉 `popq %rbx`，会破坏什么？ （3）调用 `g` 时 `%rdi` 里还是 `x`，而 `g` 可能改写 `%rdi`，为什么 `h` 不在 `call` 前保存它？ （4）用自己的话总结 caller-saved 与 callee-s">
+        <div>
+          <a class="qrow__link" href="../questions/ics-040.html">下面的 C 函数调用了 <code>g</code>：</a>
+          <div class="qrow__meta"><span>计系概 · 函数调用</span><span>概念题</span><span class="dots" aria-label="难度 2 / 4"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          
+        </div>
+        
+      </li><li class="qrow" data-id="ics-044" data-course="ics" data-chapter="ics-4" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="4" data-tags="函数调用 栈帧 汇编" data-text="`g` 是外部函数，参数与返回值都是 `int`。`f` 的汇编如下： ``` f: pushq %rbp movq %rsp, %rbp pushq %rbx subq $16, %rsp movq %rdi, %rbx movq %rdi, -24(%rbp) movl $1, %edi call g movl $2, %edi call g movq -24(%rbp), %rax addq %rbx, %rax addq $16, %rsp popq %rbx popq %rbp ret ``` `g` 的内部有这样一条指令： ``` movaps %xmm0, (%rsp) ``` 运行 `f(5)` 时程序在 `g` 里崩溃（SIGSEGV）。回答： (1) 逐条跟踪 `%rsp` 除以 16 的余数（从进入 `f` 开始），说明崩溃的直接原因； (2) 为什么 `movaps">
+        <div>
+          <a class="qrow__link" href="../questions/ics-044.html"><code>g</code> 是外部函数，参数与返回值都是 <code>int</code>。<code>f</code> 的汇编如下：</p>
+</a>
+          <div class="qrow__meta"><span>计系概 · 函数调用</span><span>综合题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          
+        </div>
+        
+      </li><li class="qrow" data-id="ics-045" data-course="ics" data-chapter="ics-4" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="4" data-tags="函数调用 栈帧" data-text="下面是调用者 `caller` 中为调用 `f` 准备参数的汇编（`f` 的返回值在 `%rax`，调用者不使用）： ``` caller: subq $24, %rsp movq $9, 16(%rsp) movq $8, 8(%rsp) movq $7, (%rsp) movl $6, %r9d movl $5, %r8d movl $4, %ecx movl $3, %edx movl $2, %esi movl $1, %edi call f addq $24, %rsp ret ``` 回答： (1) 写出 `f` 的函数原型（参数类型用 `long`）以及这次调用的实参序列； (2) 在 `f` 里，第 、 、 个参数分别相对 `%rbp` 的偏移是多少？写出 `f` 开头为读到这三个参数所需的典型序言； (3) 为什么 `caller` 减的是 ？如果把 `subq 32`，">
+        <div>
+          <a class="qrow__link" href="../questions/ics-045.html">下面是调用者 <code>caller</code> 中为调用 <code>f</code> 准备参数的汇编（<code>f</code> 的返回值在 <code>%rax</code>，调用者不使用）：</a>
+          <div class="qrow__meta"><span>计系概 · 函数调用</span><span>计算题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          
+        </div>
+        
+      </li><li class="qrow" data-id="ics-046" data-course="ics" data-chapter="ics-4" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="4" data-tags="递归 函数调用 栈帧" data-text="递归函数 `rec` 在 `-O0` 下的汇编如下（参数 `n` 是 `int`，在 `%edi`；返回值是 `long`，在 `%rax`）： ``` rec: pushq %rbp movq %rsp, %rbp subq $16, %rsp movl %edi, -4(%rbp) testl %edi, %edi jne .L2 movl $0, %eax jmp .L3 .L2: movl -4(%rbp), %eax subl $1, %eax movl %eax, %edi call rec addl -4(%rbp), %eax .L3: leave ret ``` 回答： (1) 还原 `rec` 的 C 代码（注意返回类型是 `long`，而 `n` 是 `int`，说明返回值是怎么扩宽的）； (2) 每一次调用 `rec` 在栈上消耗多少字节？默认栈限制为 时，最多能递">
+        <div>
+          <a class="qrow__link" href="../questions/ics-046.html">递归函数 <code>rec</code> 在 <code>-O0</code> 下的汇编如下（参数 <code>n</code> 是 <code>int</code>，在 <code>%edi</code>；返回值是 <code>long</code>，在 <code>%rax</code>）：</a>
+          <div class="qrow__meta"><span>计系概 · 函数调用</span><span>计算题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          
+        </div>
+        
       </li></ul>
   <p class="more">
-    <a class="btn btn--red" href="../export/?tag=%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8">导出这 5 道（PDF）</a>
+    <a class="btn btn--red" href="../export/?tag=%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8">导出这 11 道（PDF）</a>
     <a href="../tags/">← 回到全部标签</a>
   </p>
 </div>
@@ -127,7 +170,7 @@
         <div class="footer__col">
           <h3>内容</h3>
           <ul>
-            <li><a href="../questions/">题库（195 道）</a></li>
+            <li><a href="../questions/">题库（250 道）</a></li>
             <li><a href="../practice/">刷题</a></li>
             <li><a href="../tags/">标签</a></li>
             <li><a href="../export/">导出 PDF</a></li>

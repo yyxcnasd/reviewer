@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>标签：IEEE 754 · 复习册</title>
-<meta name="description" content="带「IEEE 754」标签的 5 道题。">
+<meta name="description" content="带「IEEE 754」标签的 6 道题。">
 <meta name="color-scheme" content="light">
 <link rel="stylesheet" href="../assets/katex/katex.min.css">
 <link rel="stylesheet" href="../assets/site.css">
@@ -21,7 +21,7 @@
 <script src="../assets/term.js" defer></script>
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <meta property="og:title" content="标签：IEEE 754 · 复习册">
-<meta property="og:description" content="带「IEEE 754」标签的 5 道题。">
+<meta property="og:description" content="带「IEEE 754」标签的 6 道题。">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="zh_CN">
 
@@ -66,7 +66,7 @@
   <header class="pagehead">
     <div class="pagehead__inner">
       <h1 class="pagehead__title">IEEE 754</h1>
-      <div class="pagehead__scope"><p>5 道题带这个标签。</p></div>
+      <div class="pagehead__scope"><p>6 道题带这个标签。</p></div>
     </div>
   </header>
   <ul class="qlist"><li class="qrow" data-id="ics-003" data-course="ics" data-chapter="ics-2" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="3" data-tags="IEEE 754 浮点数" data-text="32 位 IEEE 754 单精度浮点数按「1 位符号 + 8 位阶码 + 23 位尾数」编码，阶码偏置为 。回答： (1) 位模式 `0xC0A00000` 表示的值是多少？ (2) 写出 的单精度位模式（十六进制）。 (3) 位模式 `0x00000001` 表示的值是多少？它属于哪一类浮点数？ IEEE 754 浮点数 自编">
@@ -104,9 +104,16 @@
           
         </div>
         
+      </li><li class="qrow" data-id="ics-042" data-course="ics" data-chapter="ics-2" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="4" data-tags="浮点数 IEEE 754 编译" data-text="单精度浮点数有 24 位有效位（含隐含的 1），默认舍入方式为「就近舍入、平局取偶」。考虑下面的 C 代码： ```c float a = 16777216.0f; /* 2^24 */ float b = 1.0f; float c = 1.0f; float s1 = (a + b) + c; float s2 = a + (b + c); ``` 回答： (1) 求 `s1` 与 `s2` 的值（用十进制和 的幂表示）； (2) 说明第 (1) 问里每一次加法的舍入过程：为什么 会被舍掉； (3) 若用一个 `float` 累加器从 开始顺序累加 个 `1.0f`，最终结果是多少？与精确值 相差多少？ (4) 编译器在 `-O2` 下能否把 `s1` 的算法改写成 `s2`（或对浮点求和循环做向量化重排）？默认为什么不行？`-ffast-math` 之后呢？ 浮点数 IEEE 754">
+        <div>
+          <a class="qrow__link" href="../questions/ics-042.html">单精度浮点数有 24 位有效位（含隐含的 1），默认舍入方式为「就近舍入、平局取偶」。考虑下面的 C 代码：</a>
+          <div class="qrow__meta"><span>计系概 · 信息的表示与处理</span><span>综合题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          
+        </div>
+        
       </li></ul>
   <p class="more">
-    <a class="btn btn--red" href="../export/?tag=IEEE%20754">导出这 5 道（PDF）</a>
+    <a class="btn btn--red" href="../export/?tag=IEEE%20754">导出这 6 道（PDF）</a>
     <a href="../tags/">← 回到全部标签</a>
   </p>
 </div>
@@ -126,7 +133,7 @@
         <div class="footer__col">
           <h3>内容</h3>
           <ul>
-            <li><a href="../questions/">题库（195 道）</a></li>
+            <li><a href="../questions/">题库（250 道）</a></li>
             <li><a href="../practice/">刷题</a></li>
             <li><a href="../tags/">标签</a></li>
             <li><a href="../export/">导出 PDF</a></li>

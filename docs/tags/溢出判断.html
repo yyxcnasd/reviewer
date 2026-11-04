@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>标签：溢出判断 · 复习册</title>
-<meta name="description" content="带「溢出判断」标签的 3 道题。">
+<meta name="description" content="带「溢出判断」标签的 4 道题。">
 <meta name="color-scheme" content="light">
 <link rel="stylesheet" href="../assets/katex/katex.min.css">
 <link rel="stylesheet" href="../assets/site.css">
@@ -21,7 +21,7 @@
 <script src="../assets/term.js" defer></script>
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <meta property="og:title" content="标签：溢出判断 · 复习册">
-<meta property="og:description" content="带「溢出判断」标签的 3 道题。">
+<meta property="og:description" content="带「溢出判断」标签的 4 道题。">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="zh_CN">
 
@@ -66,7 +66,7 @@
   <header class="pagehead">
     <div class="pagehead__inner">
       <h1 class="pagehead__title">溢出判断</h1>
-      <div class="pagehead__scope"><p>3 道题带这个标签。</p></div>
+      <div class="pagehead__scope"><p>4 道题带这个标签。</p></div>
     </div>
   </header>
   <ul class="qlist"><li class="qrow" data-id="ics-014" data-course="ics" data-chapter="ics-2" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="2" data-tags="补码 C 语言 溢出判断" data-text="在 32 位机器上，`int` 与 `unsigned` 都占 4 字节，整数用补码表示。回答： (1) `int x = 0x80000000;` 中 `x` 的十进制值是多少？若忽略 C 的未定义行为、只按 32 位位模式回绕，`-x` 的位模式是什么？ (2) `unsigned u = (unsigned)-1;` 中 `u` 的值是多少？ (3) 表达式 `-1 &lt; 0u` 的值是 还是 ？说明理由。 (4) `signed char c = (signed char)200;` 与 `unsigned char d = (unsigned char)-56;` 中 `c`、`d` 的值分别是多少？ 补码 C 语言 溢出判断 自编">
@@ -90,9 +90,16 @@
           
         </div>
         
+      </li><li class="qrow" data-id="ics-043" data-course="ics" data-chapter="ics-2" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="4" data-tags="补码 C 语言 溢出判断" data-text="在 32 位 `int`（补码）与 32 位 `unsigned` 环境下，有下面两个函数： ```c int ge (int x) { return x + 1 &gt; x; } unsigned uge(unsigned x) { return x + 1 &gt; x; } ``` 回答： (1) 在 `-O2` 下，`ge` 常被编译成 `movl $1, %eax; ret`（直接返回 1）。编译器凭什么这样做？ (2) `uge` 是否对一切 `unsigned` 都返回 1？若不是，给出反例并算出返回值。 (3) 在 `-O0` 下执行 `ge(INT_MAX)`，机器上实际返回什么？为什么这个结果不能用来否定 (1) 中编译器优化的合法性？ (4) 写出一个对所有 `int` 都正确、且不产生未定义行为的版本，用来判断 。 (5) `gcc -fwrapv` 会让 (1) 的优化失效">
+        <div>
+          <a class="qrow__link" href="../questions/ics-043.html">在 32 位 <code>int</code>（补码）与 32 位 <code>unsigned</code> 环境下，有下面两个函数：</a>
+          <div class="qrow__meta"><span>计系概 · 信息的表示与处理</span><span>综合题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          
+        </div>
+        
       </li></ul>
   <p class="more">
-    <a class="btn btn--red" href="../export/?tag=%E6%BA%A2%E5%87%BA%E5%88%A4%E6%96%AD">导出这 3 道（PDF）</a>
+    <a class="btn btn--red" href="../export/?tag=%E6%BA%A2%E5%87%BA%E5%88%A4%E6%96%AD">导出这 4 道（PDF）</a>
     <a href="../tags/">← 回到全部标签</a>
   </p>
 </div>
@@ -112,7 +119,7 @@
         <div class="footer__col">
           <h3>内容</h3>
           <ul>
-            <li><a href="../questions/">题库（195 道）</a></li>
+            <li><a href="../questions/">题库（250 道）</a></li>
             <li><a href="../practice/">刷题</a></li>
             <li><a href="../tags/">标签</a></li>
             <li><a href="../export/">导出 PDF</a></li>

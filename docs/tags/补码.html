@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>标签：补码 · 复习册</title>
-<meta name="description" content="带「补码」标签的 5 道题。">
+<meta name="description" content="带「补码」标签的 6 道题。">
 <meta name="color-scheme" content="light">
 <link rel="stylesheet" href="../assets/katex/katex.min.css">
 <link rel="stylesheet" href="../assets/site.css">
@@ -21,7 +21,7 @@
 <script src="../assets/term.js" defer></script>
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <meta property="og:title" content="标签：补码 · 复习册">
-<meta property="og:description" content="带「补码」标签的 5 道题。">
+<meta property="og:description" content="带「补码」标签的 6 道题。">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="zh_CN">
 
@@ -66,7 +66,7 @@
   <header class="pagehead">
     <div class="pagehead__inner">
       <h1 class="pagehead__title">补码</h1>
-      <div class="pagehead__scope"><p>5 道题带这个标签。</p></div>
+      <div class="pagehead__scope"><p>6 道题带这个标签。</p></div>
     </div>
   </header>
   <ul class="qlist"><li class="qrow" data-id="ics-002" data-course="ics" data-chapter="ics-2" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="2" data-tags="补码 字节序" data-text="在 8 位整数环境（例如 `char`）下回答： (1) 十六进制 `0xB7` 作为无符号数和作为有符号补码数分别是多少？ (2) 十进制数 的 8 位补码是什么（写成十六进制）？ (3) 计算 `0x7D + 0x0B`，写出 8 位结果的十六进制，并分别判断作为无符号数和作为有符号数是否溢出。 (4) `0x12345678` 在小端机器上从低地址开始依次是哪 4 个字节（用十六进制）？ 补码 字节序 自编">
@@ -104,9 +104,16 @@
           
         </div>
         
+      </li><li class="qrow" data-id="ics-043" data-course="ics" data-chapter="ics-2" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="4" data-tags="补码 C 语言 溢出判断" data-text="在 32 位 `int`（补码）与 32 位 `unsigned` 环境下，有下面两个函数： ```c int ge (int x) { return x + 1 &gt; x; } unsigned uge(unsigned x) { return x + 1 &gt; x; } ``` 回答： (1) 在 `-O2` 下，`ge` 常被编译成 `movl $1, %eax; ret`（直接返回 1）。编译器凭什么这样做？ (2) `uge` 是否对一切 `unsigned` 都返回 1？若不是，给出反例并算出返回值。 (3) 在 `-O0` 下执行 `ge(INT_MAX)`，机器上实际返回什么？为什么这个结果不能用来否定 (1) 中编译器优化的合法性？ (4) 写出一个对所有 `int` 都正确、且不产生未定义行为的版本，用来判断 。 (5) `gcc -fwrapv` 会让 (1) 的优化失效">
+        <div>
+          <a class="qrow__link" href="../questions/ics-043.html">在 32 位 <code>int</code>（补码）与 32 位 <code>unsigned</code> 环境下，有下面两个函数：</a>
+          <div class="qrow__meta"><span>计系概 · 信息的表示与处理</span><span>综合题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          
+        </div>
+        
       </li></ul>
   <p class="more">
-    <a class="btn btn--red" href="../export/?tag=%E8%A1%A5%E7%A0%81">导出这 5 道（PDF）</a>
+    <a class="btn btn--red" href="../export/?tag=%E8%A1%A5%E7%A0%81">导出这 6 道（PDF）</a>
     <a href="../tags/">← 回到全部标签</a>
   </p>
 </div>
@@ -126,7 +133,7 @@
         <div class="footer__col">
           <h3>内容</h3>
           <ul>
-            <li><a href="../questions/">题库（195 道）</a></li>
+            <li><a href="../questions/">题库（250 道）</a></li>
             <li><a href="../practice/">刷题</a></li>
             <li><a href="../tags/">标签</a></li>
             <li><a href="../export/">导出 PDF</a></li>

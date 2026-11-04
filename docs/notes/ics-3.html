@@ -77,8 +77,8 @@
         <p>x86-64 的寄存器与操作数、mov 与 lea、D(Rb,Ri,S) 寻址、条件码与跳转、if-else、switch 跳转表与循环的汇编骨架。</p>
         <div class="pagehead__stats">
           <span>在范围内</span>
-          <span><b>10</b>道题在这一章</span>
-          <span data-progress-ids="ics-005,ics-006,ics-007,ics-018,ics-019,ics-020,ics-021,ics-034,ics-035,ics-036">本章已做 <b data-progress-here>0</b> / 10</span>
+          <span><b>12</b>道题在这一章</span>
+          <span data-progress-ids="ics-005,ics-006,ics-007,ics-018,ics-019,ics-020,ics-021,ics-034,ics-035,ics-036,ics-037,ics-065">本章已做 <b data-progress-here>0</b> / 12</span>
           <span><button class="ghost" type="button" data-print>打印这一章</button></span>
         </div>
       </div>
@@ -179,9 +179,9 @@ leaq 1(%rdi,%rdi,2), %rax  # rax = 3*x + 1</code></pre></p>
 <p>当 <code>case</code> 值比较密集时，编译器生成<strong>跳转表</strong>：一张存着各分支地址的数组，用 <code>jmp *.L4(,%rdi,8)</code> 一次跳过去，时间复杂度 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0278em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span>。前面通常有一条边界检查 <code>cmp $n, %rdi; ja default</code>，用<strong>无符号</strong>比较同时排除负数（负数作为无符号数是巨大的，<code>ja</code> 直接命中 default）。</p>
 <code>case</code> 值稀疏（比如 0、100、1000）时跳转表会有大量空洞，编译器改用比较链或二分查找。判断「该不该用跳转表」，看 <code>case</code> 值的范围是否密集。</p>
 
-    <div class="rule-head" style="margin-top:56px"><h2>这一章的题</h2><p>10 道，全部带解析。</p></div>
+    <div class="rule-head" style="margin-top:56px"><h2>这一章的题</h2><p>12 道，全部带解析。</p></div>
            <ul class="qmini">
-             <li><a href="../questions/ics-005.html">函数 f 的参数 x 放在 %rdi 返回值…</a> <span>综合题 · 汇编</span></li><li><a href="../questions/ics-006.html">某函数按整数参数 x 分派到不同分支 x 放…</a> <span>综合题 · 汇编</span></li><li><a href="../questions/ics-007.html">函数 f 的两个参数 x y 分别放在 %r…</a> <span>概念题 · 汇编</span></li><li><a href="../questions/ics-018.html">执行下列指令前 %rdi = 3 %rsi…</a> <span>计算题 · 汇编</span></li><li><a href="../questions/ics-019.html">函数 f 的两个 long 参数 x y 分…</a> <span>综合题 · 条件码</span></li><li><a href="../questions/ics-020.html">函数 f 的参数 a long 数组首地址…</a> <span>计算题 · 控制流</span></li><li><a href="../questions/ics-021.html">编译器把下面的求和循环展开 次 并用了两个累…</a> <span>综合题 · 控制流</span></li><li><a href="../questions/ics-034.html">已知寄存器与内存的初值</a> <span>计算题 · 汇编</span></li><li><a href="../questions/ics-035.html">下面的 C 函数返回两个 long 参数之差…</a> <span>综合题 · 汇编</span></li><li><a href="../questions/ics-036.html">函数 sum 的汇编实现如下 参数 a 在…</a> <span>综合题 · 汇编</span></li>
+             <li><a href="../questions/ics-005.html">函数 f 的参数 x 放在 %rdi 返回值…</a> <span>综合题 · 汇编</span></li><li><a href="../questions/ics-006.html">某函数按整数参数 x 分派到不同分支 x 放…</a> <span>综合题 · 汇编</span></li><li><a href="../questions/ics-007.html">函数 f 的两个参数 x y 分别放在 %r…</a> <span>概念题 · 汇编</span></li><li><a href="../questions/ics-018.html">执行下列指令前 %rdi = 3 %rsi…</a> <span>计算题 · 汇编</span></li><li><a href="../questions/ics-019.html">函数 f 的两个 long 参数 x y 分…</a> <span>综合题 · 条件码</span></li><li><a href="../questions/ics-020.html">函数 f 的参数 a long 数组首地址…</a> <span>计算题 · 控制流</span></li><li><a href="../questions/ics-021.html">编译器把下面的求和循环展开 次 并用了两个累…</a> <span>综合题 · 控制流</span></li><li><a href="../questions/ics-034.html">已知寄存器与内存的初值</a> <span>计算题 · 汇编</span></li><li><a href="../questions/ics-035.html">下面的 C 函数返回两个 long 参数之差…</a> <span>综合题 · 汇编</span></li><li><a href="../questions/ics-036.html">函数 sum 的汇编实现如下 参数 a 在…</a> <span>综合题 · 汇编</span></li><li><a href="../questions/ics-037.html">C 函数 int less float a,…</a> <span>概念题 · 条件码</span></li><li><a href="../questions/ics-065.html">某函数对整数参数 x 放在 %rdi 做多分…</a> <span>综合题 · 汇编</span></li>
            </ul>
     <div class="article__pager">
       <a href="../notes/ics-2.html">← 第 2 章 信息的表示与处理</a>
@@ -194,7 +194,7 @@ leaq 1(%rdi,%rdi,2), %rax  # rax = 3*x + 1</code></pre></p>
           <dl class="spec spec--rail">
             <div><dt>章节</dt><dd>第 3 章</dd></div>
             <div><dt>节</dt><dd>2 节在范围内</dd></div>
-            <div><dt>题</dt><dd>10 道</dd></div>
+            <div><dt>题</dt><dd>12 道</dd></div>
             <div><dt>范围</dt><dd>在范围内</dd></div>
           </dl>
         </nav>
@@ -216,7 +216,7 @@ leaq 1(%rdi,%rdi,2), %rax  # rax = 3*x + 1</code></pre></p>
         <div class="footer__col">
           <h3>内容</h3>
           <ul>
-            <li><a href="../questions/">题库（195 道）</a></li>
+            <li><a href="../questions/">题库（250 道）</a></li>
             <li><a href="../practice/">刷题</a></li>
             <li><a href="../tags/">标签</a></li>
             <li><a href="../export/">导出 PDF</a></li>
