@@ -40,7 +40,9 @@ export function buildNotes(ctx) {
     const html = withLabels(rawHtml)
 
     // 本章速览：把小节（h3）列在正文前面，手机上也有个索引
-    const subs = headings.filter((h) => h.level === 2)
+    // 速览只列课本小节，不列「这一章要会什么」「常见问法与易错点」这两个固定块
+    const SKIP = new Set(['这一章要会什么', '常见问法与易错点'])
+    const subs = headings.filter((h) => h.level === 2 && !SKIP.has(h.text.trim()))
     const glance = subs.length
       ? `<div class="note-glance">
         <h2>本章速览</h2>
