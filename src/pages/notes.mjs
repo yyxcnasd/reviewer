@@ -43,6 +43,8 @@ export function buildNotes(ctx) {
     // 速览只列课本小节，不列「这一章要会什么」「常见问法与易错点」这两个固定块
     const SKIP = new Set(['这一章要会什么', '常见问法与易错点'])
     const subs = headings.filter((h) => h.level === 2 && !SKIP.has(h.text.trim()))
+    // 右侧目录也别列这两个固定块
+    const tocItems = headings.filter((h) => !SKIP.has(h.text.trim()))
     const glance = subs.length
       ? `<div class="note-glance">
         <h2>本章速览</h2>
@@ -57,8 +59,8 @@ export function buildNotes(ctx) {
     const tocRail = `<nav class="article__toc" data-ui aria-label="本页目录">
           <h2>本页</h2>
           ${
-            headings.length
-              ? `<ol>${headings
+            tocItems.length
+              ? `<ol>${tocItems
                   .map(
                     (h) =>
                       `<li class="${h.level === 3 ? 'is-sub' : ''}${h.label ? ' is-label' : ''}"><a href="#${h.id}">${esc(h.text)}</a></li>`,
