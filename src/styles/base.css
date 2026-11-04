@@ -604,3 +604,13 @@ a.tag:hover {
     padding: 7px 8px;
   }
 }
+
+
+/* 第 5 档用一条红线标出来，和 1–4 档区分 */
+.dots--hard i.on {
+  background: var(--red);
+}
+
+.dots--hard i.on:last-child {
+  background: var(--ink);
+}

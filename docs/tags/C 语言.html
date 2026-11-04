@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>标签：C 语言 · 复习册</title>
-<meta name="description" content="带「C 语言」标签的 7 道题。">
+<meta name="description" content="带「C 语言」标签的 9 道题。">
 <meta name="color-scheme" content="light">
 <link rel="stylesheet" href="../assets/katex/katex.min.css">
 <link rel="stylesheet" href="../assets/site.css">
@@ -21,7 +21,7 @@
 <script src="../assets/term.js" defer></script>
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <meta property="og:title" content="标签：C 语言 · 复习册">
-<meta property="og:description" content="带「C 语言」标签的 7 道题。">
+<meta property="og:description" content="带「C 语言」标签的 9 道题。">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="zh_CN">
 
@@ -66,61 +66,75 @@
   <header class="pagehead">
     <div class="pagehead__inner">
       <h1 class="pagehead__title">C 语言</h1>
-      <div class="pagehead__scope"><p>7 道题带这个标签。</p></div>
+      <div class="pagehead__scope"><p>9 道题带这个标签。</p></div>
     </div>
   </header>
   <ul class="qlist"><li class="qrow" data-id="ics-014" data-course="ics" data-chapter="ics-2" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="2" data-tags="补码 C 语言 溢出判断" data-text="在 32 位机器上，`int` 与 `unsigned` 都占 4 字节，整数用补码表示。回答： (1) `int x = 0x80000000;` 中 `x` 的十进制值是多少？若忽略 C 的未定义行为、只按 32 位位模式回绕，`-x` 的位模式是什么？ (2) `unsigned u = (unsigned)-1;` 中 `u` 的值是多少？ (3) 表达式 `-1 &lt; 0u` 的值是 还是 ？说明理由。 (4) `signed char c = (signed char)200;` 与 `unsigned char d = (unsigned char)-56;` 中 `c`、`d` 的值分别是多少？ 补码 C 语言 溢出判断 自编">
         <div>
           <a class="qrow__link" href="../questions/ics-014.html">在 32 位机器上，<code>int</code> 与 <code>unsigned</code> 都占 4 字节，整数用补码表示。回答：</a>
-          <div class="qrow__meta"><span>计系概 · 信息的表示与处理</span><span>计算题</span><span class="dots" aria-label="难度 2 / 4"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__meta"><span>计系概 · 信息的表示与处理</span><span>计算题</span><span class="dots" aria-label="难度 2 / 5"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           
         </div>
         
       </li><li class="qrow" data-id="ics-019" data-course="ics" data-chapter="ics-3" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="3" data-tags="条件码 汇编 C 语言" data-text="函数 `f` 的两个 `long` 参数 `x`、`y` 分别放在 `%rdi`、`%rsi`，返回值放在 `%rax`。汇编如下： ``` cmpq %rsi, %rdi setl %al setg %dl movzbl %al, %eax movzbl %dl, %edx addl %edx, %eax ret ``` 回答： (1) 这段代码相当于 C 的什么表达式？ (2) 求 、 、 时的返回值。 (3) 如果把 `setl` 换成 `setb`，对 返回值是多少？说明原因。 条件码 汇编 C 语言 自编">
         <div>
           <a class="qrow__link" href="../questions/ics-019.html">函数 <code>f</code> 的两个 <code>long</code> 参数 <code>x</code>、<code>y</code> 分别放在 <code>%rdi</code>、<code>%rsi</code>，返回值放在 <code>%rax</code>。汇编如下：</a>
-          <div class="qrow__meta"><span>计系概 · 汇编语言与程序的机器级表示</span><span>综合题</span><span class="dots" aria-label="难度 3 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__meta"><span>计系概 · 汇编语言与程序的机器级表示</span><span>综合题</span><span class="dots" aria-label="难度 3 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           
         </div>
         
       </li><li class="qrow" data-id="ics-028" data-course="ics" data-chapter="ics-6" data-states="{&quot;midterm&quot;:&quot;partial&quot;,&quot;final&quot;:&quot;partial&quot;}" data-difficulty="4" data-tags="缓冲区溢出 C 语言 溢出判断" data-text="下面这段代码把网络包复制到栈上的缓冲区： ```c void copy_packet(const char *src, int len) { char buf[64]; if (len &lt;= 64) memcpy(buf, src, len); } ``` 回答： (1) 当 `len = -1` 时，`if` 检查能通过吗？`memcpy` 实际会复制多少字节？会发生什么？ (2) `memcpy` 的第三个参数是什么类型？`len` 传进去时发生了什么转换？ (3) 至少给出两种修复方法。 (4) 如果把条件改成 `len &lt; 64`，能防住 `len = -1` 吗？为什么？ (5) 这个漏洞与缓冲区溢出是什么关系？为什么说「边界检查写对了也可能被绕过」？ 缓冲区溢出 C 语言 溢出判断 自编">
         <div>
           <a class="qrow__link" href="../questions/ics-028.html">下面这段代码把网络包复制到栈上的缓冲区：</a>
-          <div class="qrow__meta"><span>计系概 · 程序的内存与安全</span><span>综合题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__meta"><span>计系概 · 程序的内存与安全</span><span>综合题</span><span class="dots" aria-label="难度 4 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           
         </div>
         
       </li><li class="qrow" data-id="ics-031" data-course="ics" data-chapter="ics-2" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="3" data-tags="补码 舍入 C 语言" data-text="x86-64 上 `int` 的除法用 `sarl`（算术右移）与一个偏置来实现。回答： （1）设 `int x = -7;`，分别求 `x / 4` 与 `x &gt;&gt; 2` 的值（假设 `&gt;&gt;` 是算术右移），并解释为什么编译器不能把 `x / 4` 直接编译成 `sarq $2`。 （2）编译器对 `x / 4`（`x` 为 `int`）常生成下面的序列： ``` leal 3(%rdi), %eax testl %edi, %edi cmovs %eax, %edi sarl $2, %edi ``` 说明偏置 `3` 是怎么来的，并验证 `x / 8` 的偏置应为 `7`、`x = -9` 时结果为 `-1`。 （3）如果 `x` 是 `unsigned`，为什么编译器可以直接用 `shrl $2`？ （4）分别求 `-1 &gt;&gt; 1`、`-1 / 2`、`-6 &gt;&gt; 2`、`-6 /">
         <div>
           <a class="qrow__link" href="../questions/ics-031.html">x86-64 上 <code>int</code> 的除法用 <code>sarl</code>（算术右移）与一个偏置来实现。回答：</a>
-          <div class="qrow__meta"><span>计系概 · 信息的表示与处理</span><span>综合题</span><span class="dots" aria-label="难度 3 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__meta"><span>计系概 · 信息的表示与处理</span><span>综合题</span><span class="dots" aria-label="难度 3 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           
         </div>
         
       </li><li class="qrow" data-id="ics-035" data-course="ics" data-chapter="ics-3" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="3" data-tags="汇编 控制流 C 语言" data-text="下面的 C 函数返回两个 `long` 参数之差的绝对值： ```c long maxdiff(long x, long y) { if (x &gt; y) return x - y; return y - x; } ``` 参数 `x`、`y` 分别放在 `%rdi`、`%rsi`，返回值放在 `%rax`。 （1）写出带条件跳转的 x86-64 汇编实现（AT&amp;T 语法），并标注每条指令的作用。 （2）用 `cmov` 写出无分支版本，说明它相对分支版的好处。 （3）如果参数类型改成 `unsigned long`，条件跳转应该换成哪条指令？为什么？ （4）如果参数类型改成 `int`，这个实现在什么输入下会出错？举一个具体例子。 汇编 控制流 C 语言 自编">
         <div>
           <a class="qrow__link" href="../questions/ics-035.html">下面的 C 函数返回两个 <code>long</code> 参数之差的绝对值：</a>
-          <div class="qrow__meta"><span>计系概 · 汇编语言与程序的机器级表示</span><span>综合题</span><span class="dots" aria-label="难度 3 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__meta"><span>计系概 · 汇编语言与程序的机器级表示</span><span>综合题</span><span class="dots" aria-label="难度 3 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           
         </div>
         
       </li><li class="qrow" data-id="ics-043" data-course="ics" data-chapter="ics-2" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="4" data-tags="补码 C 语言 溢出判断" data-text="在 32 位 `int`（补码）与 32 位 `unsigned` 环境下，有下面两个函数： ```c int ge (int x) { return x + 1 &gt; x; } unsigned uge(unsigned x) { return x + 1 &gt; x; } ``` 回答： (1) 在 `-O2` 下，`ge` 常被编译成 `movl $1, %eax; ret`（直接返回 1）。编译器凭什么这样做？ (2) `uge` 是否对一切 `unsigned` 都返回 1？若不是，给出反例并算出返回值。 (3) 在 `-O0` 下执行 `ge(INT_MAX)`，机器上实际返回什么？为什么这个结果不能用来否定 (1) 中编译器优化的合法性？ (4) 写出一个对所有 `int` 都正确、且不产生未定义行为的版本，用来判断 。 (5) `gcc -fwrapv` 会让 (1) 的优化失效">
         <div>
           <a class="qrow__link" href="../questions/ics-043.html">在 32 位 <code>int</code>（补码）与 32 位 <code>unsigned</code> 环境下，有下面两个函数：</a>
-          <div class="qrow__meta"><span>计系概 · 信息的表示与处理</span><span>综合题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__meta"><span>计系概 · 信息的表示与处理</span><span>综合题</span><span class="dots" aria-label="难度 4 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           
         </div>
         
       </li><li class="qrow" data-id="ics-049" data-course="ics" data-chapter="ics-6" data-states="{&quot;midterm&quot;:&quot;partial&quot;,&quot;final&quot;:&quot;partial&quot;}" data-difficulty="4" data-tags="缓冲区溢出 栈保护 栈帧 C 语言" data-text="有下面的 C 代码： ```c void victim(void) { char buf[16]; unsigned idx = 0; scanf(&quot;%u&quot;, &amp;idx); buf[idx] = 'A'; } ``` `-O0` 下编译得到的汇编是（`scanf` 的格式串在 `.LC0` 中，内容为 `&quot;%u&quot;`）： ``` victim: pushq %rbp movq %rsp, %rbp subq $32, %rsp movl $0, -4(%rbp) leaq -4(%rbp), %rsi leaq .LC0(%rip), %rdi movl $0, %eax call __isoc99_scanf movl -4(%rbp), %eax cltq leaq -24(%rbp), %rdx movb $65, (%rdx,%rax) leave ret ``` 回答： (1) 画">
         <div>
           <a class="qrow__link" href="../questions/ics-049.html">有下面的 C 代码：</a>
-          <div class="qrow__meta"><span>计系概 · 程序的内存与安全</span><span>综合题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__meta"><span>计系概 · 程序的内存与安全</span><span>综合题</span><span class="dots" aria-label="难度 4 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          
+        </div>
+        
+      </li><li class="qrow" data-id="ics-066" data-course="ics" data-chapter="ics-3" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="5" data-tags="汇编 寻址方式 C 语言" data-text="函数 `f` 的参数 `x` 放在 `%rdi`，返回值放在 `%rax`，汇编实现是 ``` f: leaq (%rdi,%rdi,4), %rax # rax = 5*x leaq (%rax,%rax,2), %rax # rax = 3*(5x) = 15x sarq $4, %rax # rax &gt;&gt;= 4（算术右移） ret ``` (1) 用含 floor/ceil 的式子写出 `f(x)`，并求 `f(100)`、`f(-100)`。 (2) 若有人把这段汇编&quot;翻译&quot;成 C 的 `return x * 15 / 16;`，两者在什么 x 上结果不同？给出反例，并解释编译器为什么不会用 `sarq` 来实现 C 的 `/16`。 (3) `x` 取多大时，第二条 `leaq` 的中间结果会超出 64 位有符号范围？此时 C 写法是什么行为，而这段汇编实际得到什么？以 为例算出">
+        <div>
+          <a class="qrow__link" href="../questions/ics-066.html">函数 <code>f</code> 的参数 <code>x</code> 放在 <code>%rdi</code>，返回值放在 <code>%rax</code>，汇编实现是</a>
+          <div class="qrow__meta"><span>计系概 · 汇编语言与程序的机器级表示</span><span>综合题</span><span class="dots dots--hard" aria-label="难度 5 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          
+        </div>
+        
+      </li><li class="qrow" data-id="ics-071" data-course="ics" data-chapter="ics-2" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="5" data-tags="汇编 C 语言" data-text="64 位 x86-64 下，函数 ```c long sh(long x, int n) { return x &lt;&lt; n; } ``` 编译成 ``` sh: movq %rdi, %rax movl %esi, %ecx salq %cl, %rax ret ``` (1) 求 `sh(1, 64)`、`sh(1, 65)`、`sh(1, 63)`、`sh(1, -1)` 的实际返回值，并解释 `n = 64` 为什么得到 1。 (2) 如果函数参数类型是 `int`（即做 32 位移位，指令为 `sall %cl, %eax`），那么 `n = 31`、`n = 32`、`n = 64` 分别得到什么？为什么掩码位数会变？ (3) C 标准对移位量 `n` 有什么要求？为什么 `sh(1, 64)` 在 C 里是未定义行为，而汇编却&quot;有确定结果&quot;？ (4) 编译器在 `-O2` 下可能">
+        <div>
+          <a class="qrow__link" href="../questions/ics-071.html">64 位 x86-64 下，函数</a>
+          <div class="qrow__meta"><span>计系概 · 信息的表示与处理</span><span>综合题</span><span class="dots dots--hard" aria-label="难度 5 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           
         </div>
         
       </li></ul>
   <p class="more">
-    <a class="btn btn--red" href="../export/?tag=C%20%E8%AF%AD%E8%A8%80">导出这 7 道（PDF）</a>
+    <a class="btn btn--red" href="../export/?tag=C%20%E8%AF%AD%E8%A8%80">导出这 9 道（PDF）</a>
     <a href="../tags/">← 回到全部标签</a>
   </p>
 </div>

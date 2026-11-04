@@ -118,10 +118,10 @@
   function renderPreview(src) {
     const B = window.RBBlocks
     if (!B) return renderMath(src)
-    const { text, blocks } = B.extractContainers(src, '\uE000', 'p')
+    const { text, blocks } = B.extractContainers(src, '\uE200', 'p')
     let html = renderMath(text)
     if (blocks.length) {
-      html = html.replace(/<p>\uE000p(\d+)\uE201<\/p>|\uE000p(\d+)\uE201/g, (m, a, b) => {
+      html = html.replace(/<p>\uE200p(\d+)\uE201<\/p>|\uE200p(\d+)\uE201/g, (m, a, b) => {
         const block = blocks[Number(a ?? b)]
         if (!block) return ''
         return B.renderContainer(block, renderPreview(block.body))
@@ -200,15 +200,15 @@
     const stem = el.stem.value.trim()
     const sol = el.solution.value.trim()
     let html = ''
-    if (stem) html += renderMath(stem)
+    if (stem) html += renderPreview(stem)
     if (el.hint.value.trim())
       html += `<details class="qblock qblock--hint"><summary>提示</summary><div class="qblock__body">${renderPreview(el.hint.value)}</div></details>`
     if (sol)
-      html += `<details class="qblock" open><summary>解析</summary><div class="qblock__body">${renderMath(sol)}</div></details>`
+      html += `<details class="qblock" open><summary>解析</summary><div class="qblock__body">${renderPreview(sol)}</div></details>`
     if (el.answer.value.trim())
-      html += `<div class="answer"><span>答案</span>${renderMath(el.answer.value)}</div>`
+      html += `<div class="answer"><span>答案</span>${renderPreview(el.answer.value)}</div>`
     if (el.mistakes.value.trim())
-      html += `<details class="qblock"><summary>常见错误</summary><div class="qblock__body">${renderMath(el.mistakes.value)}</div></details>`
+      html += `<details class="qblock"><summary>常见错误</summary><div class="qblock__body">${renderPreview(el.mistakes.value)}</div></details>`
 
     el.preview.innerHTML =
       html ||

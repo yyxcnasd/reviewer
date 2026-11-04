@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>标签：数据对齐 · 复习册</title>
-<meta name="description" content="带「数据对齐」标签的 4 道题。">
+<meta name="description" content="带「数据对齐」标签的 5 道题。">
 <meta name="color-scheme" content="light">
 <link rel="stylesheet" href="../assets/katex/katex.min.css">
 <link rel="stylesheet" href="../assets/site.css">
@@ -21,7 +21,7 @@
 <script src="../assets/term.js" defer></script>
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <meta property="og:title" content="标签：数据对齐 · 复习册">
-<meta property="og:description" content="带「数据对齐」标签的 4 道题。">
+<meta property="og:description" content="带「数据对齐」标签的 5 道题。">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="zh_CN">
 
@@ -66,40 +66,47 @@
   <header class="pagehead">
     <div class="pagehead__inner">
       <h1 class="pagehead__title">数据对齐</h1>
-      <div class="pagehead__scope"><p>4 道题带这个标签。</p></div>
+      <div class="pagehead__scope"><p>5 道题带这个标签。</p></div>
     </div>
   </header>
   <ul class="qlist"><li class="qrow" data-id="ics-011" data-course="ics" data-chapter="ics-5" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="4" data-tags="结构体 数据对齐" data-text="考虑下面的结构体： ```c struct S { char c; int i; char d; double x; short s; }; ``` (1) 求各成员的偏移与 `sizeof(struct S)`。 (2) 重排成员顺序，使 `sizeof(struct S)` 最小，写出新的定义与大小。 (3) `struct S arr[4];` 中 `arr[2]` 相对 `arr` 的偏移是多少字节？ (4) 在原来的 `struct S` 末尾再加一个 `char e;`，`sizeof(struct S)` 会变成多少？为什么？ 结构体 数据对齐 自编">
         <div>
           <a class="qrow__link" href="../questions/ics-011.html">考虑下面的结构体：</a>
-          <div class="qrow__meta"><span>计系概 · 数组与结构体</span><span>综合题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__meta"><span>计系概 · 数组与结构体</span><span>综合题</span><span class="dots" aria-label="难度 4 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           
         </div>
         
       </li><li class="qrow" data-id="ics-026" data-course="ics" data-chapter="ics-5" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="4" data-tags="联合体 结构体 数据对齐 字节序" data-text="考虑下面的定义（`long` 占 8 字节、`int` 占 4 字节、`short` 占 2 字节，机器为小端）： ```c union U { long l; int i[2]; char c[8]; }; struct S { char tag; union U u; short s; }; ``` 回答： (1) `sizeof(union U)` 是多少？ (2) `struct S` 各成员的偏移与 `sizeof(struct S)` 分别是多少？ (3) 令 `struct S x; x.u.l = 0x0102030405060708;`，求 `x.u.c[0]` 与 `x.u.i[0]` 的值。 (4) 若先执行 `x.u.i[0] = 0x11223344; x.u.i[1] = 0x55667788;`，再读 `x.u.l`，值是多少？ (5) 如果把 `s` 的类型">
         <div>
           <a class="qrow__link" href="../questions/ics-026.html">考虑下面的定义（<code>long</code> 占 8 字节、<code>int</code> 占 4 字节、<code>short</code> 占 2 字节，机器为小端）：</a>
-          <div class="qrow__meta"><span>计系概 · 数组与结构体</span><span>综合题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__meta"><span>计系概 · 数组与结构体</span><span>综合题</span><span class="dots" aria-label="难度 4 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           
         </div>
         
       </li><li class="qrow" data-id="ics-039" data-course="ics" data-chapter="ics-4" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="4" data-tags="函数调用 栈帧 数据对齐" data-text="x86-64 的调用约定要求：执行 `call` 指令时 `%rsp` 必须是 16 的倍数（因此函数入口处 `%rsp ≡ 8 (mod 16)`）。某函数 `f` 需要 3 个 `long` 的局部空间（24 字节），并且要调用函数 `g`。回答： （1）进入 `f` 时 `%rsp` 模 16 的余数是多少？为什么？ （2）编译器生成 `subq $X, %rsp`。求使调用 `g` 前满足 16 字节对齐的 `X` 的最小值。 （3）若局部空间需要 32 字节，`X` 应为多少？ （4）若 `f` 在 `pushq %rbp` 之后只 `push` 了 `%rbx` 一个寄存器，且还需要 16 字节局部空间，`X` 最小是多少？ （5）为什么一定要满足 16 字节对齐？举一个未对齐会出错的指令。 函数调用 栈帧 数据对齐 自编">
         <div>
           <a class="qrow__link" href="../questions/ics-039.html">x86-64 的调用约定要求：执行 <code>call</code> 指令时 <code>%rsp</code> 必须是 16 的倍数（因此函数入口处 <code>%rsp ≡ 8 (mod 16)</code>）。某函数 <code>f</code> 需要 3 个 <code>long</code> 的局部空间（24 字节），并且要调用函数 <code>g</code>。回答：</a>
-          <div class="qrow__meta"><span>计系概 · 函数调用</span><span>综合题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__meta"><span>计系概 · 函数调用</span><span>综合题</span><span class="dots" aria-label="难度 4 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           
         </div>
         
       </li><li class="qrow" data-id="ics-048" data-course="ics" data-chapter="ics-5" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="4" data-tags="结构体 数据对齐 缓冲区溢出" data-text="考虑下面的代码： ```c struct S { char c; double d; int i; short s; }; void f(void) { struct S s = {'a', 1.5, 42, 7}; char buf[20]; memcpy(buf, &amp;s, sizeof s); } ``` 回答： (1) 求各成员的偏移、结构体内部的填充位置，以及 `sizeof(struct S)`； (2) `memcpy` 一共写多少字节？`buf` 只有 20 字节，越界几个字节？越界写到的内存里原本是什么？ (3) 若 `buf` 在栈上紧邻另一个 8 字节的局部变量，这次越界会破坏什么？为什么这种 bug 可能&quot;跑很多次都不出错&quot;？ (4) 写出两种正确的修改方式，并说明各自的副作用； (5) 用什么工具能在运行时直接抓到这次越界？给出具体编译命令。 结构体 数据对齐 缓冲">
         <div>
           <a class="qrow__link" href="../questions/ics-048.html">考虑下面的代码：</a>
-          <div class="qrow__meta"><span>计系概 · 数组与结构体</span><span>综合题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__meta"><span>计系概 · 数组与结构体</span><span>综合题</span><span class="dots" aria-label="难度 4 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          
+        </div>
+        
+      </li><li class="qrow" data-id="ics-069" data-course="ics" data-chapter="ics-5" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="5" data-tags="结构体 数据对齐 联合体" data-text="考虑下面的类型： ```c struct Header { char magic; int version; short flags; }; struct Payload { struct Header h; char name[5]; double weight; union { long id; char code[8]; } u; }; ``` (1) 求 `sizeof(struct Header)`、`sizeof(struct Payload)` 以及 `Payload` 各成员的偏移。逐处说明填充是为什么产生的。 (2) `Payload` 的填充字节一共有多少？`name` 结束（偏移 16）到 `weight` 开始（偏移 24）之间的那 7 个字节，内容是否确定？ (3) 下面的代码有什么问题？ ```c struct Payload p; struct { char ">
+        <div>
+          <a class="qrow__link" href="../questions/ics-069.html">考虑下面的类型：</a>
+          <div class="qrow__meta"><span>计系概 · 数组与结构体</span><span>综合题</span><span class="dots dots--hard" aria-label="难度 5 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           
         </div>
         
       </li></ul>
   <p class="more">
-    <a class="btn btn--red" href="../export/?tag=%E6%95%B0%E6%8D%AE%E5%AF%B9%E9%BD%90">导出这 4 道（PDF）</a>
+    <a class="btn btn--red" href="../export/?tag=%E6%95%B0%E6%8D%AE%E5%AF%B9%E9%BD%90">导出这 5 道（PDF）</a>
     <a href="../tags/">← 回到全部标签</a>
   </p>
 </div>

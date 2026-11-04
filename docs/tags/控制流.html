@@ -72,28 +72,28 @@
   <ul class="qlist"><li class="qrow" data-id="ics-020" data-course="ics" data-chapter="ics-3" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="3" data-tags="控制流 数组 汇编" data-text="函数 `f` 的参数 `a`（`long` 数组首地址）放在 `%rdi`，元素个数 `n` 放在 `%rsi`，返回值放在 `%rax`。汇编如下： ``` movl $0, %eax movl $0, %ecx .L2: cmpq %rsi, %rcx jge .L3 movq (%rdi,%rcx,8), %rdx testq %rdx, %rdx jle .L4 addq %rdx, %rax .L4: addq $1, %rcx jmp .L2 .L3: ret ``` 回答： (1) 写出等价的 C 函数。 (2) 若数组为 、 ，返回值是多少？ (3) 上述执行过程中，循环体（从 `movq` 到 `jmp`）执行了几次？`cmpq` 执行了几次？ (4) 若 ，返回值是多少？ 控制流 数组 汇编 自编">
         <div>
           <a class="qrow__link" href="../questions/ics-020.html">函数 <code>f</code> 的参数 <code>a</code>（<code>long</code> 数组首地址）放在 <code>%rdi</code>，元素个数 <code>n</code> 放在 <code>%rsi</code>，返回值放在 <code>%rax</code>。汇编如下：</a>
-          <div class="qrow__meta"><span>计系概 · 汇编语言与程序的机器级表示</span><span>计算题</span><span class="dots" aria-label="难度 3 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__meta"><span>计系概 · 汇编语言与程序的机器级表示</span><span>计算题</span><span class="dots" aria-label="难度 3 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           
         </div>
         
       </li><li class="qrow" data-id="ics-021" data-course="ics" data-chapter="ics-3" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="4" data-tags="控制流 性能 编译" data-text="编译器把下面的求和循环展开 次，并用了两个累加器： ```c long sum(long *a, long n) { long i = 0, s0 = 0, s1 = 0; for (; i + 3 &lt; n; i += 4) { s0 += a[i] + a[i + 2]; s1 += a[i + 1] + a[i + 3]; } for (; i &lt; n; i++) s0 += a[i]; return s0 + s1; } ``` 回答： (1) 当 时，第一个循环执行几次？第二个循环处理哪些下标？ (2) 为什么用两个累加器，而不是只用一个 `s`？ (3) 为什么循环条件是 `i + 3 &lt; n`，而不是写成 `i &lt; n - 3`？如果 `n` 的类型是 `size_t` 会怎样？ (4) 展开后整数结果与不展开时一定相同吗？如果数组元素是 `double` 呢？ 控制流 性能 ">
         <div>
           <a class="qrow__link" href="../questions/ics-021.html">编译器把下面的求和循环展开 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>4</mn></mrow><annotation encoding="application/x-tex">4</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">4</span></span></span></span> 次，并用了两个累加器：</a>
-          <div class="qrow__meta"><span>计系概 · 汇编语言与程序的机器级表示</span><span>综合题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__meta"><span>计系概 · 汇编语言与程序的机器级表示</span><span>综合题</span><span class="dots" aria-label="难度 4 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           
         </div>
         
       </li><li class="qrow" data-id="ics-035" data-course="ics" data-chapter="ics-3" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="3" data-tags="汇编 控制流 C 语言" data-text="下面的 C 函数返回两个 `long` 参数之差的绝对值： ```c long maxdiff(long x, long y) { if (x &gt; y) return x - y; return y - x; } ``` 参数 `x`、`y` 分别放在 `%rdi`、`%rsi`，返回值放在 `%rax`。 （1）写出带条件跳转的 x86-64 汇编实现（AT&amp;T 语法），并标注每条指令的作用。 （2）用 `cmov` 写出无分支版本，说明它相对分支版的好处。 （3）如果参数类型改成 `unsigned long`，条件跳转应该换成哪条指令？为什么？ （4）如果参数类型改成 `int`，这个实现在什么输入下会出错？举一个具体例子。 汇编 控制流 C 语言 自编">
         <div>
           <a class="qrow__link" href="../questions/ics-035.html">下面的 C 函数返回两个 <code>long</code> 参数之差的绝对值：</a>
-          <div class="qrow__meta"><span>计系概 · 汇编语言与程序的机器级表示</span><span>综合题</span><span class="dots" aria-label="难度 3 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__meta"><span>计系概 · 汇编语言与程序的机器级表示</span><span>综合题</span><span class="dots" aria-label="难度 3 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           
         </div>
         
       </li><li class="qrow" data-id="ics-036" data-course="ics" data-chapter="ics-3" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="4" data-tags="汇编 控制流" data-text="函数 `sum` 的汇编实现如下（参数 `a` 在 `%rdi`，`n` 在 `%rsi`，返回值在 `%rax`）： ``` sum: movl $0, %eax movl $0, %ecx jmp .L2 .L3: movq (%rdi,%rax,8), %rdx addq %rdx, %rcx addq $1, %rax .L2: cmpq %rsi, %rax jl .L3 movq %rcx, %rax ret ``` （1）写出与之等价的 C 代码（用 `while` 或 `for`）。 （2）若 `a = {1, -2, 3, -4}`、`n = 4`，函数返回多少？ （3）如果把 `jl` 改成 `jle`，循环会怎样变化？会带来什么问题？ （4）如果数组元素类型从 `long` 改成 `int`，需要修改哪些指令？如果改成 `unsigned int` 呢？ 汇编 控制流">
         <div>
           <a class="qrow__link" href="../questions/ics-036.html">函数 <code>sum</code> 的汇编实现如下（参数 <code>a</code> 在 <code>%rdi</code>，<code>n</code> 在 <code>%rsi</code>，返回值在 <code>%rax</code>）：</a>
-          <div class="qrow__meta"><span>计系概 · 汇编语言与程序的机器级表示</span><span>综合题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__meta"><span>计系概 · 汇编语言与程序的机器级表示</span><span>综合题</span><span class="dots" aria-label="难度 4 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           
         </div>
         

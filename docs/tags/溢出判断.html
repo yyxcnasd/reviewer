@@ -72,28 +72,28 @@
   <ul class="qlist"><li class="qrow" data-id="ics-014" data-course="ics" data-chapter="ics-2" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="2" data-tags="补码 C 语言 溢出判断" data-text="在 32 位机器上，`int` 与 `unsigned` 都占 4 字节，整数用补码表示。回答： (1) `int x = 0x80000000;` 中 `x` 的十进制值是多少？若忽略 C 的未定义行为、只按 32 位位模式回绕，`-x` 的位模式是什么？ (2) `unsigned u = (unsigned)-1;` 中 `u` 的值是多少？ (3) 表达式 `-1 &lt; 0u` 的值是 还是 ？说明理由。 (4) `signed char c = (signed char)200;` 与 `unsigned char d = (unsigned char)-56;` 中 `c`、`d` 的值分别是多少？ 补码 C 语言 溢出判断 自编">
         <div>
           <a class="qrow__link" href="../questions/ics-014.html">在 32 位机器上，<code>int</code> 与 <code>unsigned</code> 都占 4 字节，整数用补码表示。回答：</a>
-          <div class="qrow__meta"><span>计系概 · 信息的表示与处理</span><span>计算题</span><span class="dots" aria-label="难度 2 / 4"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__meta"><span>计系概 · 信息的表示与处理</span><span>计算题</span><span class="dots" aria-label="难度 2 / 5"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           
         </div>
         
       </li><li class="qrow" data-id="ics-028" data-course="ics" data-chapter="ics-6" data-states="{&quot;midterm&quot;:&quot;partial&quot;,&quot;final&quot;:&quot;partial&quot;}" data-difficulty="4" data-tags="缓冲区溢出 C 语言 溢出判断" data-text="下面这段代码把网络包复制到栈上的缓冲区： ```c void copy_packet(const char *src, int len) { char buf[64]; if (len &lt;= 64) memcpy(buf, src, len); } ``` 回答： (1) 当 `len = -1` 时，`if` 检查能通过吗？`memcpy` 实际会复制多少字节？会发生什么？ (2) `memcpy` 的第三个参数是什么类型？`len` 传进去时发生了什么转换？ (3) 至少给出两种修复方法。 (4) 如果把条件改成 `len &lt; 64`，能防住 `len = -1` 吗？为什么？ (5) 这个漏洞与缓冲区溢出是什么关系？为什么说「边界检查写对了也可能被绕过」？ 缓冲区溢出 C 语言 溢出判断 自编">
         <div>
           <a class="qrow__link" href="../questions/ics-028.html">下面这段代码把网络包复制到栈上的缓冲区：</a>
-          <div class="qrow__meta"><span>计系概 · 程序的内存与安全</span><span>综合题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__meta"><span>计系概 · 程序的内存与安全</span><span>综合题</span><span class="dots" aria-label="难度 4 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           
         </div>
         
       </li><li class="qrow" data-id="ics-030" data-course="ics" data-chapter="ics-2" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="2" data-tags="补码 溢出判断" data-text="在 32 位 `int`（补码）环境下，执行下面的 C 代码（`x86-64` 上分别由 `imull`、`mull` 与截断实现）： ```c int x = 65536; int y = 65536; int z = x * y; unsigned u = 0x40000000u; unsigned v = u * 4u; short a = 1000, b = 100; short s = a * b; ``` （1）求 `z` 的十六进制值，并说明执行 `imull` 后 OF 是否为 1。 （2）求 `v` 的十六进制值；若编译器用 `mull` 得到 64 位积 `EDX:EAX`，写出 EDX 与 EAX，并说明 CF、OF 的状态。 （3）求 `s` 的值（写成十进制，并指出其 16 位补码）。 补码 溢出判断 自编">
         <div>
           <a class="qrow__link" href="../questions/ics-030.html">在 32 位 <code>int</code>（补码）环境下，执行下面的 C 代码（<code>x86-64</code> 上分别由 <code>imull</code>、<code>mull</code> 与截断实现）：</a>
-          <div class="qrow__meta"><span>计系概 · 信息的表示与处理</span><span>计算题</span><span class="dots" aria-label="难度 2 / 4"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__meta"><span>计系概 · 信息的表示与处理</span><span>计算题</span><span class="dots" aria-label="难度 2 / 5"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           
         </div>
         
       </li><li class="qrow" data-id="ics-043" data-course="ics" data-chapter="ics-2" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="4" data-tags="补码 C 语言 溢出判断" data-text="在 32 位 `int`（补码）与 32 位 `unsigned` 环境下，有下面两个函数： ```c int ge (int x) { return x + 1 &gt; x; } unsigned uge(unsigned x) { return x + 1 &gt; x; } ``` 回答： (1) 在 `-O2` 下，`ge` 常被编译成 `movl $1, %eax; ret`（直接返回 1）。编译器凭什么这样做？ (2) `uge` 是否对一切 `unsigned` 都返回 1？若不是，给出反例并算出返回值。 (3) 在 `-O0` 下执行 `ge(INT_MAX)`，机器上实际返回什么？为什么这个结果不能用来否定 (1) 中编译器优化的合法性？ (4) 写出一个对所有 `int` 都正确、且不产生未定义行为的版本，用来判断 。 (5) `gcc -fwrapv` 会让 (1) 的优化失效">
         <div>
           <a class="qrow__link" href="../questions/ics-043.html">在 32 位 <code>int</code>（补码）与 32 位 <code>unsigned</code> 环境下，有下面两个函数：</a>
-          <div class="qrow__meta"><span>计系概 · 信息的表示与处理</span><span>综合题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__meta"><span>计系概 · 信息的表示与处理</span><span>综合题</span><span class="dots" aria-label="难度 4 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           
         </div>
         

@@ -73,8 +73,7 @@ export function buildPractice(ctx) {
         <div class="field"><label for="p-course">科目</label><select id="p-course">${courseOptions(ctx)}</select></div>
         <div class="field"><label for="p-chapter">章节</label><select id="p-chapter"><option value="">全部</option>${chapterOptions}</select></div>
         <div class="field"><label for="p-difficulty">难度</label>
-          <select id="p-difficulty"><option value="">全部</option><option value="1">1 基础</option><option value="2">2 常规</option><option value="3">3 综合</option><option value="4">4 挑战</option></select>
-        </div>
+<select id="p-difficulty">${difficultyOptions()}</select></div>
         <div class="field"><label for="p-status">状态</label>
           <select id="p-status"><option value="">全部</option><option value="undone">还没做</option><option value="fav">收藏的</option></select>
         </div>

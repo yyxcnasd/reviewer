@@ -72,14 +72,14 @@
   <ul class="qlist"><li class="qrow" data-id="ics-010" data-course="ics" data-chapter="ics-5" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="2" data-tags="数组" data-text="有下面的 C 代码： ```c long a[5] = {10, 20, 30, 40, 50}; long *p = a + 2; char *c = (char *)a; ``` (1) `*p` 与 `*(p + 1)` 的值分别是多少？ (2) `p - a` 的值是多少？`p` 与 `a` 的地址相差多少字节？ (3) `c + 3` 指向哪里？`*(long *)(c + 8)` 的值是多少？ (4) `&amp;a[3]` 相对 `a` 的偏移是多少字节？ 数组 自编">
         <div>
           <a class="qrow__link" href="../questions/ics-010.html">有下面的 C 代码：</a>
-          <div class="qrow__meta"><span>计系概 · 数组与结构体</span><span>计算题</span><span class="dots" aria-label="难度 2 / 4"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__meta"><span>计系概 · 数组与结构体</span><span>计算题</span><span class="dots" aria-label="难度 2 / 5"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           
         </div>
         
       </li><li class="qrow" data-id="ics-020" data-course="ics" data-chapter="ics-3" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="3" data-tags="控制流 数组 汇编" data-text="函数 `f` 的参数 `a`（`long` 数组首地址）放在 `%rdi`，元素个数 `n` 放在 `%rsi`，返回值放在 `%rax`。汇编如下： ``` movl $0, %eax movl $0, %ecx .L2: cmpq %rsi, %rcx jge .L3 movq (%rdi,%rcx,8), %rdx testq %rdx, %rdx jle .L4 addq %rdx, %rax .L4: addq $1, %rcx jmp .L2 .L3: ret ``` 回答： (1) 写出等价的 C 函数。 (2) 若数组为 、 ，返回值是多少？ (3) 上述执行过程中，循环体（从 `movq` 到 `jmp`）执行了几次？`cmpq` 执行了几次？ (4) 若 ，返回值是多少？ 控制流 数组 汇编 自编">
         <div>
           <a class="qrow__link" href="../questions/ics-020.html">函数 <code>f</code> 的参数 <code>a</code>（<code>long</code> 数组首地址）放在 <code>%rdi</code>，元素个数 <code>n</code> 放在 <code>%rsi</code>，返回值放在 <code>%rax</code>。汇编如下：</a>
-          <div class="qrow__meta"><span>计系概 · 汇编语言与程序的机器级表示</span><span>计算题</span><span class="dots" aria-label="难度 3 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__meta"><span>计系概 · 汇编语言与程序的机器级表示</span><span>计算题</span><span class="dots" aria-label="难度 3 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           
         </div>
         
@@ -87,21 +87,21 @@
         <div>
           <a class="qrow__link" href="../questions/ics-025.html">有二维数组
 <pre class="code-block"><code class="language-c">int a[3][4];</code></pre></a>
-          <div class="qrow__meta"><span>计系概 · 数组与结构体</span><span>计算题</span><span class="dots" aria-label="难度 3 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__meta"><span>计系概 · 数组与结构体</span><span>计算题</span><span class="dots" aria-label="难度 3 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           
         </div>
         
       </li><li class="qrow" data-id="ics-041" data-course="ics" data-chapter="ics-5" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="2" data-tags="数组 多维数组 指针算术" data-text="有下面的 C 代码，`int` 占 4 字节，数组按行优先存放，`a` 的首地址为 `0x1000`： ```c int a[3][4]; ``` 回答： （1）`sizeof(a)` 与 `sizeof(a[1])` 分别是多少？ （2）`&amp;a[2][3]` 的地址是多少？ （3）`a[1] + 2` 的地址是多少？它指向哪个元素？ （4）`a[1]` 与 `a` 的类型分别是什么？为什么 `a + 1` 与 `a[1] + 1` 前进的字节数不同？ （5）若 `int *p = &amp;a[0][0];`，那么 `p + 6` 指向哪个元素？ 数组 多维数组 指针算术 自编">
         <div>
           <a class="qrow__link" href="../questions/ics-041.html">有下面的 C 代码，<code>int</code> 占 4 字节，数组按行优先存放，<code>a</code> 的首地址为 <code>0x1000</code>：</a>
-          <div class="qrow__meta"><span>计系概 · 数组与结构体</span><span>计算题</span><span class="dots" aria-label="难度 2 / 4"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__meta"><span>计系概 · 数组与结构体</span><span>计算题</span><span class="dots" aria-label="难度 2 / 5"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           
         </div>
         
       </li><li class="qrow" data-id="ics-047" data-course="ics" data-chapter="ics-5" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="4" data-tags="数组 多维数组 指针算术" data-text="下面三组声明里，`int` 占 4 字节，二维数组按行优先存放。按本课程的约定，把 `a` 的 个 `int` 看成一块连续的 48 字节内存： ```c int a[3][4]; int b[12]; int *p = &amp;a[0][0]; /* 按上述约定，p 可在这 12 个 int 上做指针算术 */ int *q = &amp;a[2][3]; int *r = b; /* 指向一维数组 b 的首元素 */ ``` 回答： (1) `sizeof(a)`、`sizeof(a[0])` 各是多少？`a[1] + 1` 的类型是什么，指向哪个元素？ (2) `q - p` 和 `&amp;a[1][2] - p` 的值分别是多少？它们的单位是字节还是元素？ (3) `p[7]` 是哪个元素？用二维下标写出它。 (4) 判断下面的表达式是否合法、是否属于未定义行为（UB），并说明理由： ```c r +">
         <div>
           <a class="qrow__link" href="../questions/ics-047.html">下面三组声明里，<code>int</code> 占 4 字节，二维数组按行优先存放。按本课程的约定，把 <code>a</code> 的 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>3</mn><mo>×</mo><mn>4</mn><mo>=</mo><mn>12</mn></mrow><annotation encoding="application/x-tex">3\times4=12</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">3</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">4</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">12</span></span></span></span> 个 <code>int</code> 看成一块连续的 48 字节内存：</a>
-          <div class="qrow__meta"><span>计系概 · 数组与结构体</span><span>计算题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__meta"><span>计系概 · 数组与结构体</span><span>计算题</span><span class="dots" aria-label="难度 4 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           
         </div>
         

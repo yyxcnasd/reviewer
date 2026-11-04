@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>标签：联合体 · 复习册</title>
-<meta name="description" content="带「联合体」标签的 1 道题。">
+<meta name="description" content="带「联合体」标签的 2 道题。">
 <meta name="color-scheme" content="light">
 <link rel="stylesheet" href="../assets/katex/katex.min.css">
 <link rel="stylesheet" href="../assets/site.css">
@@ -21,7 +21,7 @@
 <script src="../assets/term.js" defer></script>
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <meta property="og:title" content="标签：联合体 · 复习册">
-<meta property="og:description" content="带「联合体」标签的 1 道题。">
+<meta property="og:description" content="带「联合体」标签的 2 道题。">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="zh_CN">
 
@@ -66,19 +66,26 @@
   <header class="pagehead">
     <div class="pagehead__inner">
       <h1 class="pagehead__title">联合体</h1>
-      <div class="pagehead__scope"><p>1 道题带这个标签。</p></div>
+      <div class="pagehead__scope"><p>2 道题带这个标签。</p></div>
     </div>
   </header>
   <ul class="qlist"><li class="qrow" data-id="ics-026" data-course="ics" data-chapter="ics-5" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="4" data-tags="联合体 结构体 数据对齐 字节序" data-text="考虑下面的定义（`long` 占 8 字节、`int` 占 4 字节、`short` 占 2 字节，机器为小端）： ```c union U { long l; int i[2]; char c[8]; }; struct S { char tag; union U u; short s; }; ``` 回答： (1) `sizeof(union U)` 是多少？ (2) `struct S` 各成员的偏移与 `sizeof(struct S)` 分别是多少？ (3) 令 `struct S x; x.u.l = 0x0102030405060708;`，求 `x.u.c[0]` 与 `x.u.i[0]` 的值。 (4) 若先执行 `x.u.i[0] = 0x11223344; x.u.i[1] = 0x55667788;`，再读 `x.u.l`，值是多少？ (5) 如果把 `s` 的类型">
         <div>
           <a class="qrow__link" href="../questions/ics-026.html">考虑下面的定义（<code>long</code> 占 8 字节、<code>int</code> 占 4 字节、<code>short</code> 占 2 字节，机器为小端）：</a>
-          <div class="qrow__meta"><span>计系概 · 数组与结构体</span><span>综合题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__meta"><span>计系概 · 数组与结构体</span><span>综合题</span><span class="dots" aria-label="难度 4 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          
+        </div>
+        
+      </li><li class="qrow" data-id="ics-069" data-course="ics" data-chapter="ics-5" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="5" data-tags="结构体 数据对齐 联合体" data-text="考虑下面的类型： ```c struct Header { char magic; int version; short flags; }; struct Payload { struct Header h; char name[5]; double weight; union { long id; char code[8]; } u; }; ``` (1) 求 `sizeof(struct Header)`、`sizeof(struct Payload)` 以及 `Payload` 各成员的偏移。逐处说明填充是为什么产生的。 (2) `Payload` 的填充字节一共有多少？`name` 结束（偏移 16）到 `weight` 开始（偏移 24）之间的那 7 个字节，内容是否确定？ (3) 下面的代码有什么问题？ ```c struct Payload p; struct { char ">
+        <div>
+          <a class="qrow__link" href="../questions/ics-069.html">考虑下面的类型：</a>
+          <div class="qrow__meta"><span>计系概 · 数组与结构体</span><span>综合题</span><span class="dots dots--hard" aria-label="难度 5 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           
         </div>
         
       </li></ul>
   <p class="more">
-    <a class="btn btn--red" href="../export/?tag=%E8%81%94%E5%90%88%E4%BD%93">导出这 1 道（PDF）</a>
+    <a class="btn btn--red" href="../export/?tag=%E8%81%94%E5%90%88%E4%BD%93">导出这 2 道（PDF）</a>
     <a href="../tags/">← 回到全部标签</a>
   </p>
 </div>

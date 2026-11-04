@@ -836,6 +836,16 @@ a.tag:hover {
   }
 }
 
+
+/* 第 5 档用一条红线标出来，和 1–4 档区分 */
+.dots--hard i.on {
+  background: var(--red);
+}
+
+.dots--hard i.on:last-child {
+  background: var(--ink);
+}
+
 /* ---------------------------------------------------------------- 首屏 */
 
 .hero {
@@ -4214,6 +4224,20 @@ body.is-focus .submit__preview {
   .mdx-block {
     grid-template-columns: 1fr;
   }
+}
+
+
+/* 区块头部：类型小字 + 标题 */
+.nb__head {
+  margin: 0 0 0.35em;
+  display: flex;
+  align-items: baseline;
+  gap: 0.6em;
+}
+
+.nb__title {
+  font-weight: 700;
+  color: var(--ink);
 }
 
 /* 打印一律 A4，页边距跟导出的卷子一致 */

@@ -80,13 +80,13 @@ export function buildStats(ctx) {
   <section class="section--tight">
     <div class="rule-head">
       <h2>难度的分布</h2>
-      <p>按四档难度看题库：挑战档就是那些需要先想一步的题。</p>
+      <p>按五档难度看题库：第 5 档是硬核题，需要两跳以上。</p>
     </div>
     <ul class="st-diff">
-      ${[1, 2, 3, 4]
+      ${[1, 2, 3, 4, 5]
         .map((d) => {
           const n = ctx.questions.filter((q) => q.difficulty === d).length
-          const label = { 1: '基础', 2: '常规', 3: '综合', 4: '挑战' }[d]
+          const label = { 1: '基础', 2: '常规', 3: '综合', 4: '挑战', 5: '硬核' }[d]
           return `<li>
             <a href="${url(1, `questions/?difficulty=${d}`)}">
               <span class="st-diff__label">${d} ${label}</span>

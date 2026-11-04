@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>标签：汇编 · 复习册</title>
-<meta name="description" content="带「汇编」标签的 13 道题。">
+<meta name="description" content="带「汇编」标签的 15 道题。">
 <meta name="color-scheme" content="light">
 <link rel="stylesheet" href="../assets/katex/katex.min.css">
 <link rel="stylesheet" href="../assets/site.css">
@@ -21,7 +21,7 @@
 <script src="../assets/term.js" defer></script>
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <meta property="og:title" content="标签：汇编 · 复习册">
-<meta property="og:description" content="带「汇编」标签的 13 道题。">
+<meta property="og:description" content="带「汇编」标签的 15 道题。">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="zh_CN">
 
@@ -66,48 +66,48 @@
   <header class="pagehead">
     <div class="pagehead__inner">
       <h1 class="pagehead__title">汇编</h1>
-      <div class="pagehead__scope"><p>13 道题带这个标签。</p></div>
+      <div class="pagehead__scope"><p>15 道题带这个标签。</p></div>
     </div>
   </header>
   <ul class="qlist"><li class="qrow" data-id="ics-005" data-course="ics" data-chapter="ics-3" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="3" data-tags="汇编 寻址方式" data-text="函数 `f` 的参数 `x` 放在 `%rdi`，返回值放在 `%rax`。它的汇编实现是 ``` f: testq %rdi, %rdi jle .L1 salq $3, %rdi leaq 4(%rdi), %rax ret .L1: movq %rdi, %rax negq %rax ret ``` (1) 写出 `f` 的 C 语言等价实现。 (2) 求 `f(-3)` 与 `f(2)`。 (3) 如果把 `salq 3, %rdi`，语义会不会变？如果换成 32 位的 `sall $3, %edi`，结果会不会变？各说明理由。 汇编 寻址方式 自编">
         <div>
           <a class="qrow__link" href="../questions/ics-005.html">函数 <code>f</code> 的参数 <code>x</code> 放在 <code>%rdi</code>，返回值放在 <code>%rax</code>。它的汇编实现是</a>
-          <div class="qrow__meta"><span>计系概 · 汇编语言与程序的机器级表示</span><span>综合题</span><span class="dots" aria-label="难度 3 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__meta"><span>计系概 · 汇编语言与程序的机器级表示</span><span>综合题</span><span class="dots" aria-label="难度 3 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           
         </div>
         
       </li><li class="qrow" data-id="ics-006" data-course="ics" data-chapter="ics-3" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="3" data-tags="汇编 条件码 跳转表" data-text="某函数按整数参数 `x` 分派到不同分支，`x` 放在 `%rdi`。它的汇编片段是 ``` cmpq $6, %rdi ja .L8 jmp *.L4(,%rdi,8) .L4: .quad .L3 .quad .L5 .quad .L5 .quad .L6 .quad .L6 .quad .L7 .quad .L7 ``` (1) 前两条指令在做什么？为什么用 `ja` 而不是 `jg`？ (2) 当 `x = 3`、`x = 6`、`x = -1` 时分别跳到哪个标签？ (3) 如果把 `case` 值改成 0、10、20、30，这段跳转表还合适吗？为什么？ 汇编 条件码 跳转表 自编">
         <div>
           <a class="qrow__link" href="../questions/ics-006.html">某函数按整数参数 <code>x</code> 分派到不同分支，<code>x</code> 放在 <code>%rdi</code>。它的汇编片段是</a>
-          <div class="qrow__meta"><span>计系概 · 汇编语言与程序的机器级表示</span><span>综合题</span><span class="dots" aria-label="难度 3 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__meta"><span>计系概 · 汇编语言与程序的机器级表示</span><span>综合题</span><span class="dots" aria-label="难度 3 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           
         </div>
         
       </li><li class="qrow" data-id="ics-007" data-course="ics" data-chapter="ics-3" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="4" data-tags="汇编 条件码" data-text="函数 `f` 的两个参数 `x`、`y` 分别放在 `%rdi`、`%rsi`，返回值放在 `%rax`。汇编是 ``` f: cmpq %rsi, %rdi ja .L1 movl $0, %eax ret .L1: movl $1, %eax ret ``` (1) 这段汇编把两个参数按有符号数还是无符号数比较？`cmpq %rsi, %rdi` 计算的是谁减谁？ (2) 若执行 `f(-1, 1)`，返回值是多少？`f(1, -1)` 呢？ (3) 若对应源码是 `long f(long x, long y) { return x &gt; y; }`，编译器应当生成哪条跳转指令？这段汇编与源码一致吗？ (4) 若源码改成 `unsigned long` 版本，这段汇编是否正确？ 汇编 条件码 自编">
         <div>
           <a class="qrow__link" href="../questions/ics-007.html">函数 <code>f</code> 的两个参数 <code>x</code>、<code>y</code> 分别放在 <code>%rdi</code>、<code>%rsi</code>，返回值放在 <code>%rax</code>。汇编是</a>
-          <div class="qrow__meta"><span>计系概 · 汇编语言与程序的机器级表示</span><span>概念题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__meta"><span>计系概 · 汇编语言与程序的机器级表示</span><span>概念题</span><span class="dots" aria-label="难度 4 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           
         </div>
         
       </li><li class="qrow" data-id="ics-018" data-course="ics" data-chapter="ics-3" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="2" data-tags="汇编 寻址方式" data-text="执行下列指令前，`%rdi = 3`、`%rsi = 5`： ``` leaq (%rdi,%rsi,4), %rax leaq 8(%rax,%rax,2), %rdx salq $3, %rdx movq %rax, %rcx subq %rdi, %rcx ``` 回答： (1) 执行完后 `%rax`、`%rdx`、`%rcx` 各是多少？ (2) 第二条 `lea` 等价于 C 的哪个表达式？ (3) 如果要用一条 `lea` 算出 （其中 在 `%rdi`、 在 `%rsi`），写出这条指令。 汇编 寻址方式 自编">
         <div>
           <a class="qrow__link" href="../questions/ics-018.html">执行下列指令前，<code>%rdi = 3</code>、<code>%rsi = 5</code>：</a>
-          <div class="qrow__meta"><span>计系概 · 汇编语言与程序的机器级表示</span><span>计算题</span><span class="dots" aria-label="难度 2 / 4"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__meta"><span>计系概 · 汇编语言与程序的机器级表示</span><span>计算题</span><span class="dots" aria-label="难度 2 / 5"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           
         </div>
         
       </li><li class="qrow" data-id="ics-019" data-course="ics" data-chapter="ics-3" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="3" data-tags="条件码 汇编 C 语言" data-text="函数 `f` 的两个 `long` 参数 `x`、`y` 分别放在 `%rdi`、`%rsi`，返回值放在 `%rax`。汇编如下： ``` cmpq %rsi, %rdi setl %al setg %dl movzbl %al, %eax movzbl %dl, %edx addl %edx, %eax ret ``` 回答： (1) 这段代码相当于 C 的什么表达式？ (2) 求 、 、 时的返回值。 (3) 如果把 `setl` 换成 `setb`，对 返回值是多少？说明原因。 条件码 汇编 C 语言 自编">
         <div>
           <a class="qrow__link" href="../questions/ics-019.html">函数 <code>f</code> 的两个 <code>long</code> 参数 <code>x</code>、<code>y</code> 分别放在 <code>%rdi</code>、<code>%rsi</code>，返回值放在 <code>%rax</code>。汇编如下：</a>
-          <div class="qrow__meta"><span>计系概 · 汇编语言与程序的机器级表示</span><span>综合题</span><span class="dots" aria-label="难度 3 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__meta"><span>计系概 · 汇编语言与程序的机器级表示</span><span>综合题</span><span class="dots" aria-label="难度 3 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           
         </div>
         
       </li><li class="qrow" data-id="ics-020" data-course="ics" data-chapter="ics-3" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="3" data-tags="控制流 数组 汇编" data-text="函数 `f` 的参数 `a`（`long` 数组首地址）放在 `%rdi`，元素个数 `n` 放在 `%rsi`，返回值放在 `%rax`。汇编如下： ``` movl $0, %eax movl $0, %ecx .L2: cmpq %rsi, %rcx jge .L3 movq (%rdi,%rcx,8), %rdx testq %rdx, %rdx jle .L4 addq %rdx, %rax .L4: addq $1, %rcx jmp .L2 .L3: ret ``` 回答： (1) 写出等价的 C 函数。 (2) 若数组为 、 ，返回值是多少？ (3) 上述执行过程中，循环体（从 `movq` 到 `jmp`）执行了几次？`cmpq` 执行了几次？ (4) 若 ，返回值是多少？ 控制流 数组 汇编 自编">
         <div>
           <a class="qrow__link" href="../questions/ics-020.html">函数 <code>f</code> 的参数 <code>a</code>（<code>long</code> 数组首地址）放在 <code>%rdi</code>，元素个数 <code>n</code> 放在 <code>%rsi</code>，返回值放在 <code>%rax</code>。汇编如下：</a>
-          <div class="qrow__meta"><span>计系概 · 汇编语言与程序的机器级表示</span><span>计算题</span><span class="dots" aria-label="难度 3 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__meta"><span>计系概 · 汇编语言与程序的机器级表示</span><span>计算题</span><span class="dots" aria-label="难度 3 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           
         </div>
         
@@ -115,35 +115,35 @@
         <div>
           <a class="qrow__link" href="../questions/ics-024.html"><code>g</code> 是外部函数，参数和返回值都是 <code>long</code>。<code>f</code> 在 <code>-O0</code> 下的汇编如下：</p>
 </a>
-          <div class="qrow__meta"><span>计系概 · 函数调用</span><span>综合题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__meta"><span>计系概 · 函数调用</span><span>综合题</span><span class="dots" aria-label="难度 4 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           
         </div>
         
       </li><li class="qrow" data-id="ics-034" data-course="ics" data-chapter="ics-3" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="2" data-tags="汇编 寻址方式" data-text="已知寄存器与内存的初值： - `%rax = 0x1000`，`%rbx = 0x20`，`%rcx = 0x8`； - 内存地址 `0x1048` 处存放 8 字节的值 `0xCAFEBABE`。 回答下列问题。 （1）`movq 0x10(%rax), %rdx` 访问的有效地址是多少？ （2）`movq (%rax,%rbx,4), %rdx` 访问的有效地址是多少？ （3）执行 `leaq 8(%rax,%rcx,8), %rdx` 后 `%rdx` 的值是多少？这条指令访问内存吗？ （4）执行 `movq 8(%rax,%rbx,2), %rdx` 后 `%rdx` 的值是多少？ （5）如果把操作数写成 `(%rax,%rbx,3)`，会发生什么？比例因子允许取哪些值？ （6）`movq -8(%rax), %rdx` 的有效地址是多少？ 汇编 寻址方式 自编">
         <div>
           <a class="qrow__link" href="../questions/ics-034.html">已知寄存器与内存的初值：</a>
-          <div class="qrow__meta"><span>计系概 · 汇编语言与程序的机器级表示</span><span>计算题</span><span class="dots" aria-label="难度 2 / 4"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__meta"><span>计系概 · 汇编语言与程序的机器级表示</span><span>计算题</span><span class="dots" aria-label="难度 2 / 5"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           
         </div>
         
       </li><li class="qrow" data-id="ics-035" data-course="ics" data-chapter="ics-3" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="3" data-tags="汇编 控制流 C 语言" data-text="下面的 C 函数返回两个 `long` 参数之差的绝对值： ```c long maxdiff(long x, long y) { if (x &gt; y) return x - y; return y - x; } ``` 参数 `x`、`y` 分别放在 `%rdi`、`%rsi`，返回值放在 `%rax`。 （1）写出带条件跳转的 x86-64 汇编实现（AT&amp;T 语法），并标注每条指令的作用。 （2）用 `cmov` 写出无分支版本，说明它相对分支版的好处。 （3）如果参数类型改成 `unsigned long`，条件跳转应该换成哪条指令？为什么？ （4）如果参数类型改成 `int`，这个实现在什么输入下会出错？举一个具体例子。 汇编 控制流 C 语言 自编">
         <div>
           <a class="qrow__link" href="../questions/ics-035.html">下面的 C 函数返回两个 <code>long</code> 参数之差的绝对值：</a>
-          <div class="qrow__meta"><span>计系概 · 汇编语言与程序的机器级表示</span><span>综合题</span><span class="dots" aria-label="难度 3 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__meta"><span>计系概 · 汇编语言与程序的机器级表示</span><span>综合题</span><span class="dots" aria-label="难度 3 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           
         </div>
         
       </li><li class="qrow" data-id="ics-036" data-course="ics" data-chapter="ics-3" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="4" data-tags="汇编 控制流" data-text="函数 `sum` 的汇编实现如下（参数 `a` 在 `%rdi`，`n` 在 `%rsi`，返回值在 `%rax`）： ``` sum: movl $0, %eax movl $0, %ecx jmp .L2 .L3: movq (%rdi,%rax,8), %rdx addq %rdx, %rcx addq $1, %rax .L2: cmpq %rsi, %rax jl .L3 movq %rcx, %rax ret ``` （1）写出与之等价的 C 代码（用 `while` 或 `for`）。 （2）若 `a = {1, -2, 3, -4}`、`n = 4`，函数返回多少？ （3）如果把 `jl` 改成 `jle`，循环会怎样变化？会带来什么问题？ （4）如果数组元素类型从 `long` 改成 `int`，需要修改哪些指令？如果改成 `unsigned int` 呢？ 汇编 控制流">
         <div>
           <a class="qrow__link" href="../questions/ics-036.html">函数 <code>sum</code> 的汇编实现如下（参数 <code>a</code> 在 <code>%rdi</code>，<code>n</code> 在 <code>%rsi</code>，返回值在 <code>%rax</code>）：</a>
-          <div class="qrow__meta"><span>计系概 · 汇编语言与程序的机器级表示</span><span>综合题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__meta"><span>计系概 · 汇编语言与程序的机器级表示</span><span>综合题</span><span class="dots" aria-label="难度 4 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           
         </div>
         
       </li><li class="qrow" data-id="ics-037" data-course="ics" data-chapter="ics-3" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="3" data-tags="条件码 浮点数 汇编" data-text="C 函数 `int less(float a, float b) { return a &lt; b; }` 的 `a`、`b` 分别放在 `%xmm0`、`%xmm1`。编译器生成的汇编是 ``` less: comiss %xmm1, %xmm0 setb %al setnp %dl andb %dl, %al movzbl %al, %eax ret ``` 回答： （1）`comiss` 比较的是哪两个数？它设置哪些标志位？ （2）为什么不能只用 `setb %al`（把中间两条去掉）？ （3）当 `a` 为 NaN、`b = 1.0f` 时，CF、ZF、PF 各是什么？函数最终返回多少？ （4）如果函数改成 `a &gt; b`，可以只用 `comiss %xmm1, %xmm0; seta %al`。为什么这里不需要再加 `setnp`？ （5）如果要判断 `a == b`，应该怎样组合 ">
         <div>
           <a class="qrow__link" href="../questions/ics-037.html">C 函数 <code>int less(float a, float b) { return a &lt; b; }</code> 的 <code>a</code>、<code>b</code> 分别放在 <code>%xmm0</code>、<code>%xmm1</code>。编译器生成的汇编是</a>
-          <div class="qrow__meta"><span>计系概 · 汇编语言与程序的机器级表示</span><span>概念题</span><span class="dots" aria-label="难度 3 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__meta"><span>计系概 · 汇编语言与程序的机器级表示</span><span>概念题</span><span class="dots" aria-label="难度 3 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           
         </div>
         
@@ -151,20 +151,34 @@
         <div>
           <a class="qrow__link" href="../questions/ics-044.html"><code>g</code> 是外部函数，参数与返回值都是 <code>int</code>。<code>f</code> 的汇编如下：</p>
 </a>
-          <div class="qrow__meta"><span>计系概 · 函数调用</span><span>综合题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__meta"><span>计系概 · 函数调用</span><span>综合题</span><span class="dots" aria-label="难度 4 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           
         </div>
         
       </li><li class="qrow" data-id="ics-065" data-course="ics" data-chapter="ics-3" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="4" data-tags="汇编 条件码 跳转表" data-text="某函数对整数参数 `x`（放在 `%rdi`）做多分支分派，编译器生成的汇编片段是 ``` leal -10(%rdi), %eax cmpl $2, %eax ja .L8 jmp *.L4(,%rax,8) .L4: .quad .L5 .quad .L6 .quad .L5 ``` (1) 这段代码支持的 `case` 值是哪些？每个值分别跳到哪个标签？其他值呢？ (2) 为什么不直接 `cmpl $12, %rdi` 再用 `%rdi` 查表？`leal -10(%rdi), %eax` 这一步的作用是什么？ (3) 当 `x` 分别取 9、10、12、13 时跳到哪个标签？如果 `x` 是负数呢？ (4) 如果 C 源码里 `x` 是 `long`，而有人照抄了这段 32 位的汇编，那么 `x = 2^{32}+10` 会发生什么？为什么？ (5) 跳转表每一项为什么用 `.qu">
         <div>
           <a class="qrow__link" href="../questions/ics-065.html">某函数对整数参数 <code>x</code>（放在 <code>%rdi</code>）做多分支分派，编译器生成的汇编片段是</a>
-          <div class="qrow__meta"><span>计系概 · 汇编语言与程序的机器级表示</span><span>综合题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__meta"><span>计系概 · 汇编语言与程序的机器级表示</span><span>综合题</span><span class="dots" aria-label="难度 4 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          
+        </div>
+        
+      </li><li class="qrow" data-id="ics-066" data-course="ics" data-chapter="ics-3" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="5" data-tags="汇编 寻址方式 C 语言" data-text="函数 `f` 的参数 `x` 放在 `%rdi`，返回值放在 `%rax`，汇编实现是 ``` f: leaq (%rdi,%rdi,4), %rax # rax = 5*x leaq (%rax,%rax,2), %rax # rax = 3*(5x) = 15x sarq $4, %rax # rax &gt;&gt;= 4（算术右移） ret ``` (1) 用含 floor/ceil 的式子写出 `f(x)`，并求 `f(100)`、`f(-100)`。 (2) 若有人把这段汇编&quot;翻译&quot;成 C 的 `return x * 15 / 16;`，两者在什么 x 上结果不同？给出反例，并解释编译器为什么不会用 `sarq` 来实现 C 的 `/16`。 (3) `x` 取多大时，第二条 `leaq` 的中间结果会超出 64 位有符号范围？此时 C 写法是什么行为，而这段汇编实际得到什么？以 为例算出">
+        <div>
+          <a class="qrow__link" href="../questions/ics-066.html">函数 <code>f</code> 的参数 <code>x</code> 放在 <code>%rdi</code>，返回值放在 <code>%rax</code>，汇编实现是</a>
+          <div class="qrow__meta"><span>计系概 · 汇编语言与程序的机器级表示</span><span>综合题</span><span class="dots dots--hard" aria-label="难度 5 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          
+        </div>
+        
+      </li><li class="qrow" data-id="ics-071" data-course="ics" data-chapter="ics-2" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="5" data-tags="汇编 C 语言" data-text="64 位 x86-64 下，函数 ```c long sh(long x, int n) { return x &lt;&lt; n; } ``` 编译成 ``` sh: movq %rdi, %rax movl %esi, %ecx salq %cl, %rax ret ``` (1) 求 `sh(1, 64)`、`sh(1, 65)`、`sh(1, 63)`、`sh(1, -1)` 的实际返回值，并解释 `n = 64` 为什么得到 1。 (2) 如果函数参数类型是 `int`（即做 32 位移位，指令为 `sall %cl, %eax`），那么 `n = 31`、`n = 32`、`n = 64` 分别得到什么？为什么掩码位数会变？ (3) C 标准对移位量 `n` 有什么要求？为什么 `sh(1, 64)` 在 C 里是未定义行为，而汇编却&quot;有确定结果&quot;？ (4) 编译器在 `-O2` 下可能">
+        <div>
+          <a class="qrow__link" href="../questions/ics-071.html">64 位 x86-64 下，函数</a>
+          <div class="qrow__meta"><span>计系概 · 信息的表示与处理</span><span>综合题</span><span class="dots dots--hard" aria-label="难度 5 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           
         </div>
         
       </li></ul>
   <p class="more">
-    <a class="btn btn--red" href="../export/?tag=%E6%B1%87%E7%BC%96">导出这 13 道（PDF）</a>
+    <a class="btn btn--red" href="../export/?tag=%E6%B1%87%E7%BC%96">导出这 15 道（PDF）</a>
     <a href="../tags/">← 回到全部标签</a>
   </p>
 </div>

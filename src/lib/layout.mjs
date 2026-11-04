@@ -192,7 +192,7 @@ export function stateLabel(state) {
 }
 
 export function dots(n) {
-  return `<span class="dots" aria-label="难度 ${n} / 4">${[1, 2, 3, 4]
+  return `<span class="dots${n >= 5 ? ' dots--hard' : ''}" aria-label="难度 ${n} / 5">${[1, 2, 3, 4, 5]
     .map((i) => `<i class="${i <= n ? 'on' : ''}"></i>`)
     .join('')}</span>`
 }

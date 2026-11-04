@@ -121,7 +121,7 @@ export function tagOptions(ctx, { all = true, withCount = true } = {}) {
   )
 }
 
-export const DIFFICULTIES = ['1 基础', '2 常规', '3 综合', '4 挑战']
+export const DIFFICULTIES = ['1 基础', '2 常规', '3 综合', '4 挑战', '5 硬核']
 
 export function difficultyOptions({ all = true } = {}) {
   return (

@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>程序的内存与安全 · 综合题 · 复习册</title>
+<meta name="description" content="某程序用 `read` 从标准输入读数据，函数与汇编如下： ```c void vuln(void) { char buf[32]; read(0, buf, 128); } ``` ``` vuln: pushq %rbp movq %rsp, %rbp subq $48, %rsp movq %fs:40, %rax movq %rax, -8(%rbp) # 栈保护值 canary leaq -40(%rbp), %rdi # buf movl $128, %esi # 最多读 128 字节 call read movq -8(%rbp), %rax # 取出 canary 准备检查 ... leave ret ``` 已知攻击者通过同一程序的格式化字符串漏洞读到了 canary 的值 并且原始返回地址是 `0x0000561234abcd40`，攻击者希望跳到同一映像中的 `0x0">
+<meta name="color-scheme" content="light">
+<link rel="stylesheet" href="../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../assets/site.css">
+<script>
+  // 先按本地设置（或系统偏好）定主题，避免刷新时闪白
+  try {
+    // 默认浅色（纸面）。只有你手动切过深色，才在下次打开时记住。
+    if (localStorage.getItem('reviewer.theme') === 'dark')
+      document.documentElement.setAttribute('data-theme', 'dark')
+  } catch (e) {}
+</script>
+<script src="../assets/core.js"></script>
+<script src="../assets/theme.js" defer></script>
+<script src="../assets/term.js" defer></script>
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<meta property="og:title" content="程序的内存与安全 · 综合题 · 复习册">
+<meta property="og:description" content="某程序用 `read` 从标准输入读数据，函数与汇编如下： ```c void vuln(void) { char buf[32]; read(0, buf, 128); } ``` ``` vuln: pushq %rbp movq %rsp, %rbp subq $48, %rsp movq %fs:40, %rax movq %rax, -8(%rbp) # 栈保护值 canary leaq -40(%rbp), %rdi # buf movl $128, %esi # 最多读 128 字节 call read movq -8(%rbp), %rax # 取出 canary 准备检查 ... leave ret ``` 已知攻击者通过同一程序的格式化字符串漏洞读到了 canary 的值 并且原始返回地址是 `0x0000561234abcd40`，攻击者希望跳到同一映像中的 `0x0">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_CN">
+
+</head>
+<body class="no-js detail">
+<script>document.body.classList.remove('no-js')</script>
+<a class="skip" href="#main">跳到正文</a>
+
+  <header class="sitehead">
+    <div class="frame">
+      <nav class="nav" aria-label="主导航">
+        <a class="nav__mark" href="../"><span class="nav__dot" aria-hidden="true"></span>复习册</a>
+        <ul class="nav__links">
+          <li class="nav__menu-wrap">
+          <details class="navmenu">
+            <summary>课程</summary>
+            <ul class="navmenu__list">
+              <li><a href="../va1/">微积分 A1</a></li><li><a href="../la/">线性代数</a></li><li><a href="../dm1/">离散数学1<span class="navmenu__tag">仅期末</span></a></li><li><a href="../ics/">计算机系统概论</a></li>
+              <li class="navmenu__sep"><a href="../questions/">题库（全部课程）</a></li>
+            </ul>
+          </details>
+        </li>
+          <li><a href="../questions/" aria-current="page">题库</a></li>
+          <li><a href="../practice/">刷题</a></li>
+          <li><a href="../cheatsheet/">速查</a></li>
+          <li><a href="../stats/">进度</a></li>
+        </ul>
+        <div class="nav__end">
+          <div class="nav__terms" role="group" aria-label="考试轮次">
+            <button class="term-btn is-on" type="button" data-term-btn="midterm">期中</button><button class="term-btn" type="button" data-term-btn="final">期末</button>
+          </div>
+          <button class="ghost nav__theme" id="theme-toggle" type="button" aria-live="polite">深色</button>
+          <a class="btn btn--red nav__action" href="../submit/">投稿</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+<main id="main">
+
+<div class="frame">
+  <nav class="crumb" aria-label="位置"><a href="../">复习册</a><span class="crumb__sep">/</span><a href="../questions/">题库</a><span class="crumb__sep">/</span><a href="../ics/">计算机系统概论</a><span class="crumb__sep">/</span><span>第 6 章</span></nav>
+
+  <div class="qpage">
+    <div class="qpage__main">
+      <header class="pagehead pagehead--q">
+        <h1 class="qpage__title">程序的内存与安全 · 综合题</h1>
+        <div class="meta" style="margin-top:14px">
+          <span class="meta__item">计算机系统概论</span>
+          <span class="meta__item">综合题</span>
+          <span class="meta__item">难度 <span class="dots dots--hard" aria-label="难度 5 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></span>
+          <span class="meta__item">自编</span>
+          <span class="meta__item">投稿：自编</span>
+        </div>
+        <div class="qactions">
+          <button class="flag" type="button" data-flag="done" data-id="ics-070" aria-pressed="false"><span>已做</span></button>
+          <button class="flag flag--fav" type="button" data-flag="fav" data-id="ics-070" aria-pressed="false"><span>收藏</span></button>
+          <button class="ghost" type="button" id="expand-all">展开解析与提示</button>
+          <button class="ghost" type="button" id="copy-md">复制题目</button>
+          <a class="ghost" href="../export/?ids=ics-070">导出这道题</a>
+          <button class="ghost" type="button" data-print>打印这道题</button>
+          <span class="qactions__id">ICS-070 · <span class="kbd">←</span><span class="kbd">→</span> 翻题 · <span class="kbd">E</span> 展开 · <span class="kbd">D</span> 记已做</span>
+        </div>
+      </header>
+
+      <div class="qpage__stem prose"><p>某程序用 <code>read</code> 从标准输入读数据，函数与汇编如下：</p>
+<p><pre class="code-block"><code class="language-c">void vuln(void) {
+    char buf[32];
+    read(0, buf, 128);
+}</code></pre></p>
+<p><pre class="code-block"><code class="language-text">vuln:
+    pushq   %rbp
+    movq    %rsp, %rbp
+    subq    $48, %rsp
+    movq    %fs:40, %rax
+    movq    %rax, -8(%rbp)      # 栈保护值 canary
+    leaq    -40(%rbp), %rdi     # buf
+    movl    $128, %esi          # 最多读 128 字节
+    call    read
+    movq    -8(%rbp), %rax      # 取出 canary 准备检查
+    ...
+    leave
+    ret</code></pre></p>
+<p>已知攻击者通过同一程序的格式化字符串漏洞读到了 canary 的值</p>
+<p><span class="math-display"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>canary</mtext><mo>=</mo><mtext mathvariant="monospace">0x00007f3a9b2c5d00</mtext><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\text{canary}=\texttt{0x00007f3a9b2c5d00},</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord text"><span class="mord">canary</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8055em;vertical-align:-0.1944em;"></span><span class="mord text"><span class="mord texttt">0x00007f3a9b2c5d00</span></span><span class="mpunct">,</span></span></span></span></span></span></p>
+<p>并且原始返回地址是 <code>0x0000561234abcd40</code>，攻击者希望跳到同一映像中的 <code>0x0000561234ab9e10</code>。</p>
+<p>(1) 写出 <code>vuln</code> 的栈布局：<code>buf</code>、canary、保存的旧 <code>%rbp</code>、返回地址分别相对 <code>%rbp</code> 的偏移与输入字节区间。</p>
+<p>(2) 完整覆盖返回地址需要输入多少字节？本题只输入 51 字节，为什么也能改掉返回地址？</p>
+<p>(3) 写出这 51 字节的构造（各段内容、字节序）。</p>
+<p>(4) canary 的最低位为什么是 <code>0x00</code>？如果漏洞函数用的是 <code>gets</code> 而不是 <code>read</code>，攻击者还能做同样的事吗？</p>
+<p>(5) 在 PIE + ASLR 下，只改写返回地址的低 3 字节相当于给攻击者留下多少位的随机性？为什么&quot;部分覆盖&quot;能绕过地址随机化？</p>
+<p>(6) 栈保护（canary）和不可执行栈（NX）分别能不能挡住这次攻击？说明各自失效/起作用的原因。</p>
+</div>
+
+      <details class="qblock qblock--hint"><summary>提示<span aria-hidden="true">+</span></summary><div class="qblock__body prose"><p>先按「buf 从 <code>%rbp-40</code> 开始、canary 在 <code>%rbp-8</code>」把栈画出来，注意 <code>buf</code> 占 32 字节，正好顶到 canary 前面。部分覆盖的关键是：高字节<strong>不写就保持原值</strong>，所以不需要知道 PIE 基址。页内偏移（低 12 位）在 ASLR 下是固定的。</p>
+</div></details>
+
+      <details class="qblock" id="solution">
+        <summary>解析（先自己做一遍再看）<span aria-hidden="true">展开</span></summary>
+        <div class="qblock__body prose">
+          <div class="answer"><span>答案</span><p>buf 在 %rbp-40，canary 在 32–39、旧 rbp 在 40–47、返回地址在 48–55；输入 51 字节（32 填充 + 8 canary + 8 旧 rbp + 3 字节地址）即可只改写返回地址低 3 字节；低 12 位页内偏移固定，剩 12 位随机，即约 4096 种猜测</p>
+</div>
+          <p><strong>(1)</strong> <code>subq $48</code> 之后 <code>%rsp = %rbp-48</code>，而 <code>leaq -40(%rbp)</code> 才是 <code>buf</code> 的首地址，所以：</p>
+<div class="table-wrap"><table><thead>
+<tr>
+<th>内容</th>
+<th>相对 <code>%rbp</code></th>
+<th>输入字节偏移</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td<code>buf[32]</code></td>
+<td<code>-40</code> 到 <code>-9</code></td>
+<td>0–31</td>
+</tr>
+<tr>
+<td>canary（8 字节）</td>
+<td<code>-8</code> 到 <code>-1</code></td>
+<td>32–39</td>
+</tr>
+<tr>
+<td>保存的旧 <code>%rbp</code></td>
+<td<code>0</code> 到 <code>7</code></td>
+<td>40–47</td>
+</tr>
+<tr>
+<td>返回地址</td>
+<td<code>8</code> 到 <code>15</code></td>
+<td>48–55</td>
+</tr>
+</tbody>
+</table></div><p><strong>为什么想到</strong>：<code>subq $48</code> 只是给局部变量区留空间，真正决定 <code>buf</code> 位置的是 <code>leaq -40(%rbp)</code>；canary 写在 <code>-8(%rbp)</code>，两者之间没有别的对象，所以 32 字节的 <code>buf</code> 刚好紧贴 canary。</p>
+<p><strong>(2)</strong> 完整覆盖返回地址要写到偏移 55，即 <strong>56 字节</strong>。本题只写 51 字节：前 48 字节覆盖 <code>buf</code>、canary、旧 <code>%rbp</code>，第 49–51 字节改写返回地址的<strong>低 3 字节</strong>，返回地址的高 5 字节保持原值。<code>read</code> 不会补零，未写到的字节保持栈上原内容，所以 <code>ret</code> 弹出的仍是「高 5 字节原值 + 低 3 字节新值」。</p>
+<p><strong>(3)</strong> 51 字节的构造：</p>
+<ol>
+<li>偏移 0–31：任意 32 字节填充；</li>
+<li>偏移 32–39：canary 的小端字节，<code>00 5d 2c 9b 3a 7f 00 00</code>；</li>
+<li>偏移 40–47：任意 8 字节，覆盖旧 <code>%rbp</code>（例如 8 个 <code>0x41</code>）；</li>
+<li>偏移 48–50：新返回地址的低 3 字节，<code>10 9e ab</code>。</li>
+</ol>
+<p>拼起来后，<code>ret</code> 弹出的是</p>
+<p><span class="math-display"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext mathvariant="monospace">0x0000561234ab9e10</mtext><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\texttt{0x0000561234ab9e10},</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8055em;vertical-align:-0.1944em;"></span><span class="mord text"><span class="mord texttt">0x0000561234ab9e10</span></span><span class="mpunct">,</span></span></span></span></span></span></p>
+<p>因为高 5 字节 <code>34 12 56 00 00</code> 没被写、保持原值，与新地址的高字节恰好一致。</p>
+<p><strong>为什么想到</strong>：目标地址与原地址只差低 3 字节，说明两者在同一个 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>24</mn></msup></mrow><annotation encoding="application/x-tex">2^{24}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">24</span></span></span></span></span></span></span></span></span></span></span></span> 字节的区块内；只要不动高字节，就不需要泄露 PIE 基址。</p>
+<p><strong>(4)</strong> canary 由运行时随机生成后<strong>最低字节被强制清零</strong>。这样用 <code>gets</code>、<code>strcpy</code> 这类<strong>字符串函数</strong>做溢出时，输入不能包含 <code>0x00</code>（遇零即终止），无法在 canary 位置写出 <code>0x00</code> 这个字节，也就无法&quot;原样保留&quot;canary——一旦覆盖到 canary 就必然被检测到。</p>
+<p>本题用的是 <code>read</code>，它按长度读、允许二进制内容，所以能写出任意 <code>0x00</code>；再加上 canary 已经被泄露，攻击者可以精确还原它。</p>
+<p><strong>(5)</strong> 低 3 字节 = 24 位，其中低 12 位是页内偏移，在 ASLR 下固定不变（代码段按页随机），剩下 12 位是随机的：</p>
+<p><span class="math-display"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mn>2</mn><mn>12</mn></msup><mo>=</mo><mn>4096</mn></mrow><annotation encoding="application/x-tex">2^{12}=4096</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8641em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">12</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">4096</span></span></span></span></span></span></p>
+<p>种可能。攻击者可以暴力尝试（崩溃重启后重试），也可以选低 2 字节（只改 16 位，其中 12 位固定，只剩 4 位随机，16 种可能）以进一步提高成功率。</p>
+<p><strong>为什么部分覆盖能绕过 ASLR</strong>：ASLR 随机化的是基址的高位部分，返回地址的<strong>低 12 位（页内偏移）固定</strong>；不写高字节就保留了原来的随机基址，攻击者只需要猜低 24 位中那 12 位随机位。</p>
+<p><strong>(6)</strong> 两者都挡不住这次攻击：</p>
+<ul>
+<li><strong>canary</strong> 本来能挡住&quot;连续写溢出到返回地址&quot;，但本题 canary 已被信息泄露（格式化字符串）读出并原样写回，检查通过，所以失效；这正说明 canary 必须配合&quot;不泄露内存&quot;的防御（如 <code>%n</code> 限制、<code>-D_FORTIFY_SOURCE</code>）。</li>
+<li><strong>NX</strong> 只让栈不可执行，挡的是&quot;跳到栈上执行 shellcode&quot;；本题跳的是<strong>映像里已有的代码</strong>（如 gadget 或函数入口），不需要执行栈，所以 NX 无效。</li>
+</ul>
+<p>真正相关的是 PIE/ASLR：它让地址随机化，但部分覆盖把随机性从约 28–32 位降到 12 位，仍可暴力破解。更强的防御包括 CFI（控制流完整性）、影子栈等。</p>
+
+        </div>
+      </details>
+
+      <details class="qblock"><summary>常见错误<span aria-hidden="true">展开</span></summary><div class="qblock__body prose"><p>一是把 <code>buf</code> 起点算成 <code>%rbp-48</code> 或 <code>%rbp-32</code>，忽略 <code>leaq -40(%rbp)</code> 与 <code>subq $48</code> 的差别，导致所有偏移整体错位。二是用 56 字节一次写满返回地址，反而需要知道 PIE 基址的高字节。三是 canary 字节序写反（大端），检查必失败。四是以为 NX 能防返回地址改写；NX 防的是&quot;执行栈上代码&quot;，不是&quot;改返回地址&quot;。五是忽略 canary 最低字节为 0 的设计意图，误以为 <code>gets</code> 也能写回 canary。</p>
+</div></details>
+
+      <div class="pager" data-pager>
+        <a class="pager__prev" href="../questions/ics-069.html"><span>上一题</span>考虑下面的类型</a>
+        <a class="pager__next" href="../questions/ics-071.html"><span>下一题</span>汇编 · 难度 5</a>
+      </div>
+    </div>
+
+    <aside class="qpage__side">
+      <div>
+        <h2>这道题</h2>
+        <dl class="spec">
+          <div><dt>科目</dt><dd>计算机系统概论</dd></div>
+          <div><dt>章节</dt><dd>程序的内存与安全</dd></div>
+          <div><dt>题型</dt><dd>综合题</dd></div>
+          <div><dt>难度</dt><dd><span class="dots dots--hard" aria-label="难度 5 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></dd></div>
+          <div><dt>出处</dt><dd>自编</dd></div>
+          <div><dt>范围</dt><dd><span data-chip data-states="{&quot;midterm&quot;:&quot;partial&quot;,&quot;final&quot;:&quot;partial&quot;}">部分在范围</span></dd></div>
+        </dl>
+      </div>
+      <div>
+        <h2>考点</h2>
+        <ul class="tag-list"><li><a class="tag" href="../tags/%E7%BC%93%E5%86%B2%E5%8C%BA%E6%BA%A2%E5%87%BA.html">缓冲区溢出</a></li><li><a class="tag" href="../tags/%E6%A0%88%E5%B8%A7.html">栈帧</a></li><li><a class="tag" href="../tags/%E6%A0%88%E4%BF%9D%E6%8A%A4.html">栈保护</a></li></ul>
+      </div>
+      <div>
+        <h2>往下走</h2>
+        <ul class="sidelist">
+          <li><a href="../notes/ics-6.html">读这一章的要点</a></li>
+          <li><a href="../questions/?chapter=ics-6">这一章的 5 道题</a></li>
+          <li><a href="../export/?chapter=ics-6">导出这一章</a></li>
+          <li><a href="../ics/#ch-ics-6">这一章在考纲里的位置</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>同一章</h2>
+        <ul class="sidelist">
+          <li><a href="../questions/ics-012.html">下面的函数用 gets 读入一行字符串</a></li><li><a href="../questions/ics-027.html">缓冲区溢出 · 难度 4</a></li><li><a href="../questions/ics-028.html">下面这段代码把网络包复制到栈上的缓冲区</a></li><li><a href="../questions/ics-049.html">有下面的 C 代码</a></li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+</div>
+
+</main>
+
+  <footer class="footer">
+    <div class="frame">
+      <a class="footer__word" href="../" aria-label="回到首页：复习册"><span aria-hidden="true">复习册</span></a>
+      <div class="footer__cols">
+        <div class="footer__col">
+          <h3>科目</h3>
+          <ul>
+            <li><a href="../va1/">微积分 A1</a></li>
+            <li><a href="../la/">线性代数</a></li>
+            <li><a href="../dm1/">离散数学 1</a></li>
+            <li><a href="../ics/">计算机系统概论</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h3>内容</h3>
+          <ul>
+            <li><a href="../questions/">题库</a></li>
+            <li><a href="../practice/">刷题</a></li>
+            <li><a href="../tags/">标签</a></li>
+            <li><a href="../cheatsheet/">速查表</a></li>
+            <li><a href="../export/">导出 PDF</a></li>
+            <li><a href="../stats/">进度</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h3>参与</h3>
+          <ul>
+            <li><a href="../submit/">投稿一道题</a></li>
+            <li><a href="../markdown/">写法说明</a></li>
+            <li><a href="../about/">关于与范围说明</a></li>
+            <li><a href="https://github.com/yyxcnasd/reviewer" target="_blank" rel="noopener noreferrer">GitHub 仓库</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h3>这本册子</h3>
+          <ul>
+            <li>2026 秋 期中版</li>
+            <li>内容 CC BY-SA 4.0</li>
+            <li>构建于 2026-11-04</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__legal">
+        <span>复习册 · 课程 · 范围 · 题库</span>
+        <span>内容以 CC BY-SA 4.0 发布，题目标题与解析可自由取用，请保留出处。</span>
+      </div>
+    </div>
+  </footer>
+<script src="../assets/progress.js" defer></script>
+<script src="../assets/site.js" defer></script>
+
+</body>
+</html>

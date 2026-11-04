@@ -72,28 +72,28 @@
   <ul class="qlist"><li class="qrow" data-id="ics-021" data-course="ics" data-chapter="ics-3" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="4" data-tags="控制流 性能 编译" data-text="编译器把下面的求和循环展开 次，并用了两个累加器： ```c long sum(long *a, long n) { long i = 0, s0 = 0, s1 = 0; for (; i + 3 &lt; n; i += 4) { s0 += a[i] + a[i + 2]; s1 += a[i + 1] + a[i + 3]; } for (; i &lt; n; i++) s0 += a[i]; return s0 + s1; } ``` 回答： (1) 当 时，第一个循环执行几次？第二个循环处理哪些下标？ (2) 为什么用两个累加器，而不是只用一个 `s`？ (3) 为什么循环条件是 `i + 3 &lt; n`，而不是写成 `i &lt; n - 3`？如果 `n` 的类型是 `size_t` 会怎样？ (4) 展开后整数结果与不展开时一定相同吗？如果数组元素是 `double` 呢？ 控制流 性能 ">
         <div>
           <a class="qrow__link" href="../questions/ics-021.html">编译器把下面的求和循环展开 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>4</mn></mrow><annotation encoding="application/x-tex">4</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">4</span></span></span></span> 次，并用了两个累加器：</a>
-          <div class="qrow__meta"><span>计系概 · 汇编语言与程序的机器级表示</span><span>综合题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__meta"><span>计系概 · 汇编语言与程序的机器级表示</span><span>综合题</span><span class="dots" aria-label="难度 4 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           
         </div>
         
       </li><li class="qrow" data-id="ics-029" data-course="ics" data-chapter="ics-1" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="2" data-tags="编译 链接" data-text="一个 C 程序从源文件变成可执行文件，要经过预处理、编译、汇编、链接几个阶段。指出下列现象分别发生在哪个阶段，并简述理由。 （1）gcc 报错 `fatal error: stdio.h: No such file or directory`。 （2）gcc 报错 `error: 'x' undeclared (first use in this function)`。 （3）gcc 报错 `undefined reference to 'foo'`。 （4）汇编器报错 `Error: no such instruction: 'movq %rax,%rbx,'`（末尾多了一个逗号）。 （5）编译、链接都成功，运行时出现 `Segmentation fault`。 （6）同一个函数在 `a.c` 和 `b.c` 里各定义了一次，gcc 报 `multiple definition of '">
         <div>
           <a class="qrow__link" href="../questions/ics-029.html">一个 C 程序从源文件变成可执行文件，要经过预处理、编译、汇编、链接几个阶段。指出下列现象分别发生在哪个阶段，并简述理由。</a>
-          <div class="qrow__meta"><span>计系概 · 概论</span><span>概念题</span><span class="dots" aria-label="难度 2 / 4"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__meta"><span>计系概 · 概论</span><span>概念题</span><span class="dots" aria-label="难度 2 / 5"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           
         </div>
         
       </li><li class="qrow" data-id="ics-042" data-course="ics" data-chapter="ics-2" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="4" data-tags="浮点数 IEEE 754 编译" data-text="单精度浮点数有 24 位有效位（含隐含的 1），默认舍入方式为「就近舍入、平局取偶」。考虑下面的 C 代码： ```c float a = 16777216.0f; /* 2^24 */ float b = 1.0f; float c = 1.0f; float s1 = (a + b) + c; float s2 = a + (b + c); ``` 回答： (1) 求 `s1` 与 `s2` 的值（用十进制和 的幂表示）； (2) 说明第 (1) 问里每一次加法的舍入过程：为什么 会被舍掉； (3) 若用一个 `float` 累加器从 开始顺序累加 个 `1.0f`，最终结果是多少？与精确值 相差多少？ (4) 编译器在 `-O2` 下能否把 `s1` 的算法改写成 `s2`（或对浮点求和循环做向量化重排）？默认为什么不行？`-ffast-math` 之后呢？ 浮点数 IEEE 754">
         <div>
           <a class="qrow__link" href="../questions/ics-042.html">单精度浮点数有 24 位有效位（含隐含的 1），默认舍入方式为「就近舍入、平局取偶」。考虑下面的 C 代码：</a>
-          <div class="qrow__meta"><span>计系概 · 信息的表示与处理</span><span>综合题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__meta"><span>计系概 · 信息的表示与处理</span><span>综合题</span><span class="dots" aria-label="难度 4 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           
         </div>
         
       </li><li class="qrow" data-id="ics-063" data-course="ics" data-chapter="ics-1" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="4" data-tags="编译 链接" data-text="两个源文件： ```c /* util.c */ static int counter = 0; int next(void) { return ++counter; } ``` ```c /* main.c */ #include &lt;stdio.h&gt; int next(void); int main(void) { printf(&quot;%d\n&quot;, next()); return 0; } ``` 回答： (1) 写出把这两个文件编译链接成可执行文件 `prog` 的命令序列，以及每一步的产物。 (2) `counter` 在目标文件的符号表里是什么链接属性？如果在 `main.c` 里写 `extern int counter;` 并访问它，会在哪一步、报什么错？ (3) 在 `main.o` 里，`call next` 这条指令的目标地址在汇编阶段是填不出来的。汇编器怎么处理它？链接器最">
         <div>
           <a class="qrow__link" href="../questions/ics-063.html">两个源文件：</a>
-          <div class="qrow__meta"><span>计系概 · 概论</span><span>综合题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__meta"><span>计系概 · 概论</span><span>综合题</span><span class="dots" aria-label="难度 4 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           
         </div>
         

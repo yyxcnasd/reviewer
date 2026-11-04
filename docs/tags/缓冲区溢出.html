@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>标签：缓冲区溢出 · 复习册</title>
-<meta name="description" content="带「缓冲区溢出」标签的 5 道题。">
+<meta name="description" content="带「缓冲区溢出」标签的 6 道题。">
 <meta name="color-scheme" content="light">
 <link rel="stylesheet" href="../assets/katex/katex.min.css">
 <link rel="stylesheet" href="../assets/site.css">
@@ -21,7 +21,7 @@
 <script src="../assets/term.js" defer></script>
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <meta property="og:title" content="标签：缓冲区溢出 · 复习册">
-<meta property="og:description" content="带「缓冲区溢出」标签的 5 道题。">
+<meta property="og:description" content="带「缓冲区溢出」标签的 6 道题。">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="zh_CN">
 
@@ -66,47 +66,54 @@
   <header class="pagehead">
     <div class="pagehead__inner">
       <h1 class="pagehead__title">缓冲区溢出</h1>
-      <div class="pagehead__scope"><p>5 道题带这个标签。</p></div>
+      <div class="pagehead__scope"><p>6 道题带这个标签。</p></div>
     </div>
   </header>
   <ul class="qlist"><li class="qrow" data-id="ics-012" data-course="ics" data-chapter="ics-6" data-states="{&quot;midterm&quot;:&quot;partial&quot;,&quot;final&quot;:&quot;partial&quot;}" data-difficulty="4" data-tags="缓冲区溢出 栈帧" data-text="下面的函数用 `gets` 读入一行字符串： ```c void echo(void) { char buf[16]; gets(buf); puts(buf); } ``` 编译后的汇编是 ``` echo: pushq %rbp movq %rsp, %rbp subq $16, %rsp movq %rsp, %rdi call gets movq %rsp, %rdi call puts leave ret ``` (1) 数组 `buf` 的起始地址相对 `%rbp` 是多少？ (2) 输入至少要多少个字节才能完整改写返回地址？输入的哪一段分别覆盖了 `buf`、保存的 `%rbp`、返回地址？ (3) 已知当前栈上保存的返回地址是 `0x00000000004005a6`，攻击者想把它改成 `0x00000000004005f0`，应当怎样构造输入？说明每段的长度与字节序。 (">
         <div>
           <a class="qrow__link" href="../questions/ics-012.html">下面的函数用 <code>gets</code> 读入一行字符串：</a>
-          <div class="qrow__meta"><span>计系概 · 程序的内存与安全</span><span>综合题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__meta"><span>计系概 · 程序的内存与安全</span><span>综合题</span><span class="dots" aria-label="难度 4 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           
         </div>
         
       </li><li class="qrow" data-id="ics-027" data-course="ics" data-chapter="ics-6" data-states="{&quot;midterm&quot;:&quot;partial&quot;,&quot;final&quot;:&quot;partial&quot;}" data-difficulty="4" data-tags="缓冲区溢出 栈保护 栈帧" data-text="函数 ```c void f(void) { char buf[24]; gets(buf); } ``` 编译后的汇编是 ``` f: pushq %rbp movq %rsp, %rbp subq $32, %rsp movq %fs:40, %rax movq %rax, -8(%rbp) leaq -32(%rbp), %rdi call gets movq -8(%rbp), %rax xorq %fs:40, %rax je .L2 call __stack_chk_fail .L2: leave ret ``` 已知 canary 的最低字节固定为 。回答： (1) `buf`、canary、保存的 `%rbp`、返回地址分别在栈的什么位置？ (2) 输入多少个字符会开始破坏 canary？为什么恰好输入 个字符时不一定破坏？ (3) 至少输入多少字节才能写到返回地址的第一个">
         <div>
           <a class="qrow__link" href="../questions/ics-027.html">函数 · 缓冲区溢出</a>
-          <div class="qrow__meta"><span>计系概 · 程序的内存与安全</span><span>计算题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__meta"><span>计系概 · 程序的内存与安全</span><span>计算题</span><span class="dots" aria-label="难度 4 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           
         </div>
         
       </li><li class="qrow" data-id="ics-028" data-course="ics" data-chapter="ics-6" data-states="{&quot;midterm&quot;:&quot;partial&quot;,&quot;final&quot;:&quot;partial&quot;}" data-difficulty="4" data-tags="缓冲区溢出 C 语言 溢出判断" data-text="下面这段代码把网络包复制到栈上的缓冲区： ```c void copy_packet(const char *src, int len) { char buf[64]; if (len &lt;= 64) memcpy(buf, src, len); } ``` 回答： (1) 当 `len = -1` 时，`if` 检查能通过吗？`memcpy` 实际会复制多少字节？会发生什么？ (2) `memcpy` 的第三个参数是什么类型？`len` 传进去时发生了什么转换？ (3) 至少给出两种修复方法。 (4) 如果把条件改成 `len &lt; 64`，能防住 `len = -1` 吗？为什么？ (5) 这个漏洞与缓冲区溢出是什么关系？为什么说「边界检查写对了也可能被绕过」？ 缓冲区溢出 C 语言 溢出判断 自编">
         <div>
           <a class="qrow__link" href="../questions/ics-028.html">下面这段代码把网络包复制到栈上的缓冲区：</a>
-          <div class="qrow__meta"><span>计系概 · 程序的内存与安全</span><span>综合题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__meta"><span>计系概 · 程序的内存与安全</span><span>综合题</span><span class="dots" aria-label="难度 4 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           
         </div>
         
       </li><li class="qrow" data-id="ics-048" data-course="ics" data-chapter="ics-5" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="4" data-tags="结构体 数据对齐 缓冲区溢出" data-text="考虑下面的代码： ```c struct S { char c; double d; int i; short s; }; void f(void) { struct S s = {'a', 1.5, 42, 7}; char buf[20]; memcpy(buf, &amp;s, sizeof s); } ``` 回答： (1) 求各成员的偏移、结构体内部的填充位置，以及 `sizeof(struct S)`； (2) `memcpy` 一共写多少字节？`buf` 只有 20 字节，越界几个字节？越界写到的内存里原本是什么？ (3) 若 `buf` 在栈上紧邻另一个 8 字节的局部变量，这次越界会破坏什么？为什么这种 bug 可能&quot;跑很多次都不出错&quot;？ (4) 写出两种正确的修改方式，并说明各自的副作用； (5) 用什么工具能在运行时直接抓到这次越界？给出具体编译命令。 结构体 数据对齐 缓冲">
         <div>
           <a class="qrow__link" href="../questions/ics-048.html">考虑下面的代码：</a>
-          <div class="qrow__meta"><span>计系概 · 数组与结构体</span><span>综合题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__meta"><span>计系概 · 数组与结构体</span><span>综合题</span><span class="dots" aria-label="难度 4 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           
         </div>
         
       </li><li class="qrow" data-id="ics-049" data-course="ics" data-chapter="ics-6" data-states="{&quot;midterm&quot;:&quot;partial&quot;,&quot;final&quot;:&quot;partial&quot;}" data-difficulty="4" data-tags="缓冲区溢出 栈保护 栈帧 C 语言" data-text="有下面的 C 代码： ```c void victim(void) { char buf[16]; unsigned idx = 0; scanf(&quot;%u&quot;, &amp;idx); buf[idx] = 'A'; } ``` `-O0` 下编译得到的汇编是（`scanf` 的格式串在 `.LC0` 中，内容为 `&quot;%u&quot;`）： ``` victim: pushq %rbp movq %rsp, %rbp subq $32, %rsp movl $0, -4(%rbp) leaq -4(%rbp), %rsi leaq .LC0(%rip), %rdi movl $0, %eax call __isoc99_scanf movl -4(%rbp), %eax cltq leaq -24(%rbp), %rdx movb $65, (%rdx,%rax) leave ret ``` 回答： (1) 画">
         <div>
           <a class="qrow__link" href="../questions/ics-049.html">有下面的 C 代码：</a>
-          <div class="qrow__meta"><span>计系概 · 程序的内存与安全</span><span>综合题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__meta"><span>计系概 · 程序的内存与安全</span><span>综合题</span><span class="dots" aria-label="难度 4 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          
+        </div>
+        
+      </li><li class="qrow" data-id="ics-070" data-course="ics" data-chapter="ics-6" data-states="{&quot;midterm&quot;:&quot;partial&quot;,&quot;final&quot;:&quot;partial&quot;}" data-difficulty="5" data-tags="缓冲区溢出 栈帧 栈保护" data-text="某程序用 `read` 从标准输入读数据，函数与汇编如下： ```c void vuln(void) { char buf[32]; read(0, buf, 128); } ``` ``` vuln: pushq %rbp movq %rsp, %rbp subq $48, %rsp movq %fs:40, %rax movq %rax, -8(%rbp) # 栈保护值 canary leaq -40(%rbp), %rdi # buf movl $128, %esi # 最多读 128 字节 call read movq -8(%rbp), %rax # 取出 canary 准备检查 ... leave ret ``` 已知攻击者通过同一程序的格式化字符串漏洞读到了 canary 的值 并且原始返回地址是 `0x0000561234abcd40`，攻击者希望跳到同一映像中的 `0x0">
+        <div>
+          <a class="qrow__link" href="../questions/ics-070.html">某程序用 <code>read</code> 从标准输入读数据，函数与汇编如下：</a>
+          <div class="qrow__meta"><span>计系概 · 程序的内存与安全</span><span>综合题</span><span class="dots dots--hard" aria-label="难度 5 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           
         </div>
         
       </li></ul>
   <p class="more">
-    <a class="btn btn--red" href="../export/?tag=%E7%BC%93%E5%86%B2%E5%8C%BA%E6%BA%A2%E5%87%BA">导出这 5 道（PDF）</a>
+    <a class="btn btn--red" href="../export/?tag=%E7%BC%93%E5%86%B2%E5%8C%BA%E6%BA%A2%E5%87%BA">导出这 6 道（PDF）</a>
     <a href="../tags/">← 回到全部标签</a>
   </p>
 </div>

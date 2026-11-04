@@ -72,14 +72,14 @@
   <ul class="qlist"><li class="qrow" data-id="ics-006" data-course="ics" data-chapter="ics-3" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="3" data-tags="汇编 条件码 跳转表" data-text="某函数按整数参数 `x` 分派到不同分支，`x` 放在 `%rdi`。它的汇编片段是 ``` cmpq $6, %rdi ja .L8 jmp *.L4(,%rdi,8) .L4: .quad .L3 .quad .L5 .quad .L5 .quad .L6 .quad .L6 .quad .L7 .quad .L7 ``` (1) 前两条指令在做什么？为什么用 `ja` 而不是 `jg`？ (2) 当 `x = 3`、`x = 6`、`x = -1` 时分别跳到哪个标签？ (3) 如果把 `case` 值改成 0、10、20、30，这段跳转表还合适吗？为什么？ 汇编 条件码 跳转表 自编">
         <div>
           <a class="qrow__link" href="../questions/ics-006.html">某函数按整数参数 <code>x</code> 分派到不同分支，<code>x</code> 放在 <code>%rdi</code>。它的汇编片段是</a>
-          <div class="qrow__meta"><span>计系概 · 汇编语言与程序的机器级表示</span><span>综合题</span><span class="dots" aria-label="难度 3 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__meta"><span>计系概 · 汇编语言与程序的机器级表示</span><span>综合题</span><span class="dots" aria-label="难度 3 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           
         </div>
         
       </li><li class="qrow" data-id="ics-065" data-course="ics" data-chapter="ics-3" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="4" data-tags="汇编 条件码 跳转表" data-text="某函数对整数参数 `x`（放在 `%rdi`）做多分支分派，编译器生成的汇编片段是 ``` leal -10(%rdi), %eax cmpl $2, %eax ja .L8 jmp *.L4(,%rax,8) .L4: .quad .L5 .quad .L6 .quad .L5 ``` (1) 这段代码支持的 `case` 值是哪些？每个值分别跳到哪个标签？其他值呢？ (2) 为什么不直接 `cmpl $12, %rdi` 再用 `%rdi` 查表？`leal -10(%rdi), %eax` 这一步的作用是什么？ (3) 当 `x` 分别取 9、10、12、13 时跳到哪个标签？如果 `x` 是负数呢？ (4) 如果 C 源码里 `x` 是 `long`，而有人照抄了这段 32 位的汇编，那么 `x = 2^{32}+10` 会发生什么？为什么？ (5) 跳转表每一项为什么用 `.qu">
         <div>
           <a class="qrow__link" href="../questions/ics-065.html">某函数对整数参数 <code>x</code>（放在 <code>%rdi</code>）做多分支分派，编译器生成的汇编片段是</a>
-          <div class="qrow__meta"><span>计系概 · 汇编语言与程序的机器级表示</span><span>综合题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__meta"><span>计系概 · 汇编语言与程序的机器级表示</span><span>综合题</span><span class="dots" aria-label="难度 4 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           
         </div>
         

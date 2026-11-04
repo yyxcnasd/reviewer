@@ -72,21 +72,21 @@
   <ul class="qlist"><li class="qrow" data-id="ics-023" data-course="ics" data-chapter="ics-4" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="3" data-tags="递归 函数调用 栈帧" data-text="递归函数 ```c long f(long n) { if (n &lt;= 1) return 1; return f(n - 1) + f(n - 2); } ``` 回答： (1) `f(5)` 的值是多少？ (2) 计算 `f(5)` 的整个过程中，`f` 一共被调用多少次（包括最初的一次）？ (3) 递归调用链最深时，同时有多少个 `f` 的活动记录？ (4) 若每个活动记录占 32 字节，最深时这些活动记录共占多少栈空间？ 递归 函数调用 栈帧 自编">
         <div>
           <a class="qrow__link" href="../questions/ics-023.html">递归函数 · 递归</a>
-          <div class="qrow__meta"><span>计系概 · 函数调用</span><span>计算题</span><span class="dots" aria-label="难度 3 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__meta"><span>计系概 · 函数调用</span><span>计算题</span><span class="dots" aria-label="难度 3 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           
         </div>
         
       </li><li class="qrow" data-id="ics-038" data-course="ics" data-chapter="ics-4" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="3" data-tags="函数调用 栈帧 递归" data-text="考虑递归函数 ```c long f(long n) { char buf[64]; buf[0] = (char)n; if (n &lt;= 1) return 1; return f(n - 1) + n; } ``` 它的汇编序言是 ``` f: pushq %rbp movq %rsp, %rbp subq $72, %rsp ... ``` 其中 `subq $72` 为 64 字节的 `buf` 和额外的 8 字节对齐空间。回答： （1）每进入一层 `f`，栈上至少增加多少字节？ （2）调用 `f(100)` 时，递归深度（同时存在的 `f` 栈帧层数）是多少？ （3）从进入 `f(100)` 时的 `%rsp` 算起，递归最深时栈指针共向下移动多少字节？ （4）若进程可用的栈空间为 8 MiB（ 字节），估算 最大约为多少时不会栈溢出。 函数调用 栈帧 递归 自编">
         <div>
           <a class="qrow__link" href="../questions/ics-038.html">考虑递归函数</a>
-          <div class="qrow__meta"><span>计系概 · 函数调用</span><span>计算题</span><span class="dots" aria-label="难度 3 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__meta"><span>计系概 · 函数调用</span><span>计算题</span><span class="dots" aria-label="难度 3 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           
         </div>
         
       </li><li class="qrow" data-id="ics-046" data-course="ics" data-chapter="ics-4" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="4" data-tags="递归 函数调用 栈帧" data-text="递归函数 `rec` 在 `-O0` 下的汇编如下（参数 `n` 是 `int`，在 `%edi`；返回值是 `long`，在 `%rax`）： ``` rec: pushq %rbp movq %rsp, %rbp subq $16, %rsp movl %edi, -4(%rbp) testl %edi, %edi jne .L2 movl $0, %eax jmp .L3 .L2: movl -4(%rbp), %eax subl $1, %eax movl %eax, %edi call rec addl -4(%rbp), %eax .L3: leave ret ``` 回答： (1) 还原 `rec` 的 C 代码（注意返回类型是 `long`，而 `n` 是 `int`，说明返回值是怎么扩宽的）； (2) 每一次调用 `rec` 在栈上消耗多少字节？默认栈限制为 时，最多能递">
         <div>
           <a class="qrow__link" href="../questions/ics-046.html">递归函数 <code>rec</code> 在 <code>-O0</code> 下的汇编如下（参数 <code>n</code> 是 <code>int</code>，在 <code>%edi</code>；返回值是 <code>long</code>，在 <code>%rax</code>）：</a>
-          <div class="qrow__meta"><span>计系概 · 函数调用</span><span>计算题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__meta"><span>计系概 · 函数调用</span><span>计算题</span><span class="dots" aria-label="难度 4 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           
         </div>
         

@@ -9,7 +9,7 @@ import yaml from 'js-yaml'
 import { renderMarkdown, splitSections, stripMath } from './markdown.mjs'
 
 export const KINDS = new Set(['计算题', '证明题', '概念题', '综合题'])
-export const DIFFICULTY_LABEL = { 1: '基础', 2: '常规', 3: '综合', 4: '挑战' }
+export const DIFFICULTY_LABEL = { 1: '基础', 2: '常规', 3: '综合', 4: '挑战', 5: '硬核' }
 
 const readJSON = (p) => JSON.parse(fs.readFileSync(p, 'utf8'))
 const readYAML = (p) => yaml.load(fs.readFileSync(p, 'utf8'))
@@ -144,8 +144,8 @@ export function loadContent({ ROOT, err, warn }) {
       usedTags.set(t, (usedTags.get(t) || 0) + 1)
     }
 
-    if (!Number.isInteger(q.difficulty) || q.difficulty < 1 || q.difficulty > 4)
-      err(file, `difficulty 必须是 1–4 的整数，当前是 ${data.difficulty}`)
+    if (!Number.isInteger(q.difficulty) || q.difficulty < 1 || q.difficulty > 5)
+      err(file, `difficulty 必须是 1–5 的整数，当前是 ${data.difficulty}`)
     if (!KINDS.has(q.kind)) err(file, `kind 必须是 ${[...KINDS].join(' / ')}，当前是 ${q.kind}`)
 
     const parts = splitSections(body)

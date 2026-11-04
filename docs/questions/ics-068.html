@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>函数调用 · 综合题 · 复习册</title>
+<meta name="description" content="函数 ```c long f(long n, long a, long b, long c, long d, long e, long g, long h) { long vla[n]; /* 变长数组 */ vla[0] = a + h; return vla[0]; } ``` 的汇编开头是 ``` f: pushq %rbp movq %rsp, %rbp movq %rdi, %rax # rax = n salq $3, %rax # 8*n，long 占 8 字节 addq $15, %rax andq $-16, %rax # 向上取整到 16 的倍数 subq %rax, %rsp # 动态分配 movq %rsp, %rcx # vla 的起始地址 ... leave ret ``` (1) 8 个参数里哪些通过寄存器传递、哪些在栈上？第 7、8 个参数相对 `%rbp`">
+<meta name="color-scheme" content="light">
+<link rel="stylesheet" href="../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../assets/site.css">
+<script>
+  // 先按本地设置（或系统偏好）定主题，避免刷新时闪白
+  try {
+    // 默认浅色（纸面）。只有你手动切过深色，才在下次打开时记住。
+    if (localStorage.getItem('reviewer.theme') === 'dark')
+      document.documentElement.setAttribute('data-theme', 'dark')
+  } catch (e) {}
+</script>
+<script src="../assets/core.js"></script>
+<script src="../assets/theme.js" defer></script>
+<script src="../assets/term.js" defer></script>
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<meta property="og:title" content="函数调用 · 综合题 · 复习册">
+<meta property="og:description" content="函数 ```c long f(long n, long a, long b, long c, long d, long e, long g, long h) { long vla[n]; /* 变长数组 */ vla[0] = a + h; return vla[0]; } ``` 的汇编开头是 ``` f: pushq %rbp movq %rsp, %rbp movq %rdi, %rax # rax = n salq $3, %rax # 8*n，long 占 8 字节 addq $15, %rax andq $-16, %rax # 向上取整到 16 的倍数 subq %rax, %rsp # 动态分配 movq %rsp, %rcx # vla 的起始地址 ... leave ret ``` (1) 8 个参数里哪些通过寄存器传递、哪些在栈上？第 7、8 个参数相对 `%rbp`">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_CN">
+
+</head>
+<body class="no-js detail">
+<script>document.body.classList.remove('no-js')</script>
+<a class="skip" href="#main">跳到正文</a>
+
+  <header class="sitehead">
+    <div class="frame">
+      <nav class="nav" aria-label="主导航">
+        <a class="nav__mark" href="../"><span class="nav__dot" aria-hidden="true"></span>复习册</a>
+        <ul class="nav__links">
+          <li class="nav__menu-wrap">
+          <details class="navmenu">
+            <summary>课程</summary>
+            <ul class="navmenu__list">
+              <li><a href="../va1/">微积分 A1</a></li><li><a href="../la/">线性代数</a></li><li><a href="../dm1/">离散数学1<span class="navmenu__tag">仅期末</span></a></li><li><a href="../ics/">计算机系统概论</a></li>
+              <li class="navmenu__sep"><a href="../questions/">题库（全部课程）</a></li>
+            </ul>
+          </details>
+        </li>
+          <li><a href="../questions/" aria-current="page">题库</a></li>
+          <li><a href="../practice/">刷题</a></li>
+          <li><a href="../cheatsheet/">速查</a></li>
+          <li><a href="../stats/">进度</a></li>
+        </ul>
+        <div class="nav__end">
+          <div class="nav__terms" role="group" aria-label="考试轮次">
+            <button class="term-btn is-on" type="button" data-term-btn="midterm">期中</button><button class="term-btn" type="button" data-term-btn="final">期末</button>
+          </div>
+          <button class="ghost nav__theme" id="theme-toggle" type="button" aria-live="polite">深色</button>
+          <a class="btn btn--red nav__action" href="../submit/">投稿</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+<main id="main">
+
+<div class="frame">
+  <nav class="crumb" aria-label="位置"><a href="../">复习册</a><span class="crumb__sep">/</span><a href="../questions/">题库</a><span class="crumb__sep">/</span><a href="../ics/">计算机系统概论</a><span class="crumb__sep">/</span><span>第 4 章</span></nav>
+
+  <div class="qpage">
+    <div class="qpage__main">
+      <header class="pagehead pagehead--q">
+        <h1 class="qpage__title">函数调用 · 综合题</h1>
+        <div class="meta" style="margin-top:14px">
+          <span class="meta__item">计算机系统概论</span>
+          <span class="meta__item">综合题</span>
+          <span class="meta__item">难度 <span class="dots dots--hard" aria-label="难度 5 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></span>
+          <span class="meta__item">自编</span>
+          <span class="meta__item">投稿：自编</span>
+        </div>
+        <div class="qactions">
+          <button class="flag" type="button" data-flag="done" data-id="ics-068" aria-pressed="false"><span>已做</span></button>
+          <button class="flag flag--fav" type="button" data-flag="fav" data-id="ics-068" aria-pressed="false"><span>收藏</span></button>
+          <button class="ghost" type="button" id="expand-all">展开解析与提示</button>
+          <button class="ghost" type="button" id="copy-md">复制题目</button>
+          <a class="ghost" href="../export/?ids=ics-068">导出这道题</a>
+          <button class="ghost" type="button" data-print>打印这道题</button>
+          <span class="qactions__id">ICS-068 · <span class="kbd">←</span><span class="kbd">→</span> 翻题 · <span class="kbd">E</span> 展开 · <span class="kbd">D</span> 记已做</span>
+        </div>
+      </header>
+
+      <div class="qpage__stem prose"><p>函数</p>
+<p><pre class="code-block"><code class="language-c">long f(long n, long a, long b, long c, long d, long e, long g, long h) {
+    long vla[n];        /* 变长数组 */
+    vla[0] = a + h;
+    return vla[0];
+}</code></pre></p>
+<p>的汇编开头是</p>
+<p><pre class="code-block"><code class="language-text">f:
+    pushq   %rbp
+    movq    %rsp, %rbp
+    movq    %rdi, %rax          # rax = n
+    salq    $3, %rax            # 8*n，long 占 8 字节
+    addq    $15, %rax
+    andq    $-16, %rax          # 向上取整到 16 的倍数
+    subq    %rax, %rsp          # 动态分配
+    movq    %rsp, %rcx          # vla 的起始地址
+    ...
+    leave
+    ret</code></pre></p>
+<p>(1) 8 个参数里哪些通过寄存器传递、哪些在栈上？第 7、8 个参数相对 <code>%rbp</code> 的偏移分别是多少？</p>
+<p>(2) 设进入 <code>f</code> 时 <code>%rbp = 0x7fffffffe000</code>。分别求 <code>n = 5</code> 与 <code>n = 3</code> 时 VLA 的起始地址和分配后的 <code>%rsp</code>。</p>
+<p>(3) 若调用者传入 <code>n = 2^{61}</code>，会发生什么？为什么写 <code>vla[1]</code> 可能直接改写返回地址？</p>
+<p>(4) <code>addq $15</code> 与 <code>andq $-16</code> 这一对指令在做什么？为什么栈帧大小必须是 16 的倍数？</p>
+<p>(5) 函数返回时用 <code>leave</code> 恢复现场，动态分配的 VLA 大小并不固定，<code>leave</code> 为什么还能正确恢复 <code>%rsp</code>？</p>
+</div>
+
+      <details class="qblock qblock--hint"><summary>提示<span aria-hidden="true">+</span></summary><div class="qblock__body prose"><p>先数参数：整型/指针的前 6 个走寄存器，第 7 个起从右往左压栈，进入函数时栈顶是返回地址。VLA 的大小在运行期才确定，所以编译器用「乘元素大小、加 15、与 -16 相与」来算一个 16 字节对齐的字节数，再 <code>sub</code> 到 <code>%rsp</code>。</p>
+</div></details>
+
+      <details class="qblock" id="solution">
+        <summary>解析（先自己做一遍再看）<span aria-hidden="true">展开</span></summary>
+        <div class="qblock__body prose">
+          <div class="answer"><span>答案</span><p>前 6 个参数在 rdi/rsi/rdx/rcx/r8/r9，第 7、8 个在 16(%rbp)、24(%rbp)；n=5 时 VLA 起点为 0x7fffffffdfd0；n=3 时为 0x7fffffffdff0；n=2^61 时分配量算成 0，VLA 起点回到 %rbp，vla[1] 正好是返回地址</p>
+</div>
+          <p><strong>(1)</strong> 前 6 个参数依次在 <code>%rdi</code>、<code>%rsi</code>、<code>%rdx</code>、<code>%rcx</code>、<code>%r8</code>、<code>%r9</code>，所以 <code>n</code>、<code>a</code>、<code>b</code>、<code>c</code>、<code>d</code>、<code>e</code> 走寄存器；第 7 个 <code>g</code>、第 8 个 <code>h</code> 由调用者压栈。</p>
+<p>进入函数时栈顶是返回地址，所以布局是：</p>
+<div class="table-wrap"><table><thead>
+<tr>
+<th>地址</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td<code>0(%rbp)</code></td>
+<td>保存的旧 <code>%rbp</code></td>
+</tr>
+<tr>
+<td<code>8(%rbp)</code></td>
+<td>返回地址</td>
+</tr>
+<tr>
+<td<code>16(%rbp)</code></td>
+<td>第 7 个参数 <code>g</code></td>
+</tr>
+<tr>
+<td<code>24(%rbp)</code></td>
+<td>第 8 个参数 <code>h</code></td>
+</tr>
+</tbody>
+</table></div><p><strong>为什么想到</strong>：先确认「函数入口时栈顶是返回地址、<code>push %rbp</code> 又占 8 字节」，再按参数顺序数到第 7 个，就能推出 16 和 24，不用死记。</p>
+<p><strong>(2)</strong> <code>n=5</code>：先算 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>8</mn><mi>n</mi><mo>=</mo><mn>40</mn></mrow><annotation encoding="application/x-tex">8n=40</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">8</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">40</span></span></span></span>，<code>addq $15</code> 得 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>55</mn></mrow><annotation encoding="application/x-tex">55</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">55</span></span></span></span>，<code>andq $-16</code> 把低 4 位清零，得到 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>48</mn></mrow><annotation encoding="application/x-tex">48</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">48</span></span></span></span>。于是</p>
+<p><span class="math-display"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi mathvariant="normal">%</mi><mi>r</mi><mi>s</mi><mi>p</mi><mo>=</mo><mn>0</mn><mi>x</mi><mn>7</mn><mi>f</mi><mi>f</mi><mi>f</mi><mi>f</mi><mi>f</mi><mi>f</mi><mi>f</mi><mi>e</mi><mn>000</mn><mo>−</mo><mn>48</mn><mo>=</mo><mn>0</mn><mi>x</mi><mn>7</mn><mi>f</mi><mi>f</mi><mi>f</mi><mi>f</mi><mi>f</mi><mi>f</mi><mi>f</mi><mi>d</mi><mi>f</mi><mi>d</mi><mn>0</mn><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\%rsp=0x7fffffffe000-48=0x7fffffffdfd0,</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9444em;vertical-align:-0.1944em;"></span><span class="mord">%</span><span class="mord mathnormal" style="margin-right:0.0278em;">r</span><span class="mord mathnormal">s</span><span class="mord mathnormal">p</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord">0</span><span class="mord mathnormal">x</span><span class="mord">7</span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mord mathnormal">e</span><span class="mord">000</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">48</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord">0</span><span class="mord mathnormal">x</span><span class="mord">7</span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mord mathnormal" style="margin-right:0.1076em;">df</span><span class="mord mathnormal">d</span><span class="mord">0</span><span class="mpunct">,</span></span></span></span></span></span></p>
+<p>VLA 起点就是 <code>0x7fffffffdfd0</code>。</p>
+<code>n=3</code>：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>8</mn><mi>n</mi><mo>=</mo><mn>24</mn></mrow><annotation encoding="application/x-tex">8n=24</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">8</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">24</span></span></span></span>，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>24</mn><mo>+</mo><mn>15</mn><mo>=</mo><mn>39</mn></mrow><annotation encoding="application/x-tex">24+15=39</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">24</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">15</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">39</span></span></span></span>，向下对齐到 16 的倍数得 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>32</mn></mrow><annotation encoding="application/x-tex">32</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">32</span></span></span></span>：</p>
+<p><span class="math-display"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi mathvariant="normal">%</mi><mi>r</mi><mi>s</mi><mi>p</mi><mo>=</mo><mn>0</mn><mi>x</mi><mn>7</mn><mi>f</mi><mi>f</mi><mi>f</mi><mi>f</mi><mi>f</mi><mi>f</mi><mi>f</mi><mi>e</mi><mn>000</mn><mo>−</mo><mn>32</mn><mo>=</mo><mn>0</mn><mi>x</mi><mn>7</mn><mi>f</mi><mi>f</mi><mi>f</mi><mi>f</mi><mi>f</mi><mi>f</mi><mi>f</mi><mi>d</mi><mi>f</mi><mi>f</mi><mn>0.</mn></mrow><annotation encoding="application/x-tex">\%rsp=0x7fffffffe000-32=0x7fffffffdff0.</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9444em;vertical-align:-0.1944em;"></span><span class="mord">%</span><span class="mord mathnormal" style="margin-right:0.0278em;">r</span><span class="mord mathnormal">s</span><span class="mord mathnormal">p</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord">0</span><span class="mord mathnormal">x</span><span class="mord">7</span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mord mathnormal">e</span><span class="mord">000</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">32</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord">0</span><span class="mord mathnormal">x</span><span class="mord">7</span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mord mathnormal" style="margin-right:0.1076em;">df</span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mord">0.</span></span></span></span></span></span></p>
+<p>注意 24 本身不是 16 的倍数，所以要多留 8 字节填充；这就是 <code>addq $15</code> 的作用——先加上「最大填充」，再整体向下对齐，等价于向上取整。</p>
+<p><strong>(3)</strong> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><msup><mn>2</mn><mn>61</mn></msup></mrow><annotation encoding="application/x-tex">n=2^{61}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">61</span></span></span></span></span></span></span></span></span></span></span></span> 时，<code>salq $3</code> 计算 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>8</mn><mi>n</mi><mo>=</mo><msup><mn>2</mn><mn>64</mn></msup></mrow><annotation encoding="application/x-tex">8n=2^{64}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">8</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">64</span></span></span></span></span></span></span></span></span></span></span></span>，在 64 位寄存器里按模 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>64</mn></msup></mrow><annotation encoding="application/x-tex">2^{64}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">64</span></span></span></span></span></span></span></span></span></span></span></span> 回绕成 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span>。接着 <code>addq $15</code> 得 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>15</mn></mrow><annotation encoding="application/x-tex">15</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">15</span></span></span></span>，<code>andq $-16</code> 得 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span>，于是 <code>subq $0</code>——<strong>没有分配任何栈空间</strong>，<code>%rsp</code> 仍等于 <code>%rbp</code>，VLA 起点也变成 <code>%rbp</code>。</p>
+<p>此时写 <code>vla[0]</code> 写到 <code>0(%rbp)</code>，覆盖保存的旧 <code>%rbp</code>；写 <code>vla[1]</code> 写到 <code>8(%rbp)</code>，正好覆盖返回地址。<code>leave</code> 时 <code>%rbp</code> 被破坏、<code>ret</code> 时跳到被改写的地址——典型的 VLA 大小溢出导致的栈破坏。C 标准里 VLA 大小在计算中溢出是未定义行为，编译器不会替你做检查。</p>
+<p>顺带一提，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n=-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">−</span><span class="mord">1</span></span></span></span> 也一样危险：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>8</mn><mi>n</mi><mo>=</mo><mo>−</mo><mn>8</mn></mrow><annotation encoding="application/x-tex">8n=-8</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">8</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">−</span><span class="mord">8</span></span></span></span>，加 15 得 7，对齐后为 0，同样不分配。</p>
+<p><strong>(4)</strong> 这一对指令做的是「把字节数向上取整到 16 的倍数」。对齐要求来自 ABI：执行 <code>call</code> 前 <code>%rsp</code> 必须满足 <code>%rsp % 16 = 0</code>。进入函数时 <code>%rsp % 16 = 8</code>，<code>pushq %rbp</code> 后变成 0，所以 <code>sub</code> 的量只要是 16 的倍数，后续调用其他函数时对齐仍然成立。</p>
+<p><strong>(5)</strong> <code>leave</code> 等价于</p>
+<p><pre class="code-block"><code class="language-text">movq %rbp, %rsp
+popq %rbp</code></pre></p>
+<p>它恢复的是<strong>帧基址</strong>而不是之前保存的 <code>%rsp</code> 值：<code>%rbp</code> 在函数开头就固定指向本帧的起点，VLA 无论分配了多大，<code>%rsp</code> 都可以直接拉回 <code>%rbp</code>。这也是为什么动态分配不需要额外保存旧 <code>%rsp</code>。</p>
+<p><strong>为什么想到</strong>：看到 <code>push rbp; mov rsp,rbp</code> 就知道 <code>%rbp</code> 是&quot;锚点&quot;；任何对 <code>%rsp</code> 的临时修改都可以在收尾时一次抹掉。</p>
+
+        </div>
+      </details>
+
+      <details class="qblock"><summary>常见错误<span aria-hidden="true">展开</span></summary><div class="qblock__body prose"><p>一是把第 7、8 个参数算成 <code>8(%rbp)</code>、<code>16(%rbp)</code>，忘了 <code>8(%rbp)</code> 是返回地址。二是把 <code>andq $-16</code> 当成&quot;只清低 4 位、不改变大小&quot;，忽略它和 <code>addq $15</code> 配合才等于向上取整。三是以为 VLA 大小溢出时程序会崩溃或报错，实际上汇编照常执行、只是分配量为 0。四是认为 <code>leave</code> 能恢复 VLA 之前的 <code>%rsp</code> 是因为保存了旧值——它靠的是 <code>%rbp</code> 锚点。</p>
+</div></details>
+
+      <div class="pager" data-pager>
+        <a class="pager__prev" href="../questions/ics-067.html"><span>上一题</span>单精度浮点执行下面的累加</a>
+        <a class="pager__next" href="../questions/ics-069.html"><span>下一题</span>考虑下面的类型</a>
+      </div>
+    </div>
+
+    <aside class="qpage__side">
+      <div>
+        <h2>这道题</h2>
+        <dl class="spec">
+          <div><dt>科目</dt><dd>计算机系统概论</dd></div>
+          <div><dt>章节</dt><dd>函数调用</dd></div>
+          <div><dt>题型</dt><dd>综合题</dd></div>
+          <div><dt>难度</dt><dd><span class="dots dots--hard" aria-label="难度 5 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></dd></div>
+          <div><dt>出处</dt><dd>自编</dd></div>
+          <div><dt>范围</dt><dd><span data-chip data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}">在范围内</span></dd></div>
+        </dl>
+      </div>
+      <div>
+        <h2>考点</h2>
+        <ul class="tag-list"><li><a class="tag" href="../tags/%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8.html">函数调用</a></li><li><a class="tag" href="../tags/%E6%A0%88%E5%B8%A7.html">栈帧</a></li><li><a class="tag" href="../tags/%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F.html">局部变量</a></li></ul>
+      </div>
+      <div>
+        <h2>往下走</h2>
+        <ul class="sidelist">
+          <li><a href="../notes/ics-4.html">读这一章的要点</a></li>
+          <li><a href="../questions/?chapter=ics-4">这一章的 12 道题</a></li>
+          <li><a href="../export/?chapter=ics-4">导出这一章</a></li>
+          <li><a href="../ics/#ch-ics-4">这一章在考纲里的位置</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>同一章</h2>
+        <ul class="sidelist">
+          <li><a href="../questions/ics-008.html">函数 sum 的参数 n 放在 %rdi 返…</a></li><li><a href="../questions/ics-009.html">函数调用 · 难度 3</a></li><li><a href="../questions/ics-022.html">函数 foo 的汇编开头是</a></li><li><a href="../questions/ics-023.html">递归 · 难度 3</a></li><li><a href="../questions/ics-024.html">g 是外部函数 参数和返回值都是 long…</a></li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+</div>
+
+</main>
+
+  <footer class="footer">
+    <div class="frame">
+      <a class="footer__word" href="../" aria-label="回到首页：复习册"><span aria-hidden="true">复习册</span></a>
+      <div class="footer__cols">
+        <div class="footer__col">
+          <h3>科目</h3>
+          <ul>
+            <li><a href="../va1/">微积分 A1</a></li>
+            <li><a href="../la/">线性代数</a></li>
+            <li><a href="../dm1/">离散数学 1</a></li>
+            <li><a href="../ics/">计算机系统概论</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h3>内容</h3>
+          <ul>
+            <li><a href="../questions/">题库</a></li>
+            <li><a href="../practice/">刷题</a></li>
+            <li><a href="../tags/">标签</a></li>
+            <li><a href="../cheatsheet/">速查表</a></li>
+            <li><a href="../export/">导出 PDF</a></li>
+            <li><a href="../stats/">进度</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h3>参与</h3>
+          <ul>
+            <li><a href="../submit/">投稿一道题</a></li>
+            <li><a href="../markdown/">写法说明</a></li>
+            <li><a href="../about/">关于与范围说明</a></li>
+            <li><a href="https://github.com/yyxcnasd/reviewer" target="_blank" rel="noopener noreferrer">GitHub 仓库</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h3>这本册子</h3>
+          <ul>
+            <li>2026 秋 期中版</li>
+            <li>内容 CC BY-SA 4.0</li>
+            <li>构建于 2026-11-04</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__legal">
+        <span>复习册 · 课程 · 范围 · 题库</span>
+        <span>内容以 CC BY-SA 4.0 发布，题目标题与解析可自由取用，请保留出处。</span>
+      </div>
+    </div>
+  </footer>
+<script src="../assets/progress.js" defer></script>
+<script src="../assets/site.js" defer></script>
+
+</body>
+</html>

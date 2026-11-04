@@ -72,14 +72,14 @@
   <ul class="qlist"><li class="qrow" data-id="ics-029" data-course="ics" data-chapter="ics-1" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="2" data-tags="编译 链接" data-text="一个 C 程序从源文件变成可执行文件，要经过预处理、编译、汇编、链接几个阶段。指出下列现象分别发生在哪个阶段，并简述理由。 （1）gcc 报错 `fatal error: stdio.h: No such file or directory`。 （2）gcc 报错 `error: 'x' undeclared (first use in this function)`。 （3）gcc 报错 `undefined reference to 'foo'`。 （4）汇编器报错 `Error: no such instruction: 'movq %rax,%rbx,'`（末尾多了一个逗号）。 （5）编译、链接都成功，运行时出现 `Segmentation fault`。 （6）同一个函数在 `a.c` 和 `b.c` 里各定义了一次，gcc 报 `multiple definition of '">
         <div>
           <a class="qrow__link" href="../questions/ics-029.html">一个 C 程序从源文件变成可执行文件，要经过预处理、编译、汇编、链接几个阶段。指出下列现象分别发生在哪个阶段，并简述理由。</a>
-          <div class="qrow__meta"><span>计系概 · 概论</span><span>概念题</span><span class="dots" aria-label="难度 2 / 4"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__meta"><span>计系概 · 概论</span><span>概念题</span><span class="dots" aria-label="难度 2 / 5"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           
         </div>
         
       </li><li class="qrow" data-id="ics-063" data-course="ics" data-chapter="ics-1" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="4" data-tags="编译 链接" data-text="两个源文件： ```c /* util.c */ static int counter = 0; int next(void) { return ++counter; } ``` ```c /* main.c */ #include &lt;stdio.h&gt; int next(void); int main(void) { printf(&quot;%d\n&quot;, next()); return 0; } ``` 回答： (1) 写出把这两个文件编译链接成可执行文件 `prog` 的命令序列，以及每一步的产物。 (2) `counter` 在目标文件的符号表里是什么链接属性？如果在 `main.c` 里写 `extern int counter;` 并访问它，会在哪一步、报什么错？ (3) 在 `main.o` 里，`call next` 这条指令的目标地址在汇编阶段是填不出来的。汇编器怎么处理它？链接器最">
         <div>
           <a class="qrow__link" href="../questions/ics-063.html">两个源文件：</a>
-          <div class="qrow__meta"><span>计系概 · 概论</span><span>综合题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__meta"><span>计系概 · 概论</span><span>综合题</span><span class="dots" aria-label="难度 4 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
           
         </div>
         
