@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>程序的内存与安全 · 综合题 · 复习册</title>
+<meta name="description" content="下面的函数把 8 字节缓冲区&quot;清空&quot;，但循环边界写错了： ```c void f(void) { char buf[8]; for (int i = 0; i &lt;= 8; i++) /* 应该是 i &lt; 8 */ buf[i] = 0; } ``` 未开启栈保护时，汇编是（`buf` 位于 `%rbp-8`）： ``` f: pushq %rbp movq %rsp, %rbp subq $16, %rsp leaq -8(%rbp), %rax # buf xorl %ecx, %ecx .L2: movb $0, (%rax,%rcx) # buf[i] = 0 addq $1, %rcx cmpq $8, %rcx jle .L2 # i &lt;= 8 时继续 leave ret ``` (1) `buf` 的地址是 `%rbp-8`，那么 `i = 8` 时写到了哪个位置？被改成 0 ">
+<meta name="color-scheme" content="light">
+<link rel="stylesheet" href="../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../assets/site.css">
+<script>
+  // 先按本地设置（或系统偏好）定主题，避免刷新时闪白
+  try {
+    // 默认浅色（纸面）。只有你手动切过深色，才在下次打开时记住。
+    if (localStorage.getItem('reviewer.theme') === 'dark')
+      document.documentElement.setAttribute('data-theme', 'dark')
+  } catch (e) {}
+</script>
+<script src="../assets/core.js"></script>
+<script src="../assets/theme.js" defer></script>
+<script src="../assets/term.js" defer></script>
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<meta property="og:title" content="程序的内存与安全 · 综合题 · 复习册">
+<meta property="og:description" content="下面的函数把 8 字节缓冲区&quot;清空&quot;，但循环边界写错了： ```c void f(void) { char buf[8]; for (int i = 0; i &lt;= 8; i++) /* 应该是 i &lt; 8 */ buf[i] = 0; } ``` 未开启栈保护时，汇编是（`buf` 位于 `%rbp-8`）： ``` f: pushq %rbp movq %rsp, %rbp subq $16, %rsp leaq -8(%rbp), %rax # buf xorl %ecx, %ecx .L2: movb $0, (%rax,%rcx) # buf[i] = 0 addq $1, %rcx cmpq $8, %rcx jle .L2 # i &lt;= 8 时继续 leave ret ``` (1) `buf` 的地址是 `%rbp-8`，那么 `i = 8` 时写到了哪个位置？被改成 0 ">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_CN">
+
+</head>
+<body class="no-js detail">
+<script>document.body.classList.remove('no-js')</script>
+<a class="skip" href="#main">跳到正文</a>
+
+  <header class="sitehead">
+    <div class="frame">
+      <nav class="nav" aria-label="主导航">
+        <a class="nav__mark" href="../"><span class="nav__dot" aria-hidden="true"></span>复习册</a>
+        <ul class="nav__links">
+          <li class="nav__menu-wrap">
+          <details class="navmenu">
+            <summary>课程</summary>
+            <ul class="navmenu__list">
+              <li><a href="../va1/">微积分 A1</a></li><li><a href="../la/">线性代数</a></li><li><a href="../dm1/">离散数学1<span class="navmenu__tag">仅期末</span></a></li><li><a href="../ics/">计算机系统概论</a></li>
+              <li class="navmenu__sep"><a href="../questions/">题库（全部课程）</a></li>
+            </ul>
+          </details>
+        </li>
+          <li><a href="../questions/" aria-current="page">题库</a></li>
+          <li><a href="../practice/">刷题</a></li>
+          <li><a href="../cheatsheet/">速查</a></li>
+          <li><a href="../stats/">进度</a></li>
+        </ul>
+        <div class="nav__end">
+          <div class="nav__terms" role="group" aria-label="考试轮次">
+            <button class="term-btn is-on" type="button" data-term-btn="midterm">期中</button><button class="term-btn" type="button" data-term-btn="final">期末</button>
+          </div>
+          <button class="ghost nav__theme" id="theme-toggle" type="button" aria-live="polite">深色</button>
+          <a class="btn btn--red nav__action" href="../submit/">投稿</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+<main id="main">
+
+<div class="frame">
+  <nav class="crumb" aria-label="位置"><a href="../">复习册</a><span class="crumb__sep">/</span><a href="../questions/">题库</a><span class="crumb__sep">/</span><a href="../ics/">计算机系统概论</a><span class="crumb__sep">/</span><span>第 6 章</span></nav>
+
+  <div class="qpage">
+    <div class="qpage__main">
+      <header class="pagehead pagehead--q">
+        <h1 class="qpage__title">程序的内存与安全 · 综合题</h1>
+        <div class="meta" style="margin-top:14px">
+          <span class="meta__item">计算机系统概论</span>
+          <span class="meta__item">综合题</span>
+          <span class="meta__item">难度 <span class="dots dots--hard" aria-label="难度 5 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></span>
+          <span class="meta__item">自编</span>
+          <span class="meta__item">投稿：自编</span>
+        </div>
+        <div class="qactions">
+          <button class="flag" type="button" data-flag="done" data-id="ics-077" aria-pressed="false"><span>已做</span></button>
+          <button class="flag flag--fav" type="button" data-flag="fav" data-id="ics-077" aria-pressed="false"><span>收藏</span></button>
+          <button class="ghost" type="button" id="expand-all">展开解析与提示</button>
+          <button class="ghost" type="button" id="copy-md">复制题目</button>
+          <a class="ghost" href="../export/?ids=ics-077">导出这道题</a>
+          <button class="ghost" type="button" data-print>打印这道题</button>
+          <span class="qactions__id">ICS-077 · <span class="kbd">←</span><span class="kbd">→</span> 翻题 · <span class="kbd">E</span> 展开 · <span class="kbd">D</span> 记已做</span>
+        </div>
+      </header>
+
+      <div class="qpage__stem prose"><p>下面的函数把 8 字节缓冲区&quot;清空&quot;，但循环边界写错了：</p>
+<p><pre class="code-block"><code class="language-c">void f(void) {
+    char buf[8];
+    for (int i = 0; i &lt;= 8; i++)   /* 应该是 i &lt; 8 */
+        buf[i] = 0;
+}</code></pre></p>
+<p>未开启栈保护时，汇编是（<code>buf</code> 位于 <code>%rbp-8</code>）：</p>
+<p><pre class="code-block"><code class="language-text">f:
+    pushq   %rbp
+    movq    %rsp, %rbp
+    subq    $16, %rsp
+    leaq    -8(%rbp), %rax      # buf
+    xorl    %ecx, %ecx
+.L2:
+    movb    $0, (%rax,%rcx)     # buf[i] = 0
+    addq    $1, %rcx
+    cmpq    $8, %rcx
+    jle     .L2                 # i &lt;= 8 时继续
+    leave
+    ret</code></pre></p>
+<p>(1) <code>buf</code> 的地址是 <code>%rbp-8</code>，那么 <code>i = 8</code> 时写到了哪个位置？被改成 0 的是哪一字节？</p>
+<p>(2) 设 <code>0(%rbp)</code> 处保存的旧 <code>%rbp</code> 为 <code>0x00007fffffffe4a0</code>。函数执行 <code>leave</code> 之后 <code>%rbp</code> 变成多少？帧指针移动了多少字节？</p>
+<p>(3) 返回调用者后，调用者继续用自己的 <code>%rbp</code> 访问局部变量和保存的返回地址，会发生什么？为什么这种&quot;帧指针偏移&quot;可能导致控制流被劫持？</p>
+<p>(4) 如果给函数开启 <code>-fstack-protector</code>（编译器把 canary 放在 <code>-8(%rbp)</code>、<code>buf</code> 放到 <code>-16(%rbp)</code>），<code>i = 8</code> 写的就是 canary 的最低字节——为什么 canary 检查发现不了这次越界？</p>
+<p>(5) 从代码、编译选项、检查工具三个角度，各给出一种能防住/发现这个 bug 的办法。</p>
+</div>
+
+      <details class="qblock qblock--hint"><summary>提示<span aria-hidden="true">+</span></summary><div class="qblock__body prose"><p>栈向低地址增长，<code>buf[i]</code> 的地址是 <code>buf + i</code>；<code>buf</code> 结束于 <code>%rbp-1</code>，所以 <code>i = 8</code> 正好落在 <code>%rbp</code> 指向的字节上——那是<strong>保存的旧 <code>%rbp</code> 的最低字节</strong>（小端存储时，最低字节在最低地址）。canary 的最低位是编译器特意清零的，所以写入 0 不会改变它。</p>
+</div></details>
+
+      <details class="qblock" id="solution">
+        <summary>解析（先自己做一遍再看）<span aria-hidden="true">展开</span></summary>
+        <div class="qblock__body prose">
+          <div class="answer"><span>答案</span><p>buf 从 %rbp-8 开始，i=8 时写的是保存的旧 %rbp 的最低字节（小端最低地址）并置 0；若旧 %rbp 为 0x00007fffffffe4a0，则变成 0x00007fffffffe400，帧指针下移 0xa0=160 字节；开 canary 后该字节变成 canary 最低字节，而 canary 最低位本来就是 0x00，写入 0 不变，检查发现不了</p>
+</div>
+          <p><strong>(1)</strong> <code>buf</code> 占 <code>%rbp-8</code> 到 <code>%rbp-1</code>（8 字节）。<code>i = 8</code> 时地址是</p>
+<p><span class="math-display"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi mathvariant="normal">%</mi><mi>r</mi><mi>b</mi><mi>p</mi><mo>−</mo><mn>8</mn><mo>+</mo><mn>8</mn><mo>=</mo><mi mathvariant="normal">%</mi><mi>r</mi><mi>b</mi><mi>p</mi><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\%rbp-8+8=\%rbp,</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9444em;vertical-align:-0.1944em;"></span><span class="mord">%</span><span class="mord mathnormal" style="margin-right:0.0278em;">r</span><span class="mord mathnormal">b</span><span class="mord mathnormal">p</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">8</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">8</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.9444em;vertical-align:-0.1944em;"></span><span class="mord">%</span><span class="mord mathnormal" style="margin-right:0.0278em;">r</span><span class="mord mathnormal">b</span><span class="mord mathnormal">p</span><span class="mpunct">,</span></span></span></span></span></span></p>
+<p>也就是 <code>0(%rbp)</code> 这一字节——保存的旧 <code>%rbp</code> 在内存中的<strong>最低字节</strong>（x86-64 小端，低地址存低字节），被写成 <code>0x00</code>。</p>
+<p><strong>为什么想到</strong>：先算出缓冲区覆盖的地址区间，再算 <code>i=8</code> 的偏移；<code>%rbp</code> 处正是「保存的旧帧指针」的第一个字节，而不是返回地址（返回地址在 <code>8(%rbp)</code>）。</p>
+<p><strong>(2)</strong> 旧 <code>%rbp</code> 是 <code>0x00007fffffffe4a0</code>，最低字节是 <code>0xa0</code>；把它改成 <code>0x00</code> 后：</p>
+<p><span class="math-display"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mtable rowspacing="0.25em" columnalign="right left" columnspacing="0em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mtext>原值</mtext></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mtext mathvariant="monospace">0x00007fffffffe4a0</mtext><mo separator="true">,</mo></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mtext>新值</mtext></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mtext mathvariant="monospace">0x00007fffffffe400</mtext><mo separator="true">,</mo></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mtext>差值</mtext></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mtext mathvariant="monospace">0xa0</mtext><mo>=</mo><mn>160</mn><mtext> 字节</mtext><mi mathvariant="normal">.</mi></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}
+\text{原值} &amp;= \texttt{0x00007fffffffe4a0},\\
+\text{新值} &amp;= \texttt{0x00007fffffffe400},\\
+\text{差值} &amp;= \texttt{0xa0}=160\ \text{字节}.
+\end{aligned}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:4.2em;vertical-align:-1.85em;"></span><span class="mord"><span class="mtable"><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.35em;"><span style="top:-4.51em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord text"><span class="mord cjk_fallback">原值</span></span></span></span><span style="top:-3.01em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord text"><span class="mord cjk_fallback">新值</span></span></span></span><span style="top:-1.51em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord text"><span class="mord cjk_fallback">差值</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.85em;"><span></span></span></span></span></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.35em;"><span style="top:-4.51em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord text"><span class="mord texttt">0x00007fffffffe4a0</span></span><span class="mpunct">,</span></span></span><span style="top:-3.01em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord text"><span class="mord texttt">0x00007fffffffe400</span></span><span class="mpunct">,</span></span></span><span style="top:-1.51em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord text"><span class="mord texttt">0xa0</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord">160</span><span class="mspace"> </span><span class="mord text"><span class="mord cjk_fallback">字节</span></span><span class="mord">.</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.85em;"><span></span></span></span></span></span></span></span></span></span></span></span></span></p>
+<code>leave</code> 等价于 <code>movq %rbp, %rsp; popq %rbp</code>：它从 <code>0(%rbp)</code> 弹出这个被改过的值，于是函数返回后调用者的 <code>%rbp</code> 比正确值<strong>低了 160 字节</strong>。</p>
+<p><strong>(3)</strong> 调用者之后的代码全部用 <code>%rbp</code> 作为基准访问自己的局部变量、参数和保存的返回地址。帧指针一错位，这些访问就整体偏移了 160 字节：</p>
+<p><span class="math-display"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mtable rowspacing="0.25em" columnalign="right left" columnspacing="0em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mtext>调用者以为的保存位置</mtext></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>:</mo><mi mathvariant="normal">%</mi><mi>r</mi><mi>b</mi><msub><mi>p</mi><mtext>旧</mtext></msub><mo>+</mo><mn>0</mn><mo separator="true">,</mo><mtext> </mtext><mo>+</mo><mn>8</mn><mo separator="true">,</mo><mo>…</mo></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mtext>实际读到的位置</mtext></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>:</mo><mi mathvariant="normal">%</mi><mi>r</mi><mi>b</mi><msub><mi>p</mi><mtext>旧</mtext></msub><mo>−</mo><mn>160</mn><mo separator="true">,</mo><mtext> </mtext><mo>−</mo><mn>152</mn><mo separator="true">,</mo><mo>…</mo></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}
+\text{调用者以为的保存位置} &amp;: \%rbp_{\text{旧}}+0,\ +8,\dots\\
+\text{实际读到的位置} &amp;: \%rbp_{\text{旧}}-160,\ -152,\dots
+\end{aligned}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.7em;vertical-align:-1.1em;"></span><span class="mord"><span class="mtable"><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.6em;"><span style="top:-3.76em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord text"><span class="mord cjk_fallback">调用者以为的保存位置</span></span></span></span><span style="top:-2.26em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord text"><span class="mord cjk_fallback">实际读到的位置</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.1em;"><span></span></span></span></span></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.6em;"><span style="top:-3.76em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">:</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord">%</span><span class="mord mathnormal" style="margin-right:0.0278em;">r</span><span class="mord mathnormal">b</span><span class="mord"><span class="mord mathnormal">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord cjk_fallback mtight">旧</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace"> </span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">+</span><span class="mord">8</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner">…</span></span></span><span style="top:-2.26em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">:</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord">%</span><span class="mord mathnormal" style="margin-right:0.0278em;">r</span><span class="mord mathnormal">b</span><span class="mord"><span class="mord mathnormal">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord cjk_fallback mtight">旧</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">160</span><span class="mpunct">,</span><span class="mspace"> </span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">−</span><span class="mord">152</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner">…</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.1em;"><span></span></span></span></span></span></span></span></span></span></span></span></span></p>
+<p>也就是说，调用者的 <code>leave</code> 会从错误的位置弹出旧的 <code>%rbp</code> 和返回地址。若这 160 字节范围内有攻击者能写入的数据（例如被调用函数的缓冲区、或调用者更早读入的输入），攻击者就能让调用者从&quot;自己的数据&quot;里取返回地址，从而劫持控制流。这就是**帧指针偏移（frame shift）**攻击：不需要覆盖返回地址，只改一个字节的 <code>%rbp</code>，把整个调用者的栈帧&quot;挪&quot;到攻击者布置的数据上。</p>
+<p><strong>为什么想到</strong>：单字节只能改 <code>%rbp</code> 的低 8 位，但栈帧的局部变量和返回地址都是相对 <code>%rbp</code> 定位的，<code>%rbp</code> 一动，后续所有相对访问都跟着动——改一个字节就能移动最多 255 字节的&quot;视野&quot;。</p>
+<p><strong>(4)</strong> 开栈保护后，布局变成：</p>
+<p><span class="math-display"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mtable rowspacing="0.25em" columnalign="right left right left" columnspacing="0em 1em 0em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mo>−</mo><mn>16</mn><mo stretchy="false">(</mo><mi mathvariant="normal">%</mi><mi>r</mi><mi>b</mi><mi>p</mi><mo stretchy="false">)</mo></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>∼</mo><mo>−</mo><mn>9</mn><mo stretchy="false">(</mo><mi mathvariant="normal">%</mi><mi>r</mi><mi>b</mi><mi>p</mi><mo stretchy="false">)</mo></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>:</mo><mtext mathvariant="monospace">buf</mtext><mtext> </mtext><mo stretchy="false">(</mo><mn>8</mn><mtext> 字节</mtext><mo stretchy="false">)</mo><mo separator="true">,</mo></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mo>−</mo><mn>8</mn><mo stretchy="false">(</mo><mi mathvariant="normal">%</mi><mi>r</mi><mi>b</mi><mi>p</mi><mo stretchy="false">)</mo></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>∼</mo><mo>−</mo><mn>1</mn><mo stretchy="false">(</mo><mi mathvariant="normal">%</mi><mi>r</mi><mi>b</mi><mi>p</mi><mo stretchy="false">)</mo></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>:</mo><mtext>canary</mtext><mo separator="true">,</mo></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mn>0</mn><mo stretchy="false">(</mo><mi mathvariant="normal">%</mi><mi>r</mi><mi>b</mi><mi>p</mi><mo stretchy="false">)</mo></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>:</mo><mtext>保存的旧 </mtext><mi mathvariant="normal">%</mi><mi>r</mi><mi>b</mi><mi>p</mi><mo separator="true">,</mo></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mn>8</mn><mo stretchy="false">(</mo><mi mathvariant="normal">%</mi><mi>r</mi><mi>b</mi><mi>p</mi><mo stretchy="false">)</mo></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>:</mo><mtext>返回地址</mtext><mi mathvariant="normal">.</mi></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}
+-16(\%rbp) &amp;\sim -9(\%rbp) &amp;&amp;: \texttt{buf}\ (8\ \text{字节}),\\
+-8(\%rbp)  &amp;\sim -1(\%rbp) &amp;&amp;: \text{canary},\\
+0(\%rbp)   &amp;                 &amp;&amp;: \text{保存的旧 }\%rbp,\\
+8(\%rbp)   &amp;                 &amp;&amp;: \text{返回地址}.
+\end{aligned}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:5.7em;vertical-align:-2.6em;"></span><span class="mord"><span class="mtable"><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:3.1em;"><span style="top:-5.26em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">−</span><span class="mord">16</span><span class="mopen">(</span><span class="mord">%</span><span class="mord mathnormal" style="margin-right:0.0278em;">r</span><span class="mord mathnormal">b</span><span class="mord mathnormal">p</span><span class="mclose">)</span></span></span><span style="top:-3.76em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">−</span><span class="mord">8</span><span class="mopen">(</span><span class="mord">%</span><span class="mord mathnormal" style="margin-right:0.0278em;">r</span><span class="mord mathnormal">b</span><span class="mord mathnormal">p</span><span class="mclose">)</span></span></span><span style="top:-2.26em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span><span class="mopen">(</span><span class="mord">%</span><span class="mord mathnormal" style="margin-right:0.0278em;">r</span><span class="mord mathnormal">b</span><span class="mord mathnormal">p</span><span class="mclose">)</span></span></span><span style="top:-0.76em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">8</span><span class="mopen">(</span><span class="mord">%</span><span class="mord mathnormal" style="margin-right:0.0278em;">r</span><span class="mord mathnormal">b</span><span class="mord mathnormal">p</span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.6em;"><span></span></span></span></span></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:3.1em;"><span style="top:-5.26em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∼</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord">−</span><span class="mord">9</span><span class="mopen">(</span><span class="mord">%</span><span class="mord mathnormal" style="margin-right:0.0278em;">r</span><span class="mord mathnormal">b</span><span class="mord mathnormal">p</span><span class="mclose">)</span></span></span><span style="top:-3.76em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∼</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord">−</span><span class="mord">1</span><span class="mopen">(</span><span class="mord">%</span><span class="mord mathnormal" style="margin-right:0.0278em;">r</span><span class="mord mathnormal">b</span><span class="mord mathnormal">p</span><span class="mclose">)</span></span></span><span style="top:-2.26em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span></span></span><span style="top:-0.76em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.6em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:1em;"></span><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:3.1em;"><span style="top:-5.1em;"><span class="pstrut" style="height:2.84em;"></span><span class="mord"></span></span><span style="top:-3.6em;"><span class="pstrut" style="height:2.84em;"></span><span class="mord"></span></span><span style="top:-2.1em;"><span class="pstrut" style="height:2.84em;"></span><span class="mord"></span></span><span style="top:-0.6em;"><span class="pstrut" style="height:2.84em;"></span><span class="mord"></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.6em;"><span></span></span></span></span></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:3.1em;"><span style="top:-5.26em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">:</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord text"><span class="mord texttt">buf</span></span><span class="mspace"> </span><span class="mopen">(</span><span class="mord">8</span><span class="mspace"> </span><span class="mord text"><span class="mord cjk_fallback">字节</span></span><span class="mclose">)</span><span class="mpunct">,</span></span></span><span style="top:-3.76em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">:</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord text"><span class="mord">canary</span></span><span class="mpunct">,</span></span></span><span style="top:-2.26em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">:</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord text"><span class="mord cjk_fallback">保存的旧</span><span class="mord"> </span></span><span class="mord">%</span><span class="mord mathnormal" style="margin-right:0.0278em;">r</span><span class="mord mathnormal">b</span><span class="mord mathnormal">p</span><span class="mpunct">,</span></span></span><span style="top:-0.76em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">:</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord text"><span class="mord cjk_fallback">返回地址</span></span><span class="mord">.</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.6em;"><span></span></span></span></span></span></span></span></span></span></span></span></span></p>
+<code>i = 8</code> 写到 <code>-8(%rbp)</code>，即 canary 的最低字节。编译器生成 canary 时<strong>最低字节被强制为 0x00</strong>（这样字符串函数无法把它当普通字节写回），所以这次写入 <code>0x00</code> 等于<strong>没有改变</strong> canary 的值，函数返回前的比较照样通过，攻击者也就获得了「不触发保护地改变相邻内存一个字节」的能力（这里改的是 canary 自身，若缓冲区紧邻保存的 <code>%rbp</code>，改的就是帧指针）。</p>
+<p><strong>为什么想到</strong>：canary 检查比的是&quot;整个 8 字节是否等于原值&quot;；写入一个与原来相同的字节，差值仍为 0，检查当然发现不了。</p>
+<p><strong>(5)</strong> 三个角度：</p>
+<ul>
+<li><strong>代码</strong>：把循环条件改成 <code>i &lt; 8</code>（或用 <code>sizeof(buf)</code>、<code>memset(buf, 0, sizeof buf)</code>），从源头消除 off-by-one；对外部长度做「不小于 0 且不超过容量」的双向检查，注意无符号数下溢。</li>
+<li><strong>编译选项</strong>：<code>-fstack-protector-strong</code> 能让更多函数插入 canary，<code>-D_FORTIFY_SOURCE=2</code> 让 <code>memset</code>/<code>memcpy</code> 在编译期或运行期检查对象大小；但注意本题的 NUL 单字节写<strong>能绕过 canary</strong>，所以不能只依赖 canary。</li>
+<li><strong>检查工具</strong>：AddressSanitizer（<code>-fsanitize=address</code>）用红区（redzone）包住每个栈对象，能精确报出「越界 1 字节」；<code>-Warray-bounds</code>、静态分析器、fuzzing + ASan 也能在测试阶段发现。</li>
+</ul>
+
+        </div>
+      </details>
+
+      <details class="qblock"><summary>常见错误<span aria-hidden="true">展开</span></summary><div class="qblock__body prose"><p>一是以为 <code>i=8</code> 写的是返回地址——返回地址在 <code>8(%rbp)</code>，<code>i=8</code> 只到 <code>%rbp</code>，改的是保存的旧 <code>%rbp</code>。二是把帧指针偏移量算成 8 或 255：这里是把 <code>0xa0</code> 清零，差值恰好 <code>0xa0=160</code>。三是认为开了 canary 就一定安全：canary 最低字节为 0，写入 0 的 off-by-one 恰好&quot;隐身&quot;，帧指针照样可能被改（取决于布局）。四是只改代码不跑工具：这种 bug 在小样本上可能&quot;看起来正常&quot;，必须用 ASan 或边界检查才能稳定发现。</p>
+</div></details>
+
+      <div class="pager" data-pager>
+        <a class="pager__prev" href="../questions/ics-076.html"><span>上一题</span>两个函数分别处理二维数组 %rdi 是数组首…</a>
+        <span class="pager__next"></span>
+      </div>
+    </div>
+
+    <aside class="qpage__side">
+      <div>
+        <h2>这道题</h2>
+        <dl class="spec">
+          <div><dt>科目</dt><dd>计算机系统概论</dd></div>
+          <div><dt>章节</dt><dd>程序的内存与安全</dd></div>
+          <div><dt>题型</dt><dd>综合题</dd></div>
+          <div><dt>难度</dt><dd><span class="dots dots--hard" aria-label="难度 5 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></dd></div>
+          <div><dt>出处</dt><dd>自编</dd></div>
+          <div><dt>范围</dt><dd><span data-chip data-states="{&quot;midterm&quot;:&quot;partial&quot;,&quot;final&quot;:&quot;partial&quot;}">部分在范围</span></dd></div>
+        </dl>
+      </div>
+      <div>
+        <h2>考点</h2>
+        <ul class="tag-list"><li><a class="tag" href="../tags/%E7%BC%93%E5%86%B2%E5%8C%BA%E6%BA%A2%E5%87%BA.html">缓冲区溢出</a></li><li><a class="tag" href="../tags/%E6%A0%88%E5%B8%A7.html">栈帧</a></li><li><a class="tag" href="../tags/%E6%A0%88%E4%BF%9D%E6%8A%A4.html">栈保护</a></li></ul>
+      </div>
+      <div>
+        <h2>往下走</h2>
+        <ul class="sidelist">
+          <li><a href="../notes/ics-6.html">读这一章的要点</a></li>
+          <li><a href="../questions/?chapter=ics-6">这一章的 6 道题</a></li>
+          <li><a href="../export/?chapter=ics-6">导出这一章</a></li>
+          <li><a href="../ics/#ch-ics-6">这一章在考纲里的位置</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>同一章</h2>
+        <ul class="sidelist">
+          <li><a href="../questions/ics-012.html">下面的函数用 gets 读入一行字符串</a></li><li><a href="../questions/ics-027.html">缓冲区溢出 · 难度 4</a></li><li><a href="../questions/ics-028.html">下面这段代码把网络包复制到栈上的缓冲区</a></li><li><a href="../questions/ics-049.html">有下面的 C 代码</a></li><li><a href="../questions/ics-070.html">某程序用 read 从标准输入读数据 函数与…</a></li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+</div>
+
+</main>
+
+  <footer class="footer">
+    <div class="frame">
+      <a class="footer__word" href="../" aria-label="回到首页：复习册"><span aria-hidden="true">复习册</span></a>
+      <div class="footer__cols">
+        <div class="footer__col">
+          <h3>科目</h3>
+          <ul>
+            <li><a href="../va1/">微积分 A1</a></li>
+            <li><a href="../la/">线性代数</a></li>
+            <li><a href="../dm1/">离散数学 1</a></li>
+            <li><a href="../ics/">计算机系统概论</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h3>内容</h3>
+          <ul>
+            <li><a href="../questions/">题库</a></li>
+            <li><a href="../practice/">刷题</a></li>
+            <li><a href="../tags/">标签</a></li>
+            <li><a href="../cheatsheet/">速查表</a></li>
+            <li><a href="../export/">导出 PDF</a></li>
+            <li><a href="../stats/">进度</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h3>参与</h3>
+          <ul>
+            <li><a href="../submit/">投稿一道题</a></li>
+            <li><a href="../markdown/">写法说明</a></li>
+            <li><a href="../about/">关于与范围说明</a></li>
+            <li><a href="https://github.com/yyxcnasd/reviewer" target="_blank" rel="noopener noreferrer">GitHub 仓库</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h3>这本册子</h3>
+          <ul>
+            <li>2026 秋 期中版</li>
+            <li>内容 CC BY-SA 4.0</li>
+            <li>构建于 2026-11-04</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__legal">
+        <span>复习册 · 课程 · 范围 · 题库</span>
+        <span>内容以 CC BY-SA 4.0 发布，题目标题与解析可自由取用，请保留出处。</span>
+      </div>
+    </div>
+  </footer>
+<script src="../assets/progress.js" defer></script>
+<script src="../assets/site.js" defer></script>
+
+</body>
+</html>

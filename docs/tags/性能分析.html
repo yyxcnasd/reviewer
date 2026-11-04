@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>标签：性能分析 · 复习册</title>
-<meta name="description" content="带「性能分析」标签的 6 道题。">
+<meta name="description" content="带「性能分析」标签的 7 道题。">
 <meta name="color-scheme" content="light">
 <link rel="stylesheet" href="../assets/katex/katex.min.css">
 <link rel="stylesheet" href="../assets/site.css">
@@ -21,7 +21,7 @@
 <script src="../assets/term.js" defer></script>
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <meta property="og:title" content="标签：性能分析 · 复习册">
-<meta property="og:description" content="带「性能分析」标签的 6 道题。">
+<meta property="og:description" content="带「性能分析」标签的 7 道题。">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="zh_CN">
 
@@ -66,7 +66,7 @@
   <header class="pagehead">
     <div class="pagehead__inner">
       <h1 class="pagehead__title">性能分析</h1>
-      <div class="pagehead__scope"><p>6 道题带这个标签。</p></div>
+      <div class="pagehead__scope"><p>7 道题带这个标签。</p></div>
     </div>
   </header>
   <ul class="qlist"><li class="qrow" data-id="ics-001" data-course="ics" data-chapter="ics-1" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="2" data-tags="性能分析 存储层次" data-text="某程序在一台主频为 的机器上运行，动态指令数为 条，平均 CPI 为 。编译器做了一轮优化，把指令数减少了 ，但使平均 CPI 升到 ，主频不变。 求优化前后的执行时间与加速比，并说明这个结果反映了什么问题。 性能分析 存储层次 自编">
@@ -111,9 +111,16 @@
           
         </div>
         
+      </li><li class="qrow" data-id="ics-073" data-course="ics" data-chapter="ics-1" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="5" data-tags="存储层次 性能分析" data-text="一台机器使用 **32 位地址**，数据 cache 是**直接映射**（direct-mapped）：容量 、cache line 。两个全局数组 ```c int A[8192]; int B[8192]; /* 位于 A 之后，B 的起始地址为 0x00408000 */ ``` `A` 的起始地址是 `0x00400000`。考虑循环 ```c long s = 0; for (int i = 0; i &lt; 8192; i++) s += A[i] + B[i]; ``` 命中 个周期、缺失额外 个周期。 (1) 写出 32 位地址在直接映射 cache 中的 tag / index / offset 位域划分（各多少位），并算出 `A[0]`、`B[0]` 的 set index 与 tag。 (2) 分析这个循环的缺失率。为什么两个数组各占 、cache 也正好 ，却每次访问都">
+        <div>
+          <a class="qrow__link" href="../questions/ics-073.html">一台机器使用 <strong>32 位地址</strong>，数据 cache 是<strong>直接映射</strong>（direct-mapped）：容量 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>32</mn><mtext> KB</mtext></mrow><annotation encoding="application/x-tex">32\ \text{KB}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">32</span><span class="mspace"> </span><span class="mord text"><span class="mord">KB</span></span></span></span></span>、cache line <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>64</mn><mtext> B</mtext></mrow><annotation encoding="application/x-tex">64\ \text{B}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">64</span><span class="mspace"> </span><span class="mord text"><span class="mord">B</span></span></span></span></span>。两个全局数组</a>
+          <div class="qrow__meta"><span>计系概 · 概论</span><span>综合题</span><span class="dots dots--hard" aria-label="难度 5 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          
+        </div>
+        
       </li></ul>
   <p class="more">
-    <a class="btn btn--red" href="../export/?tag=%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90">导出这 6 道（PDF）</a>
+    <a class="btn btn--red" href="../export/?tag=%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90">导出这 7 道（PDF）</a>
     <a href="../tags/">← 回到全部标签</a>
   </p>
 </div>

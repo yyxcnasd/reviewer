@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>标签：栈帧 · 复习册</title>
-<meta name="description" content="带「栈帧」标签的 16 道题。">
+<meta name="description" content="带「栈帧」标签的 18 道题。">
 <meta name="color-scheme" content="light">
 <link rel="stylesheet" href="../assets/katex/katex.min.css">
 <link rel="stylesheet" href="../assets/site.css">
@@ -21,7 +21,7 @@
 <script src="../assets/term.js" defer></script>
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <meta property="og:title" content="标签：栈帧 · 复习册">
-<meta property="og:description" content="带「栈帧」标签的 16 道题。">
+<meta property="og:description" content="带「栈帧」标签的 18 道题。">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="zh_CN">
 
@@ -66,7 +66,7 @@
   <header class="pagehead">
     <div class="pagehead__inner">
       <h1 class="pagehead__title">栈帧</h1>
-      <div class="pagehead__scope"><p>16 道题带这个标签。</p></div>
+      <div class="pagehead__scope"><p>18 道题带这个标签。</p></div>
     </div>
   </header>
   <ul class="qlist"><li class="qrow" data-id="ics-008" data-course="ics" data-chapter="ics-4" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="3" data-tags="函数调用 栈帧" data-text="函数 `sum` 的参数 `n` 放在 `%rdi`，返回值放在 `%rax`。汇编是 ``` sum: testq %rdi, %rdi jle .L2 pushq %rbx movq %rdi, %rbx leaq -1(%rdi), %rdi call sum addq %rbx, %rax popq %rbx ret .L2: movl $0, %eax ret ``` (1) 这个函数计算的是什么？求 `sum(4)`。 (2) 为什么把 `n` 存在 `%rbx` 里，而不是随便用一个 `%rcx`？ (3) 执行 `sum(3)` 的过程中，栈上最多同时有几个返回地址、几个保存的 `%rbx`？若 `main` 调用 `sum` 前 `%rsp = 0x1000`，每层占「8 字节返回地址 + 8 字节 rbx」，求最深时的 `%rsp`。 函数调用 栈帧 自编">
@@ -183,9 +183,23 @@
           
         </div>
         
+      </li><li class="qrow" data-id="ics-075" data-course="ics" data-chapter="ics-4" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="5" data-tags="函数调用 栈帧 结构体" data-text="下面是一个返回大结构体的函数： ```c struct Big { long a, b, c, d; }; /* 32 字节 */ struct Big make(long x, long y, long z, long w) { struct Big r; r.a = x; r.b = y; r.c = z; r.d = w; return r; } ``` 编译器生成的汇编是 ``` make: movq %rsi, (%rdi) # r.a = x movq %rdx, 8(%rdi) # r.b = y movq %rcx, 16(%rdi) # r.c = z movq %r8, 24(%rdi) # r.d = w movq %rdi, %rax ret ``` (1) `%rdi` 里放的是什么？为什么第一个参数 `x` 不在 `%rdi` 里？ (2) 若把签名改成 8 个">
+        <div>
+          <a class="qrow__link" href="../questions/ics-075.html">下面是一个返回大结构体的函数：</a>
+          <div class="qrow__meta"><span>计系概 · 函数调用</span><span>综合题</span><span class="dots dots--hard" aria-label="难度 5 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          
+        </div>
+        
+      </li><li class="qrow" data-id="ics-077" data-course="ics" data-chapter="ics-6" data-states="{&quot;midterm&quot;:&quot;partial&quot;,&quot;final&quot;:&quot;partial&quot;}" data-difficulty="5" data-tags="缓冲区溢出 栈帧 栈保护" data-text="下面的函数把 8 字节缓冲区&quot;清空&quot;，但循环边界写错了： ```c void f(void) { char buf[8]; for (int i = 0; i &lt;= 8; i++) /* 应该是 i &lt; 8 */ buf[i] = 0; } ``` 未开启栈保护时，汇编是（`buf` 位于 `%rbp-8`）： ``` f: pushq %rbp movq %rsp, %rbp subq $16, %rsp leaq -8(%rbp), %rax # buf xorl %ecx, %ecx .L2: movb $0, (%rax,%rcx) # buf[i] = 0 addq $1, %rcx cmpq $8, %rcx jle .L2 # i &lt;= 8 时继续 leave ret ``` (1) `buf` 的地址是 `%rbp-8`，那么 `i = 8` 时写到了哪个位置？被改成 0 ">
+        <div>
+          <a class="qrow__link" href="../questions/ics-077.html">下面的函数把 8 字节缓冲区&quot;清空&quot;，但循环边界写错了：</a>
+          <div class="qrow__meta"><span>计系概 · 程序的内存与安全</span><span>综合题</span><span class="dots dots--hard" aria-label="难度 5 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          
+        </div>
+        
       </li></ul>
   <p class="more">
-    <a class="btn btn--red" href="../export/?tag=%E6%A0%88%E5%B8%A7">导出这 16 道（PDF）</a>
+    <a class="btn btn--red" href="../export/?tag=%E6%A0%88%E5%B8%A7">导出这 18 道（PDF）</a>
     <a href="../tags/">← 回到全部标签</a>
   </p>
 </div>

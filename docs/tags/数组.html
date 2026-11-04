@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>标签：数组 · 复习册</title>
-<meta name="description" content="带「数组」标签的 5 道题。">
+<meta name="description" content="带「数组」标签的 6 道题。">
 <meta name="color-scheme" content="light">
 <link rel="stylesheet" href="../assets/katex/katex.min.css">
 <link rel="stylesheet" href="../assets/site.css">
@@ -21,7 +21,7 @@
 <script src="../assets/term.js" defer></script>
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <meta property="og:title" content="标签：数组 · 复习册">
-<meta property="og:description" content="带「数组」标签的 5 道题。">
+<meta property="og:description" content="带「数组」标签的 6 道题。">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="zh_CN">
 
@@ -66,7 +66,7 @@
   <header class="pagehead">
     <div class="pagehead__inner">
       <h1 class="pagehead__title">数组</h1>
-      <div class="pagehead__scope"><p>5 道题带这个标签。</p></div>
+      <div class="pagehead__scope"><p>6 道题带这个标签。</p></div>
     </div>
   </header>
   <ul class="qlist"><li class="qrow" data-id="ics-010" data-course="ics" data-chapter="ics-5" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="2" data-tags="数组" data-text="有下面的 C 代码： ```c long a[5] = {10, 20, 30, 40, 50}; long *p = a + 2; char *c = (char *)a; ``` (1) `*p` 与 `*(p + 1)` 的值分别是多少？ (2) `p - a` 的值是多少？`p` 与 `a` 的地址相差多少字节？ (3) `c + 3` 指向哪里？`*(long *)(c + 8)` 的值是多少？ (4) `&amp;a[3]` 相对 `a` 的偏移是多少字节？ 数组 自编">
@@ -105,9 +105,16 @@
           
         </div>
         
+      </li><li class="qrow" data-id="ics-076" data-course="ics" data-chapter="ics-5" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="5" data-tags="数组 指针算术 多维数组" data-text="两个函数分别处理二维数组。`%rdi` 是数组首地址，`%rsi` 是行下标，`%rdx` 是列下标： ``` f: leaq (%rsi,%rsi,4), %rax # rax = 5*i leaq (%rdx,%rax,2), %rax # rax = j + 2*(5i) = 10i + j movq (%rdi,%rax,8), %rax # 取 8*(10i+j) 处的 8 字节 ret g: leaq (%rsi,%rsi,4), %rax # rax = 5*i leaq (%rax,%rax,3), %rax # rax = 4*(5i) = 20i leaq (%rdx,%rax), %rax # rax = 20i + j movl (%rdi,%rax,4), %eax # 取 4*(20i+j) 处的 4 字节 ret ``` (1) 反推 `f` 的 C 函数声明">
+        <div>
+          <a class="qrow__link" href="../questions/ics-076.html">两个函数分别处理二维数组。<code>%rdi</code> 是数组首地址，<code>%rsi</code> 是行下标，<code>%rdx</code> 是列下标：</a>
+          <div class="qrow__meta"><span>计系概 · 数组与结构体</span><span>综合题</span><span class="dots dots--hard" aria-label="难度 5 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          
+        </div>
+        
       </li></ul>
   <p class="more">
-    <a class="btn btn--red" href="../export/?tag=%E6%95%B0%E7%BB%84">导出这 5 道（PDF）</a>
+    <a class="btn btn--red" href="../export/?tag=%E6%95%B0%E7%BB%84">导出这 6 道（PDF）</a>
     <a href="../tags/">← 回到全部标签</a>
   </p>
 </div>

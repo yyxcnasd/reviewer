@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>标签：指针算术 · 复习册</title>
-<meta name="description" content="带「指针算术」标签的 2 道题。">
+<meta name="description" content="带「指针算术」标签的 3 道题。">
 <meta name="color-scheme" content="light">
 <link rel="stylesheet" href="../assets/katex/katex.min.css">
 <link rel="stylesheet" href="../assets/site.css">
@@ -21,7 +21,7 @@
 <script src="../assets/term.js" defer></script>
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <meta property="og:title" content="标签：指针算术 · 复习册">
-<meta property="og:description" content="带「指针算术」标签的 2 道题。">
+<meta property="og:description" content="带「指针算术」标签的 3 道题。">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="zh_CN">
 
@@ -66,7 +66,7 @@
   <header class="pagehead">
     <div class="pagehead__inner">
       <h1 class="pagehead__title">指针算术</h1>
-      <div class="pagehead__scope"><p>2 道题带这个标签。</p></div>
+      <div class="pagehead__scope"><p>3 道题带这个标签。</p></div>
     </div>
   </header>
   <ul class="qlist"><li class="qrow" data-id="ics-041" data-course="ics" data-chapter="ics-5" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="2" data-tags="数组 多维数组 指针算术" data-text="有下面的 C 代码，`int` 占 4 字节，数组按行优先存放，`a` 的首地址为 `0x1000`： ```c int a[3][4]; ``` 回答： （1）`sizeof(a)` 与 `sizeof(a[1])` 分别是多少？ （2）`&amp;a[2][3]` 的地址是多少？ （3）`a[1] + 2` 的地址是多少？它指向哪个元素？ （4）`a[1]` 与 `a` 的类型分别是什么？为什么 `a + 1` 与 `a[1] + 1` 前进的字节数不同？ （5）若 `int *p = &amp;a[0][0];`，那么 `p + 6` 指向哪个元素？ 数组 多维数组 指针算术 自编">
@@ -83,9 +83,16 @@
           
         </div>
         
+      </li><li class="qrow" data-id="ics-076" data-course="ics" data-chapter="ics-5" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="5" data-tags="数组 指针算术 多维数组" data-text="两个函数分别处理二维数组。`%rdi` 是数组首地址，`%rsi` 是行下标，`%rdx` 是列下标： ``` f: leaq (%rsi,%rsi,4), %rax # rax = 5*i leaq (%rdx,%rax,2), %rax # rax = j + 2*(5i) = 10i + j movq (%rdi,%rax,8), %rax # 取 8*(10i+j) 处的 8 字节 ret g: leaq (%rsi,%rsi,4), %rax # rax = 5*i leaq (%rax,%rax,3), %rax # rax = 4*(5i) = 20i leaq (%rdx,%rax), %rax # rax = 20i + j movl (%rdi,%rax,4), %eax # 取 4*(20i+j) 处的 4 字节 ret ``` (1) 反推 `f` 的 C 函数声明">
+        <div>
+          <a class="qrow__link" href="../questions/ics-076.html">两个函数分别处理二维数组。<code>%rdi</code> 是数组首地址，<code>%rsi</code> 是行下标，<code>%rdx</code> 是列下标：</a>
+          <div class="qrow__meta"><span>计系概 · 数组与结构体</span><span>综合题</span><span class="dots dots--hard" aria-label="难度 5 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          
+        </div>
+        
       </li></ul>
   <p class="more">
-    <a class="btn btn--red" href="../export/?tag=%E6%8C%87%E9%92%88%E7%AE%97%E6%9C%AF">导出这 2 道（PDF）</a>
+    <a class="btn btn--red" href="../export/?tag=%E6%8C%87%E9%92%88%E7%AE%97%E6%9C%AF">导出这 3 道（PDF）</a>
     <a href="../tags/">← 回到全部标签</a>
   </p>
 </div>

@@ -114,7 +114,7 @@ export function buildHome(ctx) {
     <li><a href="${url(0, 'practice/')}"><b>刷题</b><span>一次一道，先想再看</span></a></li>
     <li><a href="${url(0, 'practice/?random=1')}"><b>随机一题</b><span>抽一道就开工</span></a></li>
     <li><a href="${url(0, 'cheatsheet/')}"><b>速查</b><span>公式与结论，可打印</span></a></li>
-    <li><a href="${url(0, 'questions/?difficulty=4')}"><b>难题</b><span>要动一下脑子的那些</span></a></li>
+    <li><a href="${url(0, 'questions/?difficulty=5')}"><b>硬核</b><span>两跳以上，压轴档</span></a></li>
     <li><a href="${url(0, 'export/')}"><b>导出</b><span>挑题生成 A4 卷子</span></a></li>
   </ul>
 </section>

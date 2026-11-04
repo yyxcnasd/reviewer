@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>标签：结构体 · 复习册</title>
-<meta name="description" content="带「结构体」标签的 4 道题。">
+<meta name="description" content="带「结构体」标签的 5 道题。">
 <meta name="color-scheme" content="light">
 <link rel="stylesheet" href="../assets/katex/katex.min.css">
 <link rel="stylesheet" href="../assets/site.css">
@@ -21,7 +21,7 @@
 <script src="../assets/term.js" defer></script>
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <meta property="og:title" content="标签：结构体 · 复习册">
-<meta property="og:description" content="带「结构体」标签的 4 道题。">
+<meta property="og:description" content="带「结构体」标签的 5 道题。">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="zh_CN">
 
@@ -66,7 +66,7 @@
   <header class="pagehead">
     <div class="pagehead__inner">
       <h1 class="pagehead__title">结构体</h1>
-      <div class="pagehead__scope"><p>4 道题带这个标签。</p></div>
+      <div class="pagehead__scope"><p>5 道题带这个标签。</p></div>
     </div>
   </header>
   <ul class="qlist"><li class="qrow" data-id="ics-011" data-course="ics" data-chapter="ics-5" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="4" data-tags="结构体 数据对齐" data-text="考虑下面的结构体： ```c struct S { char c; int i; char d; double x; short s; }; ``` (1) 求各成员的偏移与 `sizeof(struct S)`。 (2) 重排成员顺序，使 `sizeof(struct S)` 最小，写出新的定义与大小。 (3) `struct S arr[4];` 中 `arr[2]` 相对 `arr` 的偏移是多少字节？ (4) 在原来的 `struct S` 末尾再加一个 `char e;`，`sizeof(struct S)` 会变成多少？为什么？ 结构体 数据对齐 自编">
@@ -97,9 +97,16 @@
           
         </div>
         
+      </li><li class="qrow" data-id="ics-075" data-course="ics" data-chapter="ics-4" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="5" data-tags="函数调用 栈帧 结构体" data-text="下面是一个返回大结构体的函数： ```c struct Big { long a, b, c, d; }; /* 32 字节 */ struct Big make(long x, long y, long z, long w) { struct Big r; r.a = x; r.b = y; r.c = z; r.d = w; return r; } ``` 编译器生成的汇编是 ``` make: movq %rsi, (%rdi) # r.a = x movq %rdx, 8(%rdi) # r.b = y movq %rcx, 16(%rdi) # r.c = z movq %r8, 24(%rdi) # r.d = w movq %rdi, %rax ret ``` (1) `%rdi` 里放的是什么？为什么第一个参数 `x` 不在 `%rdi` 里？ (2) 若把签名改成 8 个">
+        <div>
+          <a class="qrow__link" href="../questions/ics-075.html">下面是一个返回大结构体的函数：</a>
+          <div class="qrow__meta"><span>计系概 · 函数调用</span><span>综合题</span><span class="dots dots--hard" aria-label="难度 5 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          
+        </div>
+        
       </li></ul>
   <p class="more">
-    <a class="btn btn--red" href="../export/?tag=%E7%BB%93%E6%9E%84%E4%BD%93">导出这 4 道（PDF）</a>
+    <a class="btn btn--red" href="../export/?tag=%E7%BB%93%E6%9E%84%E4%BD%93">导出这 5 道（PDF）</a>
     <a href="../tags/">← 回到全部标签</a>
   </p>
 </div>

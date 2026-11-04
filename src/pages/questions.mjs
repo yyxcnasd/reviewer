@@ -49,7 +49,7 @@ export function buildQuestionIndex(ctx) {
         <p>${questions.length} 道题，按科目、章节、标签、难度筛；每题都有提示、解析和常见错误。</p>
         <div class="pagehead__stats">
           ${courses.map((c) => `<span><b>${(ctx.qByCourse.get(c.id) || []).length}</b>${esc(c.name)}</span>`).join('')}
-          <span><a href="${url(1, 'questions/?difficulty=4')}">难题 ${questions.filter((q) => q.difficulty === 4).length} 道</a></span>
+          <span><a href="${url(1, 'questions/?difficulty=4')}">难题 ${questions.filter((q) => q.difficulty >= 4).length} 道</a></span>
           <span><a href="${url(1, 'practice/?random=1')}">随机一道 →</a></span>
           <span><a href="${url(1, 'practice/')}">进刷题模式 →</a></span>
         </div>

@@ -500,9 +500,30 @@
 }
 
 .qrow__link {
+  display: block;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  overflow-wrap: anywhere;
   font-size: clamp(1.05rem, 1.35vw, 1.2rem);
   font-weight: 700;
   line-height: 1.45;
+}
+
+/* 题库行里如果混进行间公式（摘录），按行内处理，不许撑宽页面 */
+.qrow__link .katex {
+  max-width: 100%;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+
+.qrow__link .katex-display {
+  display: inline;
+  margin: 0;
+}
+
+.qrow > div {
+  min-width: 0;
 }
 
 .qrow__link:hover {
@@ -1140,4 +1161,32 @@
   .about-figure {
     grid-template-columns: 1fr;
   }
+}
+
+
+/* 题库行里的行内公式：窄屏不许把页面撑宽 */
+.qrow,
+.qrow__text,
+.qmini li,
+.exrow__text {
+  min-width: 0;
+}
+
+.qrow__text,
+.qmini li,
+.exrow__text {
+  overflow-wrap: anywhere;
+}
+
+.qrow__text .katex,
+.qmini .katex,
+.exrow__text .katex {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.qrow__text .katex-display,
+.qmini .katex-display {
+  max-width: 100%;
+  overflow-x: auto;
 }

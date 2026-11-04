@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>标签：条件码 · 复习册</title>
-<meta name="description" content="带「条件码」标签的 5 道题。">
+<meta name="description" content="带「条件码」标签的 6 道题。">
 <meta name="color-scheme" content="light">
 <link rel="stylesheet" href="../assets/katex/katex.min.css">
 <link rel="stylesheet" href="../assets/site.css">
@@ -21,7 +21,7 @@
 <script src="../assets/term.js" defer></script>
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <meta property="og:title" content="标签：条件码 · 复习册">
-<meta property="og:description" content="带「条件码」标签的 5 道题。">
+<meta property="og:description" content="带「条件码」标签的 6 道题。">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="zh_CN">
 
@@ -66,7 +66,7 @@
   <header class="pagehead">
     <div class="pagehead__inner">
       <h1 class="pagehead__title">条件码</h1>
-      <div class="pagehead__scope"><p>5 道题带这个标签。</p></div>
+      <div class="pagehead__scope"><p>6 道题带这个标签。</p></div>
     </div>
   </header>
   <ul class="qlist"><li class="qrow" data-id="ics-006" data-course="ics" data-chapter="ics-3" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="3" data-tags="汇编 条件码 跳转表" data-text="某函数按整数参数 `x` 分派到不同分支，`x` 放在 `%rdi`。它的汇编片段是 ``` cmpq $6, %rdi ja .L8 jmp *.L4(,%rdi,8) .L4: .quad .L3 .quad .L5 .quad .L5 .quad .L6 .quad .L6 .quad .L7 .quad .L7 ``` (1) 前两条指令在做什么？为什么用 `ja` 而不是 `jg`？ (2) 当 `x = 3`、`x = 6`、`x = -1` 时分别跳到哪个标签？ (3) 如果把 `case` 值改成 0、10、20、30，这段跳转表还合适吗？为什么？ 汇编 条件码 跳转表 自编">
@@ -104,9 +104,16 @@
           
         </div>
         
+      </li><li class="qrow" data-id="ics-074" data-course="ics" data-chapter="ics-3" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="5" data-tags="汇编 条件码 C 语言" data-text="64 位 x86-64 下，函数 `f` 的参数 `x` 在 `%rdi`，返回值在 `%rax`： ``` f: movq %rdi, %rax sarq $63, %rax # rax = x &gt;&gt; 63（算术右移） xorq %rax, %rdi # rdi = x ^ rax subq %rax, %rdi # rdi = (x ^ rax) - rax movq %rdi, %rax ret ``` (1) 说明这三条位运算如何实现 `x &lt; 0 ? -x : x`，并计算 `f(5)`、`f(-5)`。 (2) 求 `f(INT64_MIN)`。为什么 C 里的 `abs(INT64_MIN)` 是未定义行为，而这段汇编却有确定的位模式？ (3) 若把 `sarq 63`（逻辑右移），`f(5)` 与 `f(-5)` 分别变成多少？逐步算。 (4) 若把 `subq %rax,">
+        <div>
+          <a class="qrow__link" href="../questions/ics-074.html">64 位 x86-64 下，函数 <code>f</code> 的参数 <code>x</code> 在 <code>%rdi</code>，返回值在 <code>%rax</code>：</a>
+          <div class="qrow__meta"><span>计系概 · 汇编语言与程序的机器级表示</span><span>综合题</span><span class="dots dots--hard" aria-label="难度 5 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          
+        </div>
+        
       </li></ul>
   <p class="more">
-    <a class="btn btn--red" href="../export/?tag=%E6%9D%A1%E4%BB%B6%E7%A0%81">导出这 5 道（PDF）</a>
+    <a class="btn btn--red" href="../export/?tag=%E6%9D%A1%E4%BB%B6%E7%A0%81">导出这 6 道（PDF）</a>
     <a href="../tags/">← 回到全部标签</a>
   </p>
 </div>

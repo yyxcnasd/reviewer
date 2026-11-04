@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>标签：缓冲区溢出 · 复习册</title>
-<meta name="description" content="带「缓冲区溢出」标签的 6 道题。">
+<meta name="description" content="带「缓冲区溢出」标签的 7 道题。">
 <meta name="color-scheme" content="light">
 <link rel="stylesheet" href="../assets/katex/katex.min.css">
 <link rel="stylesheet" href="../assets/site.css">
@@ -21,7 +21,7 @@
 <script src="../assets/term.js" defer></script>
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <meta property="og:title" content="标签：缓冲区溢出 · 复习册">
-<meta property="og:description" content="带「缓冲区溢出」标签的 6 道题。">
+<meta property="og:description" content="带「缓冲区溢出」标签的 7 道题。">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="zh_CN">
 
@@ -66,7 +66,7 @@
   <header class="pagehead">
     <div class="pagehead__inner">
       <h1 class="pagehead__title">缓冲区溢出</h1>
-      <div class="pagehead__scope"><p>6 道题带这个标签。</p></div>
+      <div class="pagehead__scope"><p>7 道题带这个标签。</p></div>
     </div>
   </header>
   <ul class="qlist"><li class="qrow" data-id="ics-012" data-course="ics" data-chapter="ics-6" data-states="{&quot;midterm&quot;:&quot;partial&quot;,&quot;final&quot;:&quot;partial&quot;}" data-difficulty="4" data-tags="缓冲区溢出 栈帧" data-text="下面的函数用 `gets` 读入一行字符串： ```c void echo(void) { char buf[16]; gets(buf); puts(buf); } ``` 编译后的汇编是 ``` echo: pushq %rbp movq %rsp, %rbp subq $16, %rsp movq %rsp, %rdi call gets movq %rsp, %rdi call puts leave ret ``` (1) 数组 `buf` 的起始地址相对 `%rbp` 是多少？ (2) 输入至少要多少个字节才能完整改写返回地址？输入的哪一段分别覆盖了 `buf`、保存的 `%rbp`、返回地址？ (3) 已知当前栈上保存的返回地址是 `0x00000000004005a6`，攻击者想把它改成 `0x00000000004005f0`，应当怎样构造输入？说明每段的长度与字节序。 (">
@@ -111,9 +111,16 @@
           
         </div>
         
+      </li><li class="qrow" data-id="ics-077" data-course="ics" data-chapter="ics-6" data-states="{&quot;midterm&quot;:&quot;partial&quot;,&quot;final&quot;:&quot;partial&quot;}" data-difficulty="5" data-tags="缓冲区溢出 栈帧 栈保护" data-text="下面的函数把 8 字节缓冲区&quot;清空&quot;，但循环边界写错了： ```c void f(void) { char buf[8]; for (int i = 0; i &lt;= 8; i++) /* 应该是 i &lt; 8 */ buf[i] = 0; } ``` 未开启栈保护时，汇编是（`buf` 位于 `%rbp-8`）： ``` f: pushq %rbp movq %rsp, %rbp subq $16, %rsp leaq -8(%rbp), %rax # buf xorl %ecx, %ecx .L2: movb $0, (%rax,%rcx) # buf[i] = 0 addq $1, %rcx cmpq $8, %rcx jle .L2 # i &lt;= 8 时继续 leave ret ``` (1) `buf` 的地址是 `%rbp-8`，那么 `i = 8` 时写到了哪个位置？被改成 0 ">
+        <div>
+          <a class="qrow__link" href="../questions/ics-077.html">下面的函数把 8 字节缓冲区&quot;清空&quot;，但循环边界写错了：</a>
+          <div class="qrow__meta"><span>计系概 · 程序的内存与安全</span><span>综合题</span><span class="dots dots--hard" aria-label="难度 5 / 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          
+        </div>
+        
       </li></ul>
   <p class="more">
-    <a class="btn btn--red" href="../export/?tag=%E7%BC%93%E5%86%B2%E5%8C%BA%E6%BA%A2%E5%87%BA">导出这 6 道（PDF）</a>
+    <a class="btn btn--red" href="../export/?tag=%E7%BC%93%E5%86%B2%E5%8C%BA%E6%BA%A2%E5%87%BA">导出这 7 道（PDF）</a>
     <a href="../tags/">← 回到全部标签</a>
   </p>
 </div>
