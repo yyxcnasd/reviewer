@@ -32,20 +32,38 @@
     return a
   }
 
+  /** 当前轮次（期中 / 期末），term.js 写在 <html data-term> 上 */
+  const currentTerm = () => document.documentElement.dataset.term || 'midterm'
+
+  /** 该题在本轮是否可用：in / boundary / partial 都算在范围内 */
+  const inScope = (q) => {
+    const st = (q.states || {})[currentTerm()]
+    return !st || st === 'in' || st === 'boundary' || st === 'partial'
+  }
+
   function build() {
     const course = el.course.value
     const chapter = el.chapter.value
     const difficulty = el.difficulty.value
     const P = window.ReviewProgress
     const status = el.status ? el.status.value : ''
-    let list = all.filter((q) => {
-      if (course && q.course !== course) return false
-      if (chapter && q.chapter !== chapter) return false
-      if (difficulty && String(q.difficulty) !== difficulty) return false
-      if (status === 'undone' && P && P.isDone(q.id)) return false
-      if (status === 'fav' && P && !P.isFav(q.id)) return false
-      return true
-    })
+    const filter = (useScope, useStatus) =>
+      all.filter((q) => {
+        if (useScope && !inScope(q)) return false
+        if (course && q.course !== course) return false
+        if (chapter && q.chapter !== chapter) return false
+        if (difficulty && String(q.difficulty) !== difficulty) return false
+        if (useStatus && status === 'undone' && P && P.isDone(q.id)) return false
+        if (useStatus && status === 'fav' && P && !P.isFav(q.id)) return false
+        return true
+      })
+
+    // 依次放宽：范围内且未做 → 范围内 → 全部（避免"随机一题"抽到空列表）
+    let list = filter(true, true)
+    if (!list.length) list = filter(true, false)
+    if (!list.length) list = filter(false, true)
+    if (!list.length) list = filter(false, false)
+
     if (!list.length) {
       stage.innerHTML = '<p class="hint">这个筛选条件下没有题，换个条件试试。</p>'
       el.total.textContent = '0'
@@ -137,6 +155,8 @@
     })
 
   el.apply.addEventListener('click', build)
+  // 切换期中/期末时重建题组（term.js 会广播 term:change）
+  document.addEventListener('term:change', build)
   for (const s of [el.course, el.chapter, el.difficulty, el.order, el.status]) {
     if (s) s.addEventListener('change', build)
   }

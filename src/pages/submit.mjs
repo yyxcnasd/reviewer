@@ -35,11 +35,7 @@ export function buildSubmit(ctx) {
     <div class="pagehead__inner">
       <h1 class="pagehead__title">投稿一道题</h1>
       <div class="pagehead__scope">
-        <p>左边写、右边预览。课内的题选课程与章节；课外的题大分类选「其他」，不用挂课程。</p>
-        <div class="pagehead__stats">
-          <span>Markdown + \\( \\) 公式</span>
-          <span>一题一个文件</span>
-          <span>Ctrl+B 加粗 · Ctrl+I 斜体</span>
+        <p>左边写、右边预览。<a href="${url(1, 'markdown/')}">写法说明</a>里写了公式和「定义 / 定理 / 注意」区块怎么用。</p>
         </div>
       </div>
     </div>
@@ -182,6 +178,7 @@ export function buildSubmit(ctx) {
   </section>
 </div>
 <script src="${url(1, 'assets/shorthands.js')}"></script>
+<script src="${url(1, 'assets/blocks.js')}"></script>
 <script>window.__CHAPTERS__ = ${JSON.stringify(chaptersByCourse).replace(/</g, '\\u003c')}</script>
 <script src="${url(1, 'assets/vendor/markdown-it.min.js')}"></script>
 <script src="${url(1, 'assets/vendor/katex.min.js')}"></script>

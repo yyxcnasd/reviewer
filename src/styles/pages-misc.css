@@ -387,3 +387,80 @@
 .chapter .chapter__summary {
   cursor: auto;
 }
+
+
+/* 写法说明页 */
+.mdx {
+  max-width: 52em;
+}
+
+.mdx__sec {
+  margin-bottom: clamp(28px, 4vw, 48px);
+}
+
+.mdx__sec h2 {
+  font-size: clamp(1.25rem, 1.6vw, 1.5rem);
+  padding-top: 0.5em;
+  border-top: 2px solid var(--line-strong);
+  margin: 0 0 0.6em;
+}
+
+.mdx__sec p {
+  margin: 0 0 0.8em;
+  color: var(--ink-soft);
+}
+
+.mdx__sec pre {
+  background: var(--code-bg);
+  color: var(--code-fg);
+  border-left: 3px solid var(--line-strong);
+  padding: 12px 14px;
+  overflow-x: auto;
+  margin: 0 0 0.9em;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.mdx-block {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 14px;
+  align-items: center;
+  padding: 12px 0;
+}
+
+.mdx-block + .mdx-block {
+  border-top: 2px solid var(--line);
+}
+
+.mdx-block pre {
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.mdx-block__note {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: var(--fs-small);
+}
+
+.mdx-block__note b {
+  font-size: 1rem;
+}
+
+.mdx-block__note span {
+  color: var(--ink-soft);
+}
+
+.mdx__more {
+  display: flex;
+  gap: 1.6em;
+  padding-bottom: clamp(32px, 5vw, 64px);
+}
+
+@media (max-width: 760px) {
+  .mdx-block {
+    grid-template-columns: 1fr;
+  }
+}

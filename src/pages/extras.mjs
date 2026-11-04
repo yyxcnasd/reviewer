@@ -96,6 +96,8 @@ export function buildData(ctx) {
     text: q.title,
     excerptHtml: stemExcerpt(ctx, q),
     url: `questions/${q.id}.html`,
+    // 该题所在章节在两个轮次下的状态（刷题页要按当前轮次过滤）
+    states: chapterOf(ctx, q.chapter).terms || {},
   }))
   write(ctx, 'data/questions.json', JSON.stringify(index))
 

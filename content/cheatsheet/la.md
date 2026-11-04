@@ -1,6 +1,7 @@
 ---
 course: la
 title: 线性代数
+terms: [midterm, final]
 ---
 
 ### 行列式性质
@@ -36,9 +37,3 @@ title: 线性代数
 存在不全为零的 \(k_i\) 使 \(\sum k_i\alpha_i=0\) 即相关。
 判定：含零向量必相关；个数大于维数必相关；部分相关则整体相关；整体无关则部分无关。
 无关且 \(\beta\) 可由它们表示 \(\iff\) 表示法唯一。
-
-### 向量组与矩阵的秩（期末）
-
-秩 = 极大无关组中向量个数 = 非零子式的最高阶数；行秩 = 列秩。
-\[r(A+B)\le r(A)+r(B),\quad r(AB)\le\min\{r(A),r(B)\},\quad r(AB)\ge r(A)+r(B)-n\]
-\(A\mathbf x=\mathbf 0\)：解空间维数 \(=n-r(A)\)；\(A\mathbf x=\mathbf b\)：\(r(A)\ne r(A|b)\) 无解，相等时通解 = 特解 + 齐次通解。

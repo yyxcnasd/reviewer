@@ -2,10 +2,16 @@ import fs from 'node:fs'
 import path from 'node:path'
 import yaml from 'js-yaml'
 
-import { page, write, url, esc, attr, crumb } from '../lib/site.mjs'
+import { page, write, crumb, esc } from '../lib/site.mjs'
 
 /* ==========================================================================
-   速查表：一门课一份，A4 横向三栏，可以只打印某一门。
+   速查表
+
+   一门课可以有多个文件：
+     va1.md          frontmatter terms: [midterm, final]  → 期中、期末都显示
+     va1-extra.md    frontmatter terms: [final]           → 只在期末追加
+   页面上按当前轮次显示「期中版 / 期末版」，期末版 = 期中内容 + 期末补充，
+   所以「期中是期末的子集」这条结构关系是文件层面写死的。
    ========================================================================== */
 
 export function buildCheatsheet(ctx) {
@@ -14,24 +20,50 @@ export function buildCheatsheet(ctx) {
   const legacy = path.join(ctx.CONTENT, 'cheatsheet.md')
   if (!files.length && fs.existsSync(legacy)) files.push('../cheatsheet.md')
 
-  const sheets = files
+  const parsed = files
     .map((name) => {
       const file = name === '../cheatsheet.md' ? legacy : path.join(dir, name)
       const raw = fs.readFileSync(file, 'utf8')
       const m = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/)
       const meta = m ? yaml.load(m[1]) || {} : {}
       const body = m ? m[2] : raw
-      const course = ctx.courseById.get(meta.course) || { id: meta.course || name.replace('.md', ''), name: meta.title || name }
+      const course = ctx.courseById.get(meta.course) || {
+        id: meta.course || name.replace('.md', ''),
+        name: meta.title || name,
+      }
       const html = ctx.renderMarkdown(body, { errors: ctx.errors })
       const groups = (html.match(/<h[23][ >]/g) || []).length
-      return { id: course.id, name: meta.title || course.name, html, headings: groups }
+      const terms = Array.isArray(meta.terms) && meta.terms.length ? meta.terms : ['midterm', 'final']
+      return {
+        id: course.id,
+        courseName: course.name,
+        title: meta.title || course.name,
+        html,
+        groups,
+        terms,
+      }
     })
     .filter((s) => s.html.trim())
-    .sort((a, b) => ctx.courses.findIndex((c) => c.id === a.id) - ctx.courses.findIndex((c) => c.id === b.id))
 
-  if (!sheets.length) return
+  if (!parsed.length) return
 
-  const total = sheets.reduce((n, s) => n + s.headings, 0)
+  // 按课程聚合；同一门课的多个文件按文件名顺序拼接
+  const order = ctx.courses.map((c) => c.id)
+  const byCourse = new Map()
+  for (const s of parsed) {
+    const entry = byCourse.get(s.id) || { id: s.id, name: s.courseName, parts: [] }
+    entry.parts.push(s)
+    byCourse.set(s.id, entry)
+  }
+  const courses = [...byCourse.values()].sort((a, b) => order.indexOf(a.id) - order.indexOf(b.id))
+
+  const partHtml = (entry, term) =>
+    entry.parts
+      .filter((p) => p.terms.includes(term))
+      .map((p) => p.html)
+      .join('\n')
+
+  const totalGroups = parsed.reduce((n, s) => n + s.groups, 0)
 
   const body = `
 <div class="frame">
@@ -40,25 +72,32 @@ export function buildCheatsheet(ctx) {
     <div class="pagehead__inner">
       <h1 class="pagehead__title">速查表</h1>
       <div class="pagehead__scope sheet-toolbar">
-        <p class="sheet-toolbar__lead">每门课最常用的一批结论。A4 横向三栏，一张纸一门课，打印时自动分页。</p>
+        <p class="sheet-toolbar__lead">每门课最常用的一批结论。期末版包含期中内容，打印时一门课一张纸。</p>
         <div class="sheet-toolbar__actions">
           <label class="sr-only" for="sheet-pick">选择科目</label>
           <select class="select" id="sheet-pick">
-            <option value="">全部 ${sheets.length} 门课（${total} 组结论）</option>
-            ${sheets.map((s) => `<option value="${s.id}">${esc(s.name)}（${s.headings} 组）</option>`).join('')}
+            <option value="">全部 ${courses.length} 门课（${totalGroups} 组）</option>
+            ${courses.map((e) => `<option value="${e.id}">${esc(e.name)}</option>`).join('')}
           </select>
           <button class="btn btn--red" type="button" id="sheet-print">打印</button>
         </div>
       </div>
+    </div>
   </header>
 
-  ${sheets
-    .map(
-      (s) => `<section class="sheet-course" data-sheet="${s.id}">
-    <h2 class="sheet-course__title">${esc(s.name)}</h2>
-    <div class="sheet__body prose">${s.html}</div>
-  </section>`,
-    )
+  ${courses
+    .map((entry) => {
+      const mid = partHtml(entry, 'midterm')
+      const fin = partHtml(entry, 'final')
+      return `<section class="sheet-course" data-sheet="${entry.id}" data-term="midterm" ${mid ? '' : 'hidden'} data-ui>
+    <h2 class="sheet-course__title">${esc(entry.name)}<span class="sheet-course__tag">期中</span></h2>
+    <div class="sheet__body prose">${mid || ''}</div>
+  </section>
+  <section class="sheet-course" data-sheet="${entry.id}" data-term="final" ${fin ? '' : 'hidden'} data-ui>
+    <h2 class="sheet-course__title">${esc(entry.name)}<span class="sheet-course__tag">期末</span></h2>
+    <div class="sheet__body prose">${fin || ''}</div>
+  </section>`
+    })
     .join('')}
 </div>
 <script>
@@ -83,11 +122,10 @@ export function buildCheatsheet(ctx) {
     page(ctx, {
       depth: 1,
       title: '速查表',
-      description: `${sheets.map((s) => s.name).join('、')}的常用结论速查表，A4 横向三栏，可按科目打印。`,
+      description: `${courses.map((c) => c.name).join('、')}的常用结论速查表，A4 横向三栏，可按科目与轮次打印。`,
       body,
       bodyClass: 'detail',
       navActive: 'cheatsheet',
-      // 速查表整页横向 A4；放在 head 里，压过后面的全局 @page
       head: "<style>@media print { @page { size: A4 landscape; margin: 10mm 10mm 12mm; } .sitehead, .footer, .crumb, .pagehead { display: none !important; } .frame { width: auto; padding: 0; } }</style>",
     }),
   )

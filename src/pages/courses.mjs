@@ -46,10 +46,8 @@ export function buildCourses(ctx) {
               `<li class="${s.state === 'in' ? 'sec-in' : s.state === 'boundary' ? 'sec-boundary' : 'sec-out'}" data-states="${attr(JSON.stringify(s.terms || {}))}" data-sec>${esc(s.no)} ${esc(s.title)}</li>`,
           )
           .join('')
-        const links =
-          ch.state === 'out'
-            ? ''
-            : `<div class="chapter__links">
+        // 链接全部渲染，由轮次开关决定显示/隐藏（否则期末章在期末也没有入口）
+        const links = `<div class="chapter__links" data-chapter-links>
                  ${ch.note ? `<a href="${url(1, `notes/${ch.id}.html`)}">读要点</a>` : ''}
                  ${ch.count ? `<a href="${url(1, `questions/?chapter=${ch.id}`)}">做这 ${ch.count} 道题</a>` : ''}
                  ${ch.count ? `<a href="${url(1, `export/?chapter=${ch.id}`)}">导出</a>` : ''}

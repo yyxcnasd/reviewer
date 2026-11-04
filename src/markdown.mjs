@@ -1,4 +1,5 @@
 import MarkdownIt from 'markdown-it'
+import { extractContainers, renderContainer } from './blocks.mjs'
 import katex from 'katex'
 
 import { expandShorthands } from './shorthands.mjs'
@@ -46,6 +47,12 @@ export function renderMarkdown(src, opts = {}) {
     store.push({ tex, display })
     return `${PH}${store.length - 1}\uE001`
   }
+
+  // 区块容器（:::定义 … :::）先抽出来，内部正文稍后递归渲染
+  const containerId = Math.random().toString(36).slice(2, 8)
+  const extracted = extractContainers(text, PH, containerId)
+  text = extracted.text
+  const containers = extracted.blocks
 
   // 代码先行：围栏与行内代码整段保护起来，里面的 $ 不当公式（汇编里的 $3 很常见）
   const codeStore = []
@@ -123,6 +130,16 @@ export function renderMarkdown(src, opts = {}) {
     /(?:<p>|>)?\uE100(\d+)\uE101(?:<\/p>)?/g,
     (m, i) => codeStore[Number(i)].html,
   )
+
+  // 还原区块容器（内部正文再走一遍完整管线）
+  if (containers.length) {
+    html = html.replace(new RegExp(`(?:<p>)?\\uE200${containerId}(\\d+)\\uE201(?:</p>)?`, 'g'), (m, i) => {
+      const block = containers[Number(i)]
+      if (!block) return ''
+      const inner = renderMarkdown(block.body, { errors, placeholder: PH })
+      return renderContainer(block, inner)
+    })
+  }
 
   return html
 }

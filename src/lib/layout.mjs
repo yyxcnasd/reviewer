@@ -95,14 +95,17 @@ export function page(ctx, opts) {
           <ul>
             <li><a href="${base}va1/">微积分 A1</a></li>
             <li><a href="${base}la/">线性代数</a></li>
+            <li><a href="${base}dm1/">离散数学 1</a></li>
+            <li><a href="${base}ics/">计算机系统概论</a></li>
           </ul>
         </div>
         <div class="footer__col">
           <h3>内容</h3>
           <ul>
-            <li><a href="${base}questions/">题库（${ctx.stats.questions} 道）</a></li>
+            <li><a href="${base}questions/">题库</a></li>
             <li><a href="${base}practice/">刷题</a></li>
             <li><a href="${base}tags/">标签</a></li>
+            <li><a href="${base}cheatsheet/">速查表</a></li>
             <li><a href="${base}export/">导出 PDF</a></li>
             <li><a href="${base}stats/">进度</a></li>
           </ul>
@@ -111,6 +114,7 @@ export function page(ctx, opts) {
           <h3>参与</h3>
           <ul>
             <li><a href="${base}submit/">投稿一道题</a></li>
+            <li><a href="${base}markdown/">写法说明</a></li>
             <li><a href="${base}about/">关于与范围说明</a></li>
             <li><a href="https://github.com/${esc(config.repo)}" target="_blank" rel="noopener noreferrer">GitHub 仓库</a></li>
           </ul>

@@ -425,3 +425,19 @@
     padding-bottom: clamp(28px, 6vw, 48px);
   }
 }
+
+
+/* 速查表：只显示当前轮次那一版（期末版已包含期中内容） */
+html[data-term='midterm'] .sheet-course[data-term='final'],
+html[data-term='final'] .sheet-course[data-term='midterm'] {
+  display: none;
+}
+
+.sheet-course__tag {
+  margin-left: 0.6em;
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--ink-mute);
+  vertical-align: 0.15em;
+}

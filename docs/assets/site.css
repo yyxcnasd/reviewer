@@ -3061,6 +3061,22 @@ a.tag:hover {
   }
 }
 
+
+/* 速查表：只显示当前轮次那一版（期末版已包含期中内容） */
+html[data-term='midterm'] .sheet-course[data-term='final'],
+html[data-term='final'] .sheet-course[data-term='midterm'] {
+  display: none;
+}
+
+.sheet-course__tag {
+  margin-left: 0.6em;
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--ink-mute);
+  vertical-align: 0.15em;
+}
+
 /* ---------------------------------------------------------------- 投稿页 */
 
 .fieldset {
@@ -4123,6 +4139,83 @@ body.is-focus .submit__preview {
   cursor: auto;
 }
 
+
+/* 写法说明页 */
+.mdx {
+  max-width: 52em;
+}
+
+.mdx__sec {
+  margin-bottom: clamp(28px, 4vw, 48px);
+}
+
+.mdx__sec h2 {
+  font-size: clamp(1.25rem, 1.6vw, 1.5rem);
+  padding-top: 0.5em;
+  border-top: 2px solid var(--line-strong);
+  margin: 0 0 0.6em;
+}
+
+.mdx__sec p {
+  margin: 0 0 0.8em;
+  color: var(--ink-soft);
+}
+
+.mdx__sec pre {
+  background: var(--code-bg);
+  color: var(--code-fg);
+  border-left: 3px solid var(--line-strong);
+  padding: 12px 14px;
+  overflow-x: auto;
+  margin: 0 0 0.9em;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.mdx-block {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 14px;
+  align-items: center;
+  padding: 12px 0;
+}
+
+.mdx-block + .mdx-block {
+  border-top: 2px solid var(--line);
+}
+
+.mdx-block pre {
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.mdx-block__note {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: var(--fs-small);
+}
+
+.mdx-block__note b {
+  font-size: 1rem;
+}
+
+.mdx-block__note span {
+  color: var(--ink-soft);
+}
+
+.mdx__more {
+  display: flex;
+  gap: 1.6em;
+  padding-bottom: clamp(32px, 5vw, 64px);
+}
+
+@media (max-width: 760px) {
+  .mdx-block {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* 打印一律 A4，页边距跟导出的卷子一致 */
 @page {
   size: A4;
@@ -4951,7 +5044,12 @@ body.is-focus .submit__preview {
   .katex-display > .katex {
     font-size: 0.94em;
     white-space: normal;
-    text-align: left;
+    text-align: center;
+  }
+
+  .math-display,
+  .katex-display {
+    text-align: center;
   }
 
   /* 纸面上不要出现任何滚动条痕迹 */

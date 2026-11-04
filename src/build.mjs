@@ -16,6 +16,7 @@ import { buildPractice } from './pages/practice.mjs'
 import { buildSubmit } from './pages/submit.mjs'
 import { buildAbout } from './pages/about.mjs'
 import { buildNotation } from './pages/notation.mjs'
+import { buildMarkdownHelp } from './pages/markdown-help.mjs'
 import { buildStats } from './pages/stats.mjs'
 import { browserSource } from './shorthands.mjs'
 import { buildExportPages } from './pages/export.mjs'
@@ -71,13 +72,25 @@ export async function buildSite(ctx) {
   buildSubmit(ctx)
   buildAbout(ctx)
   buildNotation(ctx)
+  buildMarkdownHelp(ctx)
   buildStats(ctx)
   buildNotFound(ctx)
 
   buildData(ctx)
   buildExtras(ctx)
   copyStatic(ctx)
+
+  // 区块语法：浏览器里也用同一份实现
+  const blocksSrc = fs.readFileSync(path.join(ctx.ROOT, 'src/blocks.mjs'), 'utf8')
+  const browserBlocks = `(function () {
+${blocksSrc
+  .replace(/^export /gm, '')
+  .replace(/^\/\*\*[\s\S]*?\*\/\n/, '')}
+window.RBBlocks = { extractContainers, renderContainer }
+})()`
+  fs.writeFileSync(path.join(ctx.OUT, 'assets/blocks.js'), browserBlocks, 'utf8')
   cleanStale(ctx)
+  assertNoKatexErrors(ctx)
 }
 
 /* ---------------------------------------------------------------- 静态资源 */
@@ -163,4 +176,29 @@ export function cleanStale(ctx) {
       }
     }
   }
+}
+
+/** 页面里不该出现 KaTeX 渲染错误：出现就说明公式写坏了 */
+export function assertNoKatexErrors(ctx) {
+  const hits = []
+  const walk = (dir) => {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const abs = path.join(dir, entry.name)
+      if (entry.isDirectory()) {
+        walk(abs)
+        continue
+      }
+      if (!entry.name.endsWith('.html')) continue
+      const html = fs.readFileSync(abs, 'utf8')
+      const n = (html.match(/katex-error/g) || []).length
+      if (n) hits.push({ file: path.relative(ctx.OUT, abs).replace(/\\/g, '/'), n })
+    }
+  }
+  if (fs.existsSync(ctx.OUT)) walk(ctx.OUT)
+  if (!hits.length) return true
+  const total = hits.reduce((s, h) => s + h.n, 0)
+  console.log(`\n公式有 ${total} 处渲染错误（katex-error），共 ${hits.length} 个页面：`)
+  for (const h of hits.slice(0, 20)) console.log(`  ${h.file} (${h.n})`)
+  ctx.errors.push({ file: 'KaTeX', message: `${total} 处公式渲染错误，见上方列表` })
+  return false
 }

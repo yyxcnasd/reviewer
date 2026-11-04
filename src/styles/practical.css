@@ -826,7 +826,12 @@
   .katex-display > .katex {
     font-size: 0.94em;
     white-space: normal;
-    text-align: left;
+    text-align: center;
+  }
+
+  .math-display,
+  .katex-display {
+    text-align: center;
   }
 
   /* 纸面上不要出现任何滚动条痕迹 */

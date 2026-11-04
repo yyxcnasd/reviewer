@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>函数调用 · 计算机系统概论 · 复习册</title>
-<meta name="description" content="栈帧的建立与拆除、call/ret 的真实动作、六个参数寄存器与栈上参数、被调用者保存规则，以及递归的栈深度。">
+<meta name="description" content="调用与返回的真实动作、六个参数寄存器与栈上参数、16 字节对齐、调用者与被调用者保存规则、栈帧的建立与拆除，以及递归的栈深度。">
 <meta name="color-scheme" content="light">
 <link rel="stylesheet" href="../assets/katex/katex.min.css">
 <link rel="stylesheet" href="../assets/site.css">
@@ -21,7 +21,7 @@
 <script src="../assets/term.js" defer></script>
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <meta property="og:title" content="函数调用 · 计算机系统概论 · 复习册">
-<meta property="og:description" content="栈帧的建立与拆除、call/ret 的真实动作、六个参数寄存器与栈上参数、被调用者保存规则，以及递归的栈深度。">
+<meta property="og:description" content="调用与返回的真实动作、六个参数寄存器与栈上参数、16 字节对齐、调用者与被调用者保存规则、栈帧的建立与拆除，以及递归的栈深度。">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="zh_CN">
 
@@ -74,7 +74,7 @@
     <div class="pagehead__inner">
       <h1 class="pagehead__title">函数调用</h1>
       <div class="pagehead__scope">
-        <p>栈帧的建立与拆除、call/ret 的真实动作、六个参数寄存器与栈上参数、被调用者保存规则，以及递归的栈深度。</p>
+        <p>调用与返回的真实动作、六个参数寄存器与栈上参数、16 字节对齐、调用者与被调用者保存规则、栈帧的建立与拆除，以及递归的栈深度。</p>
         <div class="pagehead__stats">
           <span>在范围内</span>
           <span><b>11</b>道题在这一章</span>
@@ -90,90 +90,78 @@
   <div class="article__main prose">
     <div class="note-glance">
         <h2>本章速览</h2>
-        <ol><li><a href="#h-1">4.1 栈帧与调用约定</a></li><li><a href="#h-6">4.2 局部变量与递归</a></li></ol>
+        <ol><li><a href="#h-2">4.1 栈帧与调用约定</a></li><li><a href="#h-8">4.2 局部变量与递归</a></li></ol>
       </div>
-    <h2 id="h-1">4.1 栈帧与调用约定</h2>
-<h3 id="h-2">栈与 call/ret</h3>
-<p>栈向低地址增长，<code>%rsp</code> 指向栈顶。</p>
+    <h2 id="h-1">这一章要会什么</h2>
 <ul>
-<li<code>pushq %rbx</code>：先把 <code>%rsp</code> 减 8，再把 <code>%rbx</code> 存入栈顶；</li>
-<li<code>popq %rbx</code>：先从栈顶读出，再把 <code>%rsp</code> 加 8；</li>
-<li<code>call f</code>：把<strong>返回地址</strong>（<code>call</code> 的下一条指令的地址）压栈，然后跳到 <code>f</code>；</li>
-<li<code>ret</code>：从栈顶弹出返回地址，跳回去。</li>
+<li>说清 <code>call</code> 与 <code>ret</code> 各自把什么压栈、弹出，进入函数时 <code>%rsp</code> 指向哪里</li>
+<li>记住 6 个整型参数寄存器，算出第 7、8 个参数相对 <code>%rbp</code> 或 <code>%rsp</code> 的偏移</li>
+<li>用「<code>call</code> 前 <code>%rsp % 16 = 0</code>」推出栈帧为什么按 16 的倍数分配</li>
+<li>分清 caller-saved 与 callee-saved，判断一段函数该 push/pop 哪些寄存器</li>
+<li>算递归的栈深度，解释大 <code>n</code> 递归为什么会栈溢出</li>
 </ul>
-<p><strong>最容易错的一步</strong>：<code>call</code> 之后、刚进入被调用函数时，栈顶已经是返回地址，<code>%rsp</code> 比调用前小了 8。所以「函数入口处 <code>%rsp % 16 = 8</code>」——后面所有对齐规则都是从这来的。</p>
-<h3 id="h-3">参数传递（System V AMD64）</h3>
-<p>前 6 个整型/指针参数依次放在 <code>%rdi</code>、<code>%rsi</code>、<code>%rdx</code>、<code>%rcx</code>、<code>%r8</code>、<code>%r9</code>，浮点参数用 <code>%xmm0</code>–<code>%xmm7</code>。超过 6 个的整型参数<strong>从右往左</strong>压栈，返回值放在 <code>%rax</code>（更大的整数用 <code>%rax:%rdx</code>）。</p>
-<p>进入被调用函数、还没执行 <code>pushq %rbp</code> 时，栈的布局是：</p>
-<div class="table-wrap"><table><thead>
-<tr>
-<th>地址</th>
-<th>内容</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td<code>0(%rsp)</code></td>
-<td>返回地址</td>
-</tr>
-<tr>
-<td<code>8(%rsp)</code></td>
-<td>第 7 个参数</td>
-</tr>
-<tr>
-<td<code>16(%rsp)</code></td>
-<td>第 8 个参数</td>
-</tr>
-</tbody>
-</table></div><p>所以执行 <code>pushq %rbp; movq %rsp, %rbp</code> 之后，返回地址在 <code>8(%rbp)</code>，第 7 个参数在 <code>16(%rbp)</code>，第 8 个在 <code>24(%rbp)</code>。</p>
-<p><strong>例</strong>：进入函数时 <code>%rsp = 0x7fffffffe008</code>，则返回地址在 <code>0x7fffffffe008</code>；<code>pushq %rbp</code> 把旧 <code>%rbp</code> 存到 <code>0x7fffffffe000</code>，然后 <code>%rbp = 0x7fffffffe000</code>。于是第 7 个参数在 <code>0x7fffffffe010</code>，第 8 个在 <code>0x7fffffffe018</code>。这类「给一个 <code>%rsp</code> 求各参数地址」的题，只要记住「返回地址在 0，参数从 8 开始」就不会错。</p>
-<h3 id="h-4">谁该保存寄存器</h3>
-<p>寄存器分两类：</p>
-<ul>
-<li><strong>调用者保存</strong>（caller-saved）：<code>%rax %rcx %rdx %rsi %rdi %r8</code>–<code>%r11</code>。调用别人之后，里面的值可能被改掉，想保留就得自己提前存起来。</li>
-<li><strong>被调用者保存</strong>（callee-saved）：<code>%rbx %rbp %r12</code>–<code>%r15</code>。被调用函数如果要用，必须先保存、返回前恢复，保证调用者看到的值不变。</li>
-</ul>
-<p><strong>最容易错的一步</strong>：在函数里用了 <code>%rbx</code> 却没 <code>push</code>/<code>pop</code>。这会悄悄改坏调用者的数据，表现为「程序在别处莫名出错」，是缓存区、递归类题目常见的坑点。</p>
-<h3 id="h-5">栈帧与 16 字节对齐</h3>
-<p>典型函数的开头和结尾：</p>
+<h2 id="h-2">4.1 栈帧与调用约定</h2>
+<h3 id="h-3"<code>call</code> 与 <code>ret</code> 压入返回地址</h3>
+<p>条件：发生一次函数调用。</p>
+<p class="nb nb--结论"><span class="nb__label">结论</span><code>call f</code> 把<strong>返回地址</strong>（<code>call</code> 的下一条指令的地址）压栈，然后跳到 <code>f</code>；<code>ret</code> 从栈顶弹出返回地址，跳回去。刚进入 <code>f</code> 时，返回地址在 <code>0(%rsp)</code>，<code>%rsp</code> 比调用前小 8。</p>
+<p>什么时候用：算栈帧布局、定位缓冲区溢出要覆盖的返回地址、解释递归为什么占栈。</p>
+<p class="nb nb--注意"><span class="nb__label">注意</span>压的是「下一条指令」的地址，不是 <code>call</code> 自己的地址。<code>ret</code> 只做「弹地址 + 跳转」，不检查这个地址是否合法——这正是溢出攻击能劫持控制流的原因。</p>
+<h3 id="h-4">六个参数寄存器与栈上第 7、8 个参数</h3>
+<p>条件：函数参数超过 6 个整型/指针参数。</p>
+<p class="nb nb--结论"><span class="nb__label">结论</span>前 6 个依次放 <code>%rdi</code>、<code>%rsi</code>、<code>%rdx</code>、<code>%rcx</code>、<code>%r8</code>、<code>%r9</code>；浮点参数用 <code>%xmm0</code>–<code>%xmm7</code>；多出来的整型参数从右往左压栈；返回值在 <code>%rax</code>。</p>
+<p>什么时候用：写或读函数调用的汇编，求某个参数在栈上的位置。</p>
+<p class="nb nb--注意"><span class="nb__label">注意</span>进入函数、还没 <code>pushq %rbp</code> 时，<code>0(%rsp)</code> 是返回地址，<code>8(%rsp)</code> 是第 7 个参数。执行 <code>pushq %rbp; movq %rsp, %rbp</code> 之后，返回地址在 <code>8(%rbp)</code>，第 7 个参数在 <code>16(%rbp)</code>，第 8 个在 <code>24(%rbp)</code>。</p>
+<h3 id="h-5"<code>%rsp % 16 = 8</code> 与栈帧 16 字节对齐</h3>
+<p>条件：ABI 要求调用函数前栈指针对齐。</p>
+<p class="nb nb--结论"><span class="nb__label">结论</span><code>call</code> 之前 <code>%rsp % 16 = 0</code>；<code>call</code> 压入 8 字节返回地址，所以进入函数时 <code>%rsp % 16 = 8</code>；<code>pushq %rbp</code> 后变成 0；此后 <code>subq</code> 的量取 16 的倍数，才能保证下一次 <code>call</code> 仍然对齐。</p>
+<p>什么时候用：算栈帧大小、解释「局部变量只要 20 字节，为什么 <code>subq $32</code>」。</p>
+<p class="nb nb--注意"><span class="nb__label">注意</span>局部变量需要 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi></mrow><annotation encoding="application/x-tex">N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.109em;">N</span></span></span></span> 字节时，<code>sub</code> 取不小于 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi></mrow><annotation encoding="application/x-tex">N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.109em;">N</span></span></span></span> 的最小 16 的倍数。对齐被破坏时，调用用了 SSE 的库函数可能直接崩，症状往往与「栈上某个值」毫无关系。</p>
+<h3 id="h-6">调用者保存与被调用者保存寄存器</h3>
+<p>条件：函数里要用寄存器保存一个值，且中间可能调用别的函数。</p>
+<p class="nb nb--结论"><span class="nb__label">结论</span>caller-saved 是 <code>%rax</code>、<code>%rcx</code>、<code>%rdx</code>、<code>%rsi</code>、<code>%rdi</code>、<code>%r8</code>–<code>%r11</code>，调用别人后值可能被改；callee-saved 是 <code>%rbx</code>、<code>%rbp</code>、<code>%r12</code>–<code>%r15</code>，被调用函数要用就必须先保存、返回前恢复。</p>
+<p>什么时候用：写汇编函数决定 push/pop 哪些寄存器；读反汇编判断某个值为什么放在 <code>%rbx</code>。</p>
+<p class="nb nb--注意"><span class="nb__label">注意</span>在函数里用了 <code>%rbx</code> 却没 <code>push</code>/<code>pop</code>，会悄悄改坏调用者的数据，程序可能在别处莫名出错。编译器把「跨调用还要保留的值」优先放 callee-saved 寄存器，就是这个原因。</p>
+<h3 id="h-7"<code>pushq %rbp; movq %rsp, %rbp</code> 与 <code>leave</code></h3>
+<p>条件：函数需要建立和拆除栈帧。</p>
+<p class="nb nb--结论"><span class="nb__label">结论</span><code>pushq %rbp</code> 保存调用者的帧基址，<code>movq %rsp, %rbp</code> 建立当前帧，局部变量用 <code>-8(%rbp)</code>、<code>-16(%rbp)</code> 这类负偏移访问；<code>leave</code> 等价于 <code>movq %rbp, %rsp; popq %rbp</code>。</p>
 <p><pre class="code-block"><code class="language-text">f:
-    pushq %rbp            # 保存调用者的 rbp
-    movq %rsp, %rbp       # 建立当前帧基址
-    subq $32, %rsp        # 给局部变量和临时值留空间（16 的倍数）
+    pushq %rbp            # 保存调用者的帧基址
+    movq %rsp, %rbp       # 建立当前帧
+    subq $32, %rsp        # 局部变量区，16 的倍数
     ...
-    leave                 # 等价于 movq %rbp, %rsp; popq %rbp
-    ret</code></pre></p>
-<p><strong>为什么 <code>sub</code> 的量必须是 16 的倍数</strong>：调用 <code>call</code> 前 <code>%rsp</code> 必须满足 <code>%rsp % 16 = 0</code>（ABI 要求）。进入函数时 <code>%rsp % 16 = 8</code>，<code>push %rbp</code> 后变成 0，再减一个 16 的倍数，调用下一个函数时仍然对齐。局部变量需要 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi></mrow><annotation encoding="application/x-tex">N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.109em;">N</span></span></span></span> 字节时，<code>sub</code> 取「不小于 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi></mrow><annotation encoding="application/x-tex">N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.109em;">N</span></span></span></span> 的最小 16 的倍数」。</p>
-<h2 id="h-6">4.2 局部变量与递归</h2>
-<h3 id="h-7">局部变量放在哪</h3>
+    leave                 # movq %rbp, %rsp; popq %rbp
+    ret                   # 弹出返回地址</code></pre></p>
+<p>什么时候用：读函数开头结尾，算局部变量相对 <code>%rbp</code> 的偏移。</p>
+<p class="nb nb--注意"><span class="nb__label">注意</span><code>-O2</code> 常省略帧指针，改用 <code>%rsp</code> 相对寻址，此时不能假设 <code>%rbp</code> 是帧基址；看到函数里没有 <code>push %rbp</code> 并不意味着没有栈帧。</p>
+<h2 id="h-8">4.2 局部变量与递归</h2>
+<h3 id="h-9">局部变量放寄存器还是栈</h3>
+<p>条件：函数里有局部变量。</p>
+<p class="nb nb--结论"><span class="nb__label">结论</span>数量少、不取地址、不跨函数调用保留的变量放寄存器；数组、结构体、取过地址的变量、<code>volatile</code> 变量放栈帧。</p>
+<p>什么时候用：读汇编判断变量在寄存器还是内存，解释「取地址迫使变量进栈」。</p>
+<p class="nb nb--注意"><span class="nb__label">注意</span>编译器会重排、合并局部变量，C 里的声明顺序不等于栈上顺序；两个变量可能共用一个栈槽。</p>
+<h3 id="h-10">递归的栈深度</h3>
+<p>条件：递归函数每层都有自己的栈帧。</p>
+<p class="nb nb--结论"><span class="nb__label">结论</span>栈深度等于递归深度，每层至少占「返回地址 8 字节 + 保存的寄存器 + 局部变量」，并按 16 字节对齐向上取整。</p>
+<p>什么时候用：估算递归的空间开销、判断会不会栈溢出。</p>
+<p class="nb nb--注意"><span class="nb__label">注意</span>默认栈通常 8 MB，每层 32 字节时约 25 万层就耗尽。递归的空间复杂度是 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0278em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span>，不是「不占空间」。</p>
+<h3 id="h-11"<code>sum(n)</code> 递归汇编里的 <code>%rbx</code></h3>
+<p>条件：<code>return n + sum(n - 1)</code> 这种递归。</p>
+<p class="nb nb--结论"><span class="nb__label">结论</span><code>n</code> 要跨递归调用保留，编译器把它放进 callee-saved 的 <code>%rbx</code>，进入时 <code>pushq %rbx</code>，返回前 <code>popq %rbx</code>；开头用 <code>testq %rdi, %rdi; jle</code> 处理 <code>n &lt;= 0</code> 的基线。</p>
+<p>什么时候用：读递归的反汇编，解释为什么这里用 <code>%rbx</code> 而不是 <code>%rcx</code>。</p>
+<p class="nb nb--注意"><span class="nb__label">注意</span><code>%rcx</code> 是 caller-saved，递归返回后值可能已被改。<code>sum(3)</code> 最深时栈上有 4 个返回地址、3 个保存的 <code>%rbx</code>，因为 <code>sum(0)</code> 立刻返回、还没执行 <code>push</code>。</p>
+<h3 id="h-12">栈溢出与尾递归优化</h3>
+<p>条件：递归深度非常大。</p>
+<p class="nb nb--结论"><span class="nb__label">结论</span>每层 32 字节、默认 8 MB 栈时，约 25 万层就会栈溢出；尾递归在 <code>-O2</code> 下可能被改写成循环，复用同一个栈帧。</p>
+<p>什么时候用：解释大 <code>n</code> 递归的段错误、判断能否靠优化解决。</p>
+<p class="nb nb--注意"><span class="nb__label">注意</span>不是所有递归都能尾递归优化。<code>n + sum(n-1)</code> 返回后还要做加法，不能直接复用帧；改写成「累积参数 + 尾调用」后才可能被优化。</p>
+<h2 id="h-13">常见问法与易错点</h2>
 <ul>
-<li>数量少、不取地址的局部变量：直接放寄存器；</li>
-<li>数组、结构体、需要取地址的变量：放栈帧里；</li>
-<li>编译器会重排、合并局部变量的位置，所以「C 里声明的顺序」不等于「栈上的顺序」。</li>
+<li>问「返回地址在哪」：进入函数时在 <code>0(%rsp)</code>；<code>push %rbp</code> 后在 <code>8(%rbp)</code>。两套坐标别混。</li>
+<li>问「第 7 个参数在哪」：未建帧时 <code>8(%rsp)</code>，建帧后 <code>16(%rbp)</code>。</li>
+<li>问「为什么 <code>subq $32</code> 不是 <code>$24</code>」：16 字节对齐，取不小于需求的最小 16 的倍数。</li>
+<li>问「用 <code>%rbx</code> 为什么要 push」：callee-saved，必须保证调用者看到的值不变。</li>
+<li>算递归栈深度时，别忘了返回地址和保存的寄存器，不能只数局部变量。</li>
 </ul>
-<h3 id="h-8">递归与栈</h3>
-<p>每次递归调用都新建一个栈帧，所以栈深度等于递归深度。以</p>
-<p><pre class="code-block"><code class="language-c">long sum(long n) {
-    if (n &lt;= 0) return 0;
-    return n + sum(n - 1);
-}</code></pre></p>
-<p>为例，典型汇编是</p>
-<p><pre class="code-block"><code class="language-text">sum:
-    testq %rdi, %rdi
-    jle .L2
-    pushq %rbx
-    movq %rdi, %rbx
-    leaq -1(%rdi), %rdi
-    call sum
-    addq %rbx, %rax
-    popq %rbx
-    ret
-.L2:
-    movl $0, %eax
-    ret</code></pre></p>
-<p><strong>为什么用 <code>%rbx</code></strong>：递归调用 <code>sum</code> 会覆盖调用者保存寄存器（包括 <code>%rcx</code>），而 <code>%rbx</code> 是被调用者保存的，<code>sum</code> 自己负责保存和恢复，所以把 <code>n</code> 放在 <code>%rbx</code> 里最省事。</p>
-<p><strong>最容易错的一步</strong>：算递归的栈深度。<code>sum(3)</code> 会依次调用 <code>sum(2)</code>、<code>sum(1)</code>、<code>sum(0)</code>，最深时栈上同时有 4 个返回地址、3 个保存的 <code>%rbx</code>（<code>sum(0)</code> 立刻返回，还没 <code>push</code>）。</p>
-<p><strong>递归 vs 迭代</strong>：递归的栈开销是 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0278em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span> 空间。<code>sum(1000000)</code> 若每层占 32 字节，栈就要约 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>32</mn><mtext> MB</mtext></mrow><annotation encoding="application/x-tex">32\ \text{MB}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">32</span><span class="mspace"> </span><span class="mord text"><span class="mord">MB</span></span></span></span></span>，而默认栈大小通常 8 MB，结果就是栈溢出。尾递归在 <code>-O2</code> 下可能被优化成循环（复用同一个栈帧）。</p>
 
     <div class="rule-head" style="margin-top:56px"><h2>这一章的题</h2><p>11 道，全部带解析。</p></div>
            <ul class="qmini">
@@ -186,7 +174,7 @@
   </div>
   <nav class="article__toc" data-ui aria-label="本页目录">
           <h2>本页</h2>
-          <ol><li class=""><a href="#h-1">4.1 栈帧与调用约定</a></li><li class="is-sub"><a href="#h-2">栈与 call/ret</a></li><li class="is-sub"><a href="#h-3">参数传递（System V AMD64）</a></li><li class="is-sub"><a href="#h-4">谁该保存寄存器</a></li><li class="is-sub"><a href="#h-5">栈帧与 16 字节对齐</a></li><li class=""><a href="#h-6">4.2 局部变量与递归</a></li><li class="is-sub"><a href="#h-7">局部变量放在哪</a></li><li class="is-sub"><a href="#h-8">递归与栈</a></li></ol>
+          <ol><li class=""><a href="#h-1">这一章要会什么</a></li><li class=""><a href="#h-2">4.1 栈帧与调用约定</a></li><li class="is-sub"><a href="#h-3">9 与 10 压入返回地址</a></li><li class="is-sub"><a href="#h-4">六个参数寄存器与栈上第 7、8 个参数</a></li><li class="is-sub"><a href="#h-5">36 与栈帧 16 字节对齐</a></li><li class="is-sub"><a href="#h-6">调用者保存与被调用者保存寄存器</a></li><li class="is-sub"><a href="#h-7">61 与 62</a></li><li class=""><a href="#h-8">4.2 局部变量与递归</a></li><li class="is-sub"><a href="#h-9">局部变量放寄存器还是栈</a></li><li class="is-sub"><a href="#h-10">递归的栈深度</a></li><li class="is-sub"><a href="#h-11">75 递归汇编里的 76</a></li><li class="is-sub"><a href="#h-12">栈溢出与尾递归优化</a></li><li class=""><a href="#h-13">常见问法与易错点</a></li></ol>
           <dl class="spec spec--rail">
             <div><dt>章节</dt><dd>第 4 章</dd></div>
             <div><dt>节</dt><dd>2 节在范围内</dd></div>
@@ -207,14 +195,17 @@
           <ul>
             <li><a href="../va1/">微积分 A1</a></li>
             <li><a href="../la/">线性代数</a></li>
+            <li><a href="../dm1/">离散数学 1</a></li>
+            <li><a href="../ics/">计算机系统概论</a></li>
           </ul>
         </div>
         <div class="footer__col">
           <h3>内容</h3>
           <ul>
-            <li><a href="../questions/">题库（250 道）</a></li>
+            <li><a href="../questions/">题库</a></li>
             <li><a href="../practice/">刷题</a></li>
             <li><a href="../tags/">标签</a></li>
+            <li><a href="../cheatsheet/">速查表</a></li>
             <li><a href="../export/">导出 PDF</a></li>
             <li><a href="../stats/">进度</a></li>
           </ul>
@@ -223,6 +214,7 @@
           <h3>参与</h3>
           <ul>
             <li><a href="../submit/">投稿一道题</a></li>
+            <li><a href="../markdown/">写法说明</a></li>
             <li><a href="../about/">关于与范围说明</a></li>
             <li><a href="https://github.com/yyxcnasd/reviewer" target="_blank" rel="noopener noreferrer">GitHub 仓库</a></li>
           </ul>

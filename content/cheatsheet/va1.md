@@ -1,6 +1,7 @@
 ---
 course: va1
 title: 微积分 A1
+terms: [midterm, final]
 ---
 
 ### 等价无穷小（\(x\to0\)）
@@ -54,19 +55,3 @@ title: 微积分 A1
 
 可导 \(\Rightarrow\) 连续 \(\Rightarrow\) 有极限，反之不成立（\(|x|\) 在 0）。
 间断点四类：可去、跳跃、无穷、振荡。闭区间连续：有界、最值、零点、介值、一致连续。
-
-### 定积分与变上限积分
-
-\[\Phi(x)=\int_a^x f(t)\d t\ \Longrightarrow\ \Phi'(x)=f(x)\]
-\[\int_a^b f=0\Rightarrow f\text{ 变号（连续时）};\quad \Big|\int_a^b f\Big|\le\int_a^b|f|\]
-积分中值：\(f\) 连续 \(\Rightarrow\exists\xi\in[a,b],\ \int_a^b f=f(\xi)(b-a)\)。
-
-### 广义积分收敛判定
-
-\(\int_1^{\infty}\frac{\d x}{x^{p}}\) 收敛 \(\iff p>1\)；\(\int_0^{1}\frac{\d x}{x^{p}}\) 收敛 \(\iff p<1\)。
-比较判别：\(0\le f\le g\) 时 \(g\) 收敛 \(\Rightarrow f\) 收敛；\(f\) 发散 \(\Rightarrow g\) 发散。
-
-### 常微分方程
-
-一阶线性 \(y'+P(x)y=Q(x)\)：\(y=\e^{-\int P}\Big(\int Q\e^{\int P}\d x+C\Big)\)。
-二阶常系数齐次：特征根 \(r_1\ne r_2\) 实 \(\Rightarrow C_1\e^{r_1x}+C_2\e^{r_2x}\)；\(r_1=r_2\) \(\Rightarrow(C_1+C_2x)\e^{rx}\)；共轭复根 \(\alpha\pm\beta\i\) \(\Rightarrow\e^{\alpha x}(C_1\cos\beta x+C_2\sin\beta x)\)。
