@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>标签：条件码 · 复习册</title>
-<meta name="description" content="带「条件码」标签的 2 道题。">
+<meta name="description" content="带「条件码」标签的 3 道题。">
 <meta name="color-scheme" content="light">
 <link rel="stylesheet" href="../assets/katex/katex.min.css">
 <link rel="stylesheet" href="../assets/site.css">
@@ -21,7 +21,7 @@
 <script src="../assets/term.js" defer></script>
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <meta property="og:title" content="标签：条件码 · 复习册">
-<meta property="og:description" content="带「条件码」标签的 2 道题。">
+<meta property="og:description" content="带「条件码」标签的 3 道题。">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="zh_CN">
 
@@ -66,7 +66,7 @@
   <header class="pagehead">
     <div class="pagehead__inner">
       <h1 class="pagehead__title">条件码</h1>
-      <div class="pagehead__scope"><p>2 道题带这个标签。</p></div>
+      <div class="pagehead__scope"><p>3 道题带这个标签。</p></div>
     </div>
   </header>
   <ul class="qlist"><li class="qrow" data-id="ics-006" data-course="ics" data-chapter="ics-3" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="3" data-tags="汇编 条件码 跳转表" data-text="某函数按整数参数 `x` 分派到不同分支，`x` 放在 `%rdi`。它的汇编片段是 ``` cmpq $6, %rdi ja .L8 jmp *.L4(,%rdi,8) .L4: .quad .L3 .quad .L5 .quad .L5 .quad .L6 .quad .L6 .quad .L7 .quad .L7 ``` (1) 前两条指令在做什么？为什么用 `ja` 而不是 `jg`？ (2) 当 `x = 3`、`x = 6`、`x = -1` 时分别跳到哪个标签？ (3) 如果把 `case` 值改成 0、10、20、30，这段跳转表还合适吗？为什么？ 汇编 条件码 跳转表 自编">
@@ -83,9 +83,16 @@
           
         </div>
         
+      </li><li class="qrow" data-id="ics-019" data-course="ics" data-chapter="ics-3" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="3" data-tags="条件码 汇编 C 语言" data-text="函数 `f` 的两个 `long` 参数 `x`、`y` 分别放在 `%rdi`、`%rsi`，返回值放在 `%rax`。汇编如下： ``` cmpq %rsi, %rdi setl %al setg %dl movzbl %al, %eax movzbl %dl, %edx addl %edx, %eax ret ``` 回答： (1) 这段代码相当于 C 的什么表达式？ (2) 求 、 、 时的返回值。 (3) 如果把 `setl` 换成 `setb`，对 返回值是多少？说明原因。 条件码 汇编 C 语言 自编">
+        <div>
+          <a class="qrow__link" href="../questions/ics-019.html">函数 <code>f</code> 的两个 <code>long</code> 参数 <code>x</code>、<code>y</code> 分别放在 <code>%rdi</code>、<code>%rsi</code>，返回值放在 <code>%rax</code>。汇编如下：</a>
+          <div class="qrow__meta"><span>计系概 · 汇编语言与程序的机器级表示</span><span>综合题</span><span class="dots" aria-label="难度 3 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          
+        </div>
+        
       </li></ul>
   <p class="more">
-    <a class="btn btn--red" href="../export/?tag=%E6%9D%A1%E4%BB%B6%E7%A0%81">导出这 2 道（PDF）</a>
+    <a class="btn btn--red" href="../export/?tag=%E6%9D%A1%E4%BB%B6%E7%A0%81">导出这 3 道（PDF）</a>
     <a href="../tags/">← 回到全部标签</a>
   </p>
 </div>
@@ -105,7 +112,7 @@
         <div class="footer__col">
           <h3>内容</h3>
           <ul>
-            <li><a href="../questions/">题库（149 道）</a></li>
+            <li><a href="../questions/">题库（195 道）</a></li>
             <li><a href="../practice/">刷题</a></li>
             <li><a href="../tags/">标签</a></li>
             <li><a href="../export/">导出 PDF</a></li>

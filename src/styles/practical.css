@@ -838,3 +838,9 @@
     max-height: none;
   }
 }
+
+.chip--partial {
+  background: transparent;
+  color: var(--red-deep);
+  border: 2px solid var(--red);
+}

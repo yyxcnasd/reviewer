@@ -97,7 +97,7 @@ export function buildHome(ctx) {
   <div class="frame hero__inner">
     <div class="hero__copy">
       <h1 class="hero__title">要考的范围<br>和题都在这里</h1>
-      <p class="hero__lead">课程范围、讲义要点、题库与解析都在这里。当前显示的是<b data-term-label>期中</b>的范围，右上角可以换成期末。${stats.questions} 道题，每题带提示、解析和一条常见错误；${stats.notes} 篇要点。</p>
+      <p class="hero__lead">课程范围、要点和题都在这里。<b data-term-label>期中</b> · ${stats.questions} 道题 · ${stats.notes} 篇要点，右上角可换轮次。</p>
       <form class="search" action="${url(0, 'questions/')}" method="get" role="search">
         <label class="sr-only" for="q">搜题</label>
         <input class="search__input" id="q" name="q" type="search" placeholder="搜题：题干、标签、出处" autocomplete="off">

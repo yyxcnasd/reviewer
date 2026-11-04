@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>标签：数组 · 复习册</title>
-<meta name="description" content="带「数组」标签的 1 道题。">
+<meta name="description" content="带「数组」标签的 3 道题。">
 <meta name="color-scheme" content="light">
 <link rel="stylesheet" href="../assets/katex/katex.min.css">
 <link rel="stylesheet" href="../assets/site.css">
@@ -21,7 +21,7 @@
 <script src="../assets/term.js" defer></script>
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <meta property="og:title" content="标签：数组 · 复习册">
-<meta property="og:description" content="带「数组」标签的 1 道题。">
+<meta property="og:description" content="带「数组」标签的 3 道题。">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="zh_CN">
 
@@ -66,7 +66,7 @@
   <header class="pagehead">
     <div class="pagehead__inner">
       <h1 class="pagehead__title">数组</h1>
-      <div class="pagehead__scope"><p>1 道题带这个标签。</p></div>
+      <div class="pagehead__scope"><p>3 道题带这个标签。</p></div>
     </div>
   </header>
   <ul class="qlist"><li class="qrow" data-id="ics-010" data-course="ics" data-chapter="ics-5" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="2" data-tags="数组" data-text="有下面的 C 代码： ```c long a[5] = {10, 20, 30, 40, 50}; long *p = a + 2; char *c = (char *)a; ``` (1) `*p` 与 `*(p + 1)` 的值分别是多少？ (2) `p - a` 的值是多少？`p` 与 `a` 的地址相差多少字节？ (3) `c + 3` 指向哪里？`*(long *)(c + 8)` 的值是多少？ (4) `&amp;a[3]` 相对 `a` 的偏移是多少字节？ 数组 自编">
@@ -76,9 +76,26 @@
           
         </div>
         
+      </li><li class="qrow" data-id="ics-020" data-course="ics" data-chapter="ics-3" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="3" data-tags="控制流 数组 汇编" data-text="函数 `f` 的参数 `a`（`long` 数组首地址）放在 `%rdi`，元素个数 `n` 放在 `%rsi`，返回值放在 `%rax`。汇编如下： ``` movl $0, %eax movl $0, %ecx .L2: cmpq %rsi, %rcx jge .L3 movq (%rdi,%rcx,8), %rdx testq %rdx, %rdx jle .L4 addq %rdx, %rax .L4: addq $1, %rcx jmp .L2 .L3: ret ``` 回答： (1) 写出等价的 C 函数。 (2) 若数组为 、 ，返回值是多少？ (3) 上述执行过程中，循环体（从 `movq` 到 `jmp`）执行了几次？`cmpq` 执行了几次？ (4) 若 ，返回值是多少？ 控制流 数组 汇编 自编">
+        <div>
+          <a class="qrow__link" href="../questions/ics-020.html">函数 <code>f</code> 的参数 <code>a</code>（<code>long</code> 数组首地址）放在 <code>%rdi</code>，元素个数 <code>n</code> 放在 <code>%rsi</code>，返回值放在 <code>%rax</code>。汇编如下：</a>
+          <div class="qrow__meta"><span>计系概 · 汇编语言与程序的机器级表示</span><span>计算题</span><span class="dots" aria-label="难度 3 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          
+        </div>
+        
+      </li><li class="qrow" data-id="ics-025" data-course="ics" data-chapter="ics-5" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="3" data-tags="数组 多维数组 寻址方式" data-text="有二维数组 ```c int a[3][4]; ``` `int` 占 4 字节，数组按行优先存放，`&amp;a[0][0] = 0x1000`。回答： (1) `sizeof(a)` 是多少字节？每一行占多少字节？ (2) `&amp;a[1][2]` 的地址是多少？相对 `&amp;a[0][0]` 偏移多少字节？ (3) 设 在 `%rdi`、 在 `%rsi`，用两条指令算出 `a[i][j]` 相对 `&amp;a[0][0]` 的字节偏移。 (4) 偏移 44 字节处是哪个元素？ 数组 多维数组 寻址方式 自编">
+        <div>
+          <a class="qrow__link" href="../questions/ics-025.html"><p>有二维数组 ```c
+int a[3][4];</p>
+<pre><code></code></pre>
+</a>
+          <div class="qrow__meta"><span>计系概 · 数组与结构体</span><span>计算题</span><span class="dots" aria-label="难度 3 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          
+        </div>
+        
       </li></ul>
   <p class="more">
-    <a class="btn btn--red" href="../export/?tag=%E6%95%B0%E7%BB%84">导出这 1 道（PDF）</a>
+    <a class="btn btn--red" href="../export/?tag=%E6%95%B0%E7%BB%84">导出这 3 道（PDF）</a>
     <a href="../tags/">← 回到全部标签</a>
   </p>
 </div>
@@ -98,7 +115,7 @@
         <div class="footer__col">
           <h3>内容</h3>
           <ul>
-            <li><a href="../questions/">题库（149 道）</a></li>
+            <li><a href="../questions/">题库（195 道）</a></li>
             <li><a href="../practice/">刷题</a></li>
             <li><a href="../tags/">标签</a></li>
             <li><a href="../export/">导出 PDF</a></li>

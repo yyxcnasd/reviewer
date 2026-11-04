@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>标签：IEEE 754 · 复习册</title>
-<meta name="description" content="带「IEEE 754」标签的 1 道题。">
+<meta name="description" content="带「IEEE 754」标签的 5 道题。">
 <meta name="color-scheme" content="light">
 <link rel="stylesheet" href="../assets/katex/katex.min.css">
 <link rel="stylesheet" href="../assets/site.css">
@@ -21,7 +21,7 @@
 <script src="../assets/term.js" defer></script>
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <meta property="og:title" content="标签：IEEE 754 · 复习册">
-<meta property="og:description" content="带「IEEE 754」标签的 1 道题。">
+<meta property="og:description" content="带「IEEE 754」标签的 5 道题。">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="zh_CN">
 
@@ -66,7 +66,7 @@
   <header class="pagehead">
     <div class="pagehead__inner">
       <h1 class="pagehead__title">IEEE 754</h1>
-      <div class="pagehead__scope"><p>1 道题带这个标签。</p></div>
+      <div class="pagehead__scope"><p>5 道题带这个标签。</p></div>
     </div>
   </header>
   <ul class="qlist"><li class="qrow" data-id="ics-003" data-course="ics" data-chapter="ics-2" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="3" data-tags="IEEE 754 浮点数" data-text="32 位 IEEE 754 单精度浮点数按「1 位符号 + 8 位阶码 + 23 位尾数」编码，阶码偏置为 。回答： (1) 位模式 `0xC0A00000` 表示的值是多少？ (2) 写出 的单精度位模式（十六进制）。 (3) 位模式 `0x00000001` 表示的值是多少？它属于哪一类浮点数？ IEEE 754 浮点数 自编">
@@ -76,9 +76,37 @@
           
         </div>
         
+      </li><li class="qrow" data-id="ics-016" data-course="ics" data-chapter="ics-2" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="3" data-tags="IEEE 754 舍入" data-text="32 位 IEEE 754 单精度浮点数由「1 位符号 + 8 位阶码 + 23 位尾数」组成，阶码偏置为 。回答： (1) 执行 `float f = 16777217;` 后 `f` 的值（十进制）是多少？为什么？ (2) 在 附近，单精度相邻两个可表示数的间距（ulp）是多少？写出 之后的两个单精度数。 (3) 在区间 内，单精度的 ulp 是多少？ (4) 不超过多少的所有整数都能被单精度精确表示？ IEEE 754 舍入 自编">
+        <div>
+          <a class="qrow__link" href="../questions/ics-016.html">32 位 IEEE 754 单精度浮点数由「1 位符号 + 8 位阶码 + 23 位尾数」组成，阶码偏置为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>127</mn></mrow><annotation encoding="application/x-tex">127</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">127</span></span></span></span>。回答：</a>
+          <div class="qrow__meta"><span>计系概 · 信息的表示与处理</span><span>计算题</span><span class="dots" aria-label="难度 3 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          
+        </div>
+        
+      </li><li class="qrow" data-id="ics-017" data-course="ics" data-chapter="ics-2" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="3" data-tags="IEEE 754 非规格化 浮点数" data-text="单精度浮点数的位模式用十六进制给出。回答： (1) 分别写出下列位模式表示的值或类别：`0x7F800000`、`0xFF800000`、`0x7FC00000`、`0x00800000`、`0x007FFFFF`、`0x80000000`。 (2) 计算 的结果。 (3) 判断：对任意浮点数 ，`x == x` 是否总成立？`-0.0 == 0.0` 是否成立？ IEEE 754 非规格化 浮点数 自编">
+        <div>
+          <a class="qrow__link" href="../questions/ics-017.html">单精度浮点数的位模式用十六进制给出。回答：</a>
+          <div class="qrow__meta"><span>计系概 · 信息的表示与处理</span><span>概念题</span><span class="dots" aria-label="难度 3 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          
+        </div>
+        
+      </li><li class="qrow" data-id="ics-032" data-course="ics" data-chapter="ics-2" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="3" data-tags="浮点数 IEEE 754" data-text="在 IEEE 754 单精度浮点环境下回答下列问题。 （1）求 `1.0f / 0.0f`、`-1.0f / 0.0f`、`0.0f / 0.0f` 的值。 （2）求 `INFINITY - INFINITY`、`INFINITY * 0.0f`、`INFINITY / INFINITY` 的值。 （3）位模式 `0x7F800000`、`0xFF800000`、`0x7FC00000` 分别表示什么？ （4）设 `float x = 0.0f / 0.0f;`，求下列表达式的值：`x == x`、`x != x`、`x &lt; 1.0f`、`x &gt; 1.0f`、`!(x &lt; 1.0f)`。 （5）怎样用一条比较判断一个浮点数 `x` 是不是 NaN？ 浮点数 IEEE 754 自编">
+        <div>
+          <a class="qrow__link" href="../questions/ics-032.html">在 IEEE 754 单精度浮点环境下回答下列问题。</a>
+          <div class="qrow__meta"><span>计系概 · 信息的表示与处理</span><span>概念题</span><span class="dots" aria-label="难度 3 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          
+        </div>
+        
+      </li><li class="qrow" data-id="ics-033" data-course="ics" data-chapter="ics-2" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="4" data-tags="IEEE 754 舍入" data-text="单精度浮点有 24 位有效位（含隐含的 1），阶码偏置 127，默认舍入方式为「就近舍入、平局取偶」（round-to-nearest, ties-to-even）。回答： （1）`float f = 16777217;` 赋给 `f` 后的实际值是多少？ （2）`float g = 16777219;` 的实际值是多少？说明用到了哪条舍入规则。 （3）`float h = 33554435;` 的实际值是多少？ （4）`1.0f + 1.0f / 16777216.0f` 的值是多少？ （5）判断 `(int)(float)x == x` 是否对一切 `int` 都成立，并举出一个反例。 IEEE 754 舍入 自编">
+        <div>
+          <a class="qrow__link" href="../questions/ics-033.html">单精度浮点有 24 位有效位（含隐含的 1），阶码偏置 127，默认舍入方式为「就近舍入、平局取偶」（round-to-nearest, ties-to-even）。回答：</a>
+          <div class="qrow__meta"><span>计系概 · 信息的表示与处理</span><span>综合题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          
+        </div>
+        
       </li></ul>
   <p class="more">
-    <a class="btn btn--red" href="../export/?tag=IEEE%20754">导出这 1 道（PDF）</a>
+    <a class="btn btn--red" href="../export/?tag=IEEE%20754">导出这 5 道（PDF）</a>
     <a href="../tags/">← 回到全部标签</a>
   </p>
 </div>
@@ -98,7 +126,7 @@
         <div class="footer__col">
           <h3>内容</h3>
           <ul>
-            <li><a href="../questions/">题库（149 道）</a></li>
+            <li><a href="../questions/">题库（195 道）</a></li>
             <li><a href="../practice/">刷题</a></li>
             <li><a href="../tags/">标签</a></li>
             <li><a href="../export/">导出 PDF</a></li>

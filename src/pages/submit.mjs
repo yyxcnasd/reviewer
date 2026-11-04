@@ -35,7 +35,7 @@ export function buildSubmit(ctx) {
     <div class="pagehead__inner">
       <h1 class="pagehead__title">投稿一道题</h1>
       <div class="pagehead__scope">
-        <p>左边写，右边实时预览。课内的题填课程与章节；只是觉得有意思的题，大分类选「其他」就行，不必挂课程。写完一键开 GitHub issue，或把 .md 下载下来交给管理员。</p>
+        <p>左边写、右边预览。课内的题选课程与章节；课外的题大分类选「其他」，不用挂课程。</p>
         <div class="pagehead__stats">
           <span>Markdown + \\( \\) 公式</span>
           <span>一题一个文件</span>

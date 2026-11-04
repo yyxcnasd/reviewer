@@ -5,7 +5,7 @@
   const KEY = 'reviewer.term'
   const root = document.documentElement
   const buttons = Array.from(document.querySelectorAll('[data-term-btn]'))
-  const LABEL = { in: '在范围内', boundary: '止于此处', out: '不在本轮范围' }
+  const LABEL = { in: '在范围内', boundary: '止于此处', partial: '部分在范围', out: '不在本轮范围' }
   const DEFAULT = buttons[0]?.dataset.termBtn || 'midterm'
 
   function currentTerm() {
@@ -27,7 +27,7 @@
     el.dataset.state = state
     if (el.matches('.range tr, .chapter, .qrow')) {
       el.classList.toggle('is-out', state === 'out')
-      el.classList.toggle('is-boundary', state === 'boundary')
+      el.classList.toggle('is-boundary', state === 'boundary' || state === 'partial')
       // 题目行：不在本轮范围的，把标记露出来
       const badge = el.querySelector('.qrow__term')
       if (badge) badge.hidden = state !== 'out'

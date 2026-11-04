@@ -77,8 +77,8 @@
         <p>层次结构与抽象、程序从 C 到可执行文件的四个阶段、存储层次与性能三要素——以及每一步最容易算错的地方。</p>
         <div class="pagehead__stats">
           <span>在范围内</span>
-          <span><b>1</b>道题在这一章</span>
-          <span data-progress-ids="ics-001">本章已做 <b data-progress-here>0</b> / 1</span>
+          <span><b>3</b>道题在这一章</span>
+          <span data-progress-ids="ics-001,ics-013,ics-029">本章已做 <b data-progress-here>0</b> / 3</span>
           <span><button class="ghost" type="button" data-print>打印这一章</button></span>
         </div>
       </div>
@@ -144,9 +144,9 @@
 <p><strong>例</strong>：<code>gcc -c hello.c</code> 只做到 <code>.o</code>，此时 <code>main</code> 里调用的 <code>printf</code> 还没接上；<code>gcc hello.o</code> 去链接时会到 <code>libc</code> 里找，找到就成功。如果把 <code>printf</code> 写成 <code>prinf</code>，编译器只给隐式声明警告，链接器才会真正报 <code>undefined reference</code>。</p>
 <p><strong>再例</strong>：想知道某条 C 语句对应什么指令，用 <code>gcc -S -O1</code> 看 <code>.s</code>，或对可执行文件用 <code>objdump -d</code> 反汇编。考试里「给一段汇编判断语义」的题，就是这条链路的反方向。</p>
 
-    <div class="rule-head" style="margin-top:56px"><h2>这一章的题</h2><p>1 道，全部带解析。</p></div>
+    <div class="rule-head" style="margin-top:56px"><h2>这一章的题</h2><p>3 道，全部带解析。</p></div>
            <ul class="qmini">
-             <li><a href="../questions/ics-001.html">某程序在一台主频为 的机器上运行 动态指令数…</a> <span>计算题 · 性能分析</span></li>
+             <li><a href="../questions/ics-001.html">某程序在一台主频为 的机器上运行 动态指令数…</a> <span>计算题 · 性能分析</span></li><li><a href="../questions/ics-013.html">某程序在一台单核机器上运行需要 其中 花在可…</a> <span>计算题 · 性能分析</span></li><li><a href="../questions/ics-029.html">一个 C 程序从源文件变成可执行文件 要经过…</a> <span>概念题 · 编译</span></li>
            </ul>
     <div class="article__pager">
       <a href="../notes/dm-5.html">← 第 5 章 谓词逻辑的等值和推理演算</a>
@@ -159,7 +159,7 @@
           <dl class="spec spec--rail">
             <div><dt>章节</dt><dd>第 1 章</dd></div>
             <div><dt>节</dt><dd>2 节在范围内</dd></div>
-            <div><dt>题</dt><dd>1 道</dd></div>
+            <div><dt>题</dt><dd>3 道</dd></div>
             <div><dt>范围</dt><dd>在范围内</dd></div>
           </dl>
         </nav>
@@ -181,7 +181,7 @@
         <div class="footer__col">
           <h3>内容</h3>
           <ul>
-            <li><a href="../questions/">题库（149 道）</a></li>
+            <li><a href="../questions/">题库（195 道）</a></li>
             <li><a href="../practice/">刷题</a></li>
             <li><a href="../tags/">标签</a></li>
             <li><a href="../export/">导出 PDF</a></li>

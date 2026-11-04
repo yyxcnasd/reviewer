@@ -51,6 +51,10 @@
   --indigo: #173f72;
   --indigo-deep: #0e2a4d;
 
+  /* 代码块：比正文略暗一档，不要纯黑 */
+  --code-bg: #2b2822;
+  --code-fg: #f2eee4;
+
   /* 线：比背景明显低一档，控件靠它跟纸分开 */
   --line: rgba(23, 20, 15, 0.14);
   --line-strong: rgba(23, 20, 15, 0.42);
@@ -64,7 +68,7 @@
   /* 字体 */
   --serif: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "SimSun", serif;
   /* 只给两处真代码用：Markdown 编辑器与文件/issue 的原文片段 */
-  --mono: "SFMono-Regular", "JetBrains Mono", "Cascadia Mono", Consolas, monospace; /* taste-skill-ignore */
+  --mono: "Cascadia Mono", "Consolas", ui-monospace, "SFMono-Regular", monospace; /* taste-skill-ignore */
 
   /* 字号 */
   --fs-display: clamp(2.75rem, 7.4vw, 7.25rem);
@@ -111,6 +115,9 @@
 
   --line: rgba(244, 241, 232, 0.16);
   --line-strong: rgba(244, 241, 232, 0.46);
+
+  --code-bg: #221f19;
+  --code-fg: #efe9db;
 
   /* 深色下外壳再暗一档，字反而更亮 */
   --chrome-bg: #0c0b07;
@@ -205,6 +212,10 @@
     --red: #a80f1a;
     --red-deep: #7d0a13;
     --indigo: #122f57;
+  }
+  :root {
+    --code-bg: #f3f1ea;
+    --code-fg: #14120f;
   }
   :root[data-theme="dark"] .field-ink,
   :root[data-theme="dark"] .field-paper2,
@@ -1834,8 +1845,11 @@ a.tag:hover {
 }
 
 .prose pre {
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--code-bg);
+  color: var(--code-fg);
+  font-family: var(--mono); /* taste-skill-ignore */
+  font-variant-numeric: normal;
+  font-feature-settings: normal;
   padding: 18px 20px;
   overflow-x: auto;
   margin: 1.4em 0;
@@ -2119,8 +2133,10 @@ a.tag:hover {
   flex-wrap: wrap;
   align-items: baseline;
   gap: 0.5em 1em;
-  padding: 18px 20px;
-  background: var(--red);
+  padding: 16px 18px;
+  background: var(--red-soft);
+  border-left: 4px solid var(--red);
+  color: var(--ink);
   color: #fff;
 }
 
@@ -2132,7 +2148,7 @@ a.tag:hover {
 
 .answer .katex {
   font-size: 1.25em;
-  color: #fff;
+  color: var(--ink);
 }
 
 .qpage__side h2 {
@@ -2329,108 +2345,6 @@ a.tag:hover {
   }
 }
 
-/* ---------------------------------------------------------------- 鎶曠 */
-
-.submit {
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: clamp(20px, 2.4vw, 40px);
-  align-items: start;
-}
-
-.submit__form {
-  grid-column: 1 / 7;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-
-.submit__preview {
-  grid-column: 7 / 13;
-  position: sticky;
-  top: 24px;
-  background: var(--paper-2);
-  padding: clamp(18px, 2vw, 26px);
-  min-height: 60vh;
-  max-height: calc(100svh - 48px);
-  overflow-y: auto;
-}
-
-.submit__preview h2 {
-  font-size: var(--fs-micro);
-  font-weight: 700;
-  color: var(--ink-soft);
-  margin-bottom: 1em;
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-}
-
-.submit__preview .prose {
-  font-size: var(--fs-body);
-}
-
-.submit__row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-}
-
-.submit__tools {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-bottom: 8px;
-}
-
-.submit__tools button {
-  padding: 0.3em 0.6em;
-  background: var(--paper-2);
-  border: 0;
-  font-size: var(--fs-micro);
-  font-weight: 700;
-  cursor: pointer;
-  transition: background-color 150ms var(--ease), color 150ms var(--ease);
-}
-
-.submit__tools button:hover {
-  background: var(--ink);
-  color: var(--paper);
-}
-
-.submit__actions {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-}
-
-.submit__status {
-  font-size: var(--fs-small);
-  color: var(--ink-soft);
-  min-height: 1.5em;
-}
-
-.submit__status.is-warn {
-  color: var(--red);
-}
-
-@media (max-width: 1000px) {
-  .submit__form,
-  .submit__preview {
-    grid-column: 1 / -1;
-  }
-  .submit__preview {
-    position: static;
-    max-height: none;
-    min-height: 0;
-  }
-  .submit__row,
-  .submit__actions {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* ---------------------------------------------------------------- 鍒烽 */
 
 .practice {
   display: grid;
@@ -3156,7 +3070,8 @@ a.tag:hover {
 
 .submit {
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
+  /* 百分比列不会被内容的 min-content 撑开，输入时宽度是固定的 */
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 36%);
   gap: clamp(24px, 3vw, 48px);
   align-items: start;
   padding-bottom: clamp(24px, 4vw, 56px);
@@ -3263,6 +3178,9 @@ a.tag:hover {
   top: 18px;
   display: grid;
   gap: 10px;
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
   background: var(--paper-2);
   padding: clamp(14px, 1.6vw, 22px);
   max-height: calc(100vh - 36px);
@@ -3757,6 +3675,15 @@ body.is-focus .submit__preview {
 .submit__preview .prose {
   overflow-wrap: anywhere;
   word-break: break-word;
+  min-width: 0;
+}
+
+.submit__preview > * {
+  min-width: 0;
+}
+
+.submit__form {
+  min-width: 0;
 }
 
 .submit__preview .prose pre {
@@ -3859,8 +3786,10 @@ body.is-focus .submit__preview {
 .qblock__body pre {
   overflow-x: auto;
   padding: 14px 16px;
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--code-bg);
+  color: var(--code-fg);
+  font-family: var(--mono); /* taste-skill-ignore */
+  font-variant-numeric: normal;
   font-size: 0.875rem;
   line-height: 1.7;
   margin: 1.1em 0;
@@ -3880,6 +3809,90 @@ body.is-focus .submit__preview {
   min-width: 1.5em;
   text-align: center;
   padding: 0.05em 0.35em;
+}
+
+/* ---------------------------------------------------------------- 速查表（分科目） */
+
+.sheet-course {
+  margin-bottom: clamp(32px, 4vw, 56px);
+}
+
+.sheet-course__title {
+  font-size: clamp(1.25rem, 2vw, 1.6rem);
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--line-strong);
+  margin-bottom: 18px;
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.sheet-course .sheet__body {
+  column-count: 2;
+  column-gap: clamp(24px, 3vw, 48px);
+}
+
+.sheet-course .sheet__body h3 {
+  break-after: avoid;
+}
+
+.sheet-course .sheet__body p,
+.sheet-course .sheet__body ul,
+.sheet-course .sheet__body ol {
+  break-inside: avoid;
+}
+
+/* 纸上：A4 横向、三栏、小字号 */
+@media print {
+  @page {
+    size: A4 landscape;
+    margin: 10mm 10mm 12mm;
+  }
+
+  body {
+    font-size: 9pt;
+  }
+
+  .sheet-course {
+    margin: 0;
+    break-after: page;
+  }
+
+  .sheet-course:last-of-type {
+    break-after: auto;
+  }
+
+  .sheet-course__title {
+    font-size: 13pt;
+    border-bottom-width: 1.5pt;
+    margin-bottom: 4mm;
+    padding-bottom: 2mm;
+  }
+
+  .sheet-course .sheet__body {
+    column-count: 3;
+    column-gap: 8mm;
+    font-size: 8.6pt;
+    line-height: 1.5;
+  }
+
+  .sheet-course .sheet__body h3 {
+    font-size: 9.6pt;
+    margin: 3mm 0 1mm;
+  }
+
+  .sheet-course .sheet__body p {
+    margin: 0 0 1.6mm;
+  }
+
+  /* 只打印某一门 */
+  body.printing-va1 .sheet-course:not([data-sheet='va1']),
+  body.printing-la .sheet-course:not([data-sheet='la']),
+  body.printing-dm .sheet-course:not([data-sheet='dm']),
+  body.printing-ics .sheet-course:not([data-sheet='ics']),
+  body.printing-other .sheet-course:not([data-sheet='other']) {
+    display: none;
+  }
 }
 
 /* 打印一律 A4，页边距跟导出的卷子一致 */
@@ -4721,4 +4734,10 @@ body.is-focus .submit__preview {
     overflow: visible;
     max-height: none;
   }
+}
+
+.chip--partial {
+  background: transparent;
+  color: var(--red-deep);
+  border: 2px solid var(--red);
 }

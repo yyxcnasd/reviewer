@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>程序的内存与安全 · 综合题 · 复习册</title>
+<meta name="description" content="下面这段代码把网络包复制到栈上的缓冲区： ```c void copy_packet(const char *src, int len) { char buf[64]; if (len &lt;= 64) memcpy(buf, src, len); } ``` 回答： (1) 当 `len = -1` 时，`if` 检查能通过吗？`memcpy` 实际会复制多少字节？会发生什么？ (2) `memcpy` 的第三个参数是什么类型？`len` 传进去时发生了什么转换？ (3) 至少给出两种修复方法。 (4) 如果把条件改成 `len &lt; 64`，能防住 `len = -1` 吗？为什么？ (5) 这个漏洞与缓冲区溢出是什么关系？为什么说「边界检查写对了也可能被绕过」？ 缓冲区溢出 C 语言 溢出判断 自编">
+<meta name="color-scheme" content="light">
+<link rel="stylesheet" href="../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../assets/site.css">
+<script>
+  // 先按本地设置（或系统偏好）定主题，避免刷新时闪白
+  try {
+    // 默认浅色（纸面）。只有你手动切过深色，才在下次打开时记住。
+    if (localStorage.getItem('reviewer.theme') === 'dark')
+      document.documentElement.setAttribute('data-theme', 'dark')
+  } catch (e) {}
+</script>
+<script src="../assets/core.js"></script>
+<script src="../assets/theme.js" defer></script>
+<script src="../assets/term.js" defer></script>
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<meta property="og:title" content="程序的内存与安全 · 综合题 · 复习册">
+<meta property="og:description" content="下面这段代码把网络包复制到栈上的缓冲区： ```c void copy_packet(const char *src, int len) { char buf[64]; if (len &lt;= 64) memcpy(buf, src, len); } ``` 回答： (1) 当 `len = -1` 时，`if` 检查能通过吗？`memcpy` 实际会复制多少字节？会发生什么？ (2) `memcpy` 的第三个参数是什么类型？`len` 传进去时发生了什么转换？ (3) 至少给出两种修复方法。 (4) 如果把条件改成 `len &lt; 64`，能防住 `len = -1` 吗？为什么？ (5) 这个漏洞与缓冲区溢出是什么关系？为什么说「边界检查写对了也可能被绕过」？ 缓冲区溢出 C 语言 溢出判断 自编">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_CN">
+
+</head>
+<body class="no-js detail">
+<script>document.body.classList.remove('no-js')</script>
+<a class="skip" href="#main">跳到正文</a>
+
+  <header class="sitehead">
+    <div class="frame">
+      <nav class="nav" aria-label="主导航">
+        <a class="nav__mark" href="../"><span class="nav__dot" aria-hidden="true"></span>复习册</a>
+        <ul class="nav__links">
+          <li class="nav__menu-wrap">
+          <details class="navmenu">
+            <summary>课程</summary>
+            <ul class="navmenu__list">
+              <li><a href="../va1/">微积分 A1</a></li><li><a href="../la/">线性代数</a></li><li><a href="../dm/">离散数学<span class="navmenu__tag">仅期末</span></a></li><li><a href="../ics/">计算机系统概论</a></li>
+              <li class="navmenu__sep"><a href="../questions/">题库（全部课程）</a></li>
+            </ul>
+          </details>
+        </li>
+          <li><a href="../questions/" aria-current="page">题库</a></li>
+          <li><a href="../practice/">刷题</a></li>
+          <li><a href="../cheatsheet/">速查</a></li>
+          <li><a href="../stats/">进度</a></li>
+        </ul>
+        <div class="nav__end">
+          <div class="nav__terms" role="group" aria-label="考试轮次">
+            <button class="term-btn is-on" type="button" data-term-btn="midterm">期中</button><button class="term-btn" type="button" data-term-btn="final">期末</button>
+          </div>
+          <button class="ghost nav__theme" id="theme-toggle" type="button" aria-live="polite">深色</button>
+          <a class="btn btn--red nav__action" href="../submit/">投稿</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+<main id="main">
+
+<div class="frame">
+  <nav class="crumb" aria-label="位置"><a href="../">复习册</a><span class="crumb__sep">/</span><a href="../questions/">题库</a><span class="crumb__sep">/</span><a href="../ics/">计算机系统概论</a><span class="crumb__sep">/</span><span>第 6 章</span></nav>
+
+  <div class="qpage">
+    <div class="qpage__main">
+      <header class="pagehead pagehead--q">
+        <h1 class="qpage__title">程序的内存与安全 · 综合题</h1>
+        <div class="meta" style="margin-top:14px">
+          <span class="meta__item">计算机系统概论</span>
+          <span class="meta__item">综合题</span>
+          <span class="meta__item">难度 <span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></span>
+          <span class="meta__item">自编</span>
+          <span class="meta__item">投稿：自编</span>
+        </div>
+        <div class="qactions">
+          <button class="flag" type="button" data-flag="done" data-id="ics-028" aria-pressed="false"><span>已做</span></button>
+          <button class="flag flag--fav" type="button" data-flag="fav" data-id="ics-028" aria-pressed="false"><span>收藏</span></button>
+          <button class="ghost" type="button" id="expand-all">展开解析与提示</button>
+          <button class="ghost" type="button" id="copy-md">复制题目</button>
+          <a class="ghost" href="../export/?ids=ics-028">导出这道题</a>
+          <span class="qactions__id">ICS-028 · <span class="kbd">←</span><span class="kbd">→</span> 翻题 · <span class="kbd">E</span> 展开 · <span class="kbd">D</span> 记已做</span>
+        </div>
+      </header>
+
+      <div class="qpage__stem prose"><p>下面这段代码把网络包复制到栈上的缓冲区：</p>
+<pre><code class="language-c">void copy_packet(const char *src, int len) {
+    char buf[64];
+    if (len &lt;= 64)
+        memcpy(buf, src, len);
+}
+</code></pre>
+<p>回答：</p>
+<p>(1) 当 <code>len = -1</code> 时，<code>if</code> 检查能通过吗？<code>memcpy</code> 实际会复制多少字节？会发生什么？</p>
+<p>(2) <code>memcpy</code> 的第三个参数是什么类型？<code>len</code> 传进去时发生了什么转换？</p>
+<p>(3) 至少给出两种修复方法。</p>
+<p>(4) 如果把条件改成 <code>len &lt; 64</code>，能防住 <code>len = -1</code> 吗？为什么？</p>
+<p>(5) 这个漏洞与缓冲区溢出是什么关系？为什么说「边界检查写对了也可能被绕过」？</p>
+</div>
+
+      <details class="qblock qblock--hint"><summary>提示<span aria-hidden="true">+</span></summary><div class="qblock__body prose"><p><code>len</code> 是 <code>int</code>，而 <code>memcpy</code> 的第三个参数是 <code>size_t</code>（无符号）。比较 <code>len &lt;= 64</code> 时用的是有符号比较，<code>-1</code> 当然小于 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>64</mn></mrow><annotation encoding="application/x-tex">64</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">64</span></span></span></span>；但传参时 <code>-1</code> 会按模 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>64</mn></msup></mrow><annotation encoding="application/x-tex">2^{64}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">64</span></span></span></span></span></span></span></span></span></span></span></span> 变成巨大的无符号数。检查用的类型和拷贝用的类型不一致，是这类漏洞的根源。</p>
+</div></details>
+
+      <details class="qblock" id="solution">
+        <summary>解析（先自己做一遍再看）<span aria-hidden="true">展开</span></summary>
+        <div class="qblock__body prose">
+          <div class="answer"><span>答案</span><p>(1) 检查通过，会复制 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>64</mn></msup><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2^{64}-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">64</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span> 字节，导致栈溢出或崩溃；(2) <code>size_t</code>，负数按模 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>64</mn></msup></mrow><annotation encoding="application/x-tex">2^{64}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">64</span></span></span></span></span></span></span></span></span></span></span></span> 转换；(3) 改用 <code>size_t</code> 并检查上界，或同时检查 <code>len &gt;= 0</code>；(4) 不能；(5) 有符号与无符号不一致导致边界检查被绕过</p>
+</div>
+          <p><strong>(1)</strong> <code>len</code> 是 <code>int</code>，<code>-1 &lt;= 64</code> 为真，检查通过。进入 <code>memcpy</code> 时，第三个参数按 <code>size_t</code> 解释：</p>
+<p><span class="math-display"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo stretchy="false">(</mo><mtext mathvariant="monospace">size_t</mtext><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo><mo>=</mo><msup><mn>2</mn><mn>64</mn></msup><mo>−</mo><mn>1</mn><mo>=</mo><mn>18446744073709551615.</mn></mrow><annotation encoding="application/x-tex">(\texttt{size\_t})(-1)=2^{64}-1=18446744073709551615.</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord text"><span class="mord texttt">size_t</span></span><span class="mclose">)</span><span class="mopen">(</span><span class="mord">−</span><span class="mord">1</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.9474em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">64</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">18446744073709551615.</span></span></span></span></span></span></p>
+<p><code>memcpy</code> 会尝试从这个源地址复制近乎无限多的字节，远超出 <code>buf</code> 的 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>64</mn></mrow><annotation encoding="application/x-tex">64</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">64</span></span></span></span> 字节，造成严重的栈溢出，通常会直接段错误；在特定条件下也可能被利用来劫持控制流。</p>
+<p><strong>(2)</strong> <code>memcpy</code> 的原型是</p>
+<pre><code class="language-c">void *memcpy(void *dest, const void *src, size_t n);
+</code></pre>
+<p>第三个参数类型是 <code>size_t</code>，在 64 位平台上就是 <code>unsigned long</code>。C 在传参时把 <code>int</code> 转成 <code>size_t</code>：非负值不变，负值按模 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>64</mn></msup></mrow><annotation encoding="application/x-tex">2^{64}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">64</span></span></span></span></span></span></span></span></span></span></span></span> 回绕，所以 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">−</span><span class="mord">1</span></span></span></span> 变成 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>64</mn></msup><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2^{64}-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">64</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span>。</p>
+<p><strong>(3)</strong> 修复的关键是让「检查」和「使用」用同一种类型，并同时限制上下界：</p>
+<pre><code class="language-c">void copy_packet(const char *src, size_t len) {
+    char buf[64];
+    if (len &lt;= sizeof(buf))
+        memcpy(buf, src, len);
+}
+</code></pre>
+<p>或者保留 <code>int</code>，但把负值也排除：</p>
+<pre><code class="language-c">void copy_packet(const char *src, int len) {
+    char buf[64];
+    if (len &gt;= 0 &amp;&amp; len &lt;= (int)sizeof(buf))
+        memcpy(buf, src, len);
+}
+</code></pre>
+<p>也可以改用有界接口（如 <code>snprintf</code>、带长度参数的 <code>read</code>/<code>fgets</code>），从源头限制拷贝量。</p>
+<p><strong>(4)</strong> 不能。<code>-1 &lt; 64</code> 仍然为真，负值照样通过检查。把 <code>&lt;=</code> 改成 <code>&lt;</code> 只改变了上界的一个边界，完全没有处理负数。</p>
+<p><strong>(5)</strong> 这是缓冲区溢出的一个典型入口：边界检查本身写出来了，但检查用的是有符号 <code>int</code>，拷贝用的是无符号 <code>size_t</code>，攻击者用一个负长度就能让检查失效，随后 <code>memcpy</code> 按巨大的长度写入，踩坏栈上的返回地址等数据。</p>
+<p>它说明「检查写对了」不够，还要保证：检查的变量类型与真正参与运算/传参的类型一致；上下界都检查（这里上界是 <code>sizeof(buf)</code>，下界是 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span>）；长度在检查之后不会再被改变。只防住一个方向，另一个方向就可能成为绕过点。</p>
+<p>结论：<strong>(1) 检查通过，<code>memcpy</code> 会复制 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>64</mn></msup><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2^{64}-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">64</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span> 字节，造成栈溢出或崩溃；(2) 第三个参数是 <code>size_t</code>，负数按模 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>64</mn></msup></mrow><annotation encoding="application/x-tex">2^{64}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">64</span></span></span></span></span></span></span></span></span></span></span></span> 转换；(3) 改用 <code>size_t</code> 并检查上界，或同时检查 <code>len &gt;= 0</code>；(4) 不能，<code>-1 &lt; 64</code> 仍为真；(5) 有符号与无符号不一致导致边界检查被绕过，属于缓冲区溢出。</strong></p>
+
+        </div>
+      </details>
+
+      <details class="qblock"><summary>常见错误<span aria-hidden="true">展开</span></summary><div class="qblock__body prose"><p>一是认为 <code>len &lt;= 64</code> 会拒绝 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">−</span><span class="mord">1</span></span></span></span>：有符号比较下 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">−</span><span class="mord">1</span></span></span></span> 确实小于 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>64</mn></mrow><annotation encoding="application/x-tex">64</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">64</span></span></span></span>。二是以为 <code>memcpy</code> 会自动截断到 <code>buf</code> 的大小，它根本不知道 <code>buf</code> 有多大。三是用 <code>len &lt; 64</code> 或 <code>len &lt;= 64</code> 就以为修好了，没处理负数。四是只把 <code>buf</code> 改大，不改变检查逻辑，攻击者仍可用巨大长度越过。五是忽略 <code>memcpy</code> 参数的类型转换，把「值」和「位模式」混为一谈：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">−</span><span class="mord">1</span></span></span></span> 的位模式转成无符号就是 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>64</mn></msup><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2^{64}-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">64</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span>。</p>
+</div></details>
+
+      <div class="pager" data-pager>
+        <a class="pager__prev" href="../questions/ics-027.html"><span>上一题</span>缓冲区溢出 · 难度 4</a>
+        <a class="pager__next" href="../questions/ics-029.html"><span>下一题</span>一个 C 程序从源文件变成可执行文件 要经过…</a>
+      </div>
+    </div>
+
+    <aside class="qpage__side">
+      <div>
+        <h2>这道题</h2>
+        <dl class="spec">
+          <div><dt>科目</dt><dd>计算机系统概论</dd></div>
+          <div><dt>章节</dt><dd>程序的内存与安全</dd></div>
+          <div><dt>题型</dt><dd>综合题</dd></div>
+          <div><dt>难度</dt><dd><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></dd></div>
+          <div><dt>出处</dt><dd>自编</dd></div>
+          <div><dt>范围</dt><dd><span data-chip data-states="{&quot;midterm&quot;:&quot;partial&quot;,&quot;final&quot;:&quot;partial&quot;}">部分在范围</span></dd></div>
+        </dl>
+      </div>
+      <div>
+        <h2>考点</h2>
+        <ul class="tag-list"><li><a class="tag" href="../tags/%E7%BC%93%E5%86%B2%E5%8C%BA%E6%BA%A2%E5%87%BA.html">缓冲区溢出</a></li><li><a class="tag" href="../tags/C%20%E8%AF%AD%E8%A8%80.html">C 语言</a></li><li><a class="tag" href="../tags/%E6%BA%A2%E5%87%BA%E5%88%A4%E6%96%AD.html">溢出判断</a></li></ul>
+      </div>
+      <div>
+        <h2>往下走</h2>
+        <ul class="sidelist">
+          <li><a href="../notes/ics-6.html">读这一章的要点</a></li>
+          <li><a href="../questions/?chapter=ics-6">这一章的 3 道题</a></li>
+          <li><a href="../export/?chapter=ics-6">导出这一章</a></li>
+          <li><a href="../ics/#ch-ics-6">这一章在考纲里的位置</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>同一章</h2>
+        <ul class="sidelist">
+          <li><a href="../questions/ics-012.html">下面的函数用 gets 读入一行字符串</a></li><li><a href="../questions/ics-027.html">缓冲区溢出 · 难度 4</a></li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+</div>
+
+</main>
+
+  <footer class="footer">
+    <div class="frame">
+      <a class="footer__word" href="../" aria-label="回到首页：复习册"><span aria-hidden="true">复习册</span></a>
+      <div class="footer__cols">
+        <div class="footer__col">
+          <h3>科目</h3>
+          <ul>
+            <li><a href="../va1/">微积分 A1</a></li>
+            <li><a href="../la/">线性代数</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h3>内容</h3>
+          <ul>
+            <li><a href="../questions/">题库（195 道）</a></li>
+            <li><a href="../practice/">刷题</a></li>
+            <li><a href="../tags/">标签</a></li>
+            <li><a href="../export/">导出 PDF</a></li>
+            <li><a href="../stats/">进度</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h3>参与</h3>
+          <ul>
+            <li><a href="../submit/">投稿一道题</a></li>
+            <li><a href="../about/">关于与范围说明</a></li>
+            <li><a href="https://github.com/yyxcnasd/reviewer" target="_blank" rel="noopener noreferrer">GitHub 仓库</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h3>这本册子</h3>
+          <ul>
+            <li>2026 秋 期中版</li>
+            <li>内容 CC BY-SA 4.0</li>
+            <li>构建于 2026-11-04</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__legal">
+        <span>复习册 · 课程 · 范围 · 题库</span>
+        <span>内容以 CC BY-SA 4.0 发布，题目标题与解析可自由取用，请保留出处。</span>
+      </div>
+    </div>
+  </footer>
+<script src="../assets/progress.js" defer></script>
+<script src="../assets/site.js" defer></script>
+
+</body>
+</html>

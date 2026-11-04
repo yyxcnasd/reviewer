@@ -28,6 +28,10 @@
   --indigo: #173f72;
   --indigo-deep: #0e2a4d;
 
+  /* 代码块：比正文略暗一档，不要纯黑 */
+  --code-bg: #2b2822;
+  --code-fg: #f2eee4;
+
   /* 线：比背景明显低一档，控件靠它跟纸分开 */
   --line: rgba(23, 20, 15, 0.14);
   --line-strong: rgba(23, 20, 15, 0.42);
@@ -41,7 +45,7 @@
   /* 字体 */
   --serif: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "SimSun", serif;
   /* 只给两处真代码用：Markdown 编辑器与文件/issue 的原文片段 */
-  --mono: "SFMono-Regular", "JetBrains Mono", "Cascadia Mono", Consolas, monospace; /* taste-skill-ignore */
+  --mono: "Cascadia Mono", "Consolas", ui-monospace, "SFMono-Regular", monospace; /* taste-skill-ignore */
 
   /* 字号 */
   --fs-display: clamp(2.75rem, 7.4vw, 7.25rem);
@@ -88,6 +92,9 @@
 
   --line: rgba(244, 241, 232, 0.16);
   --line-strong: rgba(244, 241, 232, 0.46);
+
+  --code-bg: #221f19;
+  --code-fg: #efe9db;
 
   /* 深色下外壳再暗一档，字反而更亮 */
   --chrome-bg: #0c0b07;
@@ -182,6 +189,10 @@
     --red: #a80f1a;
     --red-deep: #7d0a13;
     --indigo: #122f57;
+  }
+  :root {
+    --code-bg: #f3f1ea;
+    --code-fg: #14120f;
   }
   :root[data-theme="dark"] .field-ink,
   :root[data-theme="dark"] .field-paper2,

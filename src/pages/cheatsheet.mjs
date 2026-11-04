@@ -1,68 +1,101 @@
 import fs from 'node:fs'
 import path from 'node:path'
+import yaml from 'js-yaml'
 
-import {
-  page,
-  write,
-  url,
-  esc,
-  attr,
-  dots,
-  stateLabel,
-  tagHref,
-  stemExcerpt,
-  shortLabel,
-  shortTitle,
-  chapterOf,
-  crumb,
-  pageHead,
-  stat,
-  statCount,
-  tagChips,
-  tagChipsList,
-  progressFlags,
-  questionRow,
-  courseOptions,
-  chapterOptions,
-  tagOptions,
-  difficultyOptions,
-  DIFFICULTIES,
-  stateChip,
-} from '../lib/site.mjs'
+import { page, write, url, esc, attr, crumb } from '../lib/site.mjs'
 
-/* ---------------------------------------------------------------- 速查表 */
+/* ==========================================================================
+   速查表：一门课一份，A4 横向三栏，可以只打印某一门。
+   ========================================================================== */
 
 export function buildCheatsheet(ctx) {
-  const file = path.join(ctx.CONTENT, 'cheatsheet.md')
-  if (!fs.existsSync(file)) return
-  const src = fs.readFileSync(file, 'utf8')
-  const headings = []
-  const html = ctx.renderMarkdown(src, { errors: ctx.errors, headings })
+  const dir = path.join(ctx.CONTENT, 'cheatsheet')
+  const files = fs.existsSync(dir) ? fs.readdirSync(dir).filter((f) => f.endsWith('.md')) : []
+  const legacy = path.join(ctx.CONTENT, 'cheatsheet.md')
+  if (!files.length && fs.existsSync(legacy)) files.push('../cheatsheet.md')
+
+  const sheets = files
+    .map((name) => {
+      const file = name === '../cheatsheet.md' ? legacy : path.join(dir, name)
+      const raw = fs.readFileSync(file, 'utf8')
+      const m = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/)
+      const meta = m ? yaml.load(m[1]) || {} : {}
+      const body = m ? m[2] : raw
+      const course = ctx.courseById.get(meta.course) || { id: meta.course || name.replace('.md', ''), name: meta.title || name }
+      const html = ctx.renderMarkdown(body, { errors: ctx.errors })
+      const groups = (html.match(/<h[23][ >]/g) || []).length
+      return { id: course.id, name: meta.title || course.name, html, headings: groups }
+    })
+    .filter((s) => s.html.trim())
+    .sort((a, b) => ctx.courses.findIndex((c) => c.id === a.id) - ctx.courses.findIndex((c) => c.id === b.id))
+
+  if (!sheets.length) return
+
+  const total = sheets.reduce((n, s) => n + s.headings, 0)
 
   const body = `
 <div class="frame">
   ${crumb(1, [{ href: '', label: ctx.config.wordmark }, { label: '速查' }])}
-  <header class="pagehead">
+  <header class="pagehead pagehead--wide">
     <div class="pagehead__inner">
       <h1 class="pagehead__title">速查表</h1>
-      <div class="pagehead__scope">
-        <p>两门课最常用的一批结论：等价无穷小、麦克劳林展开、求导与中值定理、行列式与逆矩阵、线性相关性。考前十分钟扫一遍，打印出来带走也行。</p>
-        <div class="pagehead__stats" data-cheat-stats>
-          <span><b>${headings.length}</b>组结论</span>
-          <span>适合打印（A4 双栏）</span>
-          <span><button class="ghost" type="button" data-print>打印</button></span>
-          <span><a href="${url(1, 'questions/')}">去做题 →</a></span>
+      <div class="pagehead__scope st-head">
+        <div class="st-head__text">
+          <p>每门课最常用的一批结论。A4 横向、三栏，打印出来是一张可折叠的纸。</p>
+          <div class="pagehead__stats">
+            <span>${sheets.length} 门课</span>
+            <span>${total} 组结论</span>
+            <span>打印时按科目分开</span>
+          </div>
+        </div>
+        <div class="st-head__actions">
+          <button class="btn btn--red" type="button" data-print-sheet="">打印全部</button>
+          ${sheets
+            .map(
+              (s) =>
+                `<button class="btn btn--tone" type="button" data-print-sheet="${s.id}">只打印${esc(s.name)}</button>`,
+            )
+            .join('')}
         </div>
       </div>
     </div>
   </header>
 
-  <div class="sheet">
-    <div class="sheet__body prose">
-      ${html}
-    </div>
-  </div>
+  ${sheets
+    .map(
+      (s) => `<section class="sheet-course" data-sheet="${s.id}">
+    <h2 class="sheet-course__title">${esc(s.name)}</h2>
+    <div class="sheet__body prose">${s.html}</div>
+  </section>`,
+    )
+    .join('')}
 </div>
-${'<script src="' + url(1, 'assets/print.js') + '" defer></script>'}`
-  write(ctx, 'cheatsheet/index.html', page(ctx, { depth: 1, title: '速查表', description: '微积分 A1 与线性代数的常用结论速查：等价无穷小、麦克劳林、中值定理、行列式、逆矩阵、线性相关。', body, bodyClass: 'detail', navActive: 'cheatsheet' }))
+<script>
+  // 打印时只保留选中的那一门
+  for (const btn of document.querySelectorAll('[data-print-sheet]')) {
+    btn.addEventListener('click', () => {
+      const id = btn.getAttribute('data-print-sheet')
+      document.body.classList.forEach((c) => {
+        if (c.startsWith('printing-')) document.body.classList.remove(c)
+      })
+      if (id) document.body.classList.add('printing-' + id)
+      window.print()
+    })
+  }
+</script>`
+
+  write(
+    ctx,
+    'cheatsheet/index.html',
+    page(ctx, {
+      depth: 1,
+      title: '速查表',
+      description: `${sheets.map((s) => s.name).join('、')}的常用结论速查表，A4 横向三栏，可按科目打印。`,
+      body,
+      bodyClass: 'detail',
+      navActive: 'cheatsheet',
+      // 速查表整页横向 A4；放在 head 里，压过后面的全局 @page
+      head: "<style>@media print { @page { size: A4 landscape; margin: 10mm 10mm 12mm; } .sitehead, .footer, .crumb, .pagehead { display: none !important; } .frame { width: auto; padding: 0; } }</style>",
+    }),
+  )
 }

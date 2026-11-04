@@ -181,7 +181,10 @@ export function chapterCtx(ctx, chapter) {
 }
 
 export function stateLabel(state) {
-  return state === 'in' ? '在范围内' : state === 'boundary' ? '止于此处' : '期中之后'
+  if (state === 'in') return '在范围内'
+  if (state === 'boundary') return '止于此处'
+  if (state === 'partial') return '部分在范围'
+  return '不在本轮范围'
 }
 
 export function dots(n) {

@@ -88,5 +88,5 @@ export function buildPractice(ctx) {
   </div>
 </div>
 ${'<script src="' + url(1, 'assets/practice.js') + '" defer></script>'}`
-  write(ctx, 'practice/index.html', page(ctx, { depth: 1, title: '刷题', description: '随机抽题，按章节与难度筛，做完看解析。', body, bodyClass: 'detail', navActive: 'questions' }))
+  write(ctx, 'practice/index.html', page(ctx, { depth: 1, title: '刷题', description: '随机抽题，按章节与难度筛，做完看解析。', body, bodyClass: 'detail', navActive: 'practice' }))
 }

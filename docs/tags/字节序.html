@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>标签：字节序 · 复习册</title>
-<meta name="description" content="带「字节序」标签的 1 道题。">
+<meta name="description" content="带「字节序」标签的 3 道题。">
 <meta name="color-scheme" content="light">
 <link rel="stylesheet" href="../assets/katex/katex.min.css">
 <link rel="stylesheet" href="../assets/site.css">
@@ -21,7 +21,7 @@
 <script src="../assets/term.js" defer></script>
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <meta property="og:title" content="标签：字节序 · 复习册">
-<meta property="og:description" content="带「字节序」标签的 1 道题。">
+<meta property="og:description" content="带「字节序」标签的 3 道题。">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="zh_CN">
 
@@ -66,7 +66,7 @@
   <header class="pagehead">
     <div class="pagehead__inner">
       <h1 class="pagehead__title">字节序</h1>
-      <div class="pagehead__scope"><p>1 道题带这个标签。</p></div>
+      <div class="pagehead__scope"><p>3 道题带这个标签。</p></div>
     </div>
   </header>
   <ul class="qlist"><li class="qrow" data-id="ics-002" data-course="ics" data-chapter="ics-2" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="2" data-tags="补码 字节序" data-text="在 8 位整数环境（例如 `char`）下回答： (1) 十六进制 `0xB7` 作为无符号数和作为有符号补码数分别是多少？ (2) 十进制数 的 8 位补码是什么（写成十六进制）？ (3) 计算 `0x7D + 0x0B`，写出 8 位结果的十六进制，并分别判断作为无符号数和作为有符号数是否溢出。 (4) `0x12345678` 在小端机器上从低地址开始依次是哪 4 个字节（用十六进制）？ 补码 字节序 自编">
@@ -76,9 +76,23 @@
           
         </div>
         
+      </li><li class="qrow" data-id="ics-015" data-course="ics" data-chapter="ics-2" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="3" data-tags="字节序 补码" data-text="一台机器上依次声明了 `long a; int b; short c;`，三个变量在内存中从地址 `0x1000` 起连续存放。内存 dump 如下（每个字节用两位十六进制表示）： ``` 0x1000: 08 07 06 05 04 03 02 01 0x1008: fe ff ff ff 0x100c: 34 12 00 00 ``` 回答： (1) 这台机器是小端还是大端？`a` 的十六进制值是多少？ (2) `b` 与 `c` 的十进制值分别是多少？ (3) 令 `char *p = (char *)&amp;a;`，求 `p[3]` 与 `*(int *)((char *)&amp;a + 4)` 的值（后者按 `int` 解释）。 (4) 如果同样的 16 个字节来自一台大端机器，`b` 的值会是多少？ 字节序 补码 自编">
+        <div>
+          <a class="qrow__link" href="../questions/ics-015.html">一台机器上依次声明了 <code>long a; int b; short c;</code>，三个变量在内存中从地址 <code>0x1000</code> 起连续存放。内存 dump 如下（每个字节用两位十六进制表示）：</a>
+          <div class="qrow__meta"><span>计系概 · 信息的表示与处理</span><span>计算题</span><span class="dots" aria-label="难度 3 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          
+        </div>
+        
+      </li><li class="qrow" data-id="ics-026" data-course="ics" data-chapter="ics-5" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="4" data-tags="联合体 结构体 数据对齐 字节序" data-text="考虑下面的定义（`long` 占 8 字节、`int` 占 4 字节、`short` 占 2 字节，机器为小端）： ```c union U { long l; int i[2]; char c[8]; }; struct S { char tag; union U u; short s; }; ``` 回答： (1) `sizeof(union U)` 是多少？ (2) `struct S` 各成员的偏移与 `sizeof(struct S)` 分别是多少？ (3) 令 `struct S x; x.u.l = 0x0102030405060708;`，求 `x.u.c[0]` 与 `x.u.i[0]` 的值。 (4) 若先执行 `x.u.i[0] = 0x11223344; x.u.i[1] = 0x55667788;`，再读 `x.u.l`，值是多少？ (5) 如果把 `s` 的类型">
+        <div>
+          <a class="qrow__link" href="../questions/ics-026.html">考虑下面的定义（<code>long</code> 占 8 字节、<code>int</code> 占 4 字节、<code>short</code> 占 2 字节，机器为小端）：</a>
+          <div class="qrow__meta"><span>计系概 · 数组与结构体</span><span>综合题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          
+        </div>
+        
       </li></ul>
   <p class="more">
-    <a class="btn btn--red" href="../export/?tag=%E5%AD%97%E8%8A%82%E5%BA%8F">导出这 1 道（PDF）</a>
+    <a class="btn btn--red" href="../export/?tag=%E5%AD%97%E8%8A%82%E5%BA%8F">导出这 3 道（PDF）</a>
     <a href="../tags/">← 回到全部标签</a>
   </p>
 </div>
@@ -98,7 +112,7 @@
         <div class="footer__col">
           <h3>内容</h3>
           <ul>
-            <li><a href="../questions/">题库（149 道）</a></li>
+            <li><a href="../questions/">题库（195 道）</a></li>
             <li><a href="../practice/">刷题</a></li>
             <li><a href="../tags/">标签</a></li>
             <li><a href="../export/">导出 PDF</a></li>

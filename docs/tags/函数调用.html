@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>标签：函数调用 · 复习册</title>
-<meta name="description" content="带「函数调用」标签的 2 道题。">
+<meta name="description" content="带「函数调用」标签的 5 道题。">
 <meta name="color-scheme" content="light">
 <link rel="stylesheet" href="../assets/katex/katex.min.css">
 <link rel="stylesheet" href="../assets/site.css">
@@ -21,7 +21,7 @@
 <script src="../assets/term.js" defer></script>
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <meta property="og:title" content="标签：函数调用 · 复习册">
-<meta property="og:description" content="带「函数调用」标签的 2 道题。">
+<meta property="og:description" content="带「函数调用」标签的 5 道题。">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="zh_CN">
 
@@ -66,7 +66,7 @@
   <header class="pagehead">
     <div class="pagehead__inner">
       <h1 class="pagehead__title">函数调用</h1>
-      <div class="pagehead__scope"><p>2 道题带这个标签。</p></div>
+      <div class="pagehead__scope"><p>5 道题带这个标签。</p></div>
     </div>
   </header>
   <ul class="qlist"><li class="qrow" data-id="ics-008" data-course="ics" data-chapter="ics-4" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="3" data-tags="函数调用 栈帧" data-text="函数 `sum` 的参数 `n` 放在 `%rdi`，返回值放在 `%rax`。汇编是 ``` sum: testq %rdi, %rdi jle .L2 pushq %rbx movq %rdi, %rbx leaq -1(%rdi), %rdi call sum addq %rbx, %rax popq %rbx ret .L2: movl $0, %eax ret ``` (1) 这个函数计算的是什么？求 `sum(4)`。 (2) 为什么把 `n` 存在 `%rbx` 里，而不是随便用一个 `%rcx`？ (3) 执行 `sum(3)` 的过程中，栈上最多同时有几个返回地址、几个保存的 `%rbx`？若 `main` 调用 `sum` 前 `%rsp = 0x1000`，每层占「8 字节返回地址 + 8 字节 rbx」，求最深时的 `%rsp`。 函数调用 栈帧 自编">
@@ -83,9 +83,30 @@
           
         </div>
         
+      </li><li class="qrow" data-id="ics-022" data-course="ics" data-chapter="ics-4" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="3" data-tags="函数调用 栈帧" data-text="函数 `foo` 的汇编开头是 ``` foo: pushq %rbp movq %rsp, %rbp subq $24, %rsp ... call bar ``` 执行到 `foo` 的第一条指令之前，`%rsp = 0x7fffffffe018`（除以 余 ）。 回答： (1) 执行完 `pushq %rbp`、`subq $24, %rsp` 后，`%rsp` 各是多少？ (2) 执行 `call bar` 之前，`%rsp` 是否满足 ABI 的 16 字节对齐要求？`bar` 刚进入时 `%rsp` 除以 余几？ (3) 如果 `bar` 中用 `movaps` 向按 16 字节对齐分配的栈槽写数据，可能发生什么？ (4) 只改 `subq` 的立即数，应该改成多少？并说明为什么进入 `foo` 时 `%rsp` 除以 余 。 函数调用 栈帧 自编">
+        <div>
+          <a class="qrow__link" href="../questions/ics-022.html">函数 <code>foo</code> 的汇编开头是</a>
+          <div class="qrow__meta"><span>计系概 · 函数调用</span><span>计算题</span><span class="dots" aria-label="难度 3 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          
+        </div>
+        
+      </li><li class="qrow" data-id="ics-023" data-course="ics" data-chapter="ics-4" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="3" data-tags="递归 函数调用 栈帧" data-text="递归函数 ```c long f(long n) { if (n &lt;= 1) return 1; return f(n - 1) + f(n - 2); } ``` 回答： (1) `f(5)` 的值是多少？ (2) 计算 `f(5)` 的整个过程中，`f` 一共被调用多少次（包括最初的一次）？ (3) 递归调用链最深时，同时有多少个 `f` 的活动记录？ (4) 若每个活动记录占 32 字节，最深时这些活动记录共占多少栈空间？ 递归 函数调用 栈帧 自编">
+        <div>
+          <a class="qrow__link" href="../questions/ics-023.html">递归函数 · 递归</a>
+          <div class="qrow__meta"><span>计系概 · 函数调用</span><span>计算题</span><span class="dots" aria-label="难度 3 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          
+        </div>
+        
+      </li><li class="qrow" data-id="ics-024" data-course="ics" data-chapter="ics-4" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="4" data-tags="函数调用 栈帧 汇编" data-text="`g` 是外部函数，参数和返回值都是 `long`。`f` 在 `-O0` 下的汇编如下： ``` f: pushq %rbp movq %rsp, %rbp pushq %rbx subq $24, %rsp movq %rdi, %rbx movq %rdi, -32(%rbp) call g movq %rax, -24(%rbp) movq -32(%rbp), %rax addq -24(%rbp), %rax addq $24, %rsp popq %rbx popq %rbp ret ``` 回答： (1) 还原 `f` 的 C 代码。 (2) 局部变量区（从 `-32(%rbp)` 到 `-9(%rbp)`）共多少字节？其中数组占多少、填充占多少？ (3) 若 ，求 `f(7)`。 (4) 如果删掉 `pushq %rbx` 和 `popq %rbx`，会出什么问题？ (5">
+        <div>
+          <a class="qrow__link" href="../questions/ics-024.html"><code>g</code> 是外部函数，参数和返回值都是 <code>long</code>。<code>f</code> 在 <code>-O0</code> 下的汇编如下：</a>
+          <div class="qrow__meta"><span>计系概 · 函数调用</span><span>综合题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          
+        </div>
+        
       </li></ul>
   <p class="more">
-    <a class="btn btn--red" href="../export/?tag=%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8">导出这 2 道（PDF）</a>
+    <a class="btn btn--red" href="../export/?tag=%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8">导出这 5 道（PDF）</a>
     <a href="../tags/">← 回到全部标签</a>
   </p>
 </div>
@@ -105,7 +126,7 @@
         <div class="footer__col">
           <h3>内容</h3>
           <ul>
-            <li><a href="../questions/">题库（149 道）</a></li>
+            <li><a href="../questions/">题库（195 道）</a></li>
             <li><a href="../practice/">刷题</a></li>
             <li><a href="../tags/">标签</a></li>
             <li><a href="../export/">导出 PDF</a></li>

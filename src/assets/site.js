@@ -262,7 +262,10 @@
           (!difficulty || item.dataset.difficulty === difficulty) &&
           (!tag || (item.dataset.tags || '').split(' ').includes(tag)) &&
           (!status || (status === 'done' ? done : status === 'undone' ? !done : fav)) &&
-          (!scope || (scope === 'in' ? item.dataset.state === 'in' || item.dataset.state === 'boundary' : item.dataset.state === 'out')) &&
+          (!scope ||
+            (scope === 'in'
+              ? ['in', 'boundary', 'partial'].includes(item.dataset.state)
+              : item.dataset.state === 'out')) &&
           (!q || (item.dataset.text || '').toLowerCase().includes(q))
         item.hidden = !ok
         if (ok) shown += 1
@@ -316,7 +319,7 @@
       if (!scopeNote) return
       const termLabel = document.querySelector('.term-btn.is-on')?.textContent?.trim() || '期中'
       const inScope = items.filter((el) => el.dataset.state === 'in' || el.dataset.state === 'boundary').length
-      scopeNote.textContent = `当前轮次「${termLabel}」：范围内 ${inScope} 道，范围外 ${items.length - inScope} 道。默认只看范围内，把「范围」改成「全部」可以看另一轮次的内容。`
+      scopeNote.textContent = `${termLabel}范围内 ${inScope} 道 · 范围外 ${items.length - inScope} 道（「范围」可改成全部）`
     }
     paintScopeNote()
     document.addEventListener('term:change', paintScopeNote)

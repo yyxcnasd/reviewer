@@ -76,11 +76,18 @@ export function loadContent({ ROOT, err, warn }) {
           chapterTerms[id] = 'out'
           continue
         }
-        chapterTerms[id] = sections.length
-          ? stateOf(sections.map((s) => s.terms[id]))
-          : ch.terms?.[id] || ch.state || 'in'
+        if (!sections.length) {
+          chapterTerms[id] = ch.terms?.[id] || ch.state || 'in'
+          continue
+        }
+        // 章节里有小节在范围内，但整章不都在 → partial（"部分在范围"）
+        const states = sections.map((s) => s.terms[id])
+        const hasIn = states.some((s) => s === 'in' || s === 'boundary')
+        const allIn = states.every((s) => s === 'in' || s === 'boundary')
+        chapterTerms[id] = !hasIn ? 'out' : allIn ? 'in' : 'partial'
       }
-      return { ...ch, course: course.id, terms: chapterTerms, sections, state: stateOf(Object.values(chapterTerms)) }
+      // state 只是兼容用的「首个轮次状态」，页面上的 chip 由轮次开关实时改
+      return { ...ch, course: course.id, terms: chapterTerms, sections, state: chapterTerms[termIds[0]] || 'out' }
     })
     return { ...course, terms: own, chapters }
   })
