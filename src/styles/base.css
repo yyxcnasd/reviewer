@@ -507,3 +507,100 @@ a.tag:hover {
 [hidden] {
   display: none !important;
 }
+
+/* ---------------------------------------------------------------- 课程菜单 */
+
+.nav__menu-wrap {
+  position: relative;
+}
+
+.navmenu > summary {
+  cursor: pointer;
+  list-style: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.navmenu > summary::-webkit-details-marker {
+  display: none;
+}
+
+.navmenu > summary::after {
+  content: '';
+  width: 0.42em;
+  height: 0.42em;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: translateY(-0.15em) rotate(45deg);
+  transition: transform 160ms var(--ease);
+}
+
+.navmenu[open] > summary::after {
+  transform: translateY(0.1em) rotate(-135deg);
+}
+
+.navmenu[open] > summary {
+  color: var(--red);
+}
+
+.navmenu__list {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: -14px;
+  z-index: 40;
+  min-width: 15em;
+  margin: 0;
+  padding: 6px 0;
+  list-style: none;
+  background: var(--surface);
+  border: 2px solid var(--line-strong);
+}
+
+.navmenu__list a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  color: var(--ink);
+  text-decoration: none;
+  font-size: var(--fs-small);
+  white-space: nowrap;
+}
+
+.navmenu__list a:hover,
+.navmenu__list a[aria-current='page'] {
+  background: var(--paper-2);
+  color: var(--ink);
+}
+
+.navmenu__tag {
+  margin-left: auto;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ink-mute);
+  border: 2px solid var(--line-strong);
+  padding: 0 4px;
+}
+
+.navmenu__sep {
+  border-top: 2px solid var(--line);
+  margin-top: 4px;
+  padding-top: 4px;
+}
+
+@media (max-width: 720px) {
+  .navmenu__list {
+    position: static;
+    border: 0;
+    border-left: 2px solid var(--line);
+    margin: 6px 0 0 2px;
+    padding: 0 0 0 10px;
+    min-width: 0;
+  }
+  .navmenu__list a {
+    padding: 7px 8px;
+  }
+}

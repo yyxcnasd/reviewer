@@ -35,8 +35,15 @@
       <nav class="nav" aria-label="主导航">
         <a class="nav__mark" href="./"><span class="nav__dot" aria-hidden="true"></span>复习册</a>
         <ul class="nav__links">
-          <li><a href="./va1/">微积分 A1</a></li>
-          <li><a href="./la/">线性代数</a></li>
+          <li class="nav__menu-wrap">
+          <details class="navmenu">
+            <summary>课程</summary>
+            <ul class="navmenu__list">
+              <li><a href="./va1/">微积分 A1</a></li><li><a href="./la/">线性代数</a></li><li><a href="./dm/">离散数学<span class="navmenu__tag">仅期末</span></a></li><li><a href="./ics/">计算机系统概论</a></li>
+              <li class="navmenu__sep"><a href="./questions/">题库（全部课程）</a></li>
+            </ul>
+          </details>
+        </li>
           <li><a href="./questions/">题库</a></li>
           <li><a href="./practice/">刷题</a></li>
           <li><a href="./cheatsheet/">速查</a></li>
@@ -62,26 +69,25 @@
   <div class="frame hero__inner">
     <div class="hero__copy">
       <h1 class="hero__title">要考的范围<br>和题都在这里</h1>
-      <p class="hero__lead">课程范围、讲义要点、题库与解析都在这里。当前显示的是<b data-term-label>期中</b>的范围，右上角可以换成期末。125 道题，每题带提示、解析和一条常见错误；11 篇要点。</p>
+      <p class="hero__lead">课程范围、讲义要点、题库与解析都在这里。当前显示的是<b data-term-label>期中</b>的范围，右上角可以换成期末。149 道题，每题带提示、解析和一条常见错误；22 篇要点。</p>
       <form class="search" action="questions/" method="get" role="search">
         <label class="sr-only" for="q">搜题</label>
         <input class="search__input" id="q" name="q" type="search" placeholder="搜题：题干、标签、出处" autocomplete="off">
         <button class="btn btn--red search__btn" type="submit">搜题</button>
       </form>
-      <p class="hero__note">已做 <span data-progress-total="125">0 / 125</span> · <a href="stats/">看进度</a> · 按 <span class="kbd">/</span> 在题库里搜</p>
+      <p class="hero__note">已做 <span data-progress-total="149">0 / 149</span> · <a href="stats/">看进度</a> · 按 <span class="kbd">/</span> 在题库里搜</p>
     </div>
   </div>
 </section>
 
 <section class="frame section--tight">
   <ul class="quick">
-    <li><a href="questions/"><b>题库</b><span>125 道，可筛可搜</span></a></li>
+    <li><a href="questions/"><b>题库</b><span>149 道，可筛可搜</span></a></li>
     <li><a href="practice/"><b>刷题</b><span>一次一道，先想再看</span></a></li>
     <li><a href="practice/?random=1"><b>随机一题</b><span>抽一道就开工</span></a></li>
     <li><a href="cheatsheet/"><b>速查</b><span>公式与结论，可打印</span></a></li>
     <li><a href="questions/?difficulty=4"><b>难题</b><span>要动一下脑子的那些</span></a></li>
     <li><a href="export/"><b>导出</b><span>挑题生成 A4 卷子</span></a></li>
-
   </ul>
 </section>
 
@@ -99,7 +105,7 @@
     <li><button type="button" data-try="泰勒公式">泰勒公式</button></li><li><button type="button" data-try="极值">极值</button></li><li><button type="button" data-try="向量组的秩">向量组的秩</button></li><li><button type="button" data-try="行列式">行列式</button></li><li><button type="button" data-try="一致连续">一致连续</button></li>
   </ul>
   <p class="checker__verdict" id="scope-verdict" aria-live="polite">输入一个词，下面这张表会告诉你它落在哪一章、考不考。</p>
-  <div class="ranges"><section class="range-course">
+  <div class="ranges"><section class="range-course" data-course-terms="midterm final">
         <header class="range-course__head">
           <h3><a href="va1/">微积分 A1</a></h3>
           <p>第 1 章 – 第 4.3 节</p>
@@ -183,7 +189,7 @@
           </tr></tbody>
         </table>
         <p class="range-course__foot">在范围内 7 章 · 期中之后 0 章（灰）</p>
-      </section><section class="range-course">
+      </section><section class="range-course" data-course-terms="midterm final">
         <header class="range-course__head">
           <h3><a href="la/">线性代数</a></h3>
           <p>第 1 章 – 第 3 章「向量组的秩」之前</p>
@@ -237,7 +243,146 @@
           </tr></tbody>
         </table>
         <p class="range-course__foot">在范围内 4 章 · 期中之后 0 章（灰）</p>
+      </section><section class="range-course" data-course-terms="final">
+        <header class="range-course__head">
+          <h3><a href="dm/">离散数学</a></h3>
+          <p>期末考试：第 1 章 – 第 5 章</p>
+          <p class="range-course__links">
+            <a href="questions/?course=dm">12 道题</a>
+            <a href="dm/">完整考纲</a>
+          </p>
+        </header>
+        <table class="range">
+          <thead><tr><th>章</th><th>内容</th><th>范围</th><th>题</th><th>已做</th><th>要点</th></tr></thead>
+          <tbody><tr class="" data-chapter="dm-1" data-states="{&quot;midterm&quot;:&quot;out&quot;,&quot;final&quot;:&quot;in&quot;}">
+            <td class="range__no">1</td>
+            <td class="range__title">
+              <a href="dm/#ch-dm-1">命题逻辑的基本概念</a>
+              <span class="range__secs">1.1 1.2 1.3 1.4 1.5 1.6</span>
+            </td>
+            <td class="range__state"><span class="chip chip--in" data-chip>在范围内</span></td>
+            <td class="range__count"><a href="questions/?chapter=dm-1">2</a></td>
+            <td class="range__prog"><span data-progress-ids="dm-001,dm-002"><b data-progress-here>0</b>/2</span></td>
+            <td class="range__note"><a href="notes/dm-1.html">读</a></td>
+          </tr><tr class="" data-chapter="dm-2" data-states="{&quot;midterm&quot;:&quot;out&quot;,&quot;final&quot;:&quot;in&quot;}">
+            <td class="range__no">2</td>
+            <td class="range__title">
+              <a href="dm/#ch-dm-2">命题逻辑的等值和推理演算</a>
+              <span class="range__secs">2.1 2.2 2.3 2.4 2.5 2.6 2.7 2.8 2.9 2.10</span>
+            </td>
+            <td class="range__state"><span class="chip chip--in" data-chip>在范围内</span></td>
+            <td class="range__count"><a href="questions/?chapter=dm-2">4</a></td>
+            <td class="range__prog"><span data-progress-ids="dm-003,dm-004,dm-005,dm-006"><b data-progress-here>0</b>/4</span></td>
+            <td class="range__note"><a href="notes/dm-2.html">读</a></td>
+          </tr><tr class="" data-chapter="dm-3" data-states="{&quot;midterm&quot;:&quot;out&quot;,&quot;final&quot;:&quot;in&quot;}">
+            <td class="range__no">3</td>
+            <td class="range__title">
+              <a href="dm/#ch-dm-3">命题逻辑的公理化</a>
+              <span class="range__secs">3.1 3.2 3.3 3.4 3.5 3.6</span>
+            </td>
+            <td class="range__state"><span class="chip chip--in" data-chip>在范围内</span></td>
+            <td class="range__count"><a href="questions/?chapter=dm-3">1</a></td>
+            <td class="range__prog"><span data-progress-ids="dm-007"><b data-progress-here>0</b>/1</span></td>
+            <td class="range__note"><a href="notes/dm-3.html">读</a></td>
+          </tr><tr class="" data-chapter="dm-4" data-states="{&quot;midterm&quot;:&quot;out&quot;,&quot;final&quot;:&quot;in&quot;}">
+            <td class="range__no">4</td>
+            <td class="range__title">
+              <a href="dm/#ch-dm-4">谓词逻辑的基本概念</a>
+              <span class="range__secs">4.1 4.2 4.3 4.4 4.5 4.6</span>
+            </td>
+            <td class="range__state"><span class="chip chip--in" data-chip>在范围内</span></td>
+            <td class="range__count"><a href="questions/?chapter=dm-4">2</a></td>
+            <td class="range__prog"><span data-progress-ids="dm-008,dm-009"><b data-progress-here>0</b>/2</span></td>
+            <td class="range__note"><a href="notes/dm-4.html">读</a></td>
+          </tr><tr class="" data-chapter="dm-5" data-states="{&quot;midterm&quot;:&quot;out&quot;,&quot;final&quot;:&quot;in&quot;}">
+            <td class="range__no">5</td>
+            <td class="range__title">
+              <a href="dm/#ch-dm-5">谓词逻辑的等值和推理演算</a>
+              <span class="range__secs">5.1 5.2 5.3 5.4 5.5 5.6</span>
+            </td>
+            <td class="range__state"><span class="chip chip--in" data-chip>在范围内</span></td>
+            <td class="range__count"><a href="questions/?chapter=dm-5">3</a></td>
+            <td class="range__prog"><span data-progress-ids="dm-010,dm-011,dm-012"><b data-progress-here>0</b>/3</span></td>
+            <td class="range__note"><a href="notes/dm-5.html">读</a></td>
+          </tr></tbody>
+        </table>
+        <p class="range-course__foot">在范围内 5 章 · 期中之后 0 章（灰）</p>
+      </section><section class="range-course" data-course-terms="midterm final">
+        <header class="range-course__head">
+          <h3><a href="ics/">计算机系统概论</a></h3>
+          <p>期中：概论 → 缓冲区溢出（不含内存布局）</p>
+          <p class="range-course__links">
+            <a href="questions/?course=ics">12 道题</a>
+            <a href="ics/">完整考纲</a>
+          </p>
+        </header>
+        <table class="range">
+          <thead><tr><th>章</th><th>内容</th><th>范围</th><th>题</th><th>已做</th><th>要点</th></tr></thead>
+          <tbody><tr class="" data-chapter="ics-1" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}">
+            <td class="range__no">1</td>
+            <td class="range__title">
+              <a href="ics/#ch-ics-1">概论</a>
+              <span class="range__secs">1.1 1.2</span>
+            </td>
+            <td class="range__state"><span class="chip chip--in" data-chip>在范围内</span></td>
+            <td class="range__count"><a href="questions/?chapter=ics-1">1</a></td>
+            <td class="range__prog"><span data-progress-ids="ics-001"><b data-progress-here>0</b>/1</span></td>
+            <td class="range__note"><a href="notes/ics-1.html">读</a></td>
+          </tr><tr class="" data-chapter="ics-2" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}">
+            <td class="range__no">2</td>
+            <td class="range__title">
+              <a href="ics/#ch-ics-2">信息的表示与处理</a>
+              <span class="range__secs">2.1 2.2</span>
+            </td>
+            <td class="range__state"><span class="chip chip--in" data-chip>在范围内</span></td>
+            <td class="range__count"><a href="questions/?chapter=ics-2">3</a></td>
+            <td class="range__prog"><span data-progress-ids="ics-002,ics-003,ics-004"><b data-progress-here>0</b>/3</span></td>
+            <td class="range__note"><a href="notes/ics-2.html">读</a></td>
+          </tr><tr class="" data-chapter="ics-3" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}">
+            <td class="range__no">3</td>
+            <td class="range__title">
+              <a href="ics/#ch-ics-3">汇编语言与程序的机器级表示</a>
+              <span class="range__secs">3.1 3.2</span>
+            </td>
+            <td class="range__state"><span class="chip chip--in" data-chip>在范围内</span></td>
+            <td class="range__count"><a href="questions/?chapter=ics-3">3</a></td>
+            <td class="range__prog"><span data-progress-ids="ics-005,ics-006,ics-007"><b data-progress-here>0</b>/3</span></td>
+            <td class="range__note"><a href="notes/ics-3.html">读</a></td>
+          </tr><tr class="" data-chapter="ics-4" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}">
+            <td class="range__no">4</td>
+            <td class="range__title">
+              <a href="ics/#ch-ics-4">函数调用</a>
+              <span class="range__secs">4.1 4.2</span>
+            </td>
+            <td class="range__state"><span class="chip chip--in" data-chip>在范围内</span></td>
+            <td class="range__count"><a href="questions/?chapter=ics-4">2</a></td>
+            <td class="range__prog"><span data-progress-ids="ics-008,ics-009"><b data-progress-here>0</b>/2</span></td>
+            <td class="range__note"><a href="notes/ics-4.html">读</a></td>
+          </tr><tr class="" data-chapter="ics-5" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}">
+            <td class="range__no">5</td>
+            <td class="range__title">
+              <a href="ics/#ch-ics-5">数组与结构体</a>
+              <span class="range__secs">5.1 5.2</span>
+            </td>
+            <td class="range__state"><span class="chip chip--in" data-chip>在范围内</span></td>
+            <td class="range__count"><a href="questions/?chapter=ics-5">2</a></td>
+            <td class="range__prog"><span data-progress-ids="ics-010,ics-011"><b data-progress-here>0</b>/2</span></td>
+            <td class="range__note"><a href="notes/ics-5.html">读</a></td>
+          </tr><tr class="" data-chapter="ics-6" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}">
+            <td class="range__no">6</td>
+            <td class="range__title">
+              <a href="ics/#ch-ics-6">程序的内存与安全</a>
+              <span class="range__secs">6.2</span>
+            </td>
+            <td class="range__state"><span class="chip chip--in" data-chip>在范围内</span></td>
+            <td class="range__count"><a href="questions/?chapter=ics-6">1</a></td>
+            <td class="range__prog"><span data-progress-ids="ics-012"><b data-progress-here>0</b>/1</span></td>
+            <td class="range__note"><a href="notes/ics-6.html">读</a></td>
+          </tr></tbody>
+        </table>
+        <p class="range-course__foot">在范围内 6 章 · 期中之后 0 章（灰）</p>
       </section></div>
+  <p class="ranges__other"><b>离散数学</b><span>只有期末</span><a href="dm/">看考纲</a></p>
   <p class="ranges__empty">其他这一类还没有题：<a href="submit/">投一道</a>，审核通过后会自动进这里。</p>
 </section>
 
@@ -296,7 +441,7 @@
         </div>
       </li></ul>
   <p class="more">
-    <a class="btn btn--tone" href="questions/">看全部 125 道题</a>
+    <a class="btn btn--tone" href="questions/">看全部 149 道题</a>
     <a href="practice/?random=1">随机抽一道 →</a>
   </p>
 </section>
@@ -374,7 +519,7 @@
         <div class="footer__col">
           <h3>内容</h3>
           <ul>
-            <li><a href="./questions/">题库（125 道）</a></li>
+            <li><a href="./questions/">题库（149 道）</a></li>
             <li><a href="./practice/">刷题</a></li>
             <li><a href="./tags/">标签</a></li>
             <li><a href="./export/">导出 PDF</a></li>

@@ -53,6 +53,13 @@
     root.setAttribute('data-term', term)
     for (const el of document.querySelectorAll('[data-states]')) paint(el)
     for (const btn of buttons) btn.classList.toggle('is-on', btn.dataset.termBtn === term)
+    // 首页范围表：只留下当前轮次开考的课程
+    for (const block of document.querySelectorAll('[data-course-terms]')) {
+      const own = (block.dataset.courseTerms || '').split(/\s+/).filter(Boolean)
+      block.hidden = own.length > 0 && !own.includes(term)
+    }
+    const termName = (document.querySelector('.term-btn.is-on') || {}).textContent || ''
+    for (const el of document.querySelectorAll('[data-term-name]')) el.textContent = termName.trim()
     const label = buttons.find((b) => b.dataset.termBtn === term)?.textContent?.trim() || term
     for (const el of document.querySelectorAll('[data-term-label]')) el.textContent = label
     // 题库里如果有「范围」筛选，切轮次后重算

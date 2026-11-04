@@ -620,3 +620,33 @@
   border-color: var(--ink);
   text-decoration: none;
 }
+
+.ranges__other {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 12px;
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 2px solid var(--line);
+  font-size: var(--fs-small);
+  color: var(--ink-soft);
+}
+
+.ranges__other span {
+  font-size: var(--fs-micro);
+  color: var(--ink-mute);
+  border: 2px solid var(--line-strong);
+  padding: 0 5px;
+}
+
+.ranges__other a {
+  margin-left: auto;
+  border-bottom: 2px solid var(--line-strong);
+}
+
+.ranges__other a:hover {
+  color: var(--red);
+  border-color: var(--red);
+  text-decoration: none;
+}

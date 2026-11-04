@@ -35,8 +35,15 @@
       <nav class="nav" aria-label="主导航">
         <a class="nav__mark" href="../"><span class="nav__dot" aria-hidden="true"></span>复习册</a>
         <ul class="nav__links">
-          <li><a href="../va1/">微积分 A1</a></li>
-          <li><a href="../la/">线性代数</a></li>
+          <li class="nav__menu-wrap">
+          <details class="navmenu">
+            <summary>课程</summary>
+            <ul class="navmenu__list">
+              <li><a href="../va1/">微积分 A1</a></li><li><a href="../la/">线性代数</a></li><li><a href="../dm/">离散数学<span class="navmenu__tag">仅期末</span></a></li><li><a href="../ics/">计算机系统概论</a></li>
+              <li class="navmenu__sep"><a href="../questions/">题库（全部课程）</a></li>
+            </ul>
+          </details>
+        </li>
           <li><a href="../questions/" aria-current="page">题库</a></li>
           <li><a href="../practice/">刷题</a></li>
           <li><a href="../cheatsheet/">速查</a></li>
@@ -79,8 +86,8 @@
     </div>
     <aside class="practice__side">
       <div class="practice__filters">
-        <div class="field"><label for="p-course">科目</label><select id="p-course"><option value="">全部</option><option value="va1">微积分 A1</option><option value="la">线性代数</option><option value="other">其他</option></select></div>
-        <div class="field"><label for="p-chapter">章节</label><select id="p-chapter"><option value="">全部</option><optgroup label="微积分 A1"><option value="va1-1">数列极限</option><option value="va1-2">函数极限</option><option value="va1-3">导数</option><option value="va1-4">中值定理与泰勒</option><option value="va1-5">黎曼积分</option><option value="va1-6">广义积分</option></optgroup><optgroup label="线性代数"><option value="la-1">行列式</option><option value="la-2">矩阵</option><option value="la-3">向量空间</option><option value="la-4">秩与解的结构</option></optgroup></select></div>
+        <div class="field"><label for="p-course">科目</label><select id="p-course"><option value="">全部</option><option value="va1">微积分 A1</option><option value="la">线性代数</option><option value="other">其他</option><option value="dm">离散数学</option><option value="ics">计算机系统概论</option></select></div>
+        <div class="field"><label for="p-chapter">章节</label><select id="p-chapter"><option value="">全部</option><optgroup label="微积分 A1"><option value="va1-1">数列极限</option><option value="va1-2">函数极限</option><option value="va1-3">导数</option><option value="va1-4">中值定理与泰勒</option><option value="va1-5">黎曼积分</option><option value="va1-6">广义积分</option></optgroup><optgroup label="线性代数"><option value="la-1">行列式</option><option value="la-2">矩阵</option><option value="la-3">向量空间</option><option value="la-4">秩与解的结构</option></optgroup><optgroup label="离散数学"><option value="dm-1">命题逻辑的基本概念</option><option value="dm-2">命题逻辑的等值和推理演算</option><option value="dm-3">命题逻辑的公理化</option><option value="dm-4">谓词逻辑的基本概念</option><option value="dm-5">谓词逻辑的等值和推理演算</option></optgroup><optgroup label="计算机系统概论"><option value="ics-1">概论</option><option value="ics-2">信息的表示与处理</option><option value="ics-3">汇编语言与程序的机器级表示</option><option value="ics-4">函数调用</option><option value="ics-5">数组与结构体</option><option value="ics-6">程序的内存与安全</option></optgroup></select></div>
         <div class="field"><label for="p-difficulty">难度</label>
           <select id="p-difficulty"><option value="">全部</option><option value="1">1 基础</option><option value="2">2 常规</option><option value="3">3 综合</option><option value="4">4 挑战</option></select>
         </div>
@@ -113,7 +120,7 @@
         <div class="footer__col">
           <h3>内容</h3>
           <ul>
-            <li><a href="../questions/">题库（125 道）</a></li>
+            <li><a href="../questions/">题库（149 道）</a></li>
             <li><a href="../practice/">刷题</a></li>
             <li><a href="../tags/">标签</a></li>
             <li><a href="../export/">导出 PDF</a></li>

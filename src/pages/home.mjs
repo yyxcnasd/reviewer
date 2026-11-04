@@ -55,7 +55,7 @@ export function buildHome(ctx) {
         })
         .join('')
 
-      return `<section class="range-course">
+      return `<section class="range-course" data-course-terms="${(c.terms || []).join(' ')}">
         <header class="range-course__head">
           <h3><a href="${url(0, `${c.id}/`)}">${esc(c.name)}</a></h3>
           <p>${esc(c.scope_line)}</p>
@@ -115,7 +115,7 @@ export function buildHome(ctx) {
     <li><a href="${url(0, 'practice/?random=1')}"><b>随机一题</b><span>抽一道就开工</span></a></li>
     <li><a href="${url(0, 'cheatsheet/')}"><b>速查</b><span>公式与结论，可打印</span></a></li>
     <li><a href="${url(0, 'questions/?difficulty=4')}"><b>难题</b><span>要动一下脑子的那些</span></a></li>
-    <li><a href="${url(0, 'export/')}"><b>导出</b><span>挑题生成 A4 卷子</span></a></li>
+    <li><a href="${url(0, 'export/')}"><b>导出</b><span>挑题生成 A4 卷子</span></a></li>
   </ul>
 </section>
 
@@ -136,6 +136,18 @@ export function buildHome(ctx) {
   </ul>
   <p class="checker__verdict" id="scope-verdict" aria-live="polite">输入一个词，下面这张表会告诉你它落在哪一章、考不考。</p>
   <div class="ranges">${rangeCourses}</div>
+  ${courses
+    .filter((course) => course.id !== 'other')
+    .filter((course) => {
+      const n = (ctx.qByCourse.get(course.id) || []).length
+      return n > 0 || (course.terms || []).length < 2
+    })
+    .filter((course) => (course.terms || []).length < 2 || !(ctx.qByCourse.get(course.id) || []).length)
+    .map((course) => {
+      const only = (course.terms || []).length === 1 ? (course.terms[0] === 'final' ? '只有期末' : '只有期中') : ''
+      return `<p class="ranges__other"><b>${esc(course.name)}</b>${only ? `<span>${only}</span>` : ''}<a href="${url(0, `${course.id}/`)}">看考纲</a></p>`
+    })
+    .join('')}
   ${emptyCourses
     .map(
       (c) =>

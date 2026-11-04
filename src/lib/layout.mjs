@@ -31,14 +31,29 @@ export function page(ctx, opts) {
   const base = depth === 0 ? './' : '../'.repeat(depth)
   const title = opts.title ? `${opts.title} · ${config.name}` : `${config.name} · 课程复习资料与题库`
   const desc = opts.description || config.description
+  const navCourses = ctx.courses.filter((course) => course.id !== 'other')
   const navItems = [
-    { label: '微积分 A1', href: 'va1/', key: 'va1' },
-    { label: '线性代数', href: 'la/', key: 'la' },
     { label: '题库', href: 'questions/', key: 'questions' },
     { label: '刷题', href: 'practice/', key: 'practice' },
     { label: '速查', href: 'cheatsheet/', key: 'cheatsheet' },
     { label: '进度', href: 'stats/', key: 'stats' },
   ]
+  const courseMenu = `<li class="nav__menu-wrap">
+          <details class="navmenu">
+            <summary>课程</summary>
+            <ul class="navmenu__list">
+              ${navCourses
+                .map((course) => {
+                  const onlyFinal = course.terms && !course.terms.includes('midterm')
+                  const tag = onlyFinal ? '<span class="navmenu__tag">仅期末</span>' : ''
+                  const cur = opts.navActive === course.id ? ' aria-current="page"' : ''
+                  return `<li><a href="${base}${course.id}/"${cur}>${esc(course.name)}${tag}</a></li>`
+                })
+                .join('')}
+              <li class="navmenu__sep"><a href="${base}questions/">题库（全部课程）</a></li>
+            </ul>
+          </details>
+        </li>`
 
   const nav = `
   <header class="sitehead">
@@ -46,6 +61,7 @@ export function page(ctx, opts) {
       <nav class="nav" aria-label="主导航">
         <a class="nav__mark" href="${base}"><span class="nav__dot" aria-hidden="true"></span>${esc(config.wordmark)}</a>
         <ul class="nav__links">
+          ${courseMenu}
           ${navItems
             .map(
               (n) =>

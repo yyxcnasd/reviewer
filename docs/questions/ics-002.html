@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>信息的表示与处理 · 计算题 · 复习册</title>
+<meta name="description" content="在 8 位整数环境（例如 `char`）下回答： (1) 十六进制 `0xB7` 作为无符号数和作为有符号补码数分别是多少？ (2) 十进制数 的 8 位补码是什么（写成十六进制）？ (3) 计算 `0x7D + 0x0B`，写出 8 位结果的十六进制，并分别判断作为无符号数和作为有符号数是否溢出。 (4) `0x12345678` 在小端机器上从低地址开始依次是哪 4 个字节（用十六进制）？ 补码 字节序 自编">
+<meta name="color-scheme" content="light">
+<link rel="stylesheet" href="../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../assets/site.css">
+<script>
+  // 先按本地设置（或系统偏好）定主题，避免刷新时闪白
+  try {
+    // 默认浅色（纸面）。只有你手动切过深色，才在下次打开时记住。
+    if (localStorage.getItem('reviewer.theme') === 'dark')
+      document.documentElement.setAttribute('data-theme', 'dark')
+  } catch (e) {}
+</script>
+<script src="../assets/core.js"></script>
+<script src="../assets/theme.js" defer></script>
+<script src="../assets/term.js" defer></script>
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<meta property="og:title" content="信息的表示与处理 · 计算题 · 复习册">
+<meta property="og:description" content="在 8 位整数环境（例如 `char`）下回答： (1) 十六进制 `0xB7` 作为无符号数和作为有符号补码数分别是多少？ (2) 十进制数 的 8 位补码是什么（写成十六进制）？ (3) 计算 `0x7D + 0x0B`，写出 8 位结果的十六进制，并分别判断作为无符号数和作为有符号数是否溢出。 (4) `0x12345678` 在小端机器上从低地址开始依次是哪 4 个字节（用十六进制）？ 补码 字节序 自编">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_CN">
+
+</head>
+<body class="no-js detail">
+<script>document.body.classList.remove('no-js')</script>
+<a class="skip" href="#main">跳到正文</a>
+
+  <header class="sitehead">
+    <div class="frame">
+      <nav class="nav" aria-label="主导航">
+        <a class="nav__mark" href="../"><span class="nav__dot" aria-hidden="true"></span>复习册</a>
+        <ul class="nav__links">
+          <li class="nav__menu-wrap">
+          <details class="navmenu">
+            <summary>课程</summary>
+            <ul class="navmenu__list">
+              <li><a href="../va1/">微积分 A1</a></li><li><a href="../la/">线性代数</a></li><li><a href="../dm/">离散数学<span class="navmenu__tag">仅期末</span></a></li><li><a href="../ics/">计算机系统概论</a></li>
+              <li class="navmenu__sep"><a href="../questions/">题库（全部课程）</a></li>
+            </ul>
+          </details>
+        </li>
+          <li><a href="../questions/" aria-current="page">题库</a></li>
+          <li><a href="../practice/">刷题</a></li>
+          <li><a href="../cheatsheet/">速查</a></li>
+          <li><a href="../stats/">进度</a></li>
+        </ul>
+        <div class="nav__end">
+          <div class="nav__terms" role="group" aria-label="考试轮次">
+            <button class="term-btn is-on" type="button" data-term-btn="midterm">期中</button><button class="term-btn" type="button" data-term-btn="final">期末</button>
+          </div>
+          <button class="ghost nav__theme" id="theme-toggle" type="button" aria-live="polite">深色</button>
+          <a class="btn btn--red nav__action" href="../submit/">投稿</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+<main id="main">
+
+<div class="frame">
+  <nav class="crumb" aria-label="位置"><a href="../">复习册</a><span class="crumb__sep">/</span><a href="../questions/">题库</a><span class="crumb__sep">/</span><a href="../ics/">计算机系统概论</a><span class="crumb__sep">/</span><span>第 2 章</span></nav>
+
+  <div class="qpage">
+    <div class="qpage__main">
+      <header class="pagehead pagehead--q">
+        <h1 class="qpage__title">信息的表示与处理 · 计算题</h1>
+        <div class="meta" style="margin-top:14px">
+          <span class="meta__item">计算机系统概论</span>
+          <span class="meta__item">计算题</span>
+          <span class="meta__item">难度 <span class="dots" aria-label="难度 2 / 4"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span></span>
+          <span class="meta__item">自编</span>
+          <span class="meta__item">投稿：自编</span>
+        </div>
+        <div class="qactions">
+          <button class="flag" type="button" data-flag="done" data-id="ics-002" aria-pressed="false"><span>已做</span></button>
+          <button class="flag flag--fav" type="button" data-flag="fav" data-id="ics-002" aria-pressed="false"><span>收藏</span></button>
+          <button class="ghost" type="button" id="expand-all">展开解析与提示</button>
+          <button class="ghost" type="button" id="copy-md">复制题目</button>
+          <a class="ghost" href="../export/?ids=ics-002">导出这道题</a>
+          <span class="qactions__id">ICS-002 · <span class="kbd">←</span><span class="kbd">→</span> 翻题 · <span class="kbd">E</span> 展开 · <span class="kbd">D</span> 记已做</span>
+        </div>
+      </header>
+
+      <div class="qpage__stem prose"><p>在 8 位整数环境（例如 <code>char</code>）下回答：</p>
+<p>(1) 十六进制 <code>0xB7</code> 作为无符号数和作为有符号补码数分别是多少？</p>
+<p>(2) 十进制数 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mn>37</mn></mrow><annotation encoding="application/x-tex">-37</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">−</span><span class="mord">37</span></span></span></span> 的 8 位补码是什么（写成十六进制）？</p>
+<p>(3) 计算 <code>0x7D + 0x0B</code>，写出 8 位结果的十六进制，并分别判断作为无符号数和作为有符号数是否溢出。</p>
+<p>(4) <code>0x12345678</code> 在小端机器上从低地址开始依次是哪 4 个字节（用十六进制）？</p>
+</div>
+
+      <details class="qblock qblock--hint"><summary>提示<span aria-hidden="true">+</span></summary><div class="qblock__body prose"><p>补码的判据只有一条：最高位的权重是 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><msup><mn>2</mn><mn>7</mn></msup></mrow><annotation encoding="application/x-tex">-2^{7}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord">−</span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">7</span></span></span></span></span></span></span></span></span></span></span></span>，而不是 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>+</mo><msup><mn>2</mn><mn>7</mn></msup></mrow><annotation encoding="application/x-tex">+2^{7}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord">+</span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">7</span></span></span></span></span></span></span></span></span></span></span></span>。判溢出要分两套规则：无符号看进位，有符号看「同号相加是否变号」。小端是低字节放在低地址。</p>
+</div></details>
+
+      <details class="qblock" id="solution">
+        <summary>解析（先自己做一遍再看）<span aria-hidden="true">展开</span></summary>
+        <div class="qblock__body prose">
+          <div class="answer"><span>答案</span><p>(1) 无符号 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>183</mn></mrow><annotation encoding="application/x-tex">183</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">183</span></span></span></span>、有符号 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mn>73</mn></mrow><annotation encoding="application/x-tex">-73</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">−</span><span class="mord">73</span></span></span></span>；(2) <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="monospace">0xDB</mtext></mrow><annotation encoding="application/x-tex">\texttt{0xDB}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6111em;"></span><span class="mord text"><span class="mord texttt">0xDB</span></span></span></span></span>；(3) <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="monospace">0x88</mtext></mrow><annotation encoding="application/x-tex">\texttt{0x88}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6111em;"></span><span class="mord text"><span class="mord texttt">0x88</span></span></span></span></span>，无符号不溢出、有符号溢出；(4) <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>78</mn><mtext> </mtext><mn>56</mn><mtext> </mtext><mn>34</mn><mtext> </mtext><mn>12</mn></mrow><annotation encoding="application/x-tex">78\ 56\ 34\ 12</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">78</span><span class="mspace"> </span><span class="mord">56</span><span class="mspace"> </span><span class="mord">34</span><span class="mspace"> </span><span class="mord">12</span></span></span></span></p>
+</div>
+          <p><strong>(1)</strong> <code>0xB7</code> 的二进制是 <code>1011 0111</code>。</p>
+<ul>
+<li>作为无符号数：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><mn>2</mn><mi>U</mi><mo>=</mo><mn>128</mn><mo>+</mo><mn>32</mn><mo>+</mo><mn>16</mn><mo>+</mo><mn>4</mn><mo>+</mo><mn>2</mn><mo>+</mo><mn>1</mn><mo>=</mo><mn>183</mn></mrow><annotation encoding="application/x-tex">B2U=128+32+16+4+2+1=183</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.0502em;">B</span><span class="mord">2</span><span class="mord mathnormal" style="margin-right:0.109em;">U</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">128</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">32</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">16</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">4</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">183</span></span></span></span>；</li>
+<li>作为有符号补码：最高位权重是 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mn>128</mn></mrow><annotation encoding="application/x-tex">-128</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">−</span><span class="mord">128</span></span></span></span>，所以 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><mn>2</mn><mi>T</mi><mo>=</mo><mn>183</mn><mo>−</mo><mn>256</mn><mo>=</mo><mo>−</mo><mn>73</mn></mrow><annotation encoding="application/x-tex">B2T=183-256=-73</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.0502em;">B</span><span class="mord">2</span><span class="mord mathnormal" style="margin-right:0.1389em;">T</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">183</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">256</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">−</span><span class="mord">73</span></span></span></span>。</li>
+</ul>
+<p><strong>(2)</strong> 先算 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∣</mi><mrow><mo>−</mo><mn>37</mn></mrow><mi mathvariant="normal">∣</mi><mo>=</mo><mn>37</mn><mo>=</mo><mtext mathvariant="monospace">0x25</mtext></mrow><annotation encoding="application/x-tex">|{-37}|=37=\texttt{0x25}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∣</span><span class="mord"><span class="mord">−</span><span class="mord">37</span></span><span class="mord">∣</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">37</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6111em;"></span><span class="mord text"><span class="mord texttt">0x25</span></span></span></span></span>，再按「取反加一」：</p>
+<p><span class="math-display"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo>∼</mo><mtext mathvariant="monospace">0x25</mtext><mo>=</mo><mtext mathvariant="monospace">0xDA</mtext><mo separator="true">,</mo><mspace width="2em"/><mtext mathvariant="monospace">0xDA</mtext><mo>+</mo><mn>1</mn><mo>=</mo><mtext mathvariant="monospace">0xDB</mtext><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\sim\texttt{0x25}=\texttt{0xDA},\qquad \texttt{0xDA}+1=\texttt{0xDB}.</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.3669em;"></span><span class="mrel">∼</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6111em;"></span><span class="mord text"><span class="mord texttt">0x25</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8055em;vertical-align:-0.1944em;"></span><span class="mord text"><span class="mord texttt">0xDA</span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:2em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord text"><span class="mord texttt">0xDA</span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6111em;"></span><span class="mord text"><span class="mord texttt">0xDB</span></span><span class="mord">.</span></span></span></span></span></span></p>
+<p>验算：<code>0xDB</code> 作为有符号数是 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>219</mn><mo>−</mo><mn>256</mn><mo>=</mo><mo>−</mo><mn>37</mn></mrow><annotation encoding="application/x-tex">219-256=-37</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">219</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">256</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">−</span><span class="mord">37</span></span></span></span>，正确。</p>
+<p><strong>(3)</strong> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>125</mn><mo>+</mo><mn>11</mn><mo>=</mo><mn>136</mn></mrow><annotation encoding="application/x-tex">125+11=136</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">125</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">11</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">136</span></span></span></span>，8 位结果的位模式是 <code>0x88</code>。</p>
+<ul>
+<li>作为无符号数：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>125</mn><mo>+</mo><mn>11</mn><mo>=</mo><mn>136</mn><mo>≤</mo><mn>255</mn></mrow><annotation encoding="application/x-tex">125+11=136\le255</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">125</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">11</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7804em;vertical-align:-0.136em;"></span><span class="mord">136</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">255</span></span></span></span>，<strong>不溢出</strong>；</li>
+<li>作为有符号数：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>125</mn><mo>+</mo><mn>11</mn><mo>=</mo><mn>136</mn><mo>&gt;</mo><mn>127</mn></mrow><annotation encoding="application/x-tex">125+11=136&gt;127</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">125</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">11</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6835em;vertical-align:-0.0391em;"></span><span class="mord">136</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">127</span></span></span></span>，正 + 正却得到负的结果（<code>0x88</code> 作为有符号数是 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mn>120</mn></mrow><annotation encoding="application/x-tex">-120</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">−</span><span class="mord">120</span></span></span></span>），<strong>溢出</strong>，这个结果不能当作有符号和来用。</li>
+</ul>
+<p><strong>(4)</strong> 小端把最低有效字节放在最低地址。<code>0x12345678</code> 的四个字节由低到高是 <code>78</code>、<code>56</code>、<code>34</code>、<code>12</code>。</p>
+
+        </div>
+      </details>
+
+      <details class="qblock"><summary>常见错误<span aria-hidden="true">展开</span></summary><div class="qblock__body prose"><p>一是求 <code>0xB7</code> 的有符号值时，直接把低 7 位当成数值再加负号，得到 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mn>55</mn></mrow><annotation encoding="application/x-tex">-55</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">−</span><span class="mord">55</span></span></span></span>（正确是 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mn>73</mn></mrow><annotation encoding="application/x-tex">-73</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">−</span><span class="mord">73</span></span></span></span>）。二是判有符号溢出时只看「最高位是不是 1」——最高位为 1 只说明结果是负数，不说明溢出；必须看两个加数的符号和结果的符号是否匹配。三是小端写反成 <code>12 34 56 78</code>。四是第 (2) 问用「原码」而不是补码：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mn>37</mn></mrow><annotation encoding="application/x-tex">-37</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">−</span><span class="mord">37</span></span></span></span> 的补码不是 <code>0xA5</code>（那是另一种约定）。</p>
+</div></details>
+
+      <div class="pager" data-pager>
+        <a class="pager__prev" href="../questions/ics-001.html"><span>上一题</span>某程序在一台主频为 的机器上运行 动态指令数…</a>
+        <a class="pager__next" href="../questions/ics-003.html"><span>下一题</span>32 位 IEEE 754 单精度浮点数按「…</a>
+      </div>
+    </div>
+
+    <aside class="qpage__side">
+      <div>
+        <h2>这道题</h2>
+        <dl class="spec">
+          <div><dt>科目</dt><dd>计算机系统概论</dd></div>
+          <div><dt>章节</dt><dd>信息的表示与处理</dd></div>
+          <div><dt>题型</dt><dd>计算题</dd></div>
+          <div><dt>难度</dt><dd><span class="dots" aria-label="难度 2 / 4"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span></dd></div>
+          <div><dt>出处</dt><dd>自编</dd></div>
+          <div><dt>范围</dt><dd><span data-chip data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}">在范围内</span></dd></div>
+        </dl>
+      </div>
+      <div>
+        <h2>考点</h2>
+        <ul class="tag-list"><li><a class="tag" href="../tags/%E8%A1%A5%E7%A0%81.html">补码</a></li><li><a class="tag" href="../tags/%E5%AD%97%E8%8A%82%E5%BA%8F.html">字节序</a></li></ul>
+      </div>
+      <div>
+        <h2>往下走</h2>
+        <ul class="sidelist">
+          <li><a href="../notes/ics-2.html">读这一章的要点</a></li>
+          <li><a href="../questions/?chapter=ics-2">这一章的 3 道题</a></li>
+          <li><a href="../export/?chapter=ics-2">导出这一章</a></li>
+          <li><a href="../ics/#ch-ics-2">这一章在考纲里的位置</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>同一章</h2>
+        <ul class="sidelist">
+          <li><a href="../questions/ics-003.html">32 位 IEEE 754 单精度浮点数按「…</a></li><li><a href="../questions/ics-004.html">单精度浮点有 24 位有效位 回答下列问题…</a></li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+</div>
+
+</main>
+
+  <footer class="footer">
+    <div class="frame">
+      <a class="footer__word" href="../" aria-label="回到首页：复习册"><span aria-hidden="true">复习册</span></a>
+      <div class="footer__cols">
+        <div class="footer__col">
+          <h3>科目</h3>
+          <ul>
+            <li><a href="../va1/">微积分 A1</a></li>
+            <li><a href="../la/">线性代数</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h3>内容</h3>
+          <ul>
+            <li><a href="../questions/">题库（149 道）</a></li>
+            <li><a href="../practice/">刷题</a></li>
+            <li><a href="../tags/">标签</a></li>
+            <li><a href="../export/">导出 PDF</a></li>
+            <li><a href="../stats/">进度</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h3>参与</h3>
+          <ul>
+            <li><a href="../submit/">投稿一道题</a></li>
+            <li><a href="../about/">关于与范围说明</a></li>
+            <li><a href="https://github.com/yyxcnasd/reviewer" target="_blank" rel="noopener noreferrer">GitHub 仓库</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h3>这本册子</h3>
+          <ul>
+            <li>2026 秋 期中版</li>
+            <li>内容 CC BY-SA 4.0</li>
+            <li>构建于 2026-11-04</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__legal">
+        <span>复习册 · 课程 · 范围 · 题库</span>
+        <span>内容以 CC BY-SA 4.0 发布，题目标题与解析可自由取用，请保留出处。</span>
+      </div>
+    </div>
+  </footer>
+<script src="../assets/progress.js" defer></script>
+<script src="../assets/site.js" defer></script>
+
+</body>
+</html>

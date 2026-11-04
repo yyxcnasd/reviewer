@@ -35,8 +35,15 @@
       <nav class="nav" aria-label="主导航">
         <a class="nav__mark" href="../"><span class="nav__dot" aria-hidden="true"></span>复习册</a>
         <ul class="nav__links">
-          <li><a href="../va1/">微积分 A1</a></li>
-          <li><a href="../la/">线性代数</a></li>
+          <li class="nav__menu-wrap">
+          <details class="navmenu">
+            <summary>课程</summary>
+            <ul class="navmenu__list">
+              <li><a href="../va1/">微积分 A1</a></li><li><a href="../la/">线性代数</a></li><li><a href="../dm/">离散数学<span class="navmenu__tag">仅期末</span></a></li><li><a href="../ics/">计算机系统概论</a></li>
+              <li class="navmenu__sep"><a href="../questions/">题库（全部课程）</a></li>
+            </ul>
+          </details>
+        </li>
           <li><a href="../questions/" aria-current="page">题库</a></li>
           <li><a href="../practice/">刷题</a></li>
           <li><a href="../cheatsheet/">速查</a></li>
@@ -187,7 +194,7 @@ c-10,0,-16.667,5,-20,15z M188 15 H145 v585 v1200 v585 h43z"/></svg></span></span
         <div class="footer__col">
           <h3>内容</h3>
           <ul>
-            <li><a href="../questions/">题库（125 道）</a></li>
+            <li><a href="../questions/">题库（149 道）</a></li>
             <li><a href="../practice/">刷题</a></li>
             <li><a href="../tags/">标签</a></li>
             <li><a href="../export/">导出 PDF</a></li>

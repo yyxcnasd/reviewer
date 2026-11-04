@@ -57,26 +57,33 @@ export function loadContent({ ROOT, err, warn }) {
   const stateOf = (states) =>
     states.includes('in') ? 'in' : states.includes('boundary') ? 'boundary' : 'out'
 
-  const courses = coursesDoc.courses.map((c) => ({
-    ...c,
-    chapters: c.chapters.map((ch) => {
+  const allTermIds = termIds
+  const courses = coursesDoc.courses.map((course) => {
+    // 课程级 terms：不写就表示期中期末都有；离散数学只写了 [final]
+    const own = Array.isArray(course.terms) && course.terms.length ? course.terms : allTermIds
+    const chapters = course.chapters.map((ch) => {
       // 每个小节：terms 里没写的轮次按 state 兜底
       const sections = (ch.sections || []).map((s) => {
         const termsOfSection = {}
         for (const id of termIds) {
-          termsOfSection[id] = s.terms?.[id] || s.state || 'out'
+          termsOfSection[id] = own.includes(id) ? s.terms?.[id] || s.state || 'out' : 'out'
         }
         return { ...s, terms: termsOfSection, state: stateOf(Object.values(termsOfSection)) }
       })
       const chapterTerms = {}
       for (const id of termIds) {
+        if (!own.includes(id)) {
+          chapterTerms[id] = 'out'
+          continue
+        }
         chapterTerms[id] = sections.length
           ? stateOf(sections.map((s) => s.terms[id]))
           : ch.terms?.[id] || ch.state || 'in'
       }
-      return { ...ch, course: c.id, terms: chapterTerms, sections, state: stateOf(Object.values(chapterTerms)) }
-    }),
-  }))
+      return { ...ch, course: course.id, terms: chapterTerms, sections, state: stateOf(Object.values(chapterTerms)) }
+    })
+    return { ...course, terms: own, chapters }
+  })
 
   const courseById = new Map(courses.map((c) => [c.id, c]))
   // 章节只存一份：prepare() 会往上面挂 count / note，课程页与题目页都要看到

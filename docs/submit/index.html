@@ -35,8 +35,15 @@
       <nav class="nav" aria-label="主导航">
         <a class="nav__mark" href="../"><span class="nav__dot" aria-hidden="true"></span>复习册</a>
         <ul class="nav__links">
-          <li><a href="../va1/">微积分 A1</a></li>
-          <li><a href="../la/">线性代数</a></li>
+          <li class="nav__menu-wrap">
+          <details class="navmenu">
+            <summary>课程</summary>
+            <ul class="navmenu__list">
+              <li><a href="../va1/">微积分 A1</a></li><li><a href="../la/">线性代数</a></li><li><a href="../dm/">离散数学<span class="navmenu__tag">仅期末</span></a></li><li><a href="../ics/">计算机系统概论</a></li>
+              <li class="navmenu__sep"><a href="../questions/">题库（全部课程）</a></li>
+            </ul>
+          </details>
+        </li>
           <li><a href="../questions/">题库</a></li>
           <li><a href="../practice/">刷题</a></li>
           <li><a href="../cheatsheet/">速查</a></li>
@@ -78,13 +85,13 @@
         <div class="submit__row">
           <div class="field">
             <label for="s-category">大分类</label>
-            <select class="select" id="s-category"><option value="calculus">微积分</option><option value="linear-algebra">线性代数</option><option value="other">其他</option></select>
+            <select class="select" id="s-category"><option value="calculus">微积分</option><option value="linear-algebra">线性代数</option><option value="discrete">离散数学</option><option value="cs">计算机系统</option><option value="other">其他</option></select>
           </div>
           <div class="field">
             <label for="s-course">课程 <span class="hint-inline">可不选</span></label>
             <select class="select" id="s-course">
               <option value="">不属于任何课程</option>
-              <option value="va1">微积分 A1</option><option value="la">线性代数</option>
+              <option value="va1">微积分 A1</option><option value="la">线性代数</option><option value="dm">离散数学</option><option value="ics">计算机系统概论</option>
             </select>
           </div>
         </div>
@@ -99,7 +106,7 @@
             <label for="s-tags">标签</label>
             <input class="input" id="s-tags" type="text" placeholder="用逗号分开，比如：泰勒公式, 极限计算" list="tag-suggestions" autocomplete="off">
             <datalist id="tag-suggestions">
-              <option value="极限计算"></option><option value="ε-N 语言"></option><option value="夹逼准则"></option><option value="单调有界"></option><option value="等价无穷小"></option><option value="连续性"></option><option value="间断点"></option><option value="导数定义"></option><option value="复合函数求导"></option><option value="隐函数求导"></option><option value="参数方程求导"></option><option value="高阶导数"></option><option value="微分"></option><option value="中值定理"></option><option value="辅助函数"></option><option value="洛必达法则"></option><option value="泰勒公式"></option><option value="证明题"></option><option value="行列式计算"></option><option value="递推"></option><option value="线性方程组"></option><option value="代数余子式"></option><option value="克莱姆法则"></option><option value="矩阵运算"></option><option value="逆矩阵"></option><option value="分块矩阵"></option><option value="初等变换"></option><option value="相抵标准形"></option><option value="线性相关性"></option><option value="线性表示"></option><option value="向量空间"></option><option value="泰勒余项"></option><option value="递推数列"></option><option value="积分不等式"></option><option value="存在性证明"></option><option value="秩不等式"></option><option value="伴随矩阵"></option><option value="反例构造"></option><option value="解的结构"></option><option value="行列式技巧"></option><option value="构造证明"></option><option value="介值定理"></option><option value="Wallis 公式"></option>
+              <option value="极限计算"></option><option value="ε-N 语言"></option><option value="夹逼准则"></option><option value="单调有界"></option><option value="等价无穷小"></option><option value="连续性"></option><option value="间断点"></option><option value="导数定义"></option><option value="复合函数求导"></option><option value="隐函数求导"></option><option value="参数方程求导"></option><option value="高阶导数"></option><option value="微分"></option><option value="中值定理"></option><option value="辅助函数"></option><option value="洛必达法则"></option><option value="泰勒公式"></option><option value="证明题"></option><option value="行列式计算"></option><option value="递推"></option><option value="线性方程组"></option><option value="代数余子式"></option><option value="克莱姆法则"></option><option value="矩阵运算"></option><option value="逆矩阵"></option><option value="分块矩阵"></option><option value="初等变换"></option><option value="相抵标准形"></option><option value="线性相关性"></option><option value="线性表示"></option><option value="向量空间"></option><option value="泰勒余项"></option><option value="递推数列"></option><option value="积分不等式"></option><option value="存在性证明"></option><option value="秩不等式"></option><option value="伴随矩阵"></option><option value="反例构造"></option><option value="解的结构"></option><option value="行列式技巧"></option><option value="构造证明"></option><option value="介值定理"></option><option value="Wallis 公式"></option><option value="命题逻辑"></option><option value="谓词逻辑"></option><option value="真值表"></option><option value="等值演算"></option><option value="范式"></option><option value="推理演算"></option><option value="归结"></option><option value="量词"></option><option value="前束范式"></option><option value="公理系统"></option><option value="补码"></option><option value="IEEE 754"></option><option value="浮点数"></option><option value="汇编"></option><option value="寻址方式"></option><option value="条件码"></option><option value="函数调用"></option><option value="栈帧"></option><option value="数组"></option><option value="结构体"></option><option value="缓冲区溢出"></option><option value="性能分析"></option><option value="存储层次"></option><option value="字节序"></option><option value="数据对齐"></option><option value="跳转表"></option><option value="线性相关"></option><option value="波兰表达式"></option>
             </datalist>
           </div>
         </div>
@@ -208,7 +215,7 @@
   </section>
 </div>
 <script src="../assets/shorthands.js"></script>
-<script>window.__CHAPTERS__ = {"va1":"\u003coption value=\"va1-1\">第 1 章 实数系与实数列的极限\u003c/option>\u003coption value=\"va1-2\">第 2 章 函数 函数的极限与连续\u003c/option>\u003coption value=\"va1-3\">第 3 章 函数的导数\u003c/option>\u003coption value=\"va1-4\">第 4 章 导数应用\u003c/option>\u003coption value=\"va1-5\">第 5 章 黎曼积分\u003c/option>\u003coption value=\"va1-6\">第 6 章 广义黎曼积分\u003c/option>\u003coption value=\"va1-7\">第 7 章 常微分方程\u003c/option>","la":"\u003coption value=\"la-1\">第 1 章 线性方程组与行列式\u003c/option>\u003coption value=\"la-2\">第 2 章 矩阵\u003c/option>\u003coption value=\"la-3\">第 3 章 n 维向量空间\u003c/option>\u003coption value=\"la-4\">第 4 章 向量组的秩之后\u003c/option>","other":"\u003coption value=\"other-1\">其他题目\u003c/option>"}</script>
+<script>window.__CHAPTERS__ = {"va1":"\u003coption value=\"va1-1\">第 1 章 实数系与实数列的极限\u003c/option>\u003coption value=\"va1-2\">第 2 章 函数 函数的极限与连续\u003c/option>\u003coption value=\"va1-3\">第 3 章 函数的导数\u003c/option>\u003coption value=\"va1-4\">第 4 章 导数应用\u003c/option>\u003coption value=\"va1-5\">第 5 章 黎曼积分\u003c/option>\u003coption value=\"va1-6\">第 6 章 广义黎曼积分\u003c/option>\u003coption value=\"va1-7\">第 7 章 常微分方程\u003c/option>","la":"\u003coption value=\"la-1\">第 1 章 线性方程组与行列式\u003c/option>\u003coption value=\"la-2\">第 2 章 矩阵\u003c/option>\u003coption value=\"la-3\">第 3 章 n 维向量空间\u003c/option>\u003coption value=\"la-4\">第 4 章 向量组的秩之后\u003c/option>","other":"\u003coption value=\"other-1\">其他题目\u003c/option>","dm":"\u003coption value=\"dm-1\">第 1 章 命题逻辑的基本概念\u003c/option>\u003coption value=\"dm-2\">第 2 章 命题逻辑的等值和推理演算\u003c/option>\u003coption value=\"dm-3\">第 3 章 命题逻辑的公理化\u003c/option>\u003coption value=\"dm-4\">第 4 章 谓词逻辑的基本概念\u003c/option>\u003coption value=\"dm-5\">第 5 章 谓词逻辑的等值和推理演算\u003c/option>","ics":"\u003coption value=\"ics-1\">第 1 章 概论\u003c/option>\u003coption value=\"ics-2\">第 2 章 信息的表示与处理\u003c/option>\u003coption value=\"ics-3\">第 3 章 汇编语言与程序的机器级表示\u003c/option>\u003coption value=\"ics-4\">第 4 章 函数调用\u003c/option>\u003coption value=\"ics-5\">第 5 章 数组与结构体\u003c/option>\u003coption value=\"ics-6\">第 6 章 程序的内存与安全\u003c/option>"}</script>
 <script src="../assets/vendor/markdown-it.min.js"></script>
 <script src="../assets/vendor/katex.min.js"></script>
 <script src="../assets/submit.js" defer></script>
@@ -228,7 +235,7 @@
         <div class="footer__col">
           <h3>内容</h3>
           <ul>
-            <li><a href="../questions/">题库（125 道）</a></li>
+            <li><a href="../questions/">题库（149 道）</a></li>
             <li><a href="../practice/">刷题</a></li>
             <li><a href="../tags/">标签</a></li>
             <li><a href="../export/">导出 PDF</a></li>

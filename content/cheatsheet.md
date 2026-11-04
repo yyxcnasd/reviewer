@@ -38,9 +38,9 @@
 
 \[(\arcsin x)'=\frac{1}{\sqrt{1-x^{2}}},\quad (\arccos x)'=-\frac{1}{\sqrt{1-x^{2}}},\quad (\arctan x)'=\frac{1}{1+x^{2}}\]
 
-隐函数 \(F(x,y)=0\)：\(\dfrac{\mathrm \d y}{\mathrm \d x}=-\dfrac{F_x}{F_y}\)。
+隐函数 \(F(x,y)=0\)：\(\dfrac{\d y}{\d x}=-\dfrac{F_x}{F_y}\)。
 
-参数方程：\(\dfrac{\mathrm \d y}{\mathrm \d x}=\dfrac{y'(t)}{x'(t)}\)；二阶导是 \(\dfrac{\d{\mathrm \d t}\Big(\dfrac{y'}{x'}\Big)\Big/x'(t)\)，**不是** \(\dfrac{y''}{x''}\)。
+参数方程：\(\dfrac{\d y}{\d x}=\dfrac{y'(t)}{x'(t)}\)；二阶导是 \(\dfrac{\d}{\d t}\Big(\dfrac{y'}{x'}\Big)\Big/x'(t)\)，**不是** \(\dfrac{y''}{x''}\)。
 
 ### 高阶导数
 

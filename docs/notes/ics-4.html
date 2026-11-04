@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>函数调用 · 计算机系统概论 · 复习册</title>
+<meta name="description" content="栈帧的建立与拆除、call/ret 的真实动作、六个参数寄存器与栈上参数、被调用者保存规则，以及递归的栈深度。">
+<meta name="color-scheme" content="light">
+<link rel="stylesheet" href="../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../assets/site.css">
+<script>
+  // 先按本地设置（或系统偏好）定主题，避免刷新时闪白
+  try {
+    // 默认浅色（纸面）。只有你手动切过深色，才在下次打开时记住。
+    if (localStorage.getItem('reviewer.theme') === 'dark')
+      document.documentElement.setAttribute('data-theme', 'dark')
+  } catch (e) {}
+</script>
+<script src="../assets/core.js"></script>
+<script src="../assets/theme.js" defer></script>
+<script src="../assets/term.js" defer></script>
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<meta property="og:title" content="函数调用 · 计算机系统概论 · 复习册">
+<meta property="og:description" content="栈帧的建立与拆除、call/ret 的真实动作、六个参数寄存器与栈上参数、被调用者保存规则，以及递归的栈深度。">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_CN">
+
+</head>
+<body class="no-js detail">
+<script>document.body.classList.remove('no-js')</script>
+<a class="skip" href="#main">跳到正文</a>
+
+  <header class="sitehead">
+    <div class="frame">
+      <nav class="nav" aria-label="主导航">
+        <a class="nav__mark" href="../"><span class="nav__dot" aria-hidden="true"></span>复习册</a>
+        <ul class="nav__links">
+          <li class="nav__menu-wrap">
+          <details class="navmenu">
+            <summary>课程</summary>
+            <ul class="navmenu__list">
+              <li><a href="../va1/">微积分 A1</a></li><li><a href="../la/">线性代数</a></li><li><a href="../dm/">离散数学<span class="navmenu__tag">仅期末</span></a></li><li><a href="../ics/" aria-current="page">计算机系统概论</a></li>
+              <li class="navmenu__sep"><a href="../questions/">题库（全部课程）</a></li>
+            </ul>
+          </details>
+        </li>
+          <li><a href="../questions/">题库</a></li>
+          <li><a href="../practice/">刷题</a></li>
+          <li><a href="../cheatsheet/">速查</a></li>
+          <li><a href="../stats/">进度</a></li>
+        </ul>
+        <div class="nav__end">
+          <div class="nav__terms" role="group" aria-label="考试轮次">
+            <button class="term-btn is-on" type="button" data-term-btn="midterm">期中</button><button class="term-btn" type="button" data-term-btn="final">期末</button>
+          </div>
+          <button class="ghost nav__theme" id="theme-toggle" type="button" aria-live="polite">深色</button>
+          <a class="btn btn--red nav__action" href="../submit/">投稿</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+<main id="main">
+
+<div class="frame">
+  <nav class="crumb" aria-label="位置">
+    <a href="../">复习册</a>
+    <span class="crumb__sep">/</span>
+    <a href="../ics/">计算机系统概论</a>
+    <span class="crumb__sep">/</span>
+    <span>第 4 章</span>
+  </nav>
+
+  <header class="pagehead">
+    <div class="pagehead__inner">
+      <h1 class="pagehead__title">函数调用</h1>
+      <div class="pagehead__scope">
+        <p>栈帧的建立与拆除、call/ret 的真实动作、六个参数寄存器与栈上参数、被调用者保存规则，以及递归的栈深度。</p>
+        <div class="pagehead__stats">
+          <span>在范围内</span>
+          <span><b>2</b>道题在这一章</span>
+          <span data-progress-ids="ics-008,ics-009">本章已做 <b data-progress-here>0</b> / 2</span>
+          <span><button class="ghost" type="button" data-print>打印这一章</button></span>
+        </div>
+      </div>
+    </div>
+  </header>
+</div>
+
+<div class="frame article">
+  <div class="article__main prose">
+    <h2 id="h-1">4.1 栈帧与调用约定</h2>
+<h3 id="h-2">栈与 call/ret</h3>
+<p>栈向低地址增长，<code>%rsp</code> 指向栈顶。</p>
+<ul>
+<li><code>pushq %rbx</code>：先把 <code>%rsp</code> 减 8，再把 <code>%rbx</code> 存入栈顶；</li>
+<li><code>popq %rbx</code>：先从栈顶读出，再把 <code>%rsp</code> 加 8；</li>
+<li><code>call f</code>：把<strong>返回地址</strong>（<code>call</code> 的下一条指令的地址）压栈，然后跳到 <code>f</code>；</li>
+<li><code>ret</code>：从栈顶弹出返回地址，跳回去。</li>
+</ul>
+<p><strong>最容易错的一步</strong>：<code>call</code> 之后、刚进入被调用函数时，栈顶已经是返回地址，<code>%rsp</code> 比调用前小了 8。所以「函数入口处 <code>%rsp % 16 = 8</code>」——后面所有对齐规则都是从这来的。</p>
+<h3 id="h-3">参数传递（System V AMD64）</h3>
+<p>前 6 个整型/指针参数依次放在 <code>%rdi</code>、<code>%rsi</code>、<code>%rdx</code>、<code>%rcx</code>、<code>%r8</code>、<code>%r9</code>，浮点参数用 <code>%xmm0</code>–<code>%xmm7</code>。超过 6 个的整型参数<strong>从右往左</strong>压栈，返回值放在 <code>%rax</code>（更大的整数用 <code>%rax:%rdx</code>）。</p>
+<p>进入被调用函数、还没执行 <code>pushq %rbp</code> 时，栈的布局是：</p>
+<table>
+<thead>
+<tr>
+<th>地址</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0(%rsp)</code></td>
+<td>返回地址</td>
+</tr>
+<tr>
+<td><code>8(%rsp)</code></td>
+<td>第 7 个参数</td>
+</tr>
+<tr>
+<td><code>16(%rsp)</code></td>
+<td>第 8 个参数</td>
+</tr>
+</tbody>
+</table>
+<p>所以执行 <code>pushq %rbp; movq %rsp, %rbp</code> 之后，返回地址在 <code>8(%rbp)</code>，第 7 个参数在 <code>16(%rbp)</code>，第 8 个在 <code>24(%rbp)</code>。</p>
+<p><strong>例</strong>：进入函数时 <code>%rsp = 0x7fffffffe008</code>，则返回地址在 <code>0x7fffffffe008</code>；<code>pushq %rbp</code> 把旧 <code>%rbp</code> 存到 <code>0x7fffffffe000</code>，然后 <code>%rbp = 0x7fffffffe000</code>。于是第 7 个参数在 <code>0x7fffffffe010</code>，第 8 个在 <code>0x7fffffffe018</code>。这类「给一个 <code>%rsp</code> 求各参数地址」的题，只要记住「返回地址在 0，参数从 8 开始」就不会错。</p>
+<h3 id="h-4">谁该保存寄存器</h3>
+<p>寄存器分两类：</p>
+<ul>
+<li><strong>调用者保存</strong>（caller-saved）：<code>%rax %rcx %rdx %rsi %rdi %r8</code>–<code>%r11</code>。调用别人之后，里面的值可能被改掉，想保留就得自己提前存起来。</li>
+<li><strong>被调用者保存</strong>（callee-saved）：<code>%rbx %rbp %r12</code>–<code>%r15</code>。被调用函数如果要用，必须先保存、返回前恢复，保证调用者看到的值不变。</li>
+</ul>
+<p><strong>最容易错的一步</strong>：在函数里用了 <code>%rbx</code> 却没 <code>push</code>/<code>pop</code>。这会悄悄改坏调用者的数据，表现为「程序在别处莫名出错」，是缓存区、递归类题目常见的坑点。</p>
+<h3 id="h-5">栈帧与 16 字节对齐</h3>
+<p>典型函数的开头和结尾：</p>
+<pre><code>f:
+    pushq %rbp            # 保存调用者的 rbp
+    movq %rsp, %rbp       # 建立当前帧基址
+    subq $32, %rsp        # 给局部变量和临时值留空间（16 的倍数）
+    ...
+    leave                 # 等价于 movq %rbp, %rsp; popq %rbp
+    ret
+</code></pre>
+<p><strong>为什么 <code>sub</code> 的量必须是 16 的倍数</strong>：调用 <code>call</code> 前 <code>%rsp</code> 必须满足 <code>%rsp % 16 = 0</code>（ABI 要求）。进入函数时 <code>%rsp % 16 = 8</code>，<code>push %rbp</code> 后变成 0，再减一个 16 的倍数，调用下一个函数时仍然对齐。局部变量需要 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi></mrow><annotation encoding="application/x-tex">N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.109em;">N</span></span></span></span> 字节时，<code>sub</code> 取「不小于 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi></mrow><annotation encoding="application/x-tex">N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.109em;">N</span></span></span></span> 的最小 16 的倍数」。</p>
+<h2 id="h-6">4.2 局部变量与递归</h2>
+<h3 id="h-7">局部变量放在哪</h3>
+<ul>
+<li>数量少、不取地址的局部变量：直接放寄存器；</li>
+<li>数组、结构体、需要取地址的变量：放栈帧里；</li>
+<li>编译器会重排、合并局部变量的位置，所以「C 里声明的顺序」不等于「栈上的顺序」。</li>
+</ul>
+<h3 id="h-8">递归与栈</h3>
+<p>每次递归调用都新建一个栈帧，所以栈深度等于递归深度。以</p>
+<pre><code class="language-c">long sum(long n) {
+    if (n &lt;= 0) return 0;
+    return n + sum(n - 1);
+}
+</code></pre>
+<p>为例，典型汇编是</p>
+<pre><code>sum:
+    testq %rdi, %rdi
+    jle .L2
+    pushq %rbx
+    movq %rdi, %rbx
+    leaq -1(%rdi), %rdi
+    call sum
+    addq %rbx, %rax
+    popq %rbx
+    ret
+.L2:
+    movl $0, %eax
+    ret
+</code></pre>
+<p><strong>为什么用 <code>%rbx</code></strong>：递归调用 <code>sum</code> 会覆盖调用者保存寄存器（包括 <code>%rcx</code>），而 <code>%rbx</code> 是被调用者保存的，<code>sum</code> 自己负责保存和恢复，所以把 <code>n</code> 放在 <code>%rbx</code> 里最省事。</p>
+<p><strong>最容易错的一步</strong>：算递归的栈深度。<code>sum(3)</code> 会依次调用 <code>sum(2)</code>、<code>sum(1)</code>、<code>sum(0)</code>，最深时栈上同时有 4 个返回地址、3 个保存的 <code>%rbx</code>（<code>sum(0)</code> 立刻返回，还没 <code>push</code>）。</p>
+<p><strong>递归 vs 迭代</strong>：递归的栈开销是 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0278em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span> 空间。<code>sum(1000000)</code> 若每层占 32 字节，栈就要约 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>32</mn><mtext> MB</mtext></mrow><annotation encoding="application/x-tex">32\ \text{MB}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">32</span><span class="mspace"> </span><span class="mord text"><span class="mord">MB</span></span></span></span></span>，而默认栈大小通常 8 MB，结果就是栈溢出。尾递归在 <code>-O2</code> 下可能被优化成循环（复用同一个栈帧）。</p>
+
+    <div class="rule-head" style="margin-top:56px"><h2>这一章的题</h2><p>2 道，全部带解析。</p></div>
+           <ul class="qmini">
+             <li><a href="../questions/ics-008.html">函数 sum 的参数 n 放在 %rdi 返…</a> <span>计算题 · 函数调用</span></li><li><a href="../questions/ics-009.html">函数调用 · 难度 3</a> <span>计算题 · 函数调用</span></li>
+           </ul>
+    <div class="article__pager">
+      <a href="../notes/ics-3.html">← 第 3 章 汇编语言与程序的机器级表示</a>
+      <a href="../notes/ics-5.html">第 5 章 数组与结构体 →</a>
+    </div>
+  </div>
+  <nav class="article__toc" data-ui aria-label="本页目录">
+          <h2>本页</h2>
+          <ol><li class=""><a href="#h-1">4.1 栈帧与调用约定</a></li><li class=""><a href="#h-6">4.2 局部变量与递归</a></li></ol>
+          <dl class="spec spec--rail">
+            <div><dt>章节</dt><dd>第 4 章</dd></div>
+            <div><dt>节</dt><dd>2 节在范围内</dd></div>
+            <div><dt>题</dt><dd>2 道</dd></div>
+            <div><dt>范围</dt><dd>在范围内</dd></div>
+          </dl>
+        </nav>
+</div>
+
+</main>
+
+  <footer class="footer">
+    <div class="frame">
+      <a class="footer__word" href="../" aria-label="回到首页：复习册"><span aria-hidden="true">复习册</span></a>
+      <div class="footer__cols">
+        <div class="footer__col">
+          <h3>科目</h3>
+          <ul>
+            <li><a href="../va1/">微积分 A1</a></li>
+            <li><a href="../la/">线性代数</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h3>内容</h3>
+          <ul>
+            <li><a href="../questions/">题库（149 道）</a></li>
+            <li><a href="../practice/">刷题</a></li>
+            <li><a href="../tags/">标签</a></li>
+            <li><a href="../export/">导出 PDF</a></li>
+            <li><a href="../stats/">进度</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h3>参与</h3>
+          <ul>
+            <li><a href="../submit/">投稿一道题</a></li>
+            <li><a href="../about/">关于与范围说明</a></li>
+            <li><a href="https://github.com/yyxcnasd/reviewer" target="_blank" rel="noopener noreferrer">GitHub 仓库</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h3>这本册子</h3>
+          <ul>
+            <li>2026 秋 期中版</li>
+            <li>内容 CC BY-SA 4.0</li>
+            <li>构建于 2026-11-04</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__legal">
+        <span>复习册 · 课程 · 范围 · 题库</span>
+        <span>内容以 CC BY-SA 4.0 发布，题目标题与解析可自由取用，请保留出处。</span>
+      </div>
+    </div>
+  </footer>
+<script src="../assets/progress.js" defer></script>
+<script src="../assets/site.js" defer></script>
+
+</body>
+</html>

@@ -2305,3 +2305,99 @@ body.is-focus .submit__preview {
   font-size: var(--fs-micro);
   color: var(--ink-mute);
 }
+
+.course__term-less {
+  margin-bottom: 14px;
+  padding: 10px 12px;
+  background: var(--paper-2);
+  border-left: 4px solid var(--red);
+  font-size: var(--fs-small);
+  color: var(--ink-soft);
+}
+
+/* ---------------------------------------------------------------- 窄屏排版 */
+
+/* 窄屏：筛选两列网格，搜索与操作整行 */
+@media (max-width: 760px) {
+  .filters {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 12px;
+    position: static;
+    padding-block: 16px 18px;
+  }
+
+  .filters__field {
+    min-width: 0;
+  }
+
+  /* 搜索框、按钮组、计数、批量操作占整行 */
+  .filters__field:has(input[type='search']),
+  .filters__count,
+  .donebar,
+  .questions__scope {
+    grid-column: 1 / -1;
+  }
+
+  .filters select,
+  .filters input {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .pagehead__stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 12px;
+  }
+
+  .pagehead__stats span {
+    white-space: nowrap;
+  }
+
+  .donebar__actions {
+    grid-column: 1 / -1;
+  }
+}
+
+/* 页头统计：单项不换行（桌面也一样） */
+.pagehead__stats span {
+  white-space: nowrap;
+}
+
+/* 要点页：页头到正文的空白收紧 */
+.article {
+  padding-top: 0;
+}
+
+.article__main {
+  padding-top: 4px;
+}
+
+/* 代码块：窄屏横向滚动，不撑破页面 */
+.prose pre,
+.qblock__body pre {
+  overflow-x: auto;
+  padding: 14px 16px;
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 0.875rem;
+  line-height: 1.7;
+  margin: 1.1em 0;
+  max-width: 100%;
+}
+
+.prose pre code,
+.qblock__body pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+  font-size: inherit;
+}
+
+/* 键位提示：一个字符也要看得见 */
+.kbd {
+  min-width: 1.5em;
+  text-align: center;
+  padding: 0.05em 0.35em;
+}

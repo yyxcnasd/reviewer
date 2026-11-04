@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>题库 · 复习册</title>
-<meta name="description" content="125 道微积分 A1 与线性代数题目，带完整解析。">
+<meta name="description" content="149 道微积分 A1 与线性代数题目，带完整解析。">
 <meta name="color-scheme" content="light">
 <link rel="stylesheet" href="../assets/katex/katex.min.css">
 <link rel="stylesheet" href="../assets/site.css">
@@ -21,7 +21,7 @@
 <script src="../assets/term.js" defer></script>
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <meta property="og:title" content="题库 · 复习册">
-<meta property="og:description" content="125 道微积分 A1 与线性代数题目，带完整解析。">
+<meta property="og:description" content="149 道微积分 A1 与线性代数题目，带完整解析。">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="zh_CN">
 
@@ -35,8 +35,15 @@
       <nav class="nav" aria-label="主导航">
         <a class="nav__mark" href="../"><span class="nav__dot" aria-hidden="true"></span>复习册</a>
         <ul class="nav__links">
-          <li><a href="../va1/">微积分 A1</a></li>
-          <li><a href="../la/">线性代数</a></li>
+          <li class="nav__menu-wrap">
+          <details class="navmenu">
+            <summary>课程</summary>
+            <ul class="navmenu__list">
+              <li><a href="../va1/">微积分 A1</a></li><li><a href="../la/">线性代数</a></li><li><a href="../dm/">离散数学<span class="navmenu__tag">仅期末</span></a></li><li><a href="../ics/">计算机系统概论</a></li>
+              <li class="navmenu__sep"><a href="../questions/">题库（全部课程）</a></li>
+            </ul>
+          </details>
+        </li>
           <li><a href="../questions/" aria-current="page">题库</a></li>
           <li><a href="../practice/">刷题</a></li>
           <li><a href="../cheatsheet/">速查</a></li>
@@ -60,10 +67,10 @@
     <div class="pagehead__inner">
       <h1 class="pagehead__title">题库</h1>
       <div class="pagehead__scope">
-        <p>125 道题，按科目、章节、标签和难度筛。每题都有提示、完整解析和一条最常见的错法。</p>
+        <p>149 道题，按科目、章节、标签和难度筛。每题都有提示、完整解析和一条最常见的错法。</p>
         <div class="pagehead__stats">
-          <span><b>63</b>微积分 A1</span><span><b>62</b>线性代数</span><span><b>0</b>其他</span>
-          <span><a href="../questions/?difficulty=4">难题 29 道</a></span>
+          <span><b>63</b>微积分 A1</span><span><b>62</b>线性代数</span><span><b>0</b>其他</span><span><b>12</b>离散数学</span><span><b>12</b>计算机系统概论</span>
+          <span><a href="../questions/?difficulty=4">难题 38 道</a></span>
           <span><a href="../practice/?random=1">随机一道 →</a></span>
           <span><a href="../practice/">进刷题模式 →</a></span>
         </div>
@@ -77,15 +84,15 @@
     <form class="filters" id="filters" role="search" onsubmit="return false">
     <div class="filters__field">
       <label for="f-course">科目</label>
-      <select id="f-course"><option value="">全部</option><option value="va1">微积分 A1</option><option value="la">线性代数</option><option value="other">其他</option></select>
+      <select id="f-course"><option value="">全部</option><option value="va1">微积分 A1</option><option value="la">线性代数</option><option value="other">其他</option><option value="dm">离散数学</option><option value="ics">计算机系统概论</option></select>
     </div>
     <div class="filters__field">
       <label for="f-chapter">章节</label>
-      <select id="f-chapter"><option value="">全部</option><optgroup label="微积分 A1"><option value="va1-1">第 1 章 实数系与实数列的极限</option><option value="va1-2">第 2 章 函数 函数的极限与连续</option><option value="va1-3">第 3 章 函数的导数</option><option value="va1-4">第 4 章 导数应用</option><option value="va1-5">第 5 章 黎曼积分</option><option value="va1-6">第 6 章 广义黎曼积分</option></optgroup><optgroup label="线性代数"><option value="la-1">第 1 章 线性方程组与行列式</option><option value="la-2">第 2 章 矩阵</option><option value="la-3">第 3 章 n 维向量空间</option><option value="la-4">第 4 章 向量组的秩之后</option></optgroup></select>
+      <select id="f-chapter"><option value="">全部</option><optgroup label="微积分 A1"><option value="va1-1">第 1 章 实数系与实数列的极限</option><option value="va1-2">第 2 章 函数 函数的极限与连续</option><option value="va1-3">第 3 章 函数的导数</option><option value="va1-4">第 4 章 导数应用</option><option value="va1-5">第 5 章 黎曼积分</option><option value="va1-6">第 6 章 广义黎曼积分</option></optgroup><optgroup label="线性代数"><option value="la-1">第 1 章 线性方程组与行列式</option><option value="la-2">第 2 章 矩阵</option><option value="la-3">第 3 章 n 维向量空间</option><option value="la-4">第 4 章 向量组的秩之后</option></optgroup><optgroup label="离散数学"><option value="dm-1">第 1 章 命题逻辑的基本概念</option><option value="dm-2">第 2 章 命题逻辑的等值和推理演算</option><option value="dm-3">第 3 章 命题逻辑的公理化</option><option value="dm-4">第 4 章 谓词逻辑的基本概念</option><option value="dm-5">第 5 章 谓词逻辑的等值和推理演算</option></optgroup><optgroup label="计算机系统概论"><option value="ics-1">第 1 章 概论</option><option value="ics-2">第 2 章 信息的表示与处理</option><option value="ics-3">第 3 章 汇编语言与程序的机器级表示</option><option value="ics-4">第 4 章 函数调用</option><option value="ics-5">第 5 章 数组与结构体</option><option value="ics-6">第 6 章 程序的内存与安全</option></optgroup></select>
     </div>
     <div class="filters__field">
       <label for="f-tag">标签</label>
-      <select id="f-tag"><option value="">全部</option><option value="极限计算">极限计算（29）</option><option value="证明题">证明题（27）</option><option value="行列式计算">行列式计算（18）</option><option value="矩阵运算">矩阵运算（16）</option><option value="构造证明">构造证明（11）</option><option value="逆矩阵">逆矩阵（10）</option><option value="泰勒公式">泰勒公式（10）</option><option value="线性相关性">线性相关性（10）</option><option value="中值定理">中值定理（9）</option><option value="连续性">连续性（8）</option><option value="等价无穷小">等价无穷小（6）</option><option value="线性表示">线性表示（6）</option><option value="代数余子式">代数余子式（5）</option><option value="导数定义">导数定义（5）</option><option value="洛必达法则">洛必达法则（5）</option><option value="辅助函数">辅助函数（4）</option><option value="高阶导数">高阶导数（4）</option><option value="夹逼准则">夹逼准则（4）</option><option value="解的结构">解的结构（4）</option><option value="初等变换">初等变换（3）</option><option value="单调有界">单调有界（3）</option><option value="递推数列">递推数列（3）</option><option value="分块矩阵">分块矩阵（3）</option><option value="复合函数求导">复合函数求导（3）</option><option value="线性方程组">线性方程组（3）</option><option value="隐函数求导">隐函数求导（3）</option><option value="秩不等式">秩不等式（3）</option><option value="反例构造">反例构造（2）</option><option value="积分不等式">积分不等式（2）</option><option value="间断点">间断点（2）</option><option value="介值定理">介值定理（2）</option><option value="克莱姆法则">克莱姆法则（2）</option><option value="微分">微分（2）</option><option value="行列式技巧">行列式技巧（2）</option><option value="ε-N 语言">ε-N 语言（2）</option><option value="伴随矩阵">伴随矩阵（1）</option><option value="参数方程求导">参数方程求导（1）</option><option value="递推">递推（1）</option><option value="线性相关">线性相关（1）</option><option value="相抵标准形">相抵标准形（1）</option></select>
+      <select id="f-tag"><option value="">全部</option><option value="极限计算">极限计算（29）</option><option value="证明题">证明题（27）</option><option value="行列式计算">行列式计算（18）</option><option value="矩阵运算">矩阵运算（16）</option><option value="构造证明">构造证明（11）</option><option value="逆矩阵">逆矩阵（10）</option><option value="泰勒公式">泰勒公式（10）</option><option value="线性相关性">线性相关性（10）</option><option value="中值定理">中值定理（9）</option><option value="连续性">连续性（8）</option><option value="命题逻辑">命题逻辑（7）</option><option value="等价无穷小">等价无穷小（6）</option><option value="线性表示">线性表示（6）</option><option value="代数余子式">代数余子式（5）</option><option value="导数定义">导数定义（5）</option><option value="洛必达法则">洛必达法则（5）</option><option value="辅助函数">辅助函数（4）</option><option value="高阶导数">高阶导数（4）</option><option value="夹逼准则">夹逼准则（4）</option><option value="解的结构">解的结构（4）</option><option value="量词">量词（4）</option><option value="谓词逻辑">谓词逻辑（4）</option><option value="初等变换">初等变换（3）</option><option value="单调有界">单调有界（3）</option><option value="递推数列">递推数列（3）</option><option value="反例构造">反例构造（3）</option><option value="分块矩阵">分块矩阵（3）</option><option value="复合函数求导">复合函数求导（3）</option><option value="汇编">汇编（3）</option><option value="线性方程组">线性方程组（3）</option><option value="隐函数求导">隐函数求导（3）</option><option value="栈帧">栈帧（3）</option><option value="秩不等式">秩不等式（3）</option><option value="等值演算">等值演算（2）</option><option value="浮点数">浮点数（2）</option><option value="归结">归结（2）</option><option value="函数调用">函数调用（2）</option><option value="积分不等式">积分不等式（2）</option><option value="间断点">间断点（2）</option><option value="介值定理">介值定理（2）</option><option value="克莱姆法则">克莱姆法则（2）</option><option value="条件码">条件码（2）</option><option value="微分">微分（2）</option><option value="行列式技巧">行列式技巧（2）</option><option value="ε-N 语言">ε-N 语言（2）</option><option value="伴随矩阵">伴随矩阵（1）</option><option value="波兰表达式">波兰表达式（1）</option><option value="补码">补码（1）</option><option value="参数方程求导">参数方程求导（1）</option><option value="存储层次">存储层次（1）</option><option value="递推">递推（1）</option><option value="范式">范式（1）</option><option value="公理系统">公理系统（1）</option><option value="缓冲区溢出">缓冲区溢出（1）</option><option value="结构体">结构体（1）</option><option value="前束范式">前束范式（1）</option><option value="数据对齐">数据对齐（1）</option><option value="数组">数组（1）</option><option value="跳转表">跳转表（1）</option><option value="推理演算">推理演算（1）</option><option value="线性相关">线性相关（1）</option><option value="相抵标准形">相抵标准形（1）</option><option value="性能分析">性能分析（1）</option><option value="寻址方式">寻址方式（1）</option><option value="真值表">真值表（1）</option><option value="字节序">字节序（1）</option><option value="IEEE 754">IEEE 754（1）</option></select>
     </div>
     <div class="filters__field">
       <label for="f-difficulty">难度</label>
@@ -120,14 +127,14 @@
       <label for="f-q">搜索</label>
       <input id="f-q" type="search" placeholder="题干、标签、出处" autocomplete="off">
     </div>
-    <div class="filters__count"><b id="f-count">125</b> 道</div>
+    <div class="filters__count"><b id="f-count">149</b> 道</div>
   </form>
 
   <p class="questions__scope" id="q-scope-note"></p>
 
-  <div class="donebar" data-progress-ids="la-001,la-002,la-003,la-004,la-005,la-006,la-007,la-008,la-009,la-010,la-011,la-012,la-013,la-014,la-015,la-016,la-017,la-018,la-019,la-020,la-021,la-022,la-023,la-024,la-025,la-026,la-027,la-028,la-029,la-030,la-031,la-032,la-033,la-034,la-035,la-036,la-037,la-038,la-039,la-040,la-041,la-042,la-043,la-044,la-045,la-046,la-047,la-048,la-049,la-050,la-051,la-052,la-053,la-054,la-055,la-056,la-057,la-058,la-059,la-060,la-061,la-062,va1-001,va1-002,va1-003,va1-004,va1-005,va1-006,va1-007,va1-008,va1-009,va1-010,va1-011,va1-012,va1-013,va1-014,va1-015,va1-016,va1-017,va1-018,va1-019,va1-020,va1-021,va1-022,va1-023,va1-024,va1-025,va1-026,va1-027,va1-028,va1-029,va1-030,va1-031,va1-032,va1-033,va1-034,va1-035,va1-036,va1-037,va1-038,va1-039,va1-040,va1-041,va1-042,va1-043,va1-044,va1-045,va1-046,va1-047,va1-048,va1-049,va1-050,va1-051,va1-052,va1-053,va1-054,va1-055,va1-056,va1-057,va1-058,va1-059,va1-060,va1-061,va1-062,va1-063">
+  <div class="donebar" data-progress-ids="dm-001,dm-002,dm-003,dm-004,dm-005,dm-006,dm-007,dm-008,dm-009,dm-010,dm-011,dm-012,ics-001,ics-002,ics-003,ics-004,ics-005,ics-006,ics-007,ics-008,ics-009,ics-010,ics-011,ics-012,la-001,la-002,la-003,la-004,la-005,la-006,la-007,la-008,la-009,la-010,la-011,la-012,la-013,la-014,la-015,la-016,la-017,la-018,la-019,la-020,la-021,la-022,la-023,la-024,la-025,la-026,la-027,la-028,la-029,la-030,la-031,la-032,la-033,la-034,la-035,la-036,la-037,la-038,la-039,la-040,la-041,la-042,la-043,la-044,la-045,la-046,la-047,la-048,la-049,la-050,la-051,la-052,la-053,la-054,la-055,la-056,la-057,la-058,la-059,la-060,la-061,la-062,va1-001,va1-002,va1-003,va1-004,va1-005,va1-006,va1-007,va1-008,va1-009,va1-010,va1-011,va1-012,va1-013,va1-014,va1-015,va1-016,va1-017,va1-018,va1-019,va1-020,va1-021,va1-022,va1-023,va1-024,va1-025,va1-026,va1-027,va1-028,va1-029,va1-030,va1-031,va1-032,va1-033,va1-034,va1-035,va1-036,va1-037,va1-038,va1-039,va1-040,va1-041,va1-042,va1-043,va1-044,va1-045,va1-046,va1-047,va1-048,va1-049,va1-050,va1-051,va1-052,va1-053,va1-054,va1-055,va1-056,va1-057,va1-058,va1-059,va1-060,va1-061,va1-062,va1-063">
     <p>
-      已做 <b data-progress-here>0</b> / 125
+      已做 <b data-progress-here>0</b> / 149
       <span>·</span> 收藏 <b data-progress-count>0</b>
       <span>·</span> 点每道题下面的「已做」「收藏」记进度，只存在你自己的浏览器里
       <span>·</span> 按 <span class="kbd">/</span> 搜索
@@ -139,6 +146,270 @@
   </div>
 
   <ul class="qlist" id="qlist">
+      <li class="qrow" data-id="dm-001" data-course="dm" data-chapter="dm-1" data-states="{&quot;midterm&quot;:&quot;out&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="2" data-tags="命题逻辑 真值表" data-text="设 ：认真复习， ：通过考试。把下面三句话形式化，并用真值表判断哪些彼此等值： (1) 只有认真复习，才能通过考试； (2) 除非认真复习，否则不能通过考试； (3) 只要认真复习，就能通过考试。 再举一组赋值说明 (1) 与 (3) 不等值，并解释这个差别在&quot;必要条件&quot;和&quot;充分条件&quot;上的含义。 命题逻辑 真值表 自编">
+        <div>
+          <a class="qrow__link" href="../questions/dm-001.html">设 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi></mrow><annotation encoding="application/x-tex">P</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">P</span></span></span></span>：认真复习，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Q</mi></mrow><annotation encoding="application/x-tex">Q</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">Q</span></span></span></span>：通过考试。把下面三句话形式化，并用真值表判断哪些彼此等值：</a>
+          <div class="qrow__meta"><span class="fq__id">DM-001</span><span>离散 · 命题逻辑的基本概念</span><span>计算题</span><span class="dots" aria-label="难度 2 / 4"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__flags">
+    <button class="flag" type="button" data-flag="done" data-id="dm-001" aria-pressed="false"><span>已做</span></button>
+    <button class="flag flag--fav" type="button" data-flag="fav" data-id="dm-001" aria-pressed="false"><span>收藏</span></button>
+  </div>
+        </div>
+        <div class="qrow__tags"><a class="tag" href="../tags/%E5%91%BD%E9%A2%98%E9%80%BB%E8%BE%91.html">命题逻辑</a><a class="tag" href="../tags/%E7%9C%9F%E5%80%BC%E8%A1%A8.html">真值表</a></div>
+      </li>
+      <li class="qrow" data-id="dm-002" data-course="dm" data-chapter="dm-1" data-states="{&quot;midterm&quot;:&quot;out&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="3" data-tags="命题逻辑 波兰表达式" data-text="设公式 (1) 写出 的波兰表达式（前缀式）和逆波兰表达式（后缀式）； (2) 用代入规则说明：由重言式 可以断定 也是重言式，并指出代入规则的两条要求分别在这里怎么体现； (3) 说明为什么前缀式在计算机处理时不需要括号。 命题逻辑 波兰表达式 自编">
+        <div>
+          <a class="qrow__link" href="../questions/dm-002.html">设公式 · 命题逻辑</a>
+          <div class="qrow__meta"><span class="fq__id">DM-002</span><span>离散 · 命题逻辑的基本概念</span><span>计算题</span><span class="dots" aria-label="难度 3 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__flags">
+    <button class="flag" type="button" data-flag="done" data-id="dm-002" aria-pressed="false"><span>已做</span></button>
+    <button class="flag flag--fav" type="button" data-flag="fav" data-id="dm-002" aria-pressed="false"><span>收藏</span></button>
+  </div>
+        </div>
+        <div class="qrow__tags"><a class="tag" href="../tags/%E5%91%BD%E9%A2%98%E9%80%BB%E8%BE%91.html">命题逻辑</a><a class="tag" href="../tags/%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F.html">波兰表达式</a></div>
+      </li>
+      <li class="qrow" data-id="dm-003" data-course="dm" data-chapter="dm-2" data-states="{&quot;midterm&quot;:&quot;out&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="2" data-tags="等值演算 命题逻辑" data-text="(1) 用等值演算证明 每一步都要注明所用的等值公式； (2) 判断 与 是否等值，若不等值，给出一组使其真值不同的赋值； (3) 说明第 (1) 问的结论为什么能解释&quot;归谬法&quot;：要证 ，只需假设 推出两个互相矛盾的结论。 等值演算 命题逻辑 自编">
+        <div>
+          <a class="qrow__link" href="../questions/dm-003.html">(1) 用等值演算证明</a>
+          <div class="qrow__meta"><span class="fq__id">DM-003</span><span>离散 · 命题逻辑的等值和推理演算</span><span>证明题</span><span class="dots" aria-label="难度 2 / 4"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__flags">
+    <button class="flag" type="button" data-flag="done" data-id="dm-003" aria-pressed="false"><span>已做</span></button>
+    <button class="flag flag--fav" type="button" data-flag="fav" data-id="dm-003" aria-pressed="false"><span>收藏</span></button>
+  </div>
+        </div>
+        <div class="qrow__tags"><a class="tag" href="../tags/%E7%AD%89%E5%80%BC%E6%BC%94%E7%AE%97.html">等值演算</a><a class="tag" href="../tags/%E5%91%BD%E9%A2%98%E9%80%BB%E8%BE%91.html">命题逻辑</a></div>
+      </li>
+      <li class="qrow" data-id="dm-004" data-course="dm" data-chapter="dm-2" data-states="{&quot;midterm&quot;:&quot;out&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="4" data-tags="范式 命题逻辑" data-text="设 (1) 求 的主析取范式和主合取范式； (2) 判断 的类型（重言式/矛盾式/可满足式），并写出全部成真赋值； (3) 把 化成尽可能简单的等值公式，并说明为什么两个蕴含式的双向&quot;能与&quot;直接&quot;与&quot;是同一个公式。 范式 命题逻辑 自编">
+        <div>
+          <a class="qrow__link" href="../questions/dm-004.html">设 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo>=</mo><mo stretchy="false">(</mo><mi>P</mi><mo>→</mo><mi>Q</mi><mo stretchy="false">)</mo><mo>↔</mo><mo stretchy="false">(</mo><mi>Q</mi><mo>→</mo><mi>R</mi><mo stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">A=(P\to Q)\leftrightarrow(Q\to R).</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">A</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.1389em;">P</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">Q</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">↔</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal">Q</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0077em;">R</span><span class="mclose">)</span><span class="mord">.</span></span></span></span> · 范式</a>
+          <div class="qrow__meta"><span class="fq__id">DM-004</span><span>离散 · 命题逻辑的等值和推理演算</span><span>计算题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__flags">
+    <button class="flag" type="button" data-flag="done" data-id="dm-004" aria-pressed="false"><span>已做</span></button>
+    <button class="flag flag--fav" type="button" data-flag="fav" data-id="dm-004" aria-pressed="false"><span>收藏</span></button>
+  </div>
+        </div>
+        <div class="qrow__tags"><a class="tag" href="../tags/%E8%8C%83%E5%BC%8F.html">范式</a><a class="tag" href="../tags/%E5%91%BD%E9%A2%98%E9%80%BB%E8%BE%91.html">命题逻辑</a></div>
+      </li>
+      <li class="qrow" data-id="dm-005" data-course="dm" data-chapter="dm-2" data-states="{&quot;midterm&quot;:&quot;out&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="4" data-tags="推理演算 命题逻辑" data-text="用推理演算（归谬法）证明 要求写出完整的推理步骤，每步注明所用规则或基本推理公式，并说明哪一步开始&quot;撤销&quot;了附加前提。 再把上面的公式翻译成一个自然语言推理，说明它对应的日常论证为什么成立。 推理演算 命题逻辑 自编">
+        <div>
+          <a class="qrow__link" href="../questions/dm-005.html">用推理演算（归谬法）证明</a>
+          <div class="qrow__meta"><span class="fq__id">DM-005</span><span>离散 · 命题逻辑的等值和推理演算</span><span>证明题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__flags">
+    <button class="flag" type="button" data-flag="done" data-id="dm-005" aria-pressed="false"><span>已做</span></button>
+    <button class="flag flag--fav" type="button" data-flag="fav" data-id="dm-005" aria-pressed="false"><span>收藏</span></button>
+  </div>
+        </div>
+        <div class="qrow__tags"><a class="tag" href="../tags/%E6%8E%A8%E7%90%86%E6%BC%94%E7%AE%97.html">推理演算</a><a class="tag" href="../tags/%E5%91%BD%E9%A2%98%E9%80%BB%E8%BE%91.html">命题逻辑</a></div>
+      </li>
+      <li class="qrow" data-id="dm-006" data-course="dm" data-chapter="dm-2" data-states="{&quot;midterm&quot;:&quot;out&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="3" data-tags="归结 命题逻辑" data-text="用归结推理法证明 要求：写出出发公式、子句集、每一步归结所用的子句，并说明为什么归结出空子句就说明原推理成立。 归结 命题逻辑 自编">
+        <div>
+          <a class="qrow__link" href="../questions/dm-006.html">用归结推理法证明</a>
+          <div class="qrow__meta"><span class="fq__id">DM-006</span><span>离散 · 命题逻辑的等值和推理演算</span><span>证明题</span><span class="dots" aria-label="难度 3 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__flags">
+    <button class="flag" type="button" data-flag="done" data-id="dm-006" aria-pressed="false"><span>已做</span></button>
+    <button class="flag flag--fav" type="button" data-flag="fav" data-id="dm-006" aria-pressed="false"><span>收藏</span></button>
+  </div>
+        </div>
+        <div class="qrow__tags"><a class="tag" href="../tags/%E5%BD%92%E7%BB%93.html">归结</a><a class="tag" href="../tags/%E5%91%BD%E9%A2%98%E9%80%BB%E8%BE%91.html">命题逻辑</a></div>
+      </li>
+      <li class="qrow" data-id="dm-007" data-course="dm" data-chapter="dm-3" data-states="{&quot;midterm&quot;:&quot;out&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="3" data-tags="公理系统 命题逻辑" data-text="(1) 在自然演绎系统中证明 只用肯定前提律、传递律、蕴涵消去律（分离规则）和蕴涵引入律，写清每步用的是哪条规则。 (2) 指出这个证明中哪几步体现了演绎定理，并说明演绎定理为什么可以&quot;把前件当假设用&quot;。 (3) 王浩算法与罗素公理系统相比，在初始符号、公理、变形规则三个方面有什么不同？为什么王浩算法既能证明定理、又能判定&quot;某个公式不是定理&quot;？ 公理系统 命题逻辑 自编">
+        <div>
+          <a class="qrow__link" href="../questions/dm-007.html">(1) 在自然演绎系统中证明</a>
+          <div class="qrow__meta"><span class="fq__id">DM-007</span><span>离散 · 命题逻辑的公理化</span><span>证明题</span><span class="dots" aria-label="难度 3 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__flags">
+    <button class="flag" type="button" data-flag="done" data-id="dm-007" aria-pressed="false"><span>已做</span></button>
+    <button class="flag flag--fav" type="button" data-flag="fav" data-id="dm-007" aria-pressed="false"><span>收藏</span></button>
+  </div>
+        </div>
+        <div class="qrow__tags"><a class="tag" href="../tags/%E5%85%AC%E7%90%86%E7%B3%BB%E7%BB%9F.html">公理系统</a><a class="tag" href="../tags/%E5%91%BD%E9%A2%98%E9%80%BB%E8%BE%91.html">命题逻辑</a></div>
+      </li>
+      <li class="qrow" data-id="dm-008" data-course="dm" data-chapter="dm-4" data-states="{&quot;midterm&quot;:&quot;out&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="2" data-tags="谓词逻辑 量词" data-text="个体域取全总个体域。设 ： 是有理数， ： 是实数， ： 是自然数， ： 。把下面三句话形式化，并指出哪部分是特性谓词： (1) 所有的有理数都是实数； (2) 有的实数不是有理数； (3) 没有最大的自然数。 (4) 判断 (2) 的公式与 是否等值，并说明理由。 谓词逻辑 量词 自编">
+        <div>
+          <a class="qrow__link" href="../questions/dm-008.html">个体域取全总个体域。设 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Q</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">Q(x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">Q</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span></span></span></span>：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span></span></span></span> 是有理数，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">R(x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0077em;">R</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span></span></span></span>：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span></span></span></span> 是实数，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">N(x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.109em;">N</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span></span></span></span>：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span></span></span></span> 是自然数，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">G(x,y)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">G</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">y</span><span class="mclose">)</span></span></span></span>：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>&gt;</mo><mi>y</mi></mrow><annotation encoding="application/x-tex">x&gt;y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">y</span></span></span></span>。把下面三句话形式化，并指出哪部分是特性谓词：</a>
+          <div class="qrow__meta"><span class="fq__id">DM-008</span><span>离散 · 谓词逻辑的基本概念</span><span>概念题</span><span class="dots" aria-label="难度 2 / 4"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__flags">
+    <button class="flag" type="button" data-flag="done" data-id="dm-008" aria-pressed="false"><span>已做</span></button>
+    <button class="flag flag--fav" type="button" data-flag="fav" data-id="dm-008" aria-pressed="false"><span>收藏</span></button>
+  </div>
+        </div>
+        <div class="qrow__tags"><a class="tag" href="../tags/%E8%B0%93%E8%AF%8D%E9%80%BB%E8%BE%91.html">谓词逻辑</a><a class="tag" href="../tags/%E9%87%8F%E8%AF%8D.html">量词</a></div>
+      </li>
+      <li class="qrow" data-id="dm-009" data-course="dm" data-chapter="dm-4" data-states="{&quot;midterm&quot;:&quot;out&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="4" data-tags="谓词逻辑 反例构造 量词" data-text="设 是二元谓词，论域取 。 (1) 把 与 都化成只含命题变项 的命题逻辑公式； (2) 证明 ； (3) 构造一个解释，使 (2) 的前件为真、后件为假，从而说明反向的蕴含不成立； (4) 由 (3) 说明：为什么不能靠&quot;在有限个个体域上逐一代入验证&quot;来判定一个谓词公式是否普遍有效。 谓词逻辑 反例构造 量词 自编">
+        <div>
+          <a class="qrow__link" href="../questions/dm-009.html">设 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">P(x,y)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">P</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">y</span><span class="mclose">)</span></span></span></span> 是二元谓词，论域取 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi><mo>=</mo><mo stretchy="false">{</mo><mn>1</mn><mo separator="true">,</mo><mn>2</mn><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">D=\{1,2\}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.0278em;">D</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">{</span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">2</span><span class="mclose">}</span></span></span></span>。</a>
+          <div class="qrow__meta"><span class="fq__id">DM-009</span><span>离散 · 谓词逻辑的基本概念</span><span>综合题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__flags">
+    <button class="flag" type="button" data-flag="done" data-id="dm-009" aria-pressed="false"><span>已做</span></button>
+    <button class="flag flag--fav" type="button" data-flag="fav" data-id="dm-009" aria-pressed="false"><span>收藏</span></button>
+  </div>
+        </div>
+        <div class="qrow__tags"><a class="tag" href="../tags/%E8%B0%93%E8%AF%8D%E9%80%BB%E8%BE%91.html">谓词逻辑</a><a class="tag" href="../tags/%E5%8F%8D%E4%BE%8B%E6%9E%84%E9%80%A0.html">反例构造</a><a class="tag" href="../tags/%E9%87%8F%E8%AF%8D.html">量词</a></div>
+      </li>
+      <li class="qrow" data-id="dm-010" data-course="dm" data-chapter="dm-5" data-states="{&quot;midterm&quot;:&quot;out&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="3" data-tags="前束范式 谓词逻辑" data-text="设 (1) 求 的前束范式； (2) 求 的 Skolem 标准形； (3) 举出 的另一个不同的前束范式，说明前束范式不唯一，并指出 Skolem 标准形与 之间保持的是什么性质。 前束范式 谓词逻辑 自编">
+        <div>
+          <a class="qrow__link" href="../questions/dm-010.html">设 · 前束范式</a>
+          <div class="qrow__meta"><span class="fq__id">DM-010</span><span>离散 · 谓词逻辑的等值和推理演算</span><span>计算题</span><span class="dots" aria-label="难度 3 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__flags">
+    <button class="flag" type="button" data-flag="done" data-id="dm-010" aria-pressed="false"><span>已做</span></button>
+    <button class="flag flag--fav" type="button" data-flag="fav" data-id="dm-010" aria-pressed="false"><span>收藏</span></button>
+  </div>
+        </div>
+        <div class="qrow__tags"><a class="tag" href="../tags/%E5%89%8D%E6%9D%9F%E8%8C%83%E5%BC%8F.html">前束范式</a><a class="tag" href="../tags/%E8%B0%93%E8%AF%8D%E9%80%BB%E8%BE%91.html">谓词逻辑</a></div>
+      </li>
+      <li class="qrow" data-id="dm-011" data-course="dm" data-chapter="dm-5" data-states="{&quot;midterm&quot;:&quot;out&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="4" data-tags="量词 等值演算" data-text="(1) 判断 与 是否等值。若不等值，在论域 上给出一组解释使两者真值不同，并指出哪个方向是成立的蕴含； (2) 判断 与 是否等值，同样处理； (3) 说明 成立的条件，并给出证明；再说明为什么这个条件不能去掉。 量词 等值演算 自编">
+        <div>
+          <a class="qrow__link" href="../questions/dm-011.html">(1) 判断 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi mathvariant="normal">∀</mi><mi>x</mi><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mi>P</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>∨</mo><mi>Q</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(\forall x)(P(x)\lor Q(x))</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">∀</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.1389em;">P</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∨</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">Q</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">))</span></span></span></span> 与 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi mathvariant="normal">∀</mi><mi>x</mi><mo stretchy="false">)</mo><mi>P</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>∨</mo><mo stretchy="false">(</mo><mi mathvariant="normal">∀</mi><mi>x</mi><mo stretchy="false">)</mo><mi>Q</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(\forall x)P(x)\lor(\forall x)Q(x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">∀</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mord mathnormal" style="margin-right:0.1389em;">P</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∨</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">∀</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mord mathnormal">Q</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span></span></span></span> 是否等值。若不等值，在论域 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">{</mo><mn>1</mn><mo separator="true">,</mo><mn>2</mn><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">\{1,2\}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">{</span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">2</span><span class="mclose">}</span></span></span></span> 上给出一组解释使两者真值不同，并指出哪个方向是成立的蕴含；</a>
+          <div class="qrow__meta"><span class="fq__id">DM-011</span><span>离散 · 谓词逻辑的等值和推理演算</span><span>概念题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__flags">
+    <button class="flag" type="button" data-flag="done" data-id="dm-011" aria-pressed="false"><span>已做</span></button>
+    <button class="flag flag--fav" type="button" data-flag="fav" data-id="dm-011" aria-pressed="false"><span>收藏</span></button>
+  </div>
+        </div>
+        <div class="qrow__tags"><a class="tag" href="../tags/%E9%87%8F%E8%AF%8D.html">量词</a><a class="tag" href="../tags/%E7%AD%89%E5%80%BC%E6%BC%94%E7%AE%97.html">等值演算</a></div>
+      </li>
+      <li class="qrow" data-id="dm-012" data-course="dm" data-chapter="dm-5" data-states="{&quot;midterm&quot;:&quot;out&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="4" data-tags="归结 谓词逻辑 量词" data-text="用谓词归结推理法证明 要求： (1) 写出欲证公式的否定，并把它化成前束范式、再化成 Skolem 标准形； (2) 写出子句集，写出每次归结所用的子句、合一（变元替换）以及归结式； (3) 说明为什么 Skolem 化这一步不会破坏证明的正确性。 归结 谓词逻辑 量词 自编">
+        <div>
+          <a class="qrow__link" href="../questions/dm-012.html">用谓词归结推理法证明</a>
+          <div class="qrow__meta"><span class="fq__id">DM-012</span><span>离散 · 谓词逻辑的等值和推理演算</span><span>证明题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__flags">
+    <button class="flag" type="button" data-flag="done" data-id="dm-012" aria-pressed="false"><span>已做</span></button>
+    <button class="flag flag--fav" type="button" data-flag="fav" data-id="dm-012" aria-pressed="false"><span>收藏</span></button>
+  </div>
+        </div>
+        <div class="qrow__tags"><a class="tag" href="../tags/%E5%BD%92%E7%BB%93.html">归结</a><a class="tag" href="../tags/%E8%B0%93%E8%AF%8D%E9%80%BB%E8%BE%91.html">谓词逻辑</a><a class="tag" href="../tags/%E9%87%8F%E8%AF%8D.html">量词</a></div>
+      </li>
+      <li class="qrow" data-id="ics-001" data-course="ics" data-chapter="ics-1" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="2" data-tags="性能分析 存储层次" data-text="某程序在一台主频为 的机器上运行，动态指令数为 条，平均 CPI 为 。编译器做了一轮优化，把指令数减少了 ，但使平均 CPI 升到 ，主频不变。 求优化前后的执行时间与加速比，并说明这个结果反映了什么问题。 性能分析 存储层次 自编">
+        <div>
+          <a class="qrow__link" href="../questions/ics-001.html">某程序在一台主频为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2.5</mn><mtext> GHz</mtext></mrow><annotation encoding="application/x-tex">2.5\ \text{GHz}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">2.5</span><span class="mspace"> </span><span class="mord text"><span class="mord">GHz</span></span></span></span></span> 的机器上运行，动态指令数为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>5.0</mn><mo>×</mo><msup><mn>10</mn><mn>9</mn></msup></mrow><annotation encoding="application/x-tex">5.0\times10^{9}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">5.0</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">9</span></span></span></span></span></span></span></span></span></span></span></span> 条，平均 CPI 为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1.6</mn></mrow><annotation encoding="application/x-tex">1.6</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1.6</span></span></span></span>。编译器做了一轮优化，把指令数减少了 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>20</mn><mi mathvariant="normal">%</mi></mrow><annotation encoding="application/x-tex">20\%</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8056em;vertical-align:-0.0556em;"></span><span class="mord">20%</span></span></span></span>，但使平均 CPI 升到 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2.0</mn></mrow><annotation encoding="application/x-tex">2.0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">2.0</span></span></span></span>，主频不变。</a>
+          <div class="qrow__meta"><span class="fq__id">ICS-001</span><span>计系概 · 概论</span><span>计算题</span><span class="dots" aria-label="难度 2 / 4"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__flags">
+    <button class="flag" type="button" data-flag="done" data-id="ics-001" aria-pressed="false"><span>已做</span></button>
+    <button class="flag flag--fav" type="button" data-flag="fav" data-id="ics-001" aria-pressed="false"><span>收藏</span></button>
+  </div>
+        </div>
+        <div class="qrow__tags"><a class="tag" href="../tags/%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90.html">性能分析</a><a class="tag" href="../tags/%E5%AD%98%E5%82%A8%E5%B1%82%E6%AC%A1.html">存储层次</a></div>
+      </li>
+      <li class="qrow" data-id="ics-002" data-course="ics" data-chapter="ics-2" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="2" data-tags="补码 字节序" data-text="在 8 位整数环境（例如 `char`）下回答： (1) 十六进制 `0xB7` 作为无符号数和作为有符号补码数分别是多少？ (2) 十进制数 的 8 位补码是什么（写成十六进制）？ (3) 计算 `0x7D + 0x0B`，写出 8 位结果的十六进制，并分别判断作为无符号数和作为有符号数是否溢出。 (4) `0x12345678` 在小端机器上从低地址开始依次是哪 4 个字节（用十六进制）？ 补码 字节序 自编">
+        <div>
+          <a class="qrow__link" href="../questions/ics-002.html">在 8 位整数环境（例如 <code>char</code>）下回答：</a>
+          <div class="qrow__meta"><span class="fq__id">ICS-002</span><span>计系概 · 信息的表示与处理</span><span>计算题</span><span class="dots" aria-label="难度 2 / 4"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__flags">
+    <button class="flag" type="button" data-flag="done" data-id="ics-002" aria-pressed="false"><span>已做</span></button>
+    <button class="flag flag--fav" type="button" data-flag="fav" data-id="ics-002" aria-pressed="false"><span>收藏</span></button>
+  </div>
+        </div>
+        <div class="qrow__tags"><a class="tag" href="../tags/%E8%A1%A5%E7%A0%81.html">补码</a><a class="tag" href="../tags/%E5%AD%97%E8%8A%82%E5%BA%8F.html">字节序</a></div>
+      </li>
+      <li class="qrow" data-id="ics-003" data-course="ics" data-chapter="ics-2" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="3" data-tags="IEEE 754 浮点数" data-text="32 位 IEEE 754 单精度浮点数按「1 位符号 + 8 位阶码 + 23 位尾数」编码，阶码偏置为 。回答： (1) 位模式 `0xC0A00000` 表示的值是多少？ (2) 写出 的单精度位模式（十六进制）。 (3) 位模式 `0x00000001` 表示的值是多少？它属于哪一类浮点数？ IEEE 754 浮点数 自编">
+        <div>
+          <a class="qrow__link" href="../questions/ics-003.html">32 位 IEEE 754 单精度浮点数按「1 位符号 + 8 位阶码 + 23 位尾数」编码，阶码偏置为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>127</mn></mrow><annotation encoding="application/x-tex">127</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">127</span></span></span></span>。回答：</a>
+          <div class="qrow__meta"><span class="fq__id">ICS-003</span><span>计系概 · 信息的表示与处理</span><span>计算题</span><span class="dots" aria-label="难度 3 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__flags">
+    <button class="flag" type="button" data-flag="done" data-id="ics-003" aria-pressed="false"><span>已做</span></button>
+    <button class="flag flag--fav" type="button" data-flag="fav" data-id="ics-003" aria-pressed="false"><span>收藏</span></button>
+  </div>
+        </div>
+        <div class="qrow__tags"><a class="tag" href="../tags/IEEE%20754.html">IEEE 754</a><a class="tag" href="../tags/%E6%B5%AE%E7%82%B9%E6%95%B0.html">浮点数</a></div>
+      </li>
+      <li class="qrow" data-id="ics-004" data-course="ics" data-chapter="ics-2" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="4" data-tags="浮点数" data-text="单精度浮点有 24 位有效位。回答下列问题，并给出推导： (1) 求 的值（下标 表示该十进制数对应的单精度表示）。 (2) 判断 与 是否相等；若不等，分别等于多少。 (3) 写出 `0.1f` 的精确十进制值（用分数或小数表示），并据此说明为什么浮点数比较不能用 `==`。 浮点数 自编">
+        <div>
+          <a class="qrow__link" href="../questions/ics-004.html">单精度浮点有 24 位有效位。回答下列问题，并给出推导：</a>
+          <div class="qrow__meta"><span class="fq__id">ICS-004</span><span>计系概 · 信息的表示与处理</span><span>综合题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__flags">
+    <button class="flag" type="button" data-flag="done" data-id="ics-004" aria-pressed="false"><span>已做</span></button>
+    <button class="flag flag--fav" type="button" data-flag="fav" data-id="ics-004" aria-pressed="false"><span>收藏</span></button>
+  </div>
+        </div>
+        <div class="qrow__tags"><a class="tag" href="../tags/%E6%B5%AE%E7%82%B9%E6%95%B0.html">浮点数</a></div>
+      </li>
+      <li class="qrow" data-id="ics-005" data-course="ics" data-chapter="ics-3" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="3" data-tags="汇编 寻址方式" data-text="函数 `f` 的参数 `x` 放在 `%rdi`，返回值放在 `%rax`。它的汇编实现是 ``` f: testq %rdi, %rdi jle .L1 salq $3, %rdi leaq 4(%rdi), %rax ret .L1: movq %rdi, %rax negq %rax ret ``` (1) 写出 `f` 的 C 语言等价实现。 (2) 求 `f(-3)` 与 `f(2)`。 (3) 如果把 `salq 3, %rdi`，语义会不会变？如果换成 32 位的 `sall $3, %edi`，结果会不会变？各说明理由。 汇编 寻址方式 自编">
+        <div>
+          <a class="qrow__link" href="../questions/ics-005.html">函数 <code>f</code> 的参数 <code>x</code> 放在 <code>%rdi</code>，返回值放在 <code>%rax</code>。它的汇编实现是</a>
+          <div class="qrow__meta"><span class="fq__id">ICS-005</span><span>计系概 · 汇编语言与程序的机器级表示</span><span>综合题</span><span class="dots" aria-label="难度 3 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__flags">
+    <button class="flag" type="button" data-flag="done" data-id="ics-005" aria-pressed="false"><span>已做</span></button>
+    <button class="flag flag--fav" type="button" data-flag="fav" data-id="ics-005" aria-pressed="false"><span>收藏</span></button>
+  </div>
+        </div>
+        <div class="qrow__tags"><a class="tag" href="../tags/%E6%B1%87%E7%BC%96.html">汇编</a><a class="tag" href="../tags/%E5%AF%BB%E5%9D%80%E6%96%B9%E5%BC%8F.html">寻址方式</a></div>
+      </li>
+      <li class="qrow" data-id="ics-006" data-course="ics" data-chapter="ics-3" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="3" data-tags="汇编 条件码 跳转表" data-text="某函数按整数参数 `x` 分派到不同分支，`x` 放在 `%rdi`。它的汇编片段是 ``` cmpq $6, %rdi ja .L8 jmp *.L4(,%rdi,8) .L4: .quad .L3 .quad .L5 .quad .L5 .quad .L6 .quad .L6 .quad .L7 .quad .L7 ``` (1) 前两条指令在做什么？为什么用 `ja` 而不是 `jg`？ (2) 当 `x = 3`、`x = 6`、`x = -1` 时分别跳到哪个标签？ (3) 如果把 `case` 值改成 0、10、20、30，这段跳转表还合适吗？为什么？ 汇编 条件码 跳转表 自编">
+        <div>
+          <a class="qrow__link" href="../questions/ics-006.html">某函数按整数参数 <code>x</code> 分派到不同分支，<code>x</code> 放在 <code>%rdi</code>。它的汇编片段是</a>
+          <div class="qrow__meta"><span class="fq__id">ICS-006</span><span>计系概 · 汇编语言与程序的机器级表示</span><span>综合题</span><span class="dots" aria-label="难度 3 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__flags">
+    <button class="flag" type="button" data-flag="done" data-id="ics-006" aria-pressed="false"><span>已做</span></button>
+    <button class="flag flag--fav" type="button" data-flag="fav" data-id="ics-006" aria-pressed="false"><span>收藏</span></button>
+  </div>
+        </div>
+        <div class="qrow__tags"><a class="tag" href="../tags/%E6%B1%87%E7%BC%96.html">汇编</a><a class="tag" href="../tags/%E6%9D%A1%E4%BB%B6%E7%A0%81.html">条件码</a><a class="tag" href="../tags/%E8%B7%B3%E8%BD%AC%E8%A1%A8.html">跳转表</a></div>
+      </li>
+      <li class="qrow" data-id="ics-007" data-course="ics" data-chapter="ics-3" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="4" data-tags="汇编 条件码" data-text="函数 `f` 的两个参数 `x`、`y` 分别放在 `%rdi`、`%rsi`，返回值放在 `%rax`。汇编是 ``` f: cmpq %rsi, %rdi ja .L1 movl $0, %eax ret .L1: movl $1, %eax ret ``` (1) 这段汇编把两个参数按有符号数还是无符号数比较？`cmpq %rsi, %rdi` 计算的是谁减谁？ (2) 若执行 `f(-1, 1)`，返回值是多少？`f(1, -1)` 呢？ (3) 若对应源码是 `long f(long x, long y) { return x &gt; y; }`，编译器应当生成哪条跳转指令？这段汇编与源码一致吗？ (4) 若源码改成 `unsigned long` 版本，这段汇编是否正确？ 汇编 条件码 自编">
+        <div>
+          <a class="qrow__link" href="../questions/ics-007.html">函数 <code>f</code> 的两个参数 <code>x</code>、<code>y</code> 分别放在 <code>%rdi</code>、<code>%rsi</code>，返回值放在 <code>%rax</code>。汇编是</a>
+          <div class="qrow__meta"><span class="fq__id">ICS-007</span><span>计系概 · 汇编语言与程序的机器级表示</span><span>概念题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__flags">
+    <button class="flag" type="button" data-flag="done" data-id="ics-007" aria-pressed="false"><span>已做</span></button>
+    <button class="flag flag--fav" type="button" data-flag="fav" data-id="ics-007" aria-pressed="false"><span>收藏</span></button>
+  </div>
+        </div>
+        <div class="qrow__tags"><a class="tag" href="../tags/%E6%B1%87%E7%BC%96.html">汇编</a><a class="tag" href="../tags/%E6%9D%A1%E4%BB%B6%E7%A0%81.html">条件码</a></div>
+      </li>
+      <li class="qrow" data-id="ics-008" data-course="ics" data-chapter="ics-4" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="3" data-tags="函数调用 栈帧" data-text="函数 `sum` 的参数 `n` 放在 `%rdi`，返回值放在 `%rax`。汇编是 ``` sum: testq %rdi, %rdi jle .L2 pushq %rbx movq %rdi, %rbx leaq -1(%rdi), %rdi call sum addq %rbx, %rax popq %rbx ret .L2: movl $0, %eax ret ``` (1) 这个函数计算的是什么？求 `sum(4)`。 (2) 为什么把 `n` 存在 `%rbx` 里，而不是随便用一个 `%rcx`？ (3) 执行 `sum(3)` 的过程中，栈上最多同时有几个返回地址、几个保存的 `%rbx`？若 `main` 调用 `sum` 前 `%rsp = 0x1000`，每层占「8 字节返回地址 + 8 字节 rbx」，求最深时的 `%rsp`。 函数调用 栈帧 自编">
+        <div>
+          <a class="qrow__link" href="../questions/ics-008.html">函数 <code>sum</code> 的参数 <code>n</code> 放在 <code>%rdi</code>，返回值放在 <code>%rax</code>。汇编是</a>
+          <div class="qrow__meta"><span class="fq__id">ICS-008</span><span>计系概 · 函数调用</span><span>计算题</span><span class="dots" aria-label="难度 3 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__flags">
+    <button class="flag" type="button" data-flag="done" data-id="ics-008" aria-pressed="false"><span>已做</span></button>
+    <button class="flag flag--fav" type="button" data-flag="fav" data-id="ics-008" aria-pressed="false"><span>收藏</span></button>
+  </div>
+        </div>
+        <div class="qrow__tags"><a class="tag" href="../tags/%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8.html">函数调用</a><a class="tag" href="../tags/%E6%A0%88%E5%B8%A7.html">栈帧</a></div>
+      </li>
+      <li class="qrow" data-id="ics-009" data-course="ics" data-chapter="ics-4" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="3" data-tags="函数调用 栈帧" data-text="函数 ```c long f(long a, long b, long c, long d, long e, long g, long h, long i); ``` 的汇编开头是 ``` f: pushq %rbp movq %rsp, %rbp subq $32, %rsp ... ``` (1) 8 个参数分别通过什么传递？ (2) 若进入 `f` 时 `%rsp = 0x7fffffffe008`，求返回地址、第 7 个参数、第 8 个参数、保存的 `%rbp` 的地址；执行完 `pushq %rbp`、`movq %rsp, %rbp`、`subq $32, %rsp` 后，`%rbp` 与 `%rsp` 各是多少？ (3) `subq` 的立即数 32 是怎么定的？如果函数里有 4 个 `long` 局部变量并要调用其他函数，为什么这个数必须是 16 的倍数？ 函数调用 栈帧 ">
+        <div>
+          <a class="qrow__link" href="../questions/ics-009.html">函数 · 函数调用</a>
+          <div class="qrow__meta"><span class="fq__id">ICS-009</span><span>计系概 · 函数调用</span><span>计算题</span><span class="dots" aria-label="难度 3 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__flags">
+    <button class="flag" type="button" data-flag="done" data-id="ics-009" aria-pressed="false"><span>已做</span></button>
+    <button class="flag flag--fav" type="button" data-flag="fav" data-id="ics-009" aria-pressed="false"><span>收藏</span></button>
+  </div>
+        </div>
+        <div class="qrow__tags"><a class="tag" href="../tags/%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8.html">函数调用</a><a class="tag" href="../tags/%E6%A0%88%E5%B8%A7.html">栈帧</a></div>
+      </li>
+      <li class="qrow" data-id="ics-010" data-course="ics" data-chapter="ics-5" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="2" data-tags="数组" data-text="有下面的 C 代码： ```c long a[5] = {10, 20, 30, 40, 50}; long *p = a + 2; char *c = (char *)a; ``` (1) `*p` 与 `*(p + 1)` 的值分别是多少？ (2) `p - a` 的值是多少？`p` 与 `a` 的地址相差多少字节？ (3) `c + 3` 指向哪里？`*(long *)(c + 8)` 的值是多少？ (4) `&amp;a[3]` 相对 `a` 的偏移是多少字节？ 数组 自编">
+        <div>
+          <a class="qrow__link" href="../questions/ics-010.html">有下面的 C 代码：</a>
+          <div class="qrow__meta"><span class="fq__id">ICS-010</span><span>计系概 · 数组与结构体</span><span>计算题</span><span class="dots" aria-label="难度 2 / 4"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__flags">
+    <button class="flag" type="button" data-flag="done" data-id="ics-010" aria-pressed="false"><span>已做</span></button>
+    <button class="flag flag--fav" type="button" data-flag="fav" data-id="ics-010" aria-pressed="false"><span>收藏</span></button>
+  </div>
+        </div>
+        <div class="qrow__tags"><a class="tag" href="../tags/%E6%95%B0%E7%BB%84.html">数组</a></div>
+      </li>
+      <li class="qrow" data-id="ics-011" data-course="ics" data-chapter="ics-5" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="4" data-tags="结构体 数据对齐" data-text="考虑下面的结构体： ```c struct S { char c; int i; char d; double x; short s; }; ``` (1) 求各成员的偏移与 `sizeof(struct S)`。 (2) 重排成员顺序，使 `sizeof(struct S)` 最小，写出新的定义与大小。 (3) `struct S arr[4];` 中 `arr[2]` 相对 `arr` 的偏移是多少字节？ (4) 在原来的 `struct S` 末尾再加一个 `char e;`，`sizeof(struct S)` 会变成多少？为什么？ 结构体 数据对齐 自编">
+        <div>
+          <a class="qrow__link" href="../questions/ics-011.html">考虑下面的结构体：</a>
+          <div class="qrow__meta"><span class="fq__id">ICS-011</span><span>计系概 · 数组与结构体</span><span>综合题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__flags">
+    <button class="flag" type="button" data-flag="done" data-id="ics-011" aria-pressed="false"><span>已做</span></button>
+    <button class="flag flag--fav" type="button" data-flag="fav" data-id="ics-011" aria-pressed="false"><span>收藏</span></button>
+  </div>
+        </div>
+        <div class="qrow__tags"><a class="tag" href="../tags/%E7%BB%93%E6%9E%84%E4%BD%93.html">结构体</a><a class="tag" href="../tags/%E6%95%B0%E6%8D%AE%E5%AF%B9%E9%BD%90.html">数据对齐</a></div>
+      </li>
+      <li class="qrow" data-id="ics-012" data-course="ics" data-chapter="ics-6" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="4" data-tags="缓冲区溢出 栈帧" data-text="下面的函数用 `gets` 读入一行字符串： ```c void echo(void) { char buf[16]; gets(buf); puts(buf); } ``` 编译后的汇编是 ``` echo: pushq %rbp movq %rsp, %rbp subq $16, %rsp movq %rsp, %rdi call gets movq %rsp, %rdi call puts leave ret ``` (1) 数组 `buf` 的起始地址相对 `%rbp` 是多少？ (2) 输入至少要多少个字节才能完整改写返回地址？输入的哪一段分别覆盖了 `buf`、保存的 `%rbp`、返回地址？ (3) 已知当前栈上保存的返回地址是 `0x00000000004005a6`，攻击者想把它改成 `0x00000000004005f0`，应当怎样构造输入？说明每段的长度与字节序。 (">
+        <div>
+          <a class="qrow__link" href="../questions/ics-012.html">下面的函数用 <code>gets</code> 读入一行字符串：</a>
+          <div class="qrow__meta"><span class="fq__id">ICS-012</span><span>计系概 · 程序的内存与安全</span><span>综合题</span><span class="dots" aria-label="难度 4 / 4"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="qrow__term" hidden>不在本轮范围</span></div>
+          <div class="qrow__flags">
+    <button class="flag" type="button" data-flag="done" data-id="ics-012" aria-pressed="false"><span>已做</span></button>
+    <button class="flag flag--fav" type="button" data-flag="fav" data-id="ics-012" aria-pressed="false"><span>收藏</span></button>
+  </div>
+        </div>
+        <div class="qrow__tags"><a class="tag" href="../tags/%E7%BC%93%E5%86%B2%E5%8C%BA%E6%BA%A2%E5%87%BA.html">缓冲区溢出</a><a class="tag" href="../tags/%E6%A0%88%E5%B8%A7.html">栈帧</a></div>
+      </li>
       <li class="qrow" data-id="la-001" data-course="la" data-chapter="la-1" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-difficulty="2" data-tags="行列式计算 递推" data-text="计算 阶三对角行列式 行列式计算 递推 自编">
         <div>
           <a class="qrow__link" href="../questions/la-001.html">计算 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span> 阶三对角行列式</a>
@@ -1637,7 +1908,7 @@ M1001 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
       </li>
   </ul>
   <p class="empty" id="qlist-empty" hidden>没有符合条件的题。换个筛选条件试试。</p>
-  <noscript><p class="hint">筛选需要 JavaScript；上面的列表已经包含全部 125 道题，可以直接点开。</p></noscript>
+  <noscript><p class="hint">筛选需要 JavaScript；上面的列表已经包含全部 149 道题，可以直接点开。</p></noscript>
     </div>
   </div>
 </div>
@@ -1658,7 +1929,7 @@ M1001 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
         <div class="footer__col">
           <h3>内容</h3>
           <ul>
-            <li><a href="../questions/">题库（125 道）</a></li>
+            <li><a href="../questions/">题库（149 道）</a></li>
             <li><a href="../practice/">刷题</a></li>
             <li><a href="../tags/">标签</a></li>
             <li><a href="../export/">导出 PDF</a></li>

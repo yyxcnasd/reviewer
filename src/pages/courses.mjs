@@ -85,6 +85,9 @@ export function buildCourses(ctx) {
 <section class="section">
   <div class="frame outline">
     <div class="outline__side">
+      ${course.terms && !course.terms.includes('midterm')
+        ? `<p class="course__term-less">这门课只有期末：期中那一轮它不参与范围判定，切到「期末」看。</p>`
+        : ''}
       <h2>考纲</h2>
       <p>${esc(course.notes_intro || '')}</p>
       <p>颜色有含义：深色的在范围内，红色标签的是边界，浅灰的是期中之后。</p>

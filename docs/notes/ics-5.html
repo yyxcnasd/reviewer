@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>数组与结构体 · 计算机系统概论 · 复习册</title>
+<meta name="description" content="数组的连续布局与 D(Rb,Ri,S) 寻址、指针算术的缩放、行优先的二维数组偏移、结构体的对齐填充与联合体。">
+<meta name="color-scheme" content="light">
+<link rel="stylesheet" href="../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../assets/site.css">
+<script>
+  // 先按本地设置（或系统偏好）定主题，避免刷新时闪白
+  try {
+    // 默认浅色（纸面）。只有你手动切过深色，才在下次打开时记住。
+    if (localStorage.getItem('reviewer.theme') === 'dark')
+      document.documentElement.setAttribute('data-theme', 'dark')
+  } catch (e) {}
+</script>
+<script src="../assets/core.js"></script>
+<script src="../assets/theme.js" defer></script>
+<script src="../assets/term.js" defer></script>
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<meta property="og:title" content="数组与结构体 · 计算机系统概论 · 复习册">
+<meta property="og:description" content="数组的连续布局与 D(Rb,Ri,S) 寻址、指针算术的缩放、行优先的二维数组偏移、结构体的对齐填充与联合体。">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_CN">
+
+</head>
+<body class="no-js detail">
+<script>document.body.classList.remove('no-js')</script>
+<a class="skip" href="#main">跳到正文</a>
+
+  <header class="sitehead">
+    <div class="frame">
+      <nav class="nav" aria-label="主导航">
+        <a class="nav__mark" href="../"><span class="nav__dot" aria-hidden="true"></span>复习册</a>
+        <ul class="nav__links">
+          <li class="nav__menu-wrap">
+          <details class="navmenu">
+            <summary>课程</summary>
+            <ul class="navmenu__list">
+              <li><a href="../va1/">微积分 A1</a></li><li><a href="../la/">线性代数</a></li><li><a href="../dm/">离散数学<span class="navmenu__tag">仅期末</span></a></li><li><a href="../ics/" aria-current="page">计算机系统概论</a></li>
+              <li class="navmenu__sep"><a href="../questions/">题库（全部课程）</a></li>
+            </ul>
+          </details>
+        </li>
+          <li><a href="../questions/">题库</a></li>
+          <li><a href="../practice/">刷题</a></li>
+          <li><a href="../cheatsheet/">速查</a></li>
+          <li><a href="../stats/">进度</a></li>
+        </ul>
+        <div class="nav__end">
+          <div class="nav__terms" role="group" aria-label="考试轮次">
+            <button class="term-btn is-on" type="button" data-term-btn="midterm">期中</button><button class="term-btn" type="button" data-term-btn="final">期末</button>
+          </div>
+          <button class="ghost nav__theme" id="theme-toggle" type="button" aria-live="polite">深色</button>
+          <a class="btn btn--red nav__action" href="../submit/">投稿</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+<main id="main">
+
+<div class="frame">
+  <nav class="crumb" aria-label="位置">
+    <a href="../">复习册</a>
+    <span class="crumb__sep">/</span>
+    <a href="../ics/">计算机系统概论</a>
+    <span class="crumb__sep">/</span>
+    <span>第 5 章</span>
+  </nav>
+
+  <header class="pagehead">
+    <div class="pagehead__inner">
+      <h1 class="pagehead__title">数组与结构体</h1>
+      <div class="pagehead__scope">
+        <p>数组的连续布局与 D(Rb,Ri,S) 寻址、指针算术的缩放、行优先的二维数组偏移、结构体的对齐填充与联合体。</p>
+        <div class="pagehead__stats">
+          <span>在范围内</span>
+          <span><b>2</b>道题在这一章</span>
+          <span data-progress-ids="ics-010,ics-011">本章已做 <b data-progress-here>0</b> / 2</span>
+          <span><button class="ghost" type="button" data-print>打印这一章</button></span>
+        </div>
+      </div>
+    </div>
+  </header>
+</div>
+
+<div class="frame article">
+  <div class="article__main prose">
+    <h2 id="h-1">5.1 数组与指针</h2>
+<h3 id="h-2">一维数组</h3>
+<p>声明 <code>T A[N]</code>：内存里是一段连续的 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>×</mo><mtext>sizeof</mtext><mo stretchy="false">(</mo><mi>T</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">N\times \text{sizeof}(T)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal" style="margin-right:0.109em;">N</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord">sizeof</span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.1389em;">T</span><span class="mclose">)</span></span></span></span> 字节，<code>A</code> 就是首地址，</p>
+<p><span class="math-display"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi mathvariant="normal">&amp;</mi><mi>A</mi><mo stretchy="false">[</mo><mi>i</mi><mo stretchy="false">]</mo><mo>=</mo><mi>A</mi><mo>+</mo><mi>i</mi><mo>⋅</mo><mtext>sizeof</mtext><mo stretchy="false">(</mo><mi>T</mi><mo stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\&amp;A[i]=A+i\cdot\text{sizeof}(T).</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">&amp;</span><span class="mord mathnormal">A</span><span class="mopen">[</span><span class="mord mathnormal">i</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal">A</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6595em;"></span><span class="mord mathnormal">i</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord">sizeof</span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.1389em;">T</span><span class="mclose">)</span><span class="mord">.</span></span></span></span></span></span></p>
+<p><strong>例</strong>：<code>long a[5]</code>，每个元素 8 字节，<code>&amp;a[3]</code> 相对 <code>a</code> 偏移 24 字节。若 <code>%rdi</code> 存 <code>a</code>、<code>%rsi</code> 存 <code>i</code>，取 <code>a[i]</code> 就是 <code>movq (%rdi,%rsi,8), %rax</code>。</p>
+<h3 id="h-3">指针算术</h3>
+<p>指针加减按<strong>所指类型的大小</strong>缩放：</p>
+<pre><code class="language-c">long a[5] = {10, 20, 30, 40, 50};
+long *p = a + 2;      /* p 指向 a[2]，地址比 a 大 16 字节 */
+char *c = (char *)a;  /* c 指向同一个字节，但 +1 只走 1 字节 */
+</code></pre>
+<ul>
+<li><code>p - a</code> 是 2（相差 2 个元素，不是 2 字节）；</li>
+<li><code>c + 8</code> 与 <code>&amp;a[1]</code> 是同一个地址；</li>
+<li><code>*(long *)(c + 8)</code> 取回 <code>a[1]</code> 的值 20。</li>
+</ul>
+<p><strong>最容易错的一步</strong>：把「指针 + n」当成「地址 + n 字节」。<code>int *q = p + 1</code> 地址加 4；<code>char *q = (char *)p + 1</code> 地址加 1。做这类题先问一句「步长是多少字节」。</p>
+<h3 id="h-4">二维数组与行优先</h3>
+<p><code>T A[R][C]</code> 按行优先存放，元素 <code>A[i][j]</code> 的地址是</p>
+<p><span class="math-display"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi mathvariant="normal">&amp;</mi><mi>A</mi><mo stretchy="false">[</mo><mi>i</mi><mo stretchy="false">]</mo><mo stretchy="false">[</mo><mi>j</mi><mo stretchy="false">]</mo><mo>=</mo><mi>A</mi><mo>+</mo><mo stretchy="false">(</mo><mi>i</mi><mo>⋅</mo><mi>C</mi><mo>+</mo><mi>j</mi><mo stretchy="false">)</mo><mo>⋅</mo><mtext>sizeof</mtext><mo stretchy="false">(</mo><mi>T</mi><mo stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\&amp;A[i][j]=A+(i\cdot C+j)\cdot\text{sizeof}(T).</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">&amp;</span><span class="mord mathnormal">A</span><span class="mopen">[</span><span class="mord mathnormal">i</span><span class="mclose">]</span><span class="mopen">[</span><span class="mord mathnormal" style="margin-right:0.0572em;">j</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal">A</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal">i</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal" style="margin-right:0.0715em;">C</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0572em;">j</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord">sizeof</span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.1389em;">T</span><span class="mclose">)</span><span class="mord">.</span></span></span></span></span></span></p>
+<p><strong>例</strong>：<code>int A[10][20]</code>，<code>int</code> 为 4 字节：</p>
+<ul>
+<li><code>&amp;A[3][5]</code> 相对 <code>A</code> 偏移 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mn>3</mn><mo>×</mo><mn>20</mn><mo>+</mo><mn>5</mn><mo stretchy="false">)</mo><mo>×</mo><mn>4</mn><mo>=</mo><mn>260</mn></mrow><annotation encoding="application/x-tex">(3\times20+5)\times4=260</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">3</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">20</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">5</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">4</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">260</span></span></span></span> 字节；</li>
+<li><code>A[i]</code> 是「行指针」，类型 <code>int (*)[20]</code>，所以 <code>A[i] + j</code> 的地址加 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>4</mn><mi>j</mi></mrow><annotation encoding="application/x-tex">4j</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.854em;vertical-align:-0.1944em;"></span><span class="mord">4</span><span class="mord mathnormal" style="margin-right:0.0572em;">j</span></span></span></span>；</li>
+<li><code>sizeof(A) = 10\times20\times4 = 800</code>，<code>sizeof(A[0]) = 20\times4 = 80</code>。</li>
+</ul>
+<p><strong>最容易错的一步</strong>：把 <code>A[i][j]</code> 的偏移算成 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>i</mi><mo>⋅</mo><mi>R</mi><mo>+</mo><mi>j</mi><mo stretchy="false">)</mo><mo>⋅</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">(i\cdot R+j)\cdot4</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal">i</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal" style="margin-right:0.0077em;">R</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0572em;">j</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">4</span></span></span></span>。行优先是「先走完一整行再换行」，系数是列数 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.0715em;">C</span></span></span></span>，不是行数 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.0077em;">R</span></span></span></span>。</p>
+<p>数组作为参数传给函数时会退化成指针，<code>sizeof</code> 拿不到数组长度，必须另传长度。这也是「函数里 <code>sizeof(arr)</code> 为什么是 8」的原因。</p>
+<h2 id="h-5">5.2 结构体、联合体与对齐</h2>
+<h3 id="h-6">对齐规则</h3>
+<p>编译器保证：</p>
+<ol>
+<li>每个成员的偏移是它自身对齐要求（通常等于自身大小，最大 8）的整数倍；</li>
+<li>结构体的总大小是「最大成员对齐」的整数倍；</li>
+<li>不满足时插入填充字节。</li>
+</ol>
+<p>所以结构体的 <code>sizeof</code> 往往大于成员大小之和。</p>
+<p><strong>例</strong>：</p>
+<pre><code class="language-c">struct S {
+    char   c;   /* 偏移 0 */
+    int    i;   /* 偏移 4（1-3 是填充） */
+    char   d;   /* 偏移 8 */
+    double x;   /* 偏移 16（9-15 是填充） */
+    short  s;   /* 偏移 24 */
+};              /* sizeof = 32（25-31 是尾部填充） */
+</code></pre>
+<p><code>double</code> 要求 8 字节对齐，所以 <code>d</code> 后空 7 个字节；结构体最大对齐是 8，所以总大小补到 32。</p>
+<h3 id="h-7">重排省空间</h3>
+<p>同样五个成员，按「大的在前、小的在后」排：</p>
+<pre><code class="language-c">struct T {
+    double x;  /* 0 */
+    int    i;  /* 8 */
+    short  s;  /* 12 */
+    char   c;  /* 14 */
+    char   d;  /* 15 */
+};             /* sizeof = 16 */
+</code></pre>
+<p>从 32 字节降到 16 字节，语义一点没变。</p>
+<p><strong>最容易错的一步</strong>：结构体数组的步长（stride）是 <code>sizeof(struct)</code>，<strong>包含填充</strong>。<code>struct S arr[4]</code> 里 <code>arr[2]</code> 相对 <code>arr</code> 的偏移是 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo>×</mo><mn>32</mn><mo>=</mo><mn>64</mn></mrow><annotation encoding="application/x-tex">2\times32=64</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">32</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">64</span></span></span></span>，不是按成员大小之和算的 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo>×</mo><mn>26</mn></mrow><annotation encoding="application/x-tex">2\times26</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">26</span></span></span></span>。</p>
+<h3 id="h-8">联合体</h3>
+<p>联合体的所有成员共享同一段内存，大小等于最大成员的大小（再按对齐取整），同一时刻只能安全地使用一个成员。常用来节省空间，或做「同一块字节的不同解释」（类型双关），但要注意字节序和对齐。考试里判断联合体大小，先取最大成员大小，再向上取整到最大对齐的倍数。</p>
+
+    <div class="rule-head" style="margin-top:56px"><h2>这一章的题</h2><p>2 道，全部带解析。</p></div>
+           <ul class="qmini">
+             <li><a href="../questions/ics-010.html">有下面的 C 代码</a> <span>计算题 · 数组</span></li><li><a href="../questions/ics-011.html">考虑下面的结构体</a> <span>综合题 · 结构体</span></li>
+           </ul>
+    <div class="article__pager">
+      <a href="../notes/ics-4.html">← 第 4 章 函数调用</a>
+      <a href="../notes/ics-6.html">第 6 章 程序的内存与安全 →</a>
+    </div>
+  </div>
+  <nav class="article__toc" data-ui aria-label="本页目录">
+          <h2>本页</h2>
+          <ol><li class=""><a href="#h-1">5.1 数组与指针</a></li><li class=""><a href="#h-5">5.2 结构体、联合体与对齐</a></li></ol>
+          <dl class="spec spec--rail">
+            <div><dt>章节</dt><dd>第 5 章</dd></div>
+            <div><dt>节</dt><dd>2 节在范围内</dd></div>
+            <div><dt>题</dt><dd>2 道</dd></div>
+            <div><dt>范围</dt><dd>在范围内</dd></div>
+          </dl>
+        </nav>
+</div>
+
+</main>
+
+  <footer class="footer">
+    <div class="frame">
+      <a class="footer__word" href="../" aria-label="回到首页：复习册"><span aria-hidden="true">复习册</span></a>
+      <div class="footer__cols">
+        <div class="footer__col">
+          <h3>科目</h3>
+          <ul>
+            <li><a href="../va1/">微积分 A1</a></li>
+            <li><a href="../la/">线性代数</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h3>内容</h3>
+          <ul>
+            <li><a href="../questions/">题库（149 道）</a></li>
+            <li><a href="../practice/">刷题</a></li>
+            <li><a href="../tags/">标签</a></li>
+            <li><a href="../export/">导出 PDF</a></li>
+            <li><a href="../stats/">进度</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h3>参与</h3>
+          <ul>
+            <li><a href="../submit/">投稿一道题</a></li>
+            <li><a href="../about/">关于与范围说明</a></li>
+            <li><a href="https://github.com/yyxcnasd/reviewer" target="_blank" rel="noopener noreferrer">GitHub 仓库</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h3>这本册子</h3>
+          <ul>
+            <li>2026 秋 期中版</li>
+            <li>内容 CC BY-SA 4.0</li>
+            <li>构建于 2026-11-04</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__legal">
+        <span>复习册 · 课程 · 范围 · 题库</span>
+        <span>内容以 CC BY-SA 4.0 发布，题目标题与解析可自由取用，请保留出处。</span>
+      </div>
+    </div>
+  </footer>
+<script src="../assets/progress.js" defer></script>
+<script src="../assets/site.js" defer></script>
+
+</body>
+</html>
