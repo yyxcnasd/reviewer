@@ -30,16 +30,17 @@ export function plainText(src) {
     .trim()
 }
 
-/** 列表与翻页用的短标签：题面开头一小段；太短就退回「标签 · 难度」 */
+/** 列表与翻页用的短标签：先按第一句取（不切词），取不动就退回「标签 · 难度」 */
 export function shortLabel(question) {
   const first = String(question.stem || '').split(/\n\s*\n/)[0] || ''
-  const plain = plainText(first)
-  const cjk = (plain.match(/[\u4e00-\u9fff]/g) || []).length
-  if (cjk >= 5) {
-    const head = plain.slice(0, 22).trim()
-    return head + (plain.length > 22 ? '…' : '')
-  }
-  return (question.tags[0] || question.kind) + ' · 难度 ' + question.difficulty
+  const plain = plainText(first).replace(/\s+/g, ' ').trim()
+  const sentence = (plain.match(/^[^。；：!?？]{6,30}/) || [''])[0].trim()
+  const cjk = (sentence.match(/[\u4e00-\u9fff]/g) || []).length
+  // 公式被剥掉后会留下空格，断得太碎就退回标签
+  const gaps = (sentence.match(/\s/g) || []).length
+  if (cjk >= 6 && gaps <= 1) return sentence + (sentence.length < plain.length ? '…' : '')
+  const tags = (question.tags || []).slice(0, 2).filter(Boolean).join('、')
+  return (tags || question.kind) + ' · 难度 ' + question.difficulty
 }
 
 /** 章节对象：页面里到处要 ch.id → chapter，收一处 */
