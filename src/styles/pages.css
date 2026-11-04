@@ -646,7 +646,6 @@
   background: var(--red-soft);
   border-left: 4px solid var(--red);
   color: var(--ink);
-  color: #fff;
 }
 
 .answer span {
