@@ -135,7 +135,7 @@ a[3][0];     /* (5) */</code></pre></p>
 <li>(4) <code>*(r + 11)</code>：<code>b[11]</code>，在数组范围内，<strong>合法</strong>。</li>
 <li>(5) <code>a[3][0]</code>：<code>a</code> 的行下标只能是 0–2，<code>a[3]</code> 已经是越界访问，<strong>UB</strong>。</li>
 </ul>
-<p>关键的一步是区分&quot;指针值合法&quot;与&quot;解引用合法&quot;：one-past 指针可以存在、可以比较，但不指向任何对象，读写它就是 UB。</p>
+<p>区分&quot;指针值合法&quot;与&quot;解引用合法&quot;：one-past 指针可以存在、可以比较，但不指向任何对象，读写它就是 UB。</p>
 <p><strong>(5)</strong> one-past 让&quot;半开区间&quot;成为可能：C 里区间约定为 <code>[begin, end)</code>，<code>end</code> 正是最后一个元素的下一个位置。这样循环可以写成</p>
 <p><pre class="code-block"><code class="language-c">for (int *it = r; it != r + 12; ++it) { ... }</code></pre></p>
 <p>不必在每次迭代里额外判断&quot;是不是最后一个&quot;。如果连 one-past 都不允许，<code>end</code> 指针就无法表达，循环边界要么多算一次、要么引入额外条件分支。</p>
