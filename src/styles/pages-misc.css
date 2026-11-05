@@ -177,12 +177,12 @@
 /* 比正文稍紧一点，像一份整理过的笔记而不是文章 */
 .article__main.prose {
   font-size: 1.0625rem;
-  line-height: 1.72;
+  line-height: 1.62;
   max-width: 42em;
 }
 
 .article__main.prose p {
-  margin: 0 0 0.72em;
+  margin: 0 0 0.55em;
 }
 
 .article__main.prose h2 {
@@ -225,8 +225,13 @@
 
 /* 定义 / 定理 / 注意 这类标签：小红字 + 稍缩进，扫读时一眼能定位 */
 .nb {
-  padding-left: 0.9em;
+  padding: 0.15em 0 0.15em 0.9em;
+  margin: 0 0 0.7em;
   border-left: 3px solid var(--line-strong);
+}
+
+.nb > :last-child {
+  margin-bottom: 0;
 }
 
 .nb--定义,
@@ -477,4 +482,41 @@
 .nb__title {
   font-weight: 700;
   color: var(--ink);
+}
+
+
+/* 404 */
+.notfound {
+  padding-block: clamp(56px, 12vh, 140px) clamp(56px, 10vh, 120px);
+  max-width: 40em;
+}
+
+.notfound__code {
+  font-size: clamp(3rem, 9vw, 6rem);
+  font-weight: 900;
+  line-height: 1;
+  color: var(--line-strong);
+  margin: 0 0 8px;
+  letter-spacing: -0.02em;
+}
+
+.notfound h1 {
+  font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+  margin: 0 0 12px;
+}
+
+.notfound .lede {
+  margin: 0 0 22px;
+  color: var(--ink-soft);
+}
+
+.notfound__actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+}
+
+.notfound__search {
+  max-width: 26em;
 }

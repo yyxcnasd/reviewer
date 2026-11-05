@@ -183,7 +183,6 @@ export function buildQuestionPages(ctx) {
         <div class="qactions">
           <button class="flag" type="button" data-flag="done" data-id="${q.id}" aria-pressed="false"><span>已做</span></button>
           <button class="flag flag--fav" type="button" data-flag="fav" data-id="${q.id}" aria-pressed="false"><span>收藏</span></button>
-          <button class="ghost" type="button" id="expand-all">展开解析与提示</button>
           <button class="ghost" type="button" id="copy-md">复制题目</button>
           <a class="ghost" href="${url(1, `export/?ids=${q.id}`)}">导出这道题</a>
           <button class="ghost" type="button" data-print>打印这道题</button>

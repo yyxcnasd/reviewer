@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>页面不存在 · 复习册</title>
-<meta name="description" content="复习册：把课程范围、讲义要点、题库与解析放在一处的复习站。微积分 A1 与线性代数是第一批模块，考试轮次（期中 / 期末）可切换。">
+<meta name="description" content="复习册：把课程范围、讲义要点、题库与解析放在一处的复习站。微积分 A1、线性代数、离散数学 1、计算机系统概论，考试轮次可切换。">
 <meta name="color-scheme" content="light">
 <link rel="stylesheet" href="./assets/katex/katex.min.css">
 <link rel="stylesheet" href="./assets/site.css">
@@ -21,7 +21,7 @@
 <script src="./assets/term.js" defer></script>
 <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
 <meta property="og:title" content="页面不存在 · 复习册">
-<meta property="og:description" content="复习册：把课程范围、讲义要点、题库与解析放在一处的复习站。微积分 A1 与线性代数是第一批模块，考试轮次（期中 / 期末）可切换。">
+<meta property="og:description" content="复习册：把课程范围、讲义要点、题库与解析放在一处的复习站。微积分 A1、线性代数、离散数学 1、计算机系统概论，考试轮次可切换。">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="zh_CN">
 
@@ -48,7 +48,7 @@
           <li><a href="./practice/">刷题</a></li>
           <li><a href="./cheatsheet/">速查</a></li>
           <li><a href="./stats/">进度</a></li>
-          <li><a href="./notation/">写法</a></li>
+          <li><a href="./about/">关于</a></li>
         </ul>
         <div class="nav__end">
           <div class="nav__terms" role="group" aria-label="考试轮次">
@@ -64,22 +64,24 @@
 
 <div class="frame">
   <div class="section notfound">
+    <p class="notfound__code">404</p>
     <h1>这一页不在册子里</h1>
-    <p class="lede">地址可能写错了，也可能这一章还没整理。下面这两个入口最快：</p>
-    <form class="search notfound__search" action="questions/" method="get" role="search">
+    <p class="lede">地址可能写错了，也可能这一页还没建好。<b>6 秒后自动回首页</b>，也可以直接点下面。</p>
+    <div class="notfound__actions">
+      <a class="btn btn--red" href="/reviewer/">回首页</a>
+      <a class="btn btn--tone" href="/reviewer/questions/">去题库</a>
+    </div>
+    <form class="search notfound__search" action="/reviewer/questions/" method="get" role="search">
       <label class="sr-only" for="q">搜题</label>
       <input class="search__input" id="q" name="q" type="search" placeholder="搜题：题干、标签、出处" autocomplete="off">
-      <button class="btn btn--red" type="submit">搜题</button>
+      <button class="btn" type="submit">搜一搜</button>
     </form>
-    <ul class="notfound__links">
-      <li><a href="questions/">题库（295 道）</a></li>
-      <li><a href="practice/">刷题</a></li>
-      <li><a href="cheatsheet/">速查表</a></li>
-      <li><a href="notation/">符号与写法</a></li>
-      <li><a href="export/">导出 PDF</a></li>
-    </ul>
   </div>
 </div>
+<meta http-equiv="refresh" content="6; url=/reviewer/">
+<script>
+  setTimeout(function () { location.replace('/reviewer/') }, 6000)
+</script>
 </main>
 
   <footer class="footer">

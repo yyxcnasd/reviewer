@@ -452,7 +452,7 @@ courses:
     accent: indigo
     book: 《数理逻辑与集合论》石纯一 王家廞 · 马昱春 讲义（离散数学 1）
     terms: [final]
-    scope_line: 期末考试：第 1 章 – 第 5 章
+    scope_line: 第 1 章 – 第 5 章
     scope_note: 这门课没有期中，只有期末；范围按讲义章节整理。
     notes_intro: >-
       从命题逻辑讲到谓词逻辑：联结词、真值表、等值演算、范式、推理演算、归结，
@@ -681,7 +681,7 @@ courses:
     accent: ink
     book: 《深入理解计算机系统》CSAPP（第三版）· 张悠慧
     terms: [midterm, final]
-    scope_line: 期中：概论 → 缓冲区溢出（不含内存布局）
+    scope_line: 第 1 章 → 6.2 节（6.1 内存布局不考）
     scope_note: >-
       期中范围按老师通知：1 概论、2.1 整数、2.2 浮点数、3.1 汇编基础和寻址方式、
       3.2 分支与循环、4 函数调用、5 数组与结构体、6.2 缓冲区溢出。

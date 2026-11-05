@@ -1,4 +1,4 @@
-import { page, write, url, esc, attr, crumb } from '../lib/site.mjs'
+import { aboutTabs, page, write, url, esc, attr, crumb } from '../lib/site.mjs'
 import { SHORTHANDS } from '../shorthands.mjs'
 
 /* ==========================================================================
@@ -60,7 +60,7 @@ export function buildNotation(ctx) {
   const body = `
 <div class="frame nt-page">
 
-  ${crumb(1, [{ href: '', label: ctx.config.wordmark }, { label: '符号与写法' }])}
+  ${crumb(1, [{ href: '', label: ctx.config.wordmark }, { href: 'about/', label: '关于' }, { label: '符号与写法' }])}
 
   <header class="pagehead">
     <div class="pagehead__inner">

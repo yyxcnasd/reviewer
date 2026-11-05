@@ -41,6 +41,8 @@
     return !st || st === 'in' || st === 'boundary' || st === 'partial'
   }
 
+
+
   function build() {
     const course = el.course.value
     const chapter = el.chapter.value
@@ -153,6 +155,8 @@
     .catch(() => {
       stage.innerHTML = '<p class="hint">题库没载入。可能是在本地直接打开文件，用本地服务器预览即可。</p>'
     })
+
+  if (window.RB && window.RB.bindCourseChapter) window.RB.bindCourseChapter(el.course, el.chapter)
 
   el.apply.addEventListener('click', build)
   // 切换期中/期末时重建题组（term.js 会广播 term:change）

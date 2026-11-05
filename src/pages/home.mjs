@@ -68,7 +68,7 @@ export function buildHome(ctx) {
           <thead><tr><th>章</th><th>内容</th><th>范围</th><th>题</th><th>已做</th><th>要点</th></tr></thead>
           <tbody>${rows}</tbody>
         </table>
-        <p class="range-course__foot">在范围内 ${inScope.length} 章 · 期中之后 ${c.chapters.length - inScope.length} 章（灰）</p>
+        <p class="range-course__foot">在范围内 ${inScope.length} 章 · 不在本轮 ${c.chapters.length - inScope.length} 章（灰）</p>
       </section>`
     })
     .join('')

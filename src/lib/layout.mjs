@@ -37,7 +37,7 @@ export function page(ctx, opts) {
     { label: '刷题', href: 'practice/', key: 'practice' },
     { label: '速查', href: 'cheatsheet/', key: 'cheatsheet' },
     { label: '进度', href: 'stats/', key: 'stats' },
-    { label: '写法', href: 'notation/', key: 'notation' },
+    { label: '关于', href: 'about/', key: 'about' },
   ]
   const courseMenu = `<li class="nav__menu-wrap">
           <details class="navmenu">
@@ -224,4 +224,21 @@ export function stemExcerpt(ctx, q) {
   const m = html.match(/^<p>([\s\S]*)<\/p>\s*$/)
   if (m && !m[1].includes('<p>')) html = m[1]
   return html
+}
+
+/**
+ * 「关于」区段的标签栏：关于 / 符号与写法。
+ * 两个页面共用一套，active 传当前页的 key。
+ */
+export function aboutTabs(depth, active) {
+  const tabs = [
+    { key: 'about', label: '关于', href: 'about/' },
+    { key: 'notation', label: '符号与写法', href: 'notation/' },
+  ]
+  return `<nav class="subtabs" aria-label="关于" data-ui>${tabs
+    .map(
+      (t) =>
+        `<a href="${url(depth, t.href)}"${t.key === active ? ' aria-current="page"' : ''}>${t.label}</a>`,
+    )
+    .join('')}</nav>`
 }

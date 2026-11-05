@@ -26,6 +26,8 @@
     clear: $('#ex-clear'),
   }
 
+  if (window.RB && window.RB.bindCourseChapter) window.RB.bindCourseChapter(el.course, el.chapter)
+
   let all = []
   let picked = new Set()
   const order = new Map()

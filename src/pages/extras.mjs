@@ -33,25 +33,30 @@ import {
 /* ---------------------------------------------------------------- 404 */
 
 export function buildNotFound(ctx) {
+  // 404 会出现在任意深度，链接一律走站点根的绝对路径
+  const root = new URL(ctx.config.siteUrl || '/', 'https://x/').pathname.replace(/index\.html$/, '')
+  const home = root
   const body = `
 <div class="frame">
   <div class="section notfound">
+    <p class="notfound__code">404</p>
     <h1>这一页不在册子里</h1>
-    <p class="lede">地址可能写错了，也可能这一章还没整理。下面这两个入口最快：</p>
-    <form class="search notfound__search" action="${url(0, 'questions/')}" method="get" role="search">
+    <p class="lede">地址可能写错了，也可能这一页还没建好。<b>6 秒后自动回首页</b>，也可以直接点下面。</p>
+    <div class="notfound__actions">
+      <a class="btn btn--red" href="${home}">回首页</a>
+      <a class="btn btn--tone" href="${root}questions/">去题库</a>
+    </div>
+    <form class="search notfound__search" action="${root}questions/" method="get" role="search">
       <label class="sr-only" for="q">搜题</label>
       <input class="search__input" id="q" name="q" type="search" placeholder="搜题：题干、标签、出处" autocomplete="off">
-      <button class="btn btn--red" type="submit">搜题</button>
+      <button class="btn" type="submit">搜一搜</button>
     </form>
-    <ul class="notfound__links">
-      <li><a href="${url(0, 'questions/')}">题库（${ctx.stats.questions} 道）</a></li>
-      <li><a href="${url(0, 'practice/')}">刷题</a></li>
-      <li><a href="${url(0, 'cheatsheet/')}">速查表</a></li>
-      <li><a href="${url(0, 'notation/')}">符号与写法</a></li>
-      <li><a href="${url(0, 'export/')}">导出 PDF</a></li>
-    </ul>
   </div>
-</div>`
+</div>
+<meta http-equiv="refresh" content="6; url=${home}">
+<script>
+  setTimeout(function () { location.replace('${home}') }, 6000)
+</script>`
   write(ctx, '404.html', page(ctx, { depth: 0, title: '页面不存在', body, bodyClass: 'detail' }))
 }
 

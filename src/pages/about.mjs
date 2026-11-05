@@ -2,6 +2,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 
 import {
+  aboutTabs,
   page,
   write,
   url,
@@ -44,6 +45,7 @@ export function buildAbout(ctx) {
   const body = `
 <div class="frame">
   ${crumb(1, [{ href: '', label: ctx.config.wordmark }, { label: '关于' }])}
+  ${aboutTabs(1, 'about')}
   <header class="pagehead">
     <div class="pagehead__inner">
       <h1 class="pagehead__title">关于这本册子</h1>
@@ -75,7 +77,7 @@ export function buildAbout(ctx) {
     <p><b>现在有多少道题？</b>${ctx.stats.questions} 道，全部自编，每题都有提示、解析和一条常见错误。</p>
     <p><b>为什么有些章节是灰的？</b>那是不在当前轮次范围里的内容。切到另一个轮次，颜色会跟着变。</p>
     <p><b>进度存在哪里？</b>「已做」「收藏」只存在你自己的浏览器（localStorage），不上传，换设备或清缓存就没了。</p>
-    <p><b>投稿要写什么格式？</b>Markdown，公式用 \( \) 和 \[ \]。缩写（<code>\e</code>、<code>\d</code>、<code>\abs{}</code> 之类）见<a href="${url(1, 'notation/')}">符号与缩写</a>。投稿页有实时预览，会顺手生成 frontmatter 和文件名。</p>
+    <p><b>投稿要写什么格式？</b>Markdown，公式用 \( \) 和 \[ \]。缩写（<code>\e</code>、<code>\d</code>、<code>\abs{}</code> 之类）见<a href="${url(1, 'notation/')}">符号与写法</a>。投稿页有实时预览，会顺手生成 frontmatter 和文件名。</p>
     <p><b>题目合并之后会怎样？</b>它会成为 content/questions/ 下的一个文件，出现在题库、对应标签页和所属章节里。</p>
     <p><b>能打印吗？</b>能。速查表、每篇要点、每道题都有打印样式；整份卷子在「导出」页生成，A4 排版。</p>
 

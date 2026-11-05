@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>计算机系统概论 · 复习册</title>
-<meta name="description" content="计算机系统概论期中复习：期中：概论 → 缓冲区溢出（不含内存布局）。期中范围按老师通知：1 概论、2.1 整数、2.2 浮点数、3.1 汇编基础和寻址方式、 3.2 分支与循环、4 函数调用、5 数组与结构体、6.2 缓冲区溢出。 6.1 内存布局明确不考。期末范围未定，暂按整本书（同样不含 6.1）。">
+<meta name="description" content="计算机系统概论期中复习：第 1 章 → 6.2 节（6.1 内存布局不考）。期中范围按老师通知：1 概论、2.1 整数、2.2 浮点数、3.1 汇编基础和寻址方式、 3.2 分支与循环、4 函数调用、5 数组与结构体、6.2 缓冲区溢出。 6.1 内存布局明确不考。期末范围未定，暂按整本书（同样不含 6.1）。">
 <meta name="color-scheme" content="light">
 <link rel="stylesheet" href="../assets/katex/katex.min.css">
 <link rel="stylesheet" href="../assets/site.css">
@@ -21,7 +21,7 @@
 <script src="../assets/term.js" defer></script>
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <meta property="og:title" content="计算机系统概论 · 复习册">
-<meta property="og:description" content="计算机系统概论期中复习：期中：概论 → 缓冲区溢出（不含内存布局）。期中范围按老师通知：1 概论、2.1 整数、2.2 浮点数、3.1 汇编基础和寻址方式、 3.2 分支与循环、4 函数调用、5 数组与结构体、6.2 缓冲区溢出。 6.1 内存布局明确不考。期末范围未定，暂按整本书（同样不含 6.1）。">
+<meta property="og:description" content="计算机系统概论期中复习：第 1 章 → 6.2 节（6.1 内存布局不考）。期中范围按老师通知：1 概论、2.1 整数、2.2 浮点数、3.1 汇编基础和寻址方式、 3.2 分支与循环、4 函数调用、5 数组与结构体、6.2 缓冲区溢出。 6.1 内存布局明确不考。期末范围未定，暂按整本书（同样不含 6.1）。">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="zh_CN">
 
@@ -48,7 +48,7 @@
           <li><a href="../practice/">刷题</a></li>
           <li><a href="../cheatsheet/">速查</a></li>
           <li><a href="../stats/">进度</a></li>
-          <li><a href="../notation/">写法</a></li>
+          <li><a href="../about/">关于</a></li>
         </ul>
         <div class="nav__end">
           <div class="nav__terms" role="group" aria-label="考试轮次">
@@ -67,7 +67,7 @@
     <div class="pagehead__inner">
       <h1 class="pagehead__title">计算机系统概论</h1>
       <div class="pagehead__scope">
-        <p><b>期中：概论 → 缓冲区溢出（不含内存布局）</b></p>
+        <p><b>第 1 章 → 6.2 节（6.1 内存布局不考）</b></p>
         <p>期中范围按老师通知：1 概论、2.1 整数、2.2 浮点数、3.1 汇编基础和寻址方式、 3.2 分支与循环、4 函数调用、5 数组与结构体、6.2 缓冲区溢出。 6.1 内存布局明确不考。期末范围未定，暂按整本书（同样不含 6.1）。</p>
         <div class="pagehead__stats">
           <span><b>6</b>章在范围内</span>
@@ -85,12 +85,12 @@
       
       <h2>考纲</h2>
       <p>从 C 程序怎么变成机器指令讲起：数的表示（补码、IEEE 754）、汇编与寻址、 控制流、函数调用的栈帧、数组与结构体的布局，最后是缓冲区溢出。</p>
-      <p>颜色有含义：深色的在范围内，红色标签的是边界，浅灰的是期中之后。</p>
+      <p>深色在范围内，红色是部分在范围，浅灰不在本轮范围。</p>
     </div>
     <div class="outline__body">
-      <article class="chapter" id="ch-ics-1">
+      <article class="chapter" id="ch-ics-1" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}">
           <h2 class="chapter__title"><a href="../notes/ics-1.html"><em>1</em>概论</a></h2>
-          <span class="chapter__label chapter__label--in" data-chip>在范围内</span>
+          <span class="chapter__label chapter__label--in" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-chip>在范围内</span>
           <p class="chapter__summary">计算机系统的层次、程序的编译链接运行、性能与存储层次的基本概念。</p>
           <ul class="chapter__sections"><li class="sec-in" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-sec>1.1 计算机系统的层次与抽象</li><li class="sec-in" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-sec>1.2 程序的一生：从 C 到可执行文件</li></ul>
           <div class="chapter__links" data-chapter-links>
@@ -99,9 +99,9 @@
                  <a href="../export/?chapter=ics-1">导出</a>
                </div>
         </article>
-<article class="chapter" id="ch-ics-2">
+<article class="chapter" id="ch-ics-2" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}">
           <h2 class="chapter__title"><a href="../notes/ics-2.html"><em>2</em>信息的表示与处理</a></h2>
-          <span class="chapter__label chapter__label--in" data-chip>在范围内</span>
+          <span class="chapter__label chapter__label--in" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-chip>在范围内</span>
           <p class="chapter__summary">整数的补码表示与运算、浮点数的 IEEE 754 表示与舍入。</p>
           <ul class="chapter__sections"><li class="sec-in" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-sec>2.1 整数</li><li class="sec-in" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-sec>2.2 浮点数</li></ul>
           <div class="chapter__links" data-chapter-links>
@@ -110,9 +110,9 @@
                  <a href="../export/?chapter=ics-2">导出</a>
                </div>
         </article>
-<article class="chapter" id="ch-ics-3">
+<article class="chapter" id="ch-ics-3" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}">
           <h2 class="chapter__title"><a href="../notes/ics-3.html"><em>3</em>汇编语言与程序的机器级表示</a></h2>
-          <span class="chapter__label chapter__label--in" data-chip>在范围内</span>
+          <span class="chapter__label chapter__label--in" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-chip>在范围内</span>
           <p class="chapter__summary">x86-64 汇编基础与寻址方式、条件码与控制流（分支与循环）。</p>
           <ul class="chapter__sections"><li class="sec-in" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-sec>3.1 汇编基础与寻址方式</li><li class="sec-in" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-sec>3.2 分支与循环</li></ul>
           <div class="chapter__links" data-chapter-links>
@@ -121,9 +121,9 @@
                  <a href="../export/?chapter=ics-3">导出</a>
                </div>
         </article>
-<article class="chapter" id="ch-ics-4">
+<article class="chapter" id="ch-ics-4" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}">
           <h2 class="chapter__title"><a href="../notes/ics-4.html"><em>4</em>函数调用</a></h2>
-          <span class="chapter__label chapter__label--in" data-chip>在范围内</span>
+          <span class="chapter__label chapter__label--in" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-chip>在范围内</span>
           <p class="chapter__summary">栈帧、参数传递、返回地址、保存的寄存器、递归。</p>
           <ul class="chapter__sections"><li class="sec-in" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-sec>4.1 栈帧与调用约定</li><li class="sec-in" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-sec>4.2 局部变量与递归</li></ul>
           <div class="chapter__links" data-chapter-links>
@@ -132,9 +132,9 @@
                  <a href="../export/?chapter=ics-4">导出</a>
                </div>
         </article>
-<article class="chapter" id="ch-ics-5">
+<article class="chapter" id="ch-ics-5" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}">
           <h2 class="chapter__title"><a href="../notes/ics-5.html"><em>5</em>数组与结构体</a></h2>
-          <span class="chapter__label chapter__label--in" data-chip>在范围内</span>
+          <span class="chapter__label chapter__label--in" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-chip>在范围内</span>
           <p class="chapter__summary">数组的内存布局与寻址、指针算术、结构体的对齐与填充、联合体。</p>
           <ul class="chapter__sections"><li class="sec-in" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-sec>5.1 数组与指针</li><li class="sec-in" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-sec>5.2 结构体、联合体与对齐</li></ul>
           <div class="chapter__links" data-chapter-links>
@@ -143,9 +143,9 @@
                  <a href="../export/?chapter=ics-5">导出</a>
                </div>
         </article>
-<article class="chapter" id="ch-ics-6">
+<article class="chapter" id="ch-ics-6" data-states="{&quot;midterm&quot;:&quot;partial&quot;,&quot;final&quot;:&quot;partial&quot;}">
           <h2 class="chapter__title"><a href="../notes/ics-6.html"><em>6</em>程序的内存与安全</a></h2>
-          <span class="chapter__label chapter__label--partial" data-chip>部分在范围</span>
+          <span class="chapter__label chapter__label--partial" data-states="{&quot;midterm&quot;:&quot;partial&quot;,&quot;final&quot;:&quot;partial&quot;}" data-chip>部分在范围</span>
           <p class="chapter__summary">缓冲区溢出与防御；内存布局本身不考。</p>
           <ul class="chapter__sections"><li class="sec-out" data-states="{&quot;midterm&quot;:&quot;out&quot;,&quot;final&quot;:&quot;out&quot;}" data-sec>6.1 进程的内存布局</li><li class="sec-in" data-states="{&quot;midterm&quot;:&quot;in&quot;,&quot;final&quot;:&quot;in&quot;}" data-sec>6.2 缓冲区溢出</li></ul>
           <div class="chapter__links" data-chapter-links>

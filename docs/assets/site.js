@@ -217,6 +217,8 @@
       sort: $('#f-sort'),
       q: $('#f-q'),
     }
+
+  if (window.RB && window.RB.bindCourseChapter) window.RB.bindCourseChapter(sel.course, sel.chapter)
     const list = $('#qlist')
     const order = new Map(items.map((el, i) => [el, i]))
 

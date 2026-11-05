@@ -52,7 +52,7 @@ export function buildCourses(ctx) {
                  ${ch.count ? `<a href="${url(1, `questions/?chapter=${ch.id}`)}">做这 ${ch.count} 道题</a>` : ''}
                  ${ch.count ? `<a href="${url(1, `export/?chapter=${ch.id}`)}">导出</a>` : ''}
                </div>`
-        return `<article class="chapter" id="ch-${ch.id}">
+        return `<article class="chapter" id="ch-${ch.id}" data-states="${attr(JSON.stringify(ch.terms || {}))}">
           <h2 class="chapter__title">${(() => {
           const href = ch.note
             ? url(1, `notes/${ch.id}.html`)
@@ -62,7 +62,7 @@ export function buildCourses(ctx) {
           const inner = `${ch.no ? `<em>${esc(ch.no)}</em>` : ''}${esc(ch.title)}`
           return href ? `<a href="${href}">${inner}</a>` : inner
         })()}</h2>
-          <span class="chapter__label chapter__label--${ch.state}" data-chip>${stateLabel(ch.state)}</span>
+          <span class="chapter__label chapter__label--${ch.state}" data-states="${attr(JSON.stringify(ch.terms || {}))}" data-chip>${stateLabel(ch.state)}</span>
           <p class="chapter__summary">${esc(ch.summary || '')}</p>
           <ul class="chapter__sections">${secs}</ul>
           ${links}
@@ -96,7 +96,7 @@ export function buildCourses(ctx) {
         : ''}
       <h2>考纲</h2>
       <p>${esc(course.notes_intro || '')}</p>
-      <p>颜色有含义：深色的在范围内，红色标签的是边界，浅灰的是期中之后。</p>
+      <p>深色在范围内，红色是部分在范围，浅灰不在本轮范围。</p>
     </div>
     <div class="outline__body">
       ${outline}

@@ -441,3 +441,51 @@ html[data-term='final'] .sheet-course[data-term='midterm'] {
   color: var(--ink-mute);
   vertical-align: 0.15em;
 }
+
+
+/* 速查表：科目勾选 */
+.sheet-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  align-items: center;
+}
+
+.sheet-picker__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--fs-small);
+  font-weight: 700;
+  cursor: pointer;
+  user-select: none;
+}
+
+.sheet-picker__item input {
+  width: 15px;
+  height: 15px;
+  accent-color: var(--red);
+  cursor: pointer;
+}
+
+.sheet-picker__item:has(input:disabled) {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* 没勾选的科目：屏幕与纸上都不出现 */
+.sheet-course[data-hidden='1'] {
+  display: none !important;
+}
+
+
+/* 速查表里的表格：比正文小一号，别反客为主 */
+.sheet__body table {
+  font-size: 0.94em;
+  margin-block: 0.5em;
+}
+
+.sheet__body th,
+.sheet__body td {
+  padding: 0.3em 0.5em;
+}

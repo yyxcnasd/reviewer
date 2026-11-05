@@ -596,12 +596,12 @@
 
 .qpage__stem {
   font-size: clamp(1.15rem, 1.5vw, 1.35rem);
-  line-height: 1.85;
+  line-height: 1.66;
   margin-bottom: clamp(26px, 3vw, 40px);
 }
 
 .qpage__stem p {
-  margin-bottom: 0.9em;
+  margin-bottom: 0.7em;
 }
 
 .qblock {
@@ -681,10 +681,15 @@
   color: var(--ink);
 }
 
-.answer span {
+.answer > span:first-child {
   font-size: var(--fs-micro);
   font-weight: 700;
   letter-spacing: 0.02em;
+}
+
+.answer .katex,
+.answer p {
+  font-weight: 400;
 }
 
 .answer .katex {
@@ -943,10 +948,18 @@
 }
 
 .practice__controls {
+  position: relative;
+  z-index: 2;
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   align-items: center;
+  padding-block: 10px;
+  background: var(--paper);
+}
+
+.practice__solution {
+  margin-bottom: 10px;
 }
 
 .practice__progress {
@@ -1189,4 +1202,39 @@
 .qmini .katex-display {
   max-width: 100%;
   overflow-x: auto;
+}
+
+
+/* 公式与答案块之间留出呼吸，避免行内公式顶到区块边框 */
+.answer .math-display,
+.answer .katex-display {
+  margin-block: 0.5em;
+}
+
+.answer {
+  row-gap: 0.35em;
+}
+
+/* 难度第 5 档：四颗方块 + 一颗星 */
+.dots--hard i.on:last-child {
+  background: var(--red);
+  clip-path: polygon(
+    50% 0%,
+    61% 35%,
+    98% 35%,
+    68% 57%,
+    79% 91%,
+    50% 70%,
+    21% 91%,
+    32% 57%,
+    2% 35%,
+    39% 35%
+  );
+  width: 9px;
+  height: 9px;
+}
+
+.dots--hard i:last-child {
+  width: 9px;
+  height: 9px;
 }

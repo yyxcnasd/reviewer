@@ -49,6 +49,13 @@ export function buildCheatsheet(ctx) {
 
   // 按课程聚合；同一门课的多个文件按文件名顺序拼接
   const order = ctx.courses.map((c) => c.id)
+  // 同一门课多个文件时，基础版（无 -extra）排在期末补充之前
+  parsed.sort((a, b) => {
+    const ea = /-extra$/i.test(a.file || '') ? 1 : 0
+    const eb = /-extra$/i.test(b.file || '') ? 1 : 0
+    return ea - eb
+  })
+
   const byCourse = new Map()
   for (const s of parsed) {
     const entry = byCourse.get(s.id) || { id: s.id, name: s.courseName, parts: [] }
@@ -72,14 +79,17 @@ export function buildCheatsheet(ctx) {
     <div class="pagehead__inner">
       <h1 class="pagehead__title">速查表</h1>
       <div class="pagehead__scope sheet-toolbar">
-        <p class="sheet-toolbar__lead">期末版包含期中内容；一门课一张纸。</p>
+        <p class="sheet-toolbar__lead">勾选要看的科目；打印时只打印勾上的。</p>
         <div class="sheet-toolbar__actions">
-          <label class="sr-only" for="sheet-pick">选择科目</label>
-          <select class="select" id="sheet-pick">
-            <option value="">全部 ${courses.length} 门课（${totalGroups} 组）</option>
-            ${courses.map((e) => `<option value="${e.id}">${esc(e.name)}</option>`).join('')}
-          </select>
-          <button class="btn btn--red" type="button" id="sheet-print">打印</button>
+          <div class="sheet-picker" role="group" aria-label="选择科目">
+            ${courses
+              .map(
+                (e) =>
+                  `<label class="sheet-picker__item"><input type="checkbox" data-pick="${e.id}" checked> ${esc(e.name)}</label>`,
+              )
+              .join('')}
+          </div>
+          <button class="btn btn--red" type="button" id="sheet-print">打印勾选的</button>
         </div>
       </div>
     </div>
@@ -102,14 +112,36 @@ export function buildCheatsheet(ctx) {
 </div>
 <script>
   ;(() => {
-    const pick = document.getElementById('sheet-pick')
+    const boxes = [...document.querySelectorAll('[data-pick]')]
     const btn = document.getElementById('sheet-print')
-    if (!pick || !btn) return
-    btn.addEventListener('click', () => {
-      for (const cls of [...document.body.classList]) {
-        if (cls.startsWith('printing-')) document.body.classList.remove(cls)
+    if (!btn) return
+
+    const apply = () => {
+      const on = new Set(boxes.filter((b) => b.checked).map((b) => b.dataset.pick))
+      for (const sec of document.querySelectorAll('.sheet-course')) {
+        const courseOn = on.has(sec.dataset.sheet)
+        sec.dataset.hidden = courseOn ? '0' : '1'
       }
-      if (pick.value) document.body.classList.add('printing-' + pick.value)
+    }
+
+    for (const b of boxes) b.addEventListener('change', apply)
+
+    // 期中时，只有期末的课（如离散数学1）不参与勾选
+    document.addEventListener('term:change', (e) => {
+      const term = e.detail ? e.detail.term : document.documentElement.dataset.term
+      for (const b of boxes) {
+        const sec = document.querySelector('.sheet-course[data-sheet="' + b.dataset.pick + '"]')
+        const onlyFinal = sec && sec.dataset.term === 'midterm' && sec.hidden
+        b.disabled = term === 'midterm' && onlyFinal
+        if (b.disabled) b.checked = false
+        else if (!b.dataset.touched) b.checked = true
+      }
+      apply()
+    })
+
+    apply()
+
+    btn.addEventListener('click', () => {
       if (window.RB && window.RB.printAll) window.RB.printAll()
       else window.print()
     })

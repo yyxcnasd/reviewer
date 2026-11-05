@@ -1,7 +1,29 @@
 /* 复习册 · 浏览器端公共小工具
    先于其它脚本加载，把 $ / $$ / escapeHtml / 本地存取挂到 window.RB 上。 */
 ;(() => {
-  const RB = {
+  /**
+ * 课程 → 章节联动：选了课程只保留这门课的章节，清空课程恢复全部。
+ * 章节 id 形如 va1-3 / la-2 / dm1-5 / ics-4，按前缀判断归属。
+ */
+function bindCourseChapter(courseSel, chapterSel) {
+  if (!courseSel || !chapterSel) return
+  const all = [...chapterSel.options].map((o) => ({ value: o.value, text: o.text }))
+  const sync = () => {
+    const course = courseSel.value
+    const keep = chapterSel.value
+    chapterSel.replaceChildren(new Option(all[0].text, ''))
+    for (const o of all) {
+      if (!o.value) continue
+      if (course && !o.value.startsWith(course + '-')) continue
+      chapterSel.appendChild(new Option(o.text, o.value))
+    }
+    chapterSel.value = [...chapterSel.options].some((o) => o.value === keep) ? keep : ''
+  }
+  courseSel.addEventListener('change', sync)
+  sync()
+}
+
+const RB = {
     $: (sel, root = document) => root.querySelector(sel),
     $$: (sel, root = document) => Array.from(root.querySelectorAll(sel)),
 
@@ -61,7 +83,10 @@
       window.print()
     },
 
-    /** 打印按钮：页面上任何 [data-print] 都生效 */
+  
+
+
+  /** 打印按钮：页面上任何 [data-print] 都生效 */
     bindPrintButtons() {
       for (const btn of document.querySelectorAll('[data-print]')) {
         btn.addEventListener('click', () => window.RB.printAll())
@@ -69,7 +94,8 @@
     },
   }
 
-  window.RB = RB
+  RB.bindCourseChapter = bindCourseChapter
+window.RB = RB
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => RB.bindPrintButtons())
   } else {

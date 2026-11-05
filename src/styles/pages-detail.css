@@ -705,3 +705,33 @@ body.is-focus .submit__preview {
   font-size: 0.88rem;
   margin: 0 0 12px;
 }
+
+
+/* 关于区段的标签栏：关于 / 符号与写法 */
+.subtabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 2px solid var(--line-strong);
+  margin-bottom: clamp(16px, 2.4vw, 28px);
+  overflow-x: auto;
+}
+
+.subtabs a {
+  padding: 10px 16px;
+  font-size: var(--fs-small);
+  font-weight: 700;
+  color: var(--ink-mute);
+  text-decoration: none;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+}
+
+.subtabs a:hover {
+  color: var(--ink);
+}
+
+.subtabs a[aria-current='page'] {
+  color: var(--ink);
+  border-bottom-color: var(--red);
+}
