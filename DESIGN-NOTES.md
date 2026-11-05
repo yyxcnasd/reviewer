@@ -663,3 +663,15 @@ cache 冲突缺失、off-by-one 改 `%rbp` 的帧偏移攻击。
 - 删除 `notes.mjs` 里的 `withLabels()`、`LABELS`、`GENERIC_HEADINGS` 与目录里的 `is-label` 逻辑
 - 删除对应的 CSS（`.is-label`），只保留区块本身的样式
 - 区块间距统一：整块 0.9em 上下留白，标题与正文同一缩进
+
+
+---
+
+## 第二十二轮：区块语法只保留英文关键词
+
+- `src/blocks.mjs` 的别名表删掉所有中文键，只留英文：`definition` `theorem` `lemma` `proposition`
+  `corollary` `property` `conclusion` `example` `note` `warning` `warn` `danger` `caution`
+  `important` `tip` `info` `remark` `proof`；显示标签仍是中文（页面上写「定理」「注意」）。
+- 内容里 341 处区块类型同步换成英文（22 个文件），现在没有 `:::中文` 形式的区块。
+- `/notation/` 的类型表删掉中文行，示例改用 `:::definition`、`:::tip[提示]`；说明里写明「类型词只接受英文关键词」。
+- 投稿预览同步：`:::theorem[测试]` 正常渲染，`:::定义` 按普通文本显示（不再解析）。

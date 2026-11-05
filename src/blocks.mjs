@@ -16,41 +16,26 @@
 
 const ALIASES = {
   // 数学类
-  定义: { label: '定义', tone: '定义' },
-  定理: { label: '定理', tone: '定理' },
-  引理: { label: '引理', tone: '定理' },
-  命题: { label: '命题', tone: '定理' },
-  推论: { label: '推论', tone: '推论' },
-  性质: { label: '性质', tone: '性质' },
-  结论: { label: '结论', tone: '结论' },
-  例: { label: '例', tone: '例' },
-  例题: { label: '例', tone: '例' },
-  证明: { label: '证明', tone: '证明' },
+  definition: { label: '定义', tone: '定义' },
+  theorem: { label: '定理', tone: '定理' },
+  lemma: { label: '引理', tone: '定理' },
+  proposition: { label: '命题', tone: '定理' },
+  corollary: { label: '推论', tone: '推论' },
+  property: { label: '性质', tone: '性质' },
+  conclusion: { label: '结论', tone: '结论' },
+  example: { label: '例', tone: '例' },
+  proof: { label: '证明', tone: '证明' },
 
   // 提示类
-  注意: { label: '注意', tone: '注意' },
-  易错: { label: '易错', tone: '注意' },
-  警告: { label: '警告', tone: '注意' },
-  提示: { label: '提示', tone: '提示' },
-  备注: { label: '备注', tone: '提示' },
-
-  // 通用英文类型（:::info[定义] 这种写法）
-  info: { label: '提示', tone: '提示' },
-  tip: { label: '提示', tone: '提示' },
   note: { label: '注意', tone: '注意' },
-  remark: { label: '备注', tone: '提示' },
   warning: { label: '注意', tone: '注意' },
   warn: { label: '注意', tone: '注意' },
   danger: { label: '注意', tone: '注意' },
   caution: { label: '注意', tone: '注意' },
-  theorem: { label: '定理', tone: '定理' },
-  lemma: { label: '引理', tone: '定理' },
-  corollary: { label: '推论', tone: '推论' },
-  proposition: { label: '命题', tone: '定理' },
-  definition: { label: '定义', tone: '定义' },
-  example: { label: '例', tone: '例' },
-  proof: { label: '证明', tone: '证明' },
-  conclusion: { label: '结论', tone: '结论' },
+  important: { label: '注意', tone: '注意' },
+  tip: { label: '提示', tone: '提示' },
+  info: { label: '提示', tone: '提示' },
+  remark: { label: '备注', tone: '提示' },
 }
 
 const OPEN = /^:::\s*([^\s:：\[]+)\s*(?:\[([^\]]*)\])?\s*(.*)$/

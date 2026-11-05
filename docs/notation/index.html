@@ -259,33 +259,33 @@
   </section>
 
   <section class="section--tight">
-    <div class="rule-head"><h2>区块</h2><p>定义、定理、例、注意这类内容一律用 <code>:::</code> 包起来，整块缩进并带彩色竖条。类型词决定颜色，标题写在方括号里。</p></div>
+    <div class="rule-head"><h2>区块</h2><p>定义、定理、例、注意这类内容一律用 <code>:::</code> 包起来，整块缩进并带彩色竖条。类型词只接受英文关键词，标题写在方括号里。</p></div>
     <div class="nt-blocks">
       <div class="mdx-block">
         <pre>:::theorem[中值定理]
 若 $f$ 在 $[a,b]$ 上连续……
 :::</pre>
-        <div class="mdx-block__note"><b>:::theorem[中值定理]</b><span>英文类型 + 方括号标题</span></div>
+        <div class="mdx-block__note"><b>:::theorem[中值定理]</b><span>类型 + 方括号标题</span></div>
+      </div><div class="mdx-block">
+        <pre>:::definition
+设 $f$ 在 $x_0$ 的邻域内有定义……
+:::</pre>
+        <div class="mdx-block__note"><b>:::definition</b><span>定义，可不带标题</span></div>
       </div><div class="mdx-block">
         <pre>:::warning[易错]
 分子必须同时出现 $f(x_0+h)$ 与 $f(x_0)$。
 :::</pre>
         <div class="mdx-block__note"><b>:::warning[易错]</b><span>注意 / 易错，红色线</span></div>
       </div><div class="mdx-block">
-        <pre>:::info[提示]
+        <pre>:::tip[提示]
 先把公式配成标准形式再算。
 :::</pre>
-        <div class="mdx-block__note"><b>:::info[提示]</b><span>提示、小技巧，蓝色线</span></div>
+        <div class="mdx-block__note"><b>:::tip[提示]</b><span>提示、小技巧，蓝色线</span></div>
       </div><div class="mdx-block">
         <pre>:::example[3.1]
 求 $x^2$ 的导数。
 :::</pre>
         <div class="mdx-block__note"><b>:::example[3.1]</b><span>例题，标题写编号</span></div>
-      </div><div class="mdx-block">
-        <pre>:::定义
-设 $f$ 在 $x_0$ 的邻域内有定义……
-:::</pre>
-        <div class="mdx-block__note"><b>:::定义</b><span>中文类型也能直接写</span></div>
       </div>
     </div>
     <table class="nt-table"><thead><tr><th>类型</th><th>显示</th><th>颜色</th></tr></thead><tbody>
@@ -296,7 +296,6 @@
       <tr><td><code>warning</code> <code>danger</code> <code>caution</code> <code>note</code></td><td>注意</td><td>红色</td></tr>
       <tr><td><code>info</code> <code>tip</code> <code>remark</code></td><td>提示</td><td>蓝色</td></tr>
       <tr><td><code>proof</code></td><td>证明</td><td>灰色</td></tr>
-      <tr><td>中文：<code>定义 定理 引理 命题 性质 结论 推论 例 注意 易错 警告 提示 证明</code></td><td>同上</td><td>同上</td></tr>
     </tbody></table>
   </section>
 
@@ -321,7 +320,7 @@
       <li><code>## 提示</code>、<code>## 解析</code>、<code>## 常见错误</code> 三段，顺序固定。</li>
       <li>解析里说清「关键的那一步为什么能想到」，别只贴过程。</li>
       <li>多行推导用 <code>egin{aligned}</code> 或 <code>egin{cases}</code>，不要用表格写步骤链。</li>
-      <li>旧的「定义：」「定理：」行内标签已经不再自动解析，一律写成 <code>:::</code> 区块。</li>
+      <li>类型词只认英文：<code>definition</code> <code>theorem</code> <code>lemma</code> <code>proposition</code> <code>corollary</code> <code>property</code> <code>conclusion</code> <code>example</code> <code>note</code> <code>warning</code> <code>tip</code> <code>proof</code>；中文类型词不再解析。</li>
     </ul>
   </section>
 </div>

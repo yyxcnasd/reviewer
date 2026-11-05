@@ -27,11 +27,11 @@ const PAIRS = [
 ]
 
 const BLOCKS = [
-  { word: ':::theorem[中值定理]', note: '英文类型 + 方括号标题', sample: ':::theorem[中值定理]\n若 $f$ 在 $[a,b]$ 上连续……\n:::' },
+  { word: ':::theorem[中值定理]', note: '类型 + 方括号标题', sample: ':::theorem[中值定理]\n若 $f$ 在 $[a,b]$ 上连续……\n:::' },
+  { word: ':::definition', note: '定义，可不带标题', sample: ':::definition\n设 $f$ 在 $x_0$ 的邻域内有定义……\n:::' },
   { word: ':::warning[易错]', note: '注意 / 易错，红色线', sample: ':::warning[易错]\n分子必须同时出现 $f(x_0+h)$ 与 $f(x_0)$。\n:::' },
-  { word: ':::info[提示]', note: '提示、小技巧，蓝色线', sample: ':::info[提示]\n先把公式配成标准形式再算。\n:::' },
+  { word: ':::tip[提示]', note: '提示、小技巧，蓝色线', sample: ':::tip[提示]\n先把公式配成标准形式再算。\n:::' },
   { word: ':::example[3.1]', note: '例题，标题写编号', sample: ':::example[3.1]\n求 $x^2$ 的导数。\n:::' },
-  { word: ':::定义', note: '中文类型也能直接写', sample: ':::定义\n设 $f$ 在 $x_0$ 的邻域内有定义……\n:::' },
 ]
 
 export function buildNotation(ctx) {
@@ -114,7 +114,7 @@ export function buildNotation(ctx) {
   </section>
 
   <section class="section--tight">
-    <div class="rule-head"><h2>区块</h2><p>定义、定理、例、注意这类内容一律用 <code>:::</code> 包起来，整块缩进并带彩色竖条。类型词决定颜色，标题写在方括号里。</p></div>
+    <div class="rule-head"><h2>区块</h2><p>定义、定理、例、注意这类内容一律用 <code>:::</code> 包起来，整块缩进并带彩色竖条。类型词只接受英文关键词，标题写在方括号里。</p></div>
     <div class="nt-blocks">
       ${BLOCKS.map((b) => `<div class="mdx-block">
         <pre>${esc(b.sample)}</pre>
@@ -129,7 +129,6 @@ export function buildNotation(ctx) {
       <tr><td><code>warning</code> <code>danger</code> <code>caution</code> <code>note</code></td><td>注意</td><td>红色</td></tr>
       <tr><td><code>info</code> <code>tip</code> <code>remark</code></td><td>提示</td><td>蓝色</td></tr>
       <tr><td><code>proof</code></td><td>证明</td><td>灰色</td></tr>
-      <tr><td>中文：<code>定义 定理 引理 命题 性质 结论 推论 例 注意 易错 警告 提示 证明</code></td><td>同上</td><td>同上</td></tr>
     </tbody></table>
   </section>
 
@@ -154,7 +153,7 @@ export function buildNotation(ctx) {
       <li><code>## 提示</code>、<code>## 解析</code>、<code>## 常见错误</code> 三段，顺序固定。</li>
       <li>解析里说清「关键的那一步为什么能想到」，别只贴过程。</li>
       <li>多行推导用 <code>\begin{aligned}</code> 或 <code>\begin{cases}</code>，不要用表格写步骤链。</li>
-      <li>旧的「定义：」「定理：」行内标签已经不再自动解析，一律写成 <code>:::</code> 区块。</li>
+      <li>类型词只认英文：<code>definition</code> <code>theorem</code> <code>lemma</code> <code>proposition</code> <code>corollary</code> <code>property</code> <code>conclusion</code> <code>example</code> <code>note</code> <code>warning</code> <code>tip</code> <code>proof</code>；中文类型词不再解析。</li>
     </ul>
   </section>
 </div>`

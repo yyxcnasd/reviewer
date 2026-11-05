@@ -38,7 +38,7 @@
 :::
 ```
 
-类型词：`theorem` `lemma` `definition` `corollary` `example` `warning` `info` `proof`（中文 `定理` `定义` `例` `注意` `提示` 也能用）。
+类型词只认英文：`definition` `theorem` `lemma` `proposition` `corollary` `property` `conclusion` `example` `note` `warning` `tip` `proof`。
 
 ## 考试轮次
 
