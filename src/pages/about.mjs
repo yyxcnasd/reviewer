@@ -63,7 +63,7 @@ export function buildAbout(ctx) {
     <p>以任课教师的正式通知为准。要改范围，改 <code>courses.yml</code> 里对应小节的那一行，不用动页面代码。</p>
 
     <h2>内容怎么组织的</h2>
-    <p>所有中文内容都是仓库里的 Markdown 文件：一题一个文件放在 <code>content/questions/</code>，一章要点一个文件放在 <code>content/notes/</code>，章节与轮次范围写在 <code>content/courses.yml</code>。构建脚本读这些文件，生成题库、标签页、章节索引和这一页。</p>
+    <p>这本册子可以被 AI 定制：内容全是仓库里的 Markdown，格式写在 <code>CONTENT.md</code>，改造指南在 <code>AGENTS.md</code>。所有中文内容都是 Markdown 文件：一题一个文件放在 <code>content/questions/</code>，一章要点一个文件放在 <code>content/notes/</code>，章节与轮次范围写在 <code>content/courses.yml</code>。构建脚本读这些文件，生成题库、标签页、章节索引和这一页。</p>
     <p>题目全部自编，难度分五档；图片来自公有领域，出处见下表。</p>
 
     <h2>技术</h2>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>关于 · 复习册</title>
+<title>关于 · THU复习册</title>
 <meta name="description" content="范围说明、内容组织方式、许可与图片来源。">
 <meta name="color-scheme" content="light">
 <link rel="stylesheet" href="../assets/katex/katex.min.css">
@@ -20,7 +20,7 @@
 <script src="../assets/theme.js" defer></script>
 <script src="../assets/term.js" defer></script>
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
-<meta property="og:title" content="关于 · 复习册">
+<meta property="og:title" content="关于 · THU复习册">
 <meta property="og:description" content="范围说明、内容组织方式、许可与图片来源。">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="zh_CN">
@@ -33,7 +33,7 @@
   <header class="sitehead">
     <div class="frame">
       <nav class="nav" aria-label="主导航">
-        <a class="nav__mark" href="../"><span class="nav__dot" aria-hidden="true"></span>复习册</a>
+        <a class="nav__mark" href="../"><span class="nav__dot" aria-hidden="true"></span>THU复习册</a>
         <ul class="nav__links">
           <li class="nav__menu-wrap">
           <details class="navmenu">
@@ -63,13 +63,13 @@
 <main id="main">
 
 <div class="frame">
-  <nav class="crumb" aria-label="位置"><a href="../">复习册</a><span class="crumb__sep">/</span><span>关于</span></nav>
+  <nav class="crumb" aria-label="位置"><a href="../">THU复习册</a><span class="crumb__sep">/</span><span>关于</span></nav>
   <nav class="subtabs" aria-label="关于" data-ui><a href="../about/" aria-current="page">关于</a><a href="../notation/">符号与写法</a></nav>
   <header class="pagehead">
     <div class="pagehead__inner">
       <h1 class="pagehead__title">关于这本册子</h1>
       <div class="pagehead__scope">
-        <p>复习册：把课程范围、讲义要点、题库与解析放在一处的复习站。微积分 A1、线性代数、离散数学 1、计算机系统概论，考试轮次可切换。</p>
+        <p>THU复习册：把清华课程的范围、讲义要点、题库与解析放在一处的复习站。四门课、期中期末两套范围，内容全部是仓库里的 Markdown，可以用 AI 定制成你自己的复习册。</p>
       </div>
     </div>
   </header>
@@ -82,7 +82,7 @@
     <p>以任课教师的正式通知为准。要改范围，改 <code>courses.yml</code> 里对应小节的那一行，不用动页面代码。</p>
 
     <h2>内容怎么组织的</h2>
-    <p>所有中文内容都是仓库里的 Markdown 文件：一题一个文件放在 <code>content/questions/</code>，一章要点一个文件放在 <code>content/notes/</code>，章节与轮次范围写在 <code>content/courses.yml</code>。构建脚本读这些文件，生成题库、标签页、章节索引和这一页。</p>
+    <p>这本册子可以被 AI 定制：内容全是仓库里的 Markdown，格式写在 <code>CONTENT.md</code>，改造指南在 <code>AGENTS.md</code>。所有中文内容都是 Markdown 文件：一题一个文件放在 <code>content/questions/</code>，一章要点一个文件放在 <code>content/notes/</code>，章节与轮次范围写在 <code>content/courses.yml</code>。构建脚本读这些文件，生成题库、标签页、章节索引和这一页。</p>
     <p>题目全部自编，难度分五档；图片来自公有领域，出处见下表。</p>
 
     <h2>技术</h2>
@@ -110,7 +110,7 @@
 
   <footer class="footer">
     <div class="frame">
-      <a class="footer__word" href="../" aria-label="回到首页：复习册"><span aria-hidden="true">复习册</span></a>
+      <a class="footer__word" href="../" aria-label="回到首页：THU复习册"><span aria-hidden="true">THU复习册</span></a>
       <div class="footer__cols">
         <div class="footer__col">
           <h3>科目</h3>
@@ -150,8 +150,8 @@
         </div>
       </div>
       <div class="footer__legal">
-        <span>复习册 · 课程 · 范围 · 题库</span>
-        <span>内容以 CC BY-SA 4.0 发布，题目标题与解析可自由取用，请保留出处。</span>
+        <span>THU复习册 · 清华课程 · 范围 · 题库</span>
+        <span>内容以 CC BY-SA 4.0 发布，代码以 MIT 发布。</span>
       </div>
     </div>
   </footer>

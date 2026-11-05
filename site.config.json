@@ -1,8 +1,8 @@
 {
-  "name": "复习册",
-  "wordmark": "复习册",
-  "tagline": "课程 · 范围 · 题库",
-  "description": "复习册：把课程范围、讲义要点、题库与解析放在一处的复习站。微积分 A1、线性代数、离散数学 1、计算机系统概论，考试轮次可切换。",
+  "name": "THU复习册",
+  "wordmark": "THU复习册",
+  "tagline": "清华课程 · 范围 · 题库",
+  "description": "THU复习册：把清华课程的范围、讲义要点、题库与解析放在一处的复习站。四门课、期中期末两套范围，内容全部是仓库里的 Markdown，可以用 AI 定制成你自己的复习册。",
   "lang": "zh-CN",
   "owner": "yyxcnasd",
   "repo": "yyxcnasd/reviewer",
@@ -37,6 +37,6 @@
   ],
   "credits": {
     "references": "历年期中试题整理自 mathsdream/THU-math-source 等公开资料；课本章节依据《高等微积分教程（上）》《线性代数与几何（第 2 版）》。",
-    "license": "内容以 CC BY-SA 4.0 发布，题目标题与解析可自由取用，请保留出处。"
+    "license": "内容以 CC BY-SA 4.0 发布，代码以 MIT 发布。"
   }
 }

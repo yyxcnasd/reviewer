@@ -18,9 +18,9 @@
 
 .submit {
   display: grid;
-  /* 百分比列不会被内容的 min-content 撑开，输入时宽度是固定的 */
-  grid-template-columns: minmax(0, 1fr) minmax(300px, 36%);
-  gap: clamp(24px, 3vw, 48px);
+  /* 编辑与预览各占一半；百分比列不会被内容的 min-content 撑开 */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(20px, 2.4vw, 36px);
   align-items: start;
   padding-bottom: clamp(24px, 4vw, 56px);
 }

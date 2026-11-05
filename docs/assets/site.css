@@ -859,6 +859,28 @@ html[data-term='final'] [data-only='midterm'] {
   display: none !important;
 }
 
+
+/* KaTeX 默认 1.21em，比正文大一圈；统一压到与正文接近 */
+.katex {
+  font-size: 1.06em;
+}
+
+.prose table .katex,
+.nt-table .katex,
+.sheet__body table .katex {
+  font-size: 1em;
+}
+
+.katex-display .katex {
+  font-size: 1.06em;
+}
+
+
+/* 投稿这种双栏工作台可以稍微放宽 */
+.frame--wide {
+  max-width: 1580px;
+}
+
 /* ---------------------------------------------------------------- 首屏 */
 
 .hero {
@@ -3272,9 +3294,9 @@ html[data-term='final'] .sheet-course[data-term='midterm'] {
 
 .submit {
   display: grid;
-  /* 百分比列不会被内容的 min-content 撑开，输入时宽度是固定的 */
-  grid-template-columns: minmax(0, 1fr) minmax(300px, 36%);
-  gap: clamp(24px, 3vw, 48px);
+  /* 编辑与预览各占一半；百分比列不会被内容的 min-content 撑开 */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(20px, 2.4vw, 36px);
   align-items: start;
   padding-bottom: clamp(24px, 4vw, 56px);
 }

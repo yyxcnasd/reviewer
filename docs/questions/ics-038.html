@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>函数调用 · 计算题 · 复习册</title>
+<title>函数调用 · 计算题 · THU复习册</title>
 <meta name="description" content="考虑递归函数 ```c long f(long n) { char buf[64]; buf[0] = (char)n; if (n &lt;= 1) return 1; return f(n - 1) + n; } ``` 它的汇编序言是 ``` f: pushq %rbp movq %rsp, %rbp subq $72, %rsp ... ``` 其中 `subq $72` 为 64 字节的 `buf` 和额外的 8 字节对齐空间。回答： （1）每进入一层 `f`，栈上至少增加多少字节？ （2）调用 `f(100)` 时，递归深度（同时存在的 `f` 栈帧层数）是多少？ （3）从进入 `f(100)` 时的 `%rsp` 算起，递归最深时栈指针共向下移动多少字节？ （4）若进程可用的栈空间为 8 MiB（ 字节），估算 最大约为多少时不会栈溢出。 函数调用 栈帧 递归 自编">
 <meta name="color-scheme" content="light">
 <link rel="stylesheet" href="../assets/katex/katex.min.css">
@@ -20,7 +20,7 @@
 <script src="../assets/theme.js" defer></script>
 <script src="../assets/term.js" defer></script>
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
-<meta property="og:title" content="函数调用 · 计算题 · 复习册">
+<meta property="og:title" content="函数调用 · 计算题 · THU复习册">
 <meta property="og:description" content="考虑递归函数 ```c long f(long n) { char buf[64]; buf[0] = (char)n; if (n &lt;= 1) return 1; return f(n - 1) + n; } ``` 它的汇编序言是 ``` f: pushq %rbp movq %rsp, %rbp subq $72, %rsp ... ``` 其中 `subq $72` 为 64 字节的 `buf` 和额外的 8 字节对齐空间。回答： （1）每进入一层 `f`，栈上至少增加多少字节？ （2）调用 `f(100)` 时，递归深度（同时存在的 `f` 栈帧层数）是多少？ （3）从进入 `f(100)` 时的 `%rsp` 算起，递归最深时栈指针共向下移动多少字节？ （4）若进程可用的栈空间为 8 MiB（ 字节），估算 最大约为多少时不会栈溢出。 函数调用 栈帧 递归 自编">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="zh_CN">
@@ -33,7 +33,7 @@
   <header class="sitehead">
     <div class="frame">
       <nav class="nav" aria-label="主导航">
-        <a class="nav__mark" href="../"><span class="nav__dot" aria-hidden="true"></span>复习册</a>
+        <a class="nav__mark" href="../"><span class="nav__dot" aria-hidden="true"></span>THU复习册</a>
         <ul class="nav__links">
           <li class="nav__menu-wrap">
           <details class="navmenu">
@@ -63,7 +63,7 @@
 <main id="main">
 
 <div class="frame">
-  <nav class="crumb" aria-label="位置"><a href="../">复习册</a><span class="crumb__sep">/</span><a href="../questions/">题库</a><span class="crumb__sep">/</span><a href="../ics/">计算机系统概论</a><span class="crumb__sep">/</span><span>第 4 章</span></nav>
+  <nav class="crumb" aria-label="位置"><a href="../">THU复习册</a><span class="crumb__sep">/</span><a href="../questions/">题库</a><span class="crumb__sep">/</span><a href="../ics/">计算机系统概论</a><span class="crumb__sep">/</span><span>第 4 章</span></nav>
 
   <div class="qpage">
     <div class="qpage__main">
@@ -185,7 +185,7 @@
 
   <footer class="footer">
     <div class="frame">
-      <a class="footer__word" href="../" aria-label="回到首页：复习册"><span aria-hidden="true">复习册</span></a>
+      <a class="footer__word" href="../" aria-label="回到首页：THU复习册"><span aria-hidden="true">THU复习册</span></a>
       <div class="footer__cols">
         <div class="footer__col">
           <h3>科目</h3>
@@ -225,8 +225,8 @@
         </div>
       </div>
       <div class="footer__legal">
-        <span>复习册 · 课程 · 范围 · 题库</span>
-        <span>内容以 CC BY-SA 4.0 发布，题目标题与解析可自由取用，请保留出处。</span>
+        <span>THU复习册 · 清华课程 · 范围 · 题库</span>
+        <span>内容以 CC BY-SA 4.0 发布，代码以 MIT 发布。</span>
       </div>
     </div>
   </footer>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>信息的表示与处理 · 综合题 · 复习册</title>
+<title>信息的表示与处理 · 综合题 · THU复习册</title>
 <meta name="description" content="在 32 位 `int`（补码）与 32 位 `unsigned` 环境下，有下面两个函数： ```c int ge (int x) { return x + 1 &gt; x; } unsigned uge(unsigned x) { return x + 1 &gt; x; } ``` 回答： (1) 在 `-O2` 下，`ge` 常被编译成 `movl $1, %eax; ret`（直接返回 1）。编译器凭什么这样做？ (2) `uge` 是否对一切 `unsigned` 都返回 1？若不是，给出反例并算出返回值。 (3) 在 `-O0` 下执行 `ge(INT_MAX)`，机器上实际返回什么？为什么这个结果不能用来否定 (1) 中编译器优化的合法性？ (4) 写出一个对所有 `int` 都正确、且不产生未定义行为的版本，用来判断 。 (5) `gcc -fwrapv` 会让 (1) 的优化失效">
 <meta name="color-scheme" content="light">
 <link rel="stylesheet" href="../assets/katex/katex.min.css">
@@ -20,7 +20,7 @@
 <script src="../assets/theme.js" defer></script>
 <script src="../assets/term.js" defer></script>
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
-<meta property="og:title" content="信息的表示与处理 · 综合题 · 复习册">
+<meta property="og:title" content="信息的表示与处理 · 综合题 · THU复习册">
 <meta property="og:description" content="在 32 位 `int`（补码）与 32 位 `unsigned` 环境下，有下面两个函数： ```c int ge (int x) { return x + 1 &gt; x; } unsigned uge(unsigned x) { return x + 1 &gt; x; } ``` 回答： (1) 在 `-O2` 下，`ge` 常被编译成 `movl $1, %eax; ret`（直接返回 1）。编译器凭什么这样做？ (2) `uge` 是否对一切 `unsigned` 都返回 1？若不是，给出反例并算出返回值。 (3) 在 `-O0` 下执行 `ge(INT_MAX)`，机器上实际返回什么？为什么这个结果不能用来否定 (1) 中编译器优化的合法性？ (4) 写出一个对所有 `int` 都正确、且不产生未定义行为的版本，用来判断 。 (5) `gcc -fwrapv` 会让 (1) 的优化失效">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="zh_CN">
@@ -33,7 +33,7 @@
   <header class="sitehead">
     <div class="frame">
       <nav class="nav" aria-label="主导航">
-        <a class="nav__mark" href="../"><span class="nav__dot" aria-hidden="true"></span>复习册</a>
+        <a class="nav__mark" href="../"><span class="nav__dot" aria-hidden="true"></span>THU复习册</a>
         <ul class="nav__links">
           <li class="nav__menu-wrap">
           <details class="navmenu">
@@ -63,7 +63,7 @@
 <main id="main">
 
 <div class="frame">
-  <nav class="crumb" aria-label="位置"><a href="../">复习册</a><span class="crumb__sep">/</span><a href="../questions/">题库</a><span class="crumb__sep">/</span><a href="../ics/">计算机系统概论</a><span class="crumb__sep">/</span><span>第 2 章</span></nav>
+  <nav class="crumb" aria-label="位置"><a href="../">THU复习册</a><span class="crumb__sep">/</span><a href="../questions/">题库</a><span class="crumb__sep">/</span><a href="../ics/">计算机系统概论</a><span class="crumb__sep">/</span><span>第 2 章</span></nav>
 
   <div class="qpage">
     <div class="qpage__main">
@@ -183,7 +183,7 @@ int ge_safe(int x) { return x != INT_MAX; }</code></pre></p>
 
   <footer class="footer">
     <div class="frame">
-      <a class="footer__word" href="../" aria-label="回到首页：复习册"><span aria-hidden="true">复习册</span></a>
+      <a class="footer__word" href="../" aria-label="回到首页：THU复习册"><span aria-hidden="true">THU复习册</span></a>
       <div class="footer__cols">
         <div class="footer__col">
           <h3>科目</h3>
@@ -223,8 +223,8 @@ int ge_safe(int x) { return x != INT_MAX; }</code></pre></p>
         </div>
       </div>
       <div class="footer__legal">
-        <span>复习册 · 课程 · 范围 · 题库</span>
-        <span>内容以 CC BY-SA 4.0 发布，题目标题与解析可自由取用，请保留出处。</span>
+        <span>THU复习册 · 清华课程 · 范围 · 题库</span>
+        <span>内容以 CC BY-SA 4.0 发布，代码以 MIT 发布。</span>
       </div>
     </div>
   </footer>

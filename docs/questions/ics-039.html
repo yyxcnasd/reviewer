@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>函数调用 · 综合题 · 复习册</title>
+<title>函数调用 · 综合题 · THU复习册</title>
 <meta name="description" content="x86-64 的调用约定要求：执行 `call` 指令时 `%rsp` 必须是 16 的倍数（因此函数入口处 `%rsp ≡ 8 (mod 16)`）。某函数 `f` 需要 3 个 `long` 的局部空间（24 字节），并且要调用函数 `g`。回答： （1）进入 `f` 时 `%rsp` 模 16 的余数是多少？为什么？ （2）编译器生成 `subq $X, %rsp`。求使调用 `g` 前满足 16 字节对齐的 `X` 的最小值。 （3）若局部空间需要 32 字节，`X` 应为多少？ （4）若 `f` 在 `pushq %rbp` 之后只 `push` 了 `%rbx` 一个寄存器，且还需要 16 字节局部空间，`X` 最小是多少？ （5）为什么一定要满足 16 字节对齐？举一个未对齐会出错的指令。 函数调用 栈帧 数据对齐 自编">
 <meta name="color-scheme" content="light">
 <link rel="stylesheet" href="../assets/katex/katex.min.css">
@@ -20,7 +20,7 @@
 <script src="../assets/theme.js" defer></script>
 <script src="../assets/term.js" defer></script>
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
-<meta property="og:title" content="函数调用 · 综合题 · 复习册">
+<meta property="og:title" content="函数调用 · 综合题 · THU复习册">
 <meta property="og:description" content="x86-64 的调用约定要求：执行 `call` 指令时 `%rsp` 必须是 16 的倍数（因此函数入口处 `%rsp ≡ 8 (mod 16)`）。某函数 `f` 需要 3 个 `long` 的局部空间（24 字节），并且要调用函数 `g`。回答： （1）进入 `f` 时 `%rsp` 模 16 的余数是多少？为什么？ （2）编译器生成 `subq $X, %rsp`。求使调用 `g` 前满足 16 字节对齐的 `X` 的最小值。 （3）若局部空间需要 32 字节，`X` 应为多少？ （4）若 `f` 在 `pushq %rbp` 之后只 `push` 了 `%rbx` 一个寄存器，且还需要 16 字节局部空间，`X` 最小是多少？ （5）为什么一定要满足 16 字节对齐？举一个未对齐会出错的指令。 函数调用 栈帧 数据对齐 自编">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="zh_CN">
@@ -33,7 +33,7 @@
   <header class="sitehead">
     <div class="frame">
       <nav class="nav" aria-label="主导航">
-        <a class="nav__mark" href="../"><span class="nav__dot" aria-hidden="true"></span>复习册</a>
+        <a class="nav__mark" href="../"><span class="nav__dot" aria-hidden="true"></span>THU复习册</a>
         <ul class="nav__links">
           <li class="nav__menu-wrap">
           <details class="navmenu">
@@ -63,7 +63,7 @@
 <main id="main">
 
 <div class="frame">
-  <nav class="crumb" aria-label="位置"><a href="../">复习册</a><span class="crumb__sep">/</span><a href="../questions/">题库</a><span class="crumb__sep">/</span><a href="../ics/">计算机系统概论</a><span class="crumb__sep">/</span><span>第 4 章</span></nav>
+  <nav class="crumb" aria-label="位置"><a href="../">THU复习册</a><span class="crumb__sep">/</span><a href="../questions/">题库</a><span class="crumb__sep">/</span><a href="../ics/">计算机系统概论</a><span class="crumb__sep">/</span><span>第 4 章</span></nav>
 
   <div class="qpage">
     <div class="qpage__main">
@@ -172,7 +172,7 @@
 
   <footer class="footer">
     <div class="frame">
-      <a class="footer__word" href="../" aria-label="回到首页：复习册"><span aria-hidden="true">复习册</span></a>
+      <a class="footer__word" href="../" aria-label="回到首页：THU复习册"><span aria-hidden="true">THU复习册</span></a>
       <div class="footer__cols">
         <div class="footer__col">
           <h3>科目</h3>
@@ -212,8 +212,8 @@
         </div>
       </div>
       <div class="footer__legal">
-        <span>复习册 · 课程 · 范围 · 题库</span>
-        <span>内容以 CC BY-SA 4.0 发布，题目标题与解析可自由取用，请保留出处。</span>
+        <span>THU复习册 · 清华课程 · 范围 · 题库</span>
+        <span>内容以 CC BY-SA 4.0 发布，代码以 MIT 发布。</span>
       </div>
     </div>
   </footer>

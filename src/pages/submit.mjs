@@ -41,7 +41,7 @@ export function buildSubmit(ctx) {
     </div>
   </header>
 
-  <div class="submit">
+  <div class="frame frame--wide"><div class="submit">
     <form class="submit__form" id="submit-form" data-repo="${attr(ctx.config.repo)}" onsubmit="return false">
       <fieldset class="fieldset">
         <legend>分类</legend>
@@ -176,7 +176,7 @@ export function buildSubmit(ctx) {
       <li><b>归档</b><span>合并后自动进题库、标签页和对应章节，范围与统计一起更新</span></li>
     </ol>
   </section>
-</div>
+</div></div>
 <script src="${url(1, 'assets/shorthands.js')}"></script>
 <script src="${url(1, 'assets/blocks.js')}"></script>
 <script>window.__CHAPTERS__ = ${JSON.stringify(chaptersByCourse).replace(/</g, '\\u003c')}</script>

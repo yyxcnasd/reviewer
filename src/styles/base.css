@@ -627,3 +627,25 @@ html[data-term='midterm'] [data-only='final'],
 html[data-term='final'] [data-only='midterm'] {
   display: none !important;
 }
+
+
+/* KaTeX 默认 1.21em，比正文大一圈；统一压到与正文接近 */
+.katex {
+  font-size: 1.06em;
+}
+
+.prose table .katex,
+.nt-table .katex,
+.sheet__body table .katex {
+  font-size: 1em;
+}
+
+.katex-display .katex {
+  font-size: 1.06em;
+}
+
+
+/* 投稿这种双栏工作台可以稍微放宽 */
+.frame--wide {
+  max-width: 1580px;
+}

@@ -1,8 +1,8 @@
 # 内容格式说明
 
-站点上所有中文内容都是仓库里的 Markdown 文件，构建脚本把它们变成页面。写东西只需要认三样：文件放在哪、frontmatter 写什么、正文怎么写。
-
-构建时会检查每一条：字段缺了、公式写坏了、章节 id 不存在，都会在 `npm run build` 时报错并指出文件名。
+站点上所有中文内容都是仓库里的 Markdown 与两份 YAML，构建脚本把它们变成页面。
+写东西只需要认三样：文件放在哪、frontmatter 写什么、正文怎么写。
+构建时会逐条校验：字段缺了、公式写坏了、章节 id 不存在，都会在 `node build.mjs --check-only` 时报错并指出文件名。
 
 ---
 
@@ -10,153 +10,253 @@
 
 ```
 content/
-  courses.yml              课程、章节、考纲状态、关键词（站点的骨架）
-  taxonomy.yml             大分类与标签（管理员维护）
-  notes/<course>/<章节>.md  复习要点，一个章节一个文件
-  questions/<course>/<id>.md 题目，一题一个文件
-  papers.yml               历年真题的考点索引
-  cheatsheet.md            速查表的正文（公式与结论，A4 双栏打印）
+  courses.yml                 课程 · 章节 · 小节 · 考纲轮次 · 关键词（站点的骨架）
+  taxonomy.yml                大分类与标签（标签页、筛选项都来自这里）
+  questions/<course>/<id>.md  题目，一题一个文件
+  notes/<course>/<章节>.md    复习要点，一章一个文件
+  cheatsheet/<course>.md      速查表（可按轮次拆成 <course>.md + <course>-extra.md）
 ```
 
-`<course>` 取 `courses.yml` 里的 `id`：`va1`（微积分 A1）、`la`（线性代数）。
+`<course>` 取 `courses.yml` 里的 `id`：`va1`、`la`、`dm1`、`ics`，以及不挂课程的 `other`。
+
+---
 
 ## 2. 题目文件
 
-路径：`content/questions/va1/va1-001.md`，一题一个文件，文件名就是题号。
+路径示例：`content/questions/va1/va1-001.md`，文件名就是题号。
+
+```markdown
+---
+course: va1                 # courses.yml 的课程 id
+chapter: va1-3              # courses.yml 的章节 id
+category: calculus          # taxonomy.yml 的大分类 id
+tags: [导数定义, 高阶导数]    # 必须已登记在 taxonomy.yml 的 tags 里
+difficulty: 2               # 1–5，5 = 硬核
+kind: 计算题                 # 计算题 / 证明题 / 概念题 / 综合题
+source: 自编
+origin: 自编
+answer: \(f^{(n)}(0)=(-1)^{n}n!\)
+---
+
+设 \(f(x)=\dfrac{1}{1+x}\)，求 \(f^{(n)}(0)\)。
+
+(1) 第一问；
+(2) 第二问。
+
+## 提示
+
+一句话思路（可以只给方向）。
+
+## 解析
+
+完整推导。多行推导用 `\begin{aligned}`，不要用表格写步骤链。
+
+## 常见错误
+
+最常踩的那一个坑。
+```
+
+字段规则：
+
+| 字段 | 必填 | 说明 |
+| --- | --- | --- |
+| `course` | 是 | 必须是 `courses.yml` 里有的课程 id |
+| `chapter` | 是 | 必须是该课程下的小节 id |
+| `category` | 推荐 | `taxonomy.yml` 的大分类；不写按课程默认 |
+| `tags` | 推荐 | 必须登记在 `taxonomy.yml`，否则构建时提示 |
+| `difficulty` | 是 | 整数 1–5 |
+| `kind` | 推荐 | 题型 |
+| `source` / `origin` | 否 | 出处 |
+| `answer` | 是 | 结论本身，一行能写完就一行 |
+
+正文结构固定是「题面 → `## 提示` → `## 解析` → `## 常见错误`」。解析里直接写做法与推导，
+不要写「为什么能想到」这类旁白。
+
+---
+
+## 3. 复习要点
+
+路径示例：`content/notes/va1/va1-3.md`。
 
 ```markdown
 ---
 course: va1
 chapter: va1-3
-category: calculus
-tags: [导数定义, 高阶导数]
-difficulty: 2
-kind: 计算题
-source: 自编
-answer: $(-1)^{n}\,n!$
+title: 函数的导数
+lead: 导数与微分的定义、可导与可微与连续的关系、求导法则与高阶导数的算法。
 ---
-设 $f(x)=\dfrac{1}{1+x}$，求 $f^{(n)}(0)$。
 
-## 提示
+## 这一章要会什么
 
-先算前几阶导数，找规律。
+- 用定义算导数与单侧导数，尤其是分段函数在分界点的导数
+- 判断可导、可微、连续三者的推出关系，并会举反例
 
-## 解析
+## 3.1 导数与微分
 
-由 $\dfrac{1}{1+x}=\sum_{k=0}^{\infty}(-1)^{k}x^{k}$（$\lvert x\rvert<1$）……
+### 定义与三种等价写法
 
-所以 $f^{(n)}(0)=(-1)^{n}n!$。
+正文。
+
+:::theorem
+条件：…… 结论：……
+:::
+
+什么时候用：……（这类操作提示放块外）
+
+## 常见问法与易错点
+
+- ……
 ```
 
-### frontmatter 字段
+要点页会把 `##` 小节列成「本章速览」与右侧目录，所以 `##` 用课本小节号（`## 3.1 …`），
+`###` 写具体内容（不要用「定义」「定理」这种泛称）。
 
-| 字段 | 必填 | 说明 |
-| --- | --- | --- |
-| `course` | 是 | `va1` 或 `la`（投稿的其他科目用 `other`） |
-| `chapter` | 是 | `courses.yml` 里的章节 id，例如 `va1-4`、`la-2`。决定范围判定与筛选 |
-| `category` | 否 | 大分类 id，默认按课程推断（`va1` → `calculus`） |
-| `tags` | 是 | 一到四个标签，YAML 行内数组写法 `[标签一, 标签二]` |
-| `difficulty` | 是 | 1–4 的整数，见下面的定义 |
-| `kind` | 是 | `计算题` / `证明题` / `概念题` / `综合题` |
-| `source` | 否 | 出处。自编写 `自编`；改编历年题写 `2023 期中 第 4 题（改编）` |
-| `answer` | 否 | 最终答案，一行，数学写法。填空题必须有 |
-| `origin` | 否 | 投稿者的署名，不写就是「佚名」 |
+---
 
-`difficulty` 的定义（写题的人按这个对齐，别各自发挥）：
+## 4. 正文语法
 
-1. 基础：直接套定义或公式，两三行算完。
-2. 常规：期中卷上占多数的那一类，需要选对方法。
-3. 综合：两个以上知识点串起来，或者要自己造辅助函数。
-4. 挑战：卷面最后一题或压轴的水平，思路不明显。
+### 4.1 公式
 
-### 正文结构
+- 行内：`\(...\)`
+- 行间：`\[ ... \]`
+- 站点缩写（构建时展开）：`\e` `\i` `\d` `\abs{}` `\norm{}` `\R` `\N` `\Z` `\Q` `\C` `\rank` `\tr` `\diag` `\sgn` `\eps` `\T`
+- 自然常数、微分算子、虚数单位用正体（`\e` `\d` `\i`），转置用 `\T`（渲染成 ⊤）
 
-正文分三段，用二级标题切开，**题面在最前面，不带标题**：
+### 4.2 区块
+
+英文关键词 + 可选标题：
 
 ```markdown
-<题面：直接写，不要写「题目：」>
-
-## 提示        （可选，给学生一个不剧透的抓手）
-
-## 解析        （必填）
+:::theorem[拉格朗日中值定理]
+若 \(f\) 在 \([a,b]\) 上连续、在 \((a,b)\) 内可导，则存在 \(\xi\) 使 \(f'(\xi)=\dfrac{f(b)-f(a)}{b-a}\)。
+:::
 ```
 
-- 题面是一句话到一小段，提问放在最后一句（「求……」「证明……」）。
-- 解析不是答案复述，要写出**为什么这样想**：关键的一步、用到的条件、容易漏掉的情况。计算题至少给到中间步骤，证明题要写清每一步的依据。
-- 结论单独一句放在解析最后，如果 `answer` 里已经有，正文里也要复述一遍，方便打印。
+可用类型：
 
-### 数学公式
+| 类型 | 显示 | 颜色 |
+| --- | --- | --- |
+| `definition` | 定义 | 墨色 |
+| `theorem` / `lemma` / `proposition` | 定理 / 引理 / 命题 | 墨色 |
+| `corollary` / `property` / `conclusion` | 推论 / 性质 / 结论 | 墨色 |
+| `example` | 例 | 蓝色 |
+| `warning` / `note` / `danger` / `caution` | 注意 | 红色 |
+| `tip` / `info` / `remark` | 提示 | 蓝色 |
+| `proof` | 证明 | 灰色 |
 
-三种写法都支持，推荐前两种：
+区块里可以写公式、列表、后续段落；「什么时候用 / 用法」这类操作提示留在块外。
 
-- 行内：`\(a_n\to 0\)`
-- 独立成段（居中）：`\[\lim_{x\to 0}\frac{\sin x}{x}=1\]`
-- 也接受 `$...$` 与 `$$...$$`，效果相同
+### 4.3 表格与列表
 
-规矩只有一条：**所有数学内容的每一个字符都必须包在公式定界符里**。`a_n` 裸写在正文会被 Markdown 吃成斜体，`x*y` 会变成列表。中文说明文字放在公式外面。公式里的中文用 `\text{中文}`。
+- Markdown 表格只用于真值表、参数表这类**枚举**；表格里的公式用 `\(...\)`
+- 步骤链、等值演算、归结过程用 `\begin{aligned}`（序号 / 公式 / 依据三列），分情形用 `\begin{cases}`
 
-支持的宏：KaTeX 的全部语法（`\dfrac`、`\begin{pmatrix}...\end{pmatrix}`、`\begin{aligned}`、`\cases` 用 `\begin{cases}`、`\operatorname{}` 等）。矩阵用 `\begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}`。
+### 4.4 代码
 
-## 3. 复习要点文件
+````markdown
+```c
+long f(long x) { return x * 2; }
+```
+````
 
-路径：`content/notes/va1/va1-4.md`，文件名是章节 id。
+代码块里的 `$` 和反斜杠不会被当成公式，可以放心写汇编与 LaTeX 源码。
+
+---
+
+## 5. 速查表
+
+`content/cheatsheet/<course>.md`：
 
 ```markdown
 ---
 course: va1
-chapter: va1-4
-title: 导数应用
-lead: 一句话说清这一章在考什么。
+terms: [midterm, final]
 ---
-## 微分中值定理
 
-正文……
+### 等价无穷小（\(x\to0\)）
 
-### 罗尔定理
-
-……
+\[\sin x\sim x,\quad \tan x\sim x\]
 ```
 
-- `title` 与 `lead` 会显示在页面顶部。
-- 正文用 `##` 分节、`###` 分小节，右侧目录自动由 `##` / `###` 生成。
-- 建议每节按「定义 → 定理（条件与结论）→ 怎么用 → 一个例子」的顺序写，例子用完整的公式推导，别只写结果。
+- `terms: [midterm, final]` 表示这份内容期中、期末都看
+- 期末才有的内容放 `<course>-extra.md`，写 `terms: [final]`；页面会按「期中内容 → 期末补充」排列
+- 打印是 A4 横向三栏，一门课一张纸；页面上可以勾选打印哪几门
 
-## 4. 构建与检查
+---
+
+## 6. 课程与范围（courses.yml）
+
+```yaml
+terms:
+  - id: midterm
+    label: 期中
+  - id: final
+    label: 期末
+
+courses:
+  - id: va1
+    name: 微积分 A1
+    short: 微积分
+    accent: ink
+    terms: [midterm, final]          # 这门课参加哪几轮
+    scope_midterm: 第 1 章 – 第 4.3 节（泰勒公式）
+    scope_final: 第 1 章 – 第 7 章（含定积分、广义积分、常微分方程）
+    scope_note_midterm: 4.3 节含在内，4.4 节起不在期中范围。
+    scope_note_final: 整本书。
+    chapters:
+      - id: va1-3
+        no: "3"
+        title: 函数的导数
+        state: in
+        terms: { midterm: in, final: in }
+        sections:
+          - no: "3.1"
+            title: 导数与微分的概念
+            state: in
+            terms: { midterm: in, final: in }
+            keywords: [导数定义, 单侧导数]
+```
+
+- 小节 `terms` 取值：`in` / `boundary`（到此为止）/ `out`
+- 章节状态由小节推导：全在 → `in`，部分在 → 部分在范围，都不在 → `out`
+- 课程级 `terms: [final]` 表示只有期末（如离散数学 1），期中那一轮整门课都不在范围
+
+---
+
+## 7. 标签（taxonomy.yml）
+
+```yaml
+categories:
+  - id: calculus
+    name: 微积分
+    course: va1
+  - id: discrete
+    name: 离散数学
+    course: dm1
+tags:
+  - 导数定义
+  - 泰勒公式
+```
+
+题目里用到的 tag 必须先在这里登记；没登记会在构建时报「标签还没有登记」。
+新增学科就在 `categories` 里加一项并指定 `course`。
+
+---
+
+## 8. 校验
 
 ```bash
-npm install
-npm run check      # 只校验内容，不生成页面
-npm run build      # 校验并生成到 docs/
-npm run dev        # 生成并开本地服务器预览
+node build.mjs --check-only    # 内容校验（不写文件）
+node build.mjs                 # 生成 docs/
+node scripts/check-links.mjs   # 死链
 ```
 
+常见报错：
 
-## 考试轮次（terms）
-
-每门课的章节里，小节用 `terms` 声明它在每个轮次里的状态（`in` 在范围内 / `boundary` 到此为止 / `out` 不在范围）。
-没写 `terms` 的小节会退回旧的 `state` 字段，兼容以前的题。
-
-## 投稿页
-
-`/submit/` 里可以投两种题：
-
-- **课内的题**：选大分类 → 选课程 → 选章节。
-- **其他类**：大分类选「其他」，课程留空即可，生成的文件落在 `content/questions/other/`。
-
-编辑器支持加粗 / 斜体 / 行内公式 / 独立公式 / 列表 / 引用 / 小标题，`Ctrl+B`、`Ctrl+I` 是加粗斜体，
-括号与 `$` 自动配对，`Tab` 跳出括号，`Ctrl+Z` 可以撤销工具条插入的内容。
-右侧实时预览并显示将要生成的 frontmatter 与文件名。
-
-
-## TeX 缩写
-
-写题目时可以用缩写，构建时展开：
-
-- `\e` 自然常数（正体）、`\d` 微分算子、`\i` 虚数单位
-- `\R \N \Z \Q \C` 数集
-- `\abs{x}`、`\norm{v}`
-- `\rank A`、`\tr A`、`\diag(...)`、`\sgn x`
-- `\eps` = ε，`A\T` = 转置
-
-缩写后面紧跟字母时不生效，所以 `\exp`、`\det` 不会被误伤。完整表在 `/notation/` 页面，
-定义在 `src/shorthands.mjs`。
+| 报错 | 原因 |
+| --- | --- |
+| `course 必须是 …` | frontmatter 的 course 不在 courses.yml |
+| `chapter「x」不在 courses.yml 里` | 章节 id 写错或课程不对 |
+| `标签「x」还没有登记` | 去 taxonomy.yml 补一行 |
+| `difficulty 必须是 1–5` | 难度越界 |
+| `KaTeX … 处渲染错误` | 公式写坏（构建末尾会列出页面） |
