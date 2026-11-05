@@ -122,7 +122,7 @@ export function page(ctx, opts) {
         <div class="footer__col">
           <h3>这本册子</h3>
           <ul>
-            <li>${esc(config.semester)} 期中版</li>
+            <li>${esc(config.semester)} <span data-only="midterm">期中版</span><span data-only="final">期末版</span></li>
             <li>内容 CC BY-SA 4.0</li>
             <li>构建于 ${new Date().toISOString().slice(0, 10)}</li>
           </ul>

@@ -150,7 +150,7 @@
       const q = raw.trim().toLowerCase().replace(/\s+/g, '')
       for (const r of rows) r.classList.remove('is-hit', 'is-dim')
       if (!q) {
-        verdict.innerHTML = '输入之后，这里会告诉你在不在期中范围内。'
+        verdict.innerHTML = `输入之后，这里会告诉你在不在${termLabel()}范围内。`
         return
       }
       let best = null
@@ -170,7 +170,7 @@
         else r.classList.add('is-dim')
       }
       verdict.innerHTML = `「${escapeHtml(raw.trim())}」落在 <b>${escapeHtml(best.sec)}</b>（${escapeHtml(best.course)} · ${escapeHtml(best.chTitle)}）：${stateWord(best.state)}。${
-        best.state === 'out' ? '这一节期中不考，先放着。' : `<a href="${best.href}">去看这一章 →</a>`
+        best.state === 'out' ? `这一节${termLabel()}不考，先放着。` : `<a href="${best.href}">去看这一章 →</a>`
       }`
     }
 

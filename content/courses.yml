@@ -30,8 +30,10 @@ courses:
     short: 微积分
     accent: red
     book: 高等微积分教程（上）· 刘智新 闫浩 章纪民
-    scope_line: 第 1 章 – 第 4.3 节
-    scope_note: 课本 4.3 节「泰勒公式」含在内，4.4 节起不在期中范围。
+    scope_midterm: 第 1 章 – 第 4.3 节（泰勒公式）
+    scope_final: 第 1 章 – 第 7 章（含定积分、广义积分、常微分方程）
+    scope_note_midterm: 课本 4.3 节「泰勒公式」含在内，4.4 节起不在期中范围。
+    scope_note_final: 整本书：4.4 节起的极值、凹凸、渐近线，以及定积分、广义积分、常微分方程都在范围内。
     notes_intro: >-
       半个学期的内容，从实数列的极限讲到泰勒公式。这里的要点按课本章节排，
       每条都是考场上真的会用到的：定义怎么叙述、定理的适用条件、最容易算错的那一步。
@@ -159,7 +161,7 @@ courses:
         no: "4"
         title: 导数应用
         state: in
-        summary: 微分中值定理、洛必达法则、泰勒公式——期中到此为止。
+        summary: 微分中值定理、洛必达法则、泰勒公式。
         sections:
           - no: "4.1"
             title: 微分中值定理
@@ -208,7 +210,7 @@ courses:
         no: "5"
         title: 黎曼积分
         state: in
-        summary: 期中之后的内容。
+        summary: 期末范围。
         sections:
           - no: "5.1"
             title: 黎曼积分的概念
@@ -236,7 +238,7 @@ courses:
         no: "6"
         title: 广义黎曼积分
         state: out
-        summary: 期中之后的内容。
+        summary: 期末范围。
         sections:
           - no: "6.1"
             title: 广义黎曼积分的概念
@@ -250,7 +252,7 @@ courses:
         no: "7"
         title: 常微分方程
         state: out
-        summary: 期中之后的内容。
+        summary: 期末范围。
         sections:
           - no: "7.1"
             title: 常微分方程的基本概念
@@ -279,8 +281,10 @@ courses:
     short: 线代
     accent: indigo
     book: 线性代数与几何（第 2 版，上）· 俞正光 鲁自群 林润亮
-    scope_line: 第 1 章 – 第 3 章「向量组的秩」之前
-    scope_note: 第一章 方程组求解与行列式、第二章 矩阵、第三章 n 维向量空间，到向量组的秩之前为止。
+    scope_midterm: 第 1 章 – 第 3 章（向量组的秩之前）
+    scope_final: 第 1 章 – 第 4 章（含秩与解的结构）
+    scope_note_midterm: 第一章方程组与行列式、第二章矩阵、第三章 n 维向量空间，到向量组的秩之前为止。
+    scope_note_final: 整本书：第 4 章秩与解的结构也在范围内。
     notes_intro: >-
       从解方程组和行列式开始，到矩阵、再到向量组的线性相关性。
       线代的考点大多落在「定义 + 一个算得快的办法」上，所以这里的要点都配了可操作的步骤。
@@ -401,7 +405,7 @@ courses:
         no: "4"
         title: 向量组的秩之后
         state: out
-        summary: 矩阵的秩、方程组解的结构、线性空间与线性变换，期中之后的内容。
+        summary: 矩阵的秩、方程组解的结构、线性空间与线性变换。
         sections:
           - no: "4.1"
             title: 矩阵的秩
@@ -431,8 +435,10 @@ courses:
     accent: indigo
     book: 《数理逻辑与集合论》石纯一 王家廞 · 马昱春 讲义（离散数学 1）
     terms: [final]
-    scope_line: 第 1 章 – 第 5 章
-    scope_note: 这门课没有期中，只有期末；范围按讲义章节整理。
+    scope_midterm: 这门课没有期中
+    scope_final: 第 1 章 – 第 5 章
+    scope_note_midterm: 离散数学 1 只在期末考。
+    scope_note_final: 命题逻辑 1–3 章、谓词逻辑 4–5 章。
     notes_intro: >-
       从命题逻辑讲到谓词逻辑：联结词、真值表、等值演算、范式、推理演算、归结，
       再到谓词、量词、前束范式。
@@ -660,11 +666,10 @@ courses:
     accent: ink
     book: 《深入理解计算机系统》CSAPP（第三版）· 张悠慧
     terms: [midterm, final]
-    scope_line: 第 1 章 → 6.2 节（6.1 内存布局不考）
-    scope_note: >-
-      期中范围按老师通知：1 概论、2.1 整数、2.2 浮点数、3.1 汇编基础和寻址方式、
-      3.2 分支与循环、4 函数调用、5 数组与结构体、6.2 缓冲区溢出。
-      6.1 内存布局明确不考。期末范围未定，暂按整本书（同样不含 6.1）。
+    scope_midterm: 第 1 章 → 6.2 节（6.1 不考）
+    scope_final: 第 1 章 → 6.2 节（6.1 不考）
+    scope_note_midterm: 按老师通知：概论、整数与浮点、汇编与寻址、分支与循环、函数调用、数组与结构体、缓冲区溢出；6.1 内存布局不考。
+    scope_note_final: 期末范围未定，暂按整本书（同样不含 6.1 内存布局）。
     notes_intro: >-
       从 C 程序怎么变成机器指令讲起：数的表示（补码、IEEE 754）、汇编与寻址、
       控制流、函数调用的栈帧、数组与结构体的布局，最后是缓冲区溢出。
@@ -778,8 +783,6 @@ courses:
     short: 其他
     accent: ink
     book: 不限于课本的题
-    scope_line: 不受考纲限制
-    scope_note: 这一类不参与期中/期末的范围判定，投什么都可以。
     notes_intro: 课外的、竞赛的、或者只是觉得有意思的题放这里。
     chapters:
       - id: other-1

@@ -36,6 +36,7 @@ export function buildCourses(ctx) {
   for (const course of ctx.courses) {
     const chapters = course.chapters
     const inScope = chapters.filter((c) => c.state !== 'out')
+    const inScopeOf = (term) => chapters.filter((ch) => ch.terms[term] !== 'out')
     const qCount = (ctx.qByCourse.get(course.id) || []).length
 
     const outline = chapters
@@ -76,10 +77,13 @@ export function buildCourses(ctx) {
     <div class="pagehead__inner">
       <h1 class="pagehead__title">${esc(course.name)}</h1>
       <div class="pagehead__scope">
-        <p><b>${esc(course.scope_line)}</b></p>
-        <p>${esc(course.scope_note)}</p>
+        <p data-only="midterm"><b>${esc(course.scope_midterm || course.scope_line || '')}</b></p>
+        <p data-only="final"><b>${esc(course.scope_final || course.scope_line || '')}</b></p>
+        <p data-only="midterm">${esc(course.scope_note_midterm || course.scope_note || '')}</p>
+        <p data-only="final">${esc(course.scope_note_final || course.scope_note || '')}</p>
         <div class="pagehead__stats">
-          <span><b>${inScope.length}</b>章在范围内</span>
+          <span data-only="midterm"><b>${inScopeOf('midterm').length}</b>章在范围内</span>
+          <span data-only="final"><b>${inScopeOf('final').length}</b>章在范围内</span>
           <span><b>${qCount}</b>道题</span>
           <span><b>${ctx.notes.filter((n) => n.course.id === course.id).length}</b>篇要点</span>
         </div>
@@ -92,7 +96,7 @@ export function buildCourses(ctx) {
   <div class="frame outline">
     <div class="outline__side">
       ${course.terms && !course.terms.includes('midterm')
-        ? `<p class="course__term-less">这门课只有期末：期中那一轮它不参与范围判定，切到「期末」看。</p>`
+        ? `<p class="course__term-less" data-only="midterm">这门课只有期末，期中不考它。</p>`
         : ''}
       <h2>考纲</h2>
       <p>${esc(course.notes_intro || '')}</p>

@@ -78,8 +78,9 @@
   try {
     const forced = new URLSearchParams(location.search).get('term')
     const saved = localStorage.getItem(KEY)
-    if (forced && buttons.some((b) => b.dataset.termBtn === forced)) initial = forced
-    else if (saved && buttons.some((b) => b.dataset.termBtn === saved)) initial = saved
+    const valid = (t) => t === 'midterm' || t === 'final'
+    if (valid(forced)) initial = forced
+    else if (valid(saved)) initial = saved
   } catch (e) {
     /* ignore */
   }
@@ -88,8 +89,8 @@
     btn.addEventListener('click', () => apply(btn.dataset.termBtn))
   }
 
-  if (buttons.length) apply(initial, false)
-  else root.setAttribute('data-term', DEFAULT)
+  // 没有开关的页面（导出、打印页）也要按轮次渲染
+  apply(initial, false)
 
   window.Term = { current: currentTerm, apply, label: LABEL }
 })()

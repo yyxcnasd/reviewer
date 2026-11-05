@@ -620,3 +620,10 @@ a.tag:hover {
 .dots--hard i.on {
   background: var(--red);
 }
+
+
+/* 只属于某一个轮次的内容：期中/期末切换时由 CSS 显隐，不用 JS 重绘 */
+html[data-term='midterm'] [data-only='final'],
+html[data-term='final'] [data-only='midterm'] {
+  display: none !important;
+}

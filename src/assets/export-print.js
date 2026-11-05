@@ -98,6 +98,8 @@
       }
 
       const list = rows.map((r) => r.q)
+      const termName = document.documentElement.dataset.term === 'final' ? '期末' : '期中'
+      const courseNames = [...new Set(list.map((q) => q.courseShort || q.course))].join('、')
       sheet.innerHTML = `
         <header class="psheet__head">
           <h1 class="psheet__title">${esc(titleFor(list))}</h1>
@@ -108,7 +110,7 @@
         </header>
         ${rows.map((r, i) => article(r.q, r.body, i + 1)).join('\n')}
         <footer class="psheet__foot">
-          <span>复习册 · 微积分 A1 与线性代数期中复习</span>
+          <span>复习册 · ${courseNames}${termName}复习</span>
           <span>${rows.length} 道</span>
         </footer>`
       if (want.solution || want.mistakes) sheet.classList.add('psheet--flow')

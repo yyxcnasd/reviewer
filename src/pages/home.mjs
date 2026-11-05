@@ -26,7 +26,8 @@ export function buildHome(ctx) {
   const rangeCourses = courses
     .filter((c) => (ctx.qByCourse.get(c.id) || []).length)
     .map((c) => {
-      const inScope = c.chapters.filter((ch) => ch.state !== 'out')
+      const inScopeOf = (term) => c.chapters.filter((ch) => ch.terms[term] !== 'out')
+    const inScope = inScopeOf('midterm')
       const rows = c.chapters
         .map((ch) => {
           const note = ctx.notesByChapter.get(ch.id)
@@ -41,7 +42,7 @@ export function buildHome(ctx) {
                 .map((s) => esc(s.no))
                 .join(' ')}</span>
             </td>
-            <td class="range__state"><span class="chip chip--${ch.state}" data-chip>${stateLabel(ch.state)}</span></td>
+            <td class="range__state"><span class="chip chip--${ch.state}" data-states="${attr(JSON.stringify(ch.terms || {}))}" data-chip>${stateLabel(ch.state)}</span></td>
             <td class="range__count">${
               count ? `<a href="${url(0, `questions/?chapter=${ch.id}`)}">${count}</a>` : '—'
             }</td>
@@ -68,7 +69,8 @@ export function buildHome(ctx) {
           <thead><tr><th>章</th><th>内容</th><th>范围</th><th>题</th><th>已做</th><th>要点</th></tr></thead>
           <tbody>${rows}</tbody>
         </table>
-        <p class="range-course__foot">在范围内 ${inScope.length} 章 · 不在本轮 ${c.chapters.length - inScope.length} 章（灰）</p>
+        <p class="range-course__foot" data-only="midterm">在范围内 ${inScopeOf('midterm').length} 章 · 不在本轮 ${c.chapters.length - inScopeOf('midterm').length} 章（灰）</p>
+        <p class="range-course__foot" data-only="final">在范围内 ${inScopeOf('final').length} 章 · 不在本轮 ${c.chapters.length - inScopeOf('final').length} 章（灰）</p>
       </section>`
     })
     .join('')

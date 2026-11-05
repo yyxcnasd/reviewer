@@ -164,6 +164,7 @@ function buildPrint(ctx) {
 <link rel="stylesheet" href="../../assets/katex/katex.min.css">
 <style>${FONT_FACES}</style>
 <script src="../../assets/core.js"></script>
+<script src="../../assets/term.js"></script>
 <link rel="stylesheet" href="../../assets/print-sheet.css">
 </head>
 <body class="sheet-page">

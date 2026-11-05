@@ -69,9 +69,9 @@ export function buildNotes(ctx) {
           }
           <dl class="spec spec--rail">
             <div><dt>章节</dt><dd>第 ${esc(ch.no)} 章</dd></div>
-            <div><dt>节</dt><dd>${ch.sections.filter((s) => s.state !== 'out').length} 节在范围内</dd></div>
+            <div><dt>节</dt><dd><span data-only="midterm">${ch.sections.filter((s) => s.terms.midterm !== 'out').length} 节在范围内</span><span data-only="final">${ch.sections.filter((s) => s.terms.final !== 'out').length} 节在范围内</span></dd></div>
             <div><dt>题</dt><dd>${qs.length} 道</dd></div>
-            <div><dt>范围</dt><dd>${esc(stateLabel(ch.state))}</dd></div>
+            <div><dt>范围</dt><dd><span data-chip data-states="${attr(JSON.stringify(ch.terms || {}))}">${esc(stateLabel(ch.state))}</span></dd></div>
           </dl>
         </nav>`
 
@@ -91,7 +91,7 @@ export function buildNotes(ctx) {
       <div class="pagehead__scope">
         <p>${esc(note.lead)}</p>
         <div class="pagehead__stats">
-          <span>${esc(stateLabel(ch.state))}</span>
+          <span data-chip data-states="${attr(JSON.stringify(ch.terms || {}))}">${esc(stateLabel(ch.state))}</span>
           <span><b>${qs.length}</b>道题在这一章</span>
           <span data-progress-ids="${attr(qs.map((q) => q.id).join(','))}">本章已做 <b data-progress-here>0</b> / ${qs.length}</span>
           <span><button class="ghost" type="button" data-print>打印这一章</button></span>
