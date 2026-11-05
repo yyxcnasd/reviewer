@@ -38,6 +38,7 @@ export function buildCheatsheet(ctx) {
         id: course.id,
         courseName: course.name,
         title: meta.title || course.name,
+        file: name,
         html,
         groups,
         terms,
@@ -51,8 +52,8 @@ export function buildCheatsheet(ctx) {
   const order = ctx.courses.map((c) => c.id)
   // 同一门课多个文件时，基础版（无 -extra）排在期末补充之前
   parsed.sort((a, b) => {
-    const ea = /-extra$/i.test(a.file || '') ? 1 : 0
-    const eb = /-extra$/i.test(b.file || '') ? 1 : 0
+    const ea = /-extra\.md$/i.test(a.file || '') ? 1 : 0
+    const eb = /-extra\.md$/i.test(b.file || '') ? 1 : 0
     return ea - eb
   })
 
