@@ -672,14 +672,24 @@ a.tag:hover {
 
 .math-display {
   display: block;
-  margin-block: 1.1em;
+  margin-block: 0.25em;
   overflow-x: auto;
   overflow-y: hidden;
-  padding-block: 0.15em;
+  padding-block: 0;
 }
 
 .math-display .katex-display {
   margin: 0;
+}
+
+/* 独立成段的公式不要再叠一层段落间距 */
+.prose p:has(> .math-display:first-child:last-child) {
+  margin-block: 0.15em;
+}
+
+/* 公式上一段不再额外留白，公式自己会带 0.25em */
+.prose p:has(+ p > .math-display:first-child:last-child) {
+  margin-bottom: 0;
 }
 
 .math-error {
@@ -2736,6 +2746,13 @@ a.tag:hover {
   height: 9px;
 }
 
+
+/* 题面里的行间公式别把上下文推太开 */
+.qpage__stem .math-display,
+.qblock__body .math-display {
+  margin-block: 0.3em;
+}
+
 /* ---------------------------------------------------------------- 速查表 */
 /* ==========================================================================
    速查表：A4 双栏，打印优先
@@ -4178,7 +4195,11 @@ body.is-focus .submit__preview {
 }
 
 .article__main.prose .math-display {
-  margin-block: 0.85em;
+  margin-block: 0.3em;
+}
+
+.article__main.prose p {
+  margin: 0 0 0.5em;
 }
 
 .article__main.prose ul,

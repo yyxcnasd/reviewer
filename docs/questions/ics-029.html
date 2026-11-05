@@ -103,8 +103,7 @@
         <div class="qblock__body prose">
           <div class="answer"><span>答案</span><p>（1）预处理（2）编译（3）链接（4）汇编（5）运行（6）链接</p>
 </div>
-          <p>不要凭「报错看起来像什么」猜，而是问：此时编译器手里是 <code>.c</code>、<code>.s</code>、<code>.o</code> 还是可执行文件？哪个阶段掌握了发现这个错误所需的信息，错误就属于哪个阶段。用这条线索，六个现象可以一一归位。</p>
-<p>（1）<strong>预处理</strong>。<code>#include</code> 是预处理指令，预处理器要找到并读入 <code>stdio.h</code> 的全文。文件找不到时预处理就失败，此时还没有进入语法分析。</p>
+          <p>（1）<strong>预处理</strong>。<code>#include</code> 是预处理指令，预处理器要找到并读入 <code>stdio.h</code> 的全文。文件找不到时预处理就失败，此时还没有进入语法分析。</p>
 <p>（2）<strong>编译</strong>。编译器做语法与语义分析，发现标识符 <code>x</code> 没有声明。源文件里没有 <code>x</code> 的定义或声明，编译器无法生成访问它的代码，只能在这里报错。</p>
 <p>（3）<strong>链接</strong>。<code>foo</code> 在源文件里有声明（或隐式声明），编译器能生成一条「调用外部符号 <code>foo</code>」的重定位记录，并把活交给链接器。链接器在所有目标文件和库中找不到 <code>foo</code> 的定义，于是报 <code>undefined reference</code>。</p>
 <p>（4）<strong>汇编</strong>。gcc 已经把 C 翻译成汇编、交给汇编器 <code>as</code>。<code>movq %rax,%rbx,</code> 里的指令助记符和操作数格式是汇编器负责编码的，多出的逗号让汇编器无法解析，所以停在汇编阶段。</p>

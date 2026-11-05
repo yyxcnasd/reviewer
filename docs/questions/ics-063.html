@@ -144,7 +144,6 @@ gcc main.o util.o -o prog   # 链接 → 可执行文件 prog</code></pre></p>
 <li>若程序是动态链接的，先加载动态链接器，解析 <code>libc</code> 等共享库的符号；</li>
 <li>跳到入口 <code>_start</code>，由 C 运行库初始化后调用 <code>main</code>。</li>
 </ul>
-<p>而 <code>call</code> 后面的地址在单个 <code>.o</code> 里不可能知道，只能留重定位记录——两条线索都指向「链接器负责把名字变成地址」。</p>
 
         </div>
       </details>

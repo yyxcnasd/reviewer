@@ -1238,3 +1238,10 @@
   width: 9px;
   height: 9px;
 }
+
+
+/* 题面里的行间公式别把上下文推太开 */
+.qpage__stem .math-display,
+.qblock__body .math-display {
+  margin-block: 0.3em;
+}

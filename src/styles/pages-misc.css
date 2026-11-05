@@ -210,7 +210,11 @@
 }
 
 .article__main.prose .math-display {
-  margin-block: 0.85em;
+  margin-block: 0.3em;
+}
+
+.article__main.prose p {
+  margin: 0 0 0.5em;
 }
 
 .article__main.prose ul,
