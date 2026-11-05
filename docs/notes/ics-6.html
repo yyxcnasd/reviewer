@@ -104,8 +104,8 @@
 <h2 id="h-2">6.2 缓冲区溢出</h2>
 <p>6.1 的进程内存布局不在期中范围，只需记住一句：地址空间从低到高大致是代码、数据、堆、栈，栈在高地址、向低地址增长。</p>
 <h3 id="h-3">栈帧里 <code>char buf[16]</code> 的越界写</h3>
-<p>条件：函数里声明 <code>char buf[16]</code>，编译器把它放在 <code>-16(%rbp)</code> 开始的位置。</p>
-<p class="nb nb--结论"><span class="nb__label">结论</span><code>buf</code> 占 <code>rbp-16</code> 到 <code>rbp-1</code>；再往高地址是保存的 <code>%rbp</code>（8 字节），再往上是返回地址。写超过 16 字节，就会依次盖掉它们。</p>
+<div class="nb nb--定理"><p class="nb__head"><span class="nb__label">定理</span></p><p>条件：函数里声明 <code>char buf[16]</code>，编译器把它放在 <code>-16(%rbp)</code> 开始的位置。</p>
+<code>buf</code> 占 <code>rbp-16</code> 到 <code>rbp-1</code>；再往高地址是保存的 <code>%rbp</code>（8 字节），再往上是返回地址。写超过 16 字节，就会依次盖掉它们。</p>
 <p><pre class="code-block"><code class="language-text">echo:
     pushq %rbp
     movq %rsp, %rbp
@@ -113,11 +113,13 @@
     ...
     leave
     ret                   # 弹出返回地址（位于 8(%rbp)）</code></pre></p>
+</div>
 <p>什么时候用：算覆盖偏移、构造溢出输入、解释「为什么多写几个字符程序就崩」。</p>
-<p class="nb nb--注意"><span class="nb__label">注意</span>栈向低地址增长，但数组内部向高地址增长，所以越界写是<strong>往返回地址方向</strong>覆盖。这个方向感不能反。</p>
+<div class="nb nb--注意"><p class="nb__head"><span class="nb__label">注意</span></p><p>栈向低地址增长，但数组内部向高地址增长，所以越界写是<strong>往返回地址方向</strong>覆盖。这个方向感不能反。</p>
+</div>
 <h3 id="h-4">返回地址覆盖与输入偏移 24</h3>
-<p>条件：<code>buf</code> 16 字节，随后是 saved rbp 8 字节，再是返回地址。</p>
-<p class="nb nb--结论"><span class="nb__label">结论</span>输入偏移 0–15 写 <code>buf</code>，16–23 覆盖 saved rbp，24–31 覆盖返回地址：</p>
+<div class="nb nb--定理"><p class="nb__head"><span class="nb__label">定理</span></p><p>条件：<code>buf</code> 16 字节，随后是 saved rbp 8 字节，再是返回地址。</p>
+<p>输入偏移 0–15 写 <code>buf</code>，16–23 覆盖 saved rbp，24–31 覆盖返回地址：</p>
 <div class="table-wrap"><table><thead>
 <tr>
 <th>输入偏移</th>
@@ -138,34 +140,46 @@
 <td>返回地址</td>
 </tr>
 </tbody>
-</table></div><p>什么时候用：算「第 24 个字节开始改返回地址」，检查 payload 长度是否正确。</p>
-<p class="nb nb--注意"><span class="nb__label">注意</span>24 这个数依赖「<code>buf</code> 16 字节 + 保存的 rbp 8 字节」。如果编译器多分配了栈空间、改变了 <code>buf</code> 的位置，必须按实际汇编重算，不能背常数。</p>
+</table></div></div>
+<p>什么时候用：算「第 24 个字节开始改返回地址」，检查 payload 长度是否正确。</p>
+<div class="nb nb--注意"><p class="nb__head"><span class="nb__label">注意</span></p><p>24 这个数依赖「<code>buf</code> 16 字节 + 保存的 rbp 8 字节」。如果编译器多分配了栈空间、改变了 <code>buf</code> 的位置，必须按实际汇编重算，不能背常数。</p>
+</div>
 <h3 id="h-5">被覆盖的 saved rbp 会怎样</h3>
-<p>条件：输入只写到 16–23 字节，改掉保存的 <code>%rbp</code>，还没碰到返回地址。</p>
-<p class="nb nb--结论"><span class="nb__label">结论</span>函数结尾的 <code>leave</code> 先执行 <code>movq %rbp, %rsp</code>，此时 <code>%rbp</code> 已经被改成攻击者给的地址，栈指针就被劫持过去；接着 <code>popq %rbp</code> 和 <code>ret</code> 从错误的位置取返回地址，控制流一样会跑偏。</p>
+<div class="nb nb--定理"><p class="nb__head"><span class="nb__label">定理</span></p><p>条件：输入只写到 16–23 字节，改掉保存的 <code>%rbp</code>，还没碰到返回地址。</p>
+<p>函数结尾的 <code>leave</code> 先执行 <code>movq %rbp, %rsp</code>，此时 <code>%rbp</code> 已经被改成攻击者给的地址，栈指针就被劫持过去；接着 <code>popq %rbp</code> 和 <code>ret</code> 从错误的位置取返回地址，控制流一样会跑偏。</p>
+</div>
 <p>什么时候用：解释「明明没覆盖返回地址，程序为什么也崩了」，以及构造两级跳转的溢出串。</p>
-<p class="nb nb--注意"><span class="nb__label">注意</span>只改 saved rbp 就能影响控制流，不要以为必须写满 24 字节才危险。<code>leave</code> 依赖 <code>%rbp</code> 是可信的，这是帧指针被攻击的典型入口。</p>
+<div class="nb nb--注意"><p class="nb__head"><span class="nb__label">注意</span></p><p>只改 saved rbp 就能影响控制流，不要以为必须写满 24 字节才危险。<code>leave</code> 依赖 <code>%rbp</code> 是可信的，这是帧指针被攻击的典型入口。</p>
+</div>
 <h3 id="h-6"<code>gets</code> 与 <code>strcpy</code> 为什么不检查长度</h3>
-<p>条件：调用 <code>gets(buf)</code> 或 <code>strcpy(dst, src)</code>。</p>
-<p class="nb nb--结论"><span class="nb__label">结论</span>它们只认 <code>\0</code> 结尾，不知道目标容量，输入多长就写多长，所以只要输入超过缓冲区就一定溢出。</p>
+<div class="nb nb--定理"><p class="nb__head"><span class="nb__label">定理</span></p><p>条件：调用 <code>gets(buf)</code> 或 <code>strcpy(dst, src)</code>。</p>
+<p>它们只认 <code>\0</code> 结尾，不知道目标容量，输入多长就写多长，所以只要输入超过缓冲区就一定溢出。</p>
+</div>
 <p>什么时候用：解释漏洞来源，说明为什么安全版本要求显式长度。</p>
-<p class="nb nb--注意"><span class="nb__label">注意</span><code>fgets(buf, n, stdin)</code> 最多读 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span> 个字符并补 <code>\0</code>；<code>strncpy(dst, src, n)</code> 不保证结尾有 <code>\0</code>，必要时手动补。换成安全函数但长度算错，照样溢出。</p>
+<div class="nb nb--注意"><p class="nb__head"><span class="nb__label">注意</span></p><code>fgets(buf, n, stdin)</code> 最多读 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span> 个字符并补 <code>\0</code>；<code>strncpy(dst, src, n)</code> 不保证结尾有 <code>\0</code>，必要时手动补。换成安全函数但长度算错，照样溢出。</p>
+</div>
 <h3 id="h-7">小端字节序在注入地址里的作用</h3>
-<p>条件：要把一个 64 位目标地址写进溢出字符串。</p>
-<p class="nb nb--结论"><span class="nb__label">结论</span>x86-64 是小端，低字节在前。地址 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="monospace">0x0000000000401234</mtext></mrow><annotation encoding="application/x-tex">\texttt{0x0000000000401234}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6111em;"></span><span class="mord text"><span class="mord texttt">0x0000000000401234</span></span></span></span></span> 的字节序列是</p>
+<div class="nb nb--定理"><p class="nb__head"><span class="nb__label">定理</span></p><p>条件：要把一个 64 位目标地址写进溢出字符串。</p>
+<p>x86-64 是小端，低字节在前。地址 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="monospace">0x0000000000401234</mtext></mrow><annotation encoding="application/x-tex">\texttt{0x0000000000401234}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6111em;"></span><span class="mord text"><span class="mord texttt">0x0000000000401234</span></span></span></span></span> 的字节序列是</p>
 <p><span class="math-display"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mrow><mtext mathvariant="monospace">34</mtext><mtext> </mtext><mtext mathvariant="monospace">12</mtext><mtext> </mtext><mtext mathvariant="monospace">40</mtext><mtext> </mtext><mtext mathvariant="monospace">00</mtext><mtext> </mtext><mtext mathvariant="monospace">00</mtext><mtext> </mtext><mtext mathvariant="monospace">00</mtext><mtext> </mtext><mtext mathvariant="monospace">00</mtext><mtext> </mtext><mtext mathvariant="monospace">00</mtext></mrow><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\texttt{34 12 40 00 00 00 00 00}.</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6111em;"></span><span class="mord text"><span class="mord texttt">34 12 40 00 00 00 00 00</span></span><span class="mord">.</span></span></span></span></span></span></p>
+</div>
 <p>什么时候用：构造 payload、检查偏移是否对准返回地址、解释为什么地址里会出现很多 <code>00</code>。</p>
-<p class="nb nb--注意"><span class="nb__label">注意</span>地址中间的 <code>00</code> 会让 <code>strcpy</code> 提前截断；<code>gets</code> 读到换行就停。写 payload 时这两个细节都会让攻击串失效，考试里常问「为什么这样构造不成功」。</p>
+<div class="nb nb--注意"><p class="nb__head"><span class="nb__label">注意</span></p><p>地址中间的 <code>00</code> 会让 <code>strcpy</code> 提前截断；<code>gets</code> 读到换行就停。写 payload 时这两个细节都会让攻击串失效，考试里常问「为什么这样构造不成功」。</p>
+</div>
 <h3 id="h-8">栈保护、不可执行栈与 ASLR</h3>
-<p>条件：题目问某种防御能挡住哪类攻击。</p>
-<p class="nb nb--结论"><span class="nb__label">结论</span>canary 在局部变量和返回地址之间放一个随机值，函数返回前检查是否被改，溢出必须连续写、一定会踩坏它；NX 把栈页标记为不可执行，注入的代码一跑就崩；ASLR 随机化栈、堆、代码段的基址，让攻击者猜不准跳转地址。</p>
+<div class="nb nb--定理"><p class="nb__head"><span class="nb__label">定理</span></p><p>条件：题目问某种防御能挡住哪类攻击。</p>
+<p>canary 在局部变量和返回地址之间放一个随机值，函数返回前检查是否被改，溢出必须连续写、一定会踩坏它；NX 把栈页标记为不可执行，注入的代码一跑就崩；ASLR 随机化栈、堆、代码段的基址，让攻击者猜不准跳转地址。</p>
+</div>
 <p>什么时候用：解释某次溢出攻击为什么失败，判断绕过还需要什么条件。</p>
-<p class="nb nb--注意"><span class="nb__label">注意</span>canary 只保护返回地址，挡不住「只改局部变量导致逻辑被改」；NX 挡代码注入，挡不住 return-oriented programming；ASLR 只提高猜测难度，不是绝对安全。三层通常同时开启。</p>
+<div class="nb nb--注意"><p class="nb__head"><span class="nb__label">注意</span></p><p>canary 只保护返回地址，挡不住「只改局部变量导致逻辑被改」；NX 挡代码注入，挡不住 return-oriented programming；ASLR 只提高猜测难度，不是绝对安全。三层通常同时开启。</p>
+</div>
 <h3 id="h-9">编译器选项与安全函数</h3>
-<p>条件：要减少溢出风险，或实验环境要故意关掉保护。</p>
-<p class="nb nb--结论"><span class="nb__label">结论</span><code>-fstack-protector</code> 打开 canary，<code>-fno-stack-protector</code> 关闭；栈不可执行由链接选项控制；源码层用 <code>fgets</code>、<code>strncpy</code>、<code>snprintf</code> 替代 <code>gets</code>、<code>strcpy</code>、<code>sprintf</code>。</p>
+<div class="nb nb--定理"><p class="nb__head"><span class="nb__label">定理</span></p><p>条件：要减少溢出风险，或实验环境要故意关掉保护。</p>
+<code>-fstack-protector</code> 打开 canary，<code>-fno-stack-protector</code> 关闭；栈不可执行由链接选项控制；源码层用 <code>fgets</code>、<code>strncpy</code>、<code>snprintf</code> 替代 <code>gets</code>、<code>strcpy</code>、<code>sprintf</code>。</p>
+</div>
 <p>什么时候用：看编译命令、解释「为什么同样的代码在实验环境能溢出、在本机不行」。</p>
-<p class="nb nb--注意"><span class="nb__label">注意</span><code>-D_FORTIFY_SOURCE</code> 通常要配合优化才生效；安全函数用错长度同样溢出，不能只换函数不改逻辑。</p>
+<div class="nb nb--注意"><p class="nb__head"><span class="nb__label">注意</span></p><code>-D_FORTIFY_SOURCE</code> 通常要配合优化才生效；安全函数用错长度同样溢出，不能只换函数不改逻辑。</p>
+</div>
 <h2 id="h-10">常见问法与易错点</h2>
 <ul>
 <li>问「覆盖返回地址要多少字节」：<code>buf</code> 大小 + 保存的 rbp 8 字节；先看汇编确认 <code>buf</code> 起点。</li>
@@ -186,7 +200,7 @@
   </div>
   <nav class="article__toc" data-ui aria-label="本页目录">
           <h2>本页</h2>
-          <ol><li class=""><a href="#h-2">6.2 缓冲区溢出</a></li><li class="is-sub"><a href="#h-3">栈帧里 5 的越界写</a></li><li class="is-sub"><a href="#h-4">返回地址覆盖与输入偏移 24</a></li><li class="is-sub"><a href="#h-5">被覆盖的 saved rbp 会怎样</a></li><li class="is-sub"><a href="#h-6">26 与 27 为什么不检查长度</a></li><li class="is-sub"><a href="#h-7">小端字节序在注入地址里的作用</a></li><li class="is-sub"><a href="#h-8">栈保护、不可执行栈与 ASLR</a></li><li class="is-sub"><a href="#h-9">编译器选项与安全函数</a></li></ol>
+          <ol><li class=""><a href="#h-2">6.2 缓冲区溢出</a></li><li class="is-sub"><a href="#h-3">栈帧里 4 的越界写</a></li><li class="is-sub"><a href="#h-4">返回地址覆盖与输入偏移 24</a></li><li class="is-sub"><a href="#h-5">被覆盖的 saved rbp 会怎样</a></li><li class="is-sub"><a href="#h-6">5 与 6 为什么不检查长度</a></li><li class="is-sub"><a href="#h-7">小端字节序在注入地址里的作用</a></li><li class="is-sub"><a href="#h-8">栈保护、不可执行栈与 ASLR</a></li><li class="is-sub"><a href="#h-9">编译器选项与安全函数</a></li></ol>
           <dl class="spec spec--rail">
             <div><dt>章节</dt><dd>第 6 章</dd></div>
             <div><dt>节</dt><dd>1 节在范围内</dd></div>

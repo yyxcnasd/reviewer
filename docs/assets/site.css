@@ -4193,9 +4193,13 @@ body.is-focus .submit__preview {
 
 /* 定义 / 定理 / 注意 这类标签：小红字 + 稍缩进，扫读时一眼能定位 */
 .nb {
-  padding: 0.15em 0 0.15em 0.9em;
-  margin: 0 0 0.7em;
+  padding: 0.1em 0 0.1em 0.9em;
+  margin: 0.9em 0;
   border-left: 3px solid var(--line-strong);
+}
+
+.nb__head {
+  margin: 0 0 0.3em;
 }
 
 .nb > :last-child {
@@ -4299,16 +4303,7 @@ body.is-focus .submit__preview {
 }
 
 /* 通用小标题（定义 / 定理 / 易错点）当标签用，别当章节标题 */
-.article__main.prose h3.is-label {
-  font-size: var(--fs-micro);
-  letter-spacing: 0.12em;
-  color: var(--ink-mute);
-  margin: 1.3em 0 0.25em;
-}
 
-.article__toc li.is-label {
-  display: none;
-}
 
 /* 速查表头部：一行下拉 + 打印，课再多也不会撑爆 */
 .sheet-toolbar {

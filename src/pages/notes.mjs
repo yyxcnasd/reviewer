@@ -36,8 +36,7 @@ export function buildNotes(ctx) {
   const ordered = [...ctx.notes].sort((a, b) => a.chapter.order - b.chapter.order)
   ordered.forEach((note, idx) => {
     const headings = []
-    const rawHtml = ctx.renderMarkdown(note.body, { errors: ctx.errors, headings })
-    const html = withLabels(rawHtml)
+    const html = ctx.renderMarkdown(note.body, { errors: ctx.errors, headings })
 
     // 本章速览：把小节（h3）列在正文前面，手机上也有个索引
     // 速览只列课本小节，不列「这一章要会什么」「常见问法与易错点」这两个固定块
@@ -63,7 +62,7 @@ export function buildNotes(ctx) {
               ? `<ol>${tocItems
                   .map(
                     (h) =>
-                      `<li class="${h.level === 3 ? 'is-sub' : ''}${h.label ? ' is-label' : ''}"><a href="#${h.id}">${esc(h.text)}</a></li>`,
+                      `<li class="${h.level === 3 ? 'is-sub' : ''}"><a href="#${h.id}">${esc(h.text)}</a></li>`,
                   )
                   .join('')}</ol>`
               : ''
@@ -130,26 +129,3 @@ export function buildNotes(ctx) {
   })
 }
 
-/**
- * 把「定义：」「定理：」「注意：」这类开头包成带标签的段落，
- * 只是给已有的写法加一层可扫读的结构，不改内容。
- */
-const LABELS = ['定义', '定理', '性质', '结论', '推论', '注意', '易错', '警告', '例', '例题', '常用手法', '记法', '提示']
-
-const GENERIC_HEADINGS = new Set([
-  '定义', '定理', '性质', '结论', '推论', '注意', '易错点', '最容易错的一步',
-  '例题', '例', '步骤', '套路', '套路：列真值表', '常见写法', '提示',
-])
-
-function withLabels(html) {
-  const names = LABELS.join('|')
-  let out = html.replace(
-    new RegExp(`<p>(${names})([：:])\\s*`, 'g'),
-    (m, label) => `<p class="nb nb--${label}"><span class="nb__label">${label}</span>`,
-  )
-  // 把「### 定义」这种通用小标题降级成标签行，别当章节标题用
-  out = out.replace(/<h3[^>]*>([^<]{1,10})<\/h3>/g, (m, text) =>
-    GENERIC_HEADINGS.has(text.trim()) ? `<h3 class="is-label">${text}</h3>` : m,
-  )
-  return out
-}

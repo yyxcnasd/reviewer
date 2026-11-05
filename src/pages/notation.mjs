@@ -66,7 +66,7 @@ export function buildNotation(ctx) {
     <div class="pagehead__inner">
       <h1 class="pagehead__title">符号与写法</h1>
       <div class="pagehead__scope">
-        <p>题目、笔记、投稿都按这一页的写法。上面是符号约定，下面是排版语法。</p>
+        <p>题目、要点、投稿都按这一页的写法。上面是符号约定，下面是排版语法。</p>
         <div class="pagehead__stats">
           <span>${SHORTHANDS.length} 条缩写</span>
           <span><a href="${url(1, 'submit/')}">去投稿</a></span>
@@ -114,7 +114,7 @@ export function buildNotation(ctx) {
   </section>
 
   <section class="section--tight">
-    <div class="rule-head"><h2>区块</h2><p>定义、定理、例、注意这类内容用 <code>:::</code> 包起来。类型词决定颜色，标题写在方括号里。</p></div>
+    <div class="rule-head"><h2>区块</h2><p>定义、定理、例、注意这类内容一律用 <code>:::</code> 包起来，整块缩进并带彩色竖条。类型词决定颜色，标题写在方括号里。</p></div>
     <div class="nt-blocks">
       ${BLOCKS.map((b) => `<div class="mdx-block">
         <pre>${esc(b.sample)}</pre>
@@ -154,6 +154,7 @@ export function buildNotation(ctx) {
       <li><code>## 提示</code>、<code>## 解析</code>、<code>## 常见错误</code> 三段，顺序固定。</li>
       <li>解析里说清「关键的那一步为什么能想到」，别只贴过程。</li>
       <li>多行推导用 <code>\begin{aligned}</code> 或 <code>\begin{cases}</code>，不要用表格写步骤链。</li>
+      <li>旧的「定义：」「定理：」行内标签已经不再自动解析，一律写成 <code>:::</code> 区块。</li>
     </ul>
   </section>
 </div>`
