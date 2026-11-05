@@ -14,7 +14,7 @@
     ["\\Z", "\\mathbb{Z}"],
     ["\\Q", "\\mathbb{Q}"],
     ["\\C", "\\mathbb{C}"],
-    ["\\T", "^{\\mathrm{T}}"],
+    ["\\T", "^{\\top}"],
   ]
 
   function expandBraced(tex, name, open, close) {

@@ -51,7 +51,7 @@ export function buildPractice(ctx) {
     <div class="pagehead__inner">
       <h1 class="pagehead__title">刷题</h1>
       <div class="pagehead__scope">
-        <p>一次一道。先自己想，想不出来看提示，做完再展开解析。按科目和章节筛，或者整册随机。</p>
+        <p>一次一道。先想，再看提示与解析。</p>
       </div>
     </div>
   </header>

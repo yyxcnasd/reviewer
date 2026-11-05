@@ -35,7 +35,7 @@ export function buildSubmit(ctx) {
     <div class="pagehead__inner">
       <h1 class="pagehead__title">投稿一道题</h1>
       <div class="pagehead__scope">
-        <p>左边写、右边预览。<a href="${url(1, 'markdown/')}">写法说明</a>里写了公式和「定义 / 定理 / 注意」区块怎么用。</p>
+        <p>左边写、右边预览。<a href="${url(1, 'notation/')}">符号与写法</a>里写了公式、区块和题目格式。</p>
         </div>
       </div>
     </div>
@@ -161,7 +161,7 @@ export function buildSubmit(ctx) {
     <aside class="submit__preview">
       <h2><span>预览</span><span id="p-file">content/questions/…</span></h2>
       <div class="prose" id="preview">
-        <p class="hint">左边写题面，这里同步显示排版结果。行内公式用 \\( \\)，独立公式用 \\[ \\]。</p>
+        <p class="hint">左边写，这里出排版结果。</p>
       </div>
       <h2 class="submit__preview-sub">生成的 frontmatter</h2>
       <pre class="submit__fm" id="p-frontmatter"></pre>
@@ -169,7 +169,7 @@ export function buildSubmit(ctx) {
   </div>
 
   <section class="section--tight">
-    <div class="rule-head"><h2>投稿之后</h2><p>一道题从你写下来到出现在题库里，要过三步。</p></div>
+    <div class="rule-head"><h2>投稿之后</h2></div>
     <ol class="flow">
       <li><b>提</b><span>issue 里带着完整的 frontmatter 和文件名建议；太长放不下就下载 .md 附在评论里</span></li>
       <li><b>审</b><span>管理员看数学、看标签与难度、看有没有重复，必要时在 issue 里讨论</span></li>

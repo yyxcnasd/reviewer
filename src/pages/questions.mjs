@@ -46,7 +46,7 @@ export function buildQuestionIndex(ctx) {
     <div class="pagehead__inner">
       <h1 class="pagehead__title">题库</h1>
       <div class="pagehead__scope">
-        <p>${questions.length} 道题，按科目、章节、标签、难度筛；每题都有提示、解析和常见错误。</p>
+        <p>${questions.length} 道题。</p>
         <div class="pagehead__stats">
           ${courses.map((c) => `<span><b>${(ctx.qByCourse.get(c.id) || []).length}</b>${esc(c.name)}</span>`).join('')}
           <span><a href="${url(1, 'questions/?difficulty=4')}">难题 ${questions.filter((q) => q.difficulty >= 4).length} 道</a></span>

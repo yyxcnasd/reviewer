@@ -24,7 +24,7 @@ export const SHORTHANDS = [
   { key: '\\tr', tex: '\\operatorname{tr}', note: '迹' },
   { key: '\\diag', tex: '\\operatorname{diag}', note: '对角矩阵' },
   { key: '\\sgn', tex: '\\operatorname{sgn}', note: '符号函数' },
-  { key: '\\T', tex: '^{\\mathrm{T}}', note: '转置，写在矩阵右上角' },
+  { key: '\\T', tex: '^{\\top}', note: '转置，右上角' },
 ]
 
 /** 会展开的「无参数」缩写；后面紧跟字母时不算 */
@@ -44,7 +44,7 @@ const SIMPLE = [
   ['\\Z', '\\mathbb{Z}'],
   ['\\Q', '\\mathbb{Q}'],
   ['\\C', '\\mathbb{C}'],
-  ['\\T', '^{\\mathrm{T}}'],
+  ['\\T', '^{\\top}'],
 ]
 
 /** \abs{...} / \norm{...}：括号配对地替换 */

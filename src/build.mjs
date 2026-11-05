@@ -16,7 +16,6 @@ import { buildPractice } from './pages/practice.mjs'
 import { buildSubmit } from './pages/submit.mjs'
 import { buildAbout } from './pages/about.mjs'
 import { buildNotation } from './pages/notation.mjs'
-import { buildMarkdownHelp } from './pages/markdown-help.mjs'
 import { buildStats } from './pages/stats.mjs'
 import { browserSource } from './shorthands.mjs'
 import { buildExportPages } from './pages/export.mjs'
@@ -72,7 +71,6 @@ export async function buildSite(ctx) {
   buildSubmit(ctx)
   buildAbout(ctx)
   buildNotation(ctx)
-  buildMarkdownHelp(ctx)
   buildStats(ctx)
   buildNotFound(ctx)
 

@@ -56,7 +56,7 @@ export function buildStats(ctx) {
       <h1 class="pagehead__title">进度</h1>
       <div class="pagehead__scope st-head">
         <div class="st-head__text">
-          <p>你标过「已做」「收藏」的题会汇总在这里，按章节排。这些记录只存在这台设备的浏览器里，不上传，清缓存就没了。</p>
+          <p>「已做」「收藏」汇总在这里，只存在本机。</p>
           <div class="pagehead__stats">
             <span>共 ${total} 道题</span>
             <span data-progress-ids="${attr(ctx.questions.map((q) => q.id).join(','))}">已做 <b data-progress-here>0</b> 道</span>
@@ -80,7 +80,7 @@ export function buildStats(ctx) {
   <section class="section--tight">
     <div class="rule-head">
       <h2>难度的分布</h2>
-      <p>按五档难度看题库：第 5 档是硬核题，需要两跳以上。</p>
+      <p>第 5 档是硬核题。</p>
     </div>
     <ul class="st-diff">
       ${[1, 2, 3, 4, 5]

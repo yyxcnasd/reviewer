@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>符号与缩写 · 复习册</title>
-<meta name="description" content="本站的数学符号约定与 TeX 缩写表：e、i、d 用正体，\abs、\R、\rank 之类的短写会在构建时展开。">
+<title>符号与写法 · 复习册</title>
+<meta name="description" content="本站的数学符号约定、TeX 缩写、::: 区块语法与题目写法。">
 <meta name="color-scheme" content="light">
 <link rel="stylesheet" href="../assets/katex/katex.min.css">
 <link rel="stylesheet" href="../assets/site.css">
@@ -20,8 +20,8 @@
 <script src="../assets/theme.js" defer></script>
 <script src="../assets/term.js" defer></script>
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
-<meta property="og:title" content="符号与缩写 · 复习册">
-<meta property="og:description" content="本站的数学符号约定与 TeX 缩写表：e、i、d 用正体，\abs、\R、\rank 之类的短写会在构建时展开。">
+<meta property="og:title" content="符号与写法 · 复习册">
+<meta property="og:description" content="本站的数学符号约定、TeX 缩写、::: 区块语法与题目写法。">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="zh_CN">
 
@@ -48,6 +48,7 @@
           <li><a href="../practice/">刷题</a></li>
           <li><a href="../cheatsheet/">速查</a></li>
           <li><a href="../stats/">进度</a></li>
+          <li><a href="../notation/" aria-current="page">写法</a></li>
         </ul>
         <div class="nav__end">
           <div class="nav__terms" role="group" aria-label="考试轮次">
@@ -61,17 +62,17 @@
   </header>
 <main id="main">
 
-<div class="frame">
-  <nav class="crumb" aria-label="位置"><a href="../">复习册</a><span class="crumb__sep">/</span><span>符号</span></nav>
+<div class="frame nt-page">
+
+  <nav class="crumb" aria-label="位置"><a href="../">复习册</a><span class="crumb__sep">/</span><span>符号与写法</span></nav>
 
   <header class="pagehead">
     <div class="pagehead__inner">
-      <h1 class="pagehead__title">符号与缩写</h1>
+      <h1 class="pagehead__title">符号与写法</h1>
       <div class="pagehead__scope">
-        <p>题目与解析里统一用一套符号。写题时可以用缩写，构建时会展开成标准 TeX；读题时看到的就是下面这些形状。</p>
+        <p>题目、笔记、投稿都按这一页的写法。上面是符号约定，下面是排版语法。</p>
         <div class="pagehead__stats">
           <span>16 条缩写</span>
-          <span>展开在构建时完成</span>
           <span><a href="../submit/">去投稿</a></span>
         </div>
       </div>
@@ -79,7 +80,7 @@
   </header>
 
   <section class="section--tight">
-    <div class="rule-head"><h2>为什么 e 要正体</h2><p>这条规矩不是审美偏好。</p></div>
+    <div class="rule-head"><h2>为什么 e 要正体</h2></div>
     <div class="nt-why">
       <article class="nt-why__item">
         <h3>变量斜体，常数与算子正体</h3>
@@ -87,14 +88,14 @@
 </p>
       </article><article class="nt-why__item">
         <h3>所以本站的写法</h3>
-        <p><p>自然常数写成 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">e</mi></mrow><annotation encoding="application/x-tex">\mathrm{e}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathrm">e</span></span></span></span>，虚数单位写成 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">i</mi></mrow><annotation encoding="application/x-tex">\mathrm{i}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6679em;"></span><span class="mord mathrm">i</span></span></span></span>，微分算子写成 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">d</mi></mrow><annotation encoding="application/x-tex">\mathrm{d}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathrm">d</span></span></span></span>，转置写成 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>A</mi><mi mathvariant="normal">T</mi></msup></mrow><annotation encoding="application/x-tex">A^{\mathrm{T}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8413em;"></span><span class="mord"><span class="mord mathnormal">A</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8413em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathrm mtight">T</span></span></span></span></span></span></span></span></span></span></span></span>。构建时这些缩写会展开成 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">e</mi></mrow><annotation encoding="application/x-tex">\mathrm{e}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathrm">e</span></span></span></span>、<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">i</mi></mrow><annotation encoding="application/x-tex">\mathrm{i}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6679em;"></span><span class="mord mathrm">i</span></span></span></span>、<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">d</mi></mrow><annotation encoding="application/x-tex">\mathrm{d}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathrm">d</span></span></span></span>、<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mrow></mrow><mi mathvariant="normal">T</mi></msup></mrow><annotation encoding="application/x-tex">^{\mathrm{T}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8413em;"></span><span class="mord"><span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8413em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathrm mtight">T</span></span></span></span></span></span></span></span></span></span></span></span>，所以在页面上、在导出的 PDF 里看到的都是正体。</p>
+        <p><p>自然常数写成 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">e</mi></mrow><annotation encoding="application/x-tex">\mathrm{e}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathrm">e</span></span></span></span>，虚数单位写成 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">i</mi></mrow><annotation encoding="application/x-tex">\mathrm{i}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6679em;"></span><span class="mord mathrm">i</span></span></span></span>，微分算子写成 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">d</mi></mrow><annotation encoding="application/x-tex">\mathrm{d}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathrm">d</span></span></span></span>，转置写成 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>A</mi><mi mathvariant="normal">⊤</mi></msup></mrow><annotation encoding="application/x-tex">A^{\top}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8491em;"></span><span class="mord"><span class="mord mathnormal">A</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">⊤</span></span></span></span></span></span></span></span></span></span></span></span>（⊤）。构建时这些缩写会展开成 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">e</mi></mrow><annotation encoding="application/x-tex">\mathrm{e}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathrm">e</span></span></span></span>、<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">i</mi></mrow><annotation encoding="application/x-tex">\mathrm{i}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6679em;"></span><span class="mord mathrm">i</span></span></span></span>、<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">d</mi></mrow><annotation encoding="application/x-tex">\mathrm{d}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathrm">d</span></span></span></span>、<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mrow></mrow><mi mathvariant="normal">T</mi></msup></mrow><annotation encoding="application/x-tex">^{\mathrm{T}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8413em;"></span><span class="mord"><span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8413em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathrm mtight">T</span></span></span></span></span></span></span></span></span></span></span></span>，所以在页面上、在导出的 PDF 里看到的都是正体。</p>
 </p>
       </article>
     </div>
   </section>
 
   <section class="section--tight">
-    <div class="rule-head"><h2>改写对照</h2><p>左边是常见写法，右边是本站的统一写法。两列都能读，但右列不会让人误会。</p></div>
+    <div class="rule-head"><h2>改写对照</h2></div>
     <table class="nt-table">
       <thead><tr><th>常见写法</th><th>本站写法</th><th>说明</th></tr></thead>
       <tbody><tr>
@@ -130,9 +131,9 @@
     </tr><tr>
       <td class="nt__bad"><p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>A</mi><mi>T</mi></msup></mrow><annotation encoding="application/x-tex">A^T</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8413em;"></span><span class="mord"><span class="mord mathnormal">A</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8413em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.1389em;">T</span></span></span></span></span></span></span></span></span></span></span></p>
 </td>
-      <td class="nt__good"><p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>A</mi><mi mathvariant="normal">T</mi></msup></mrow><annotation encoding="application/x-tex">A^{\mathrm{T}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8413em;"></span><span class="mord"><span class="mord mathnormal">A</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8413em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathrm mtight">T</span></span></span></span></span></span></span></span></span></span></span></span></p>
+      <td class="nt__good"><p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>A</mi><mi mathvariant="normal">⊤</mi></msup></mrow><annotation encoding="application/x-tex">A^{\top}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8491em;"></span><span class="mord"><span class="mord mathnormal">A</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">⊤</span></span></span></span></span></span></span></span></span></span></span></span></p>
 </td>
-      <td class="nt__note">转置用正体 T</td>
+      <td class="nt__note">转置写 ⊤</td>
     </tr><tr>
       <td class="nt__bad"><p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∣</mi><mi>x</mi><mo>−</mo><mn>1</mn><mi mathvariant="normal">∣</mi><mo>&lt;</mo><mi>ε</mi></mrow><annotation encoding="application/x-tex">|x-1|&lt;\varepsilon</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∣</span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1∣</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">ε</span></span></span></span></p>
 </td>
@@ -144,7 +145,7 @@
   </section>
 
   <section class="section--tight">
-    <div class="rule-head"><h2>缩写表</h2><p>写题时直接打左边这一列。缩写后面紧跟字母时不生效，所以 <code>\exp</code>、<code>\det</code>、<code>\delta</code> 都不会被误伤。</p></div>
+    <div class="rule-head"><h2>缩写表</h2><p>缩写后紧跟字母时不生效。</p></div>
     <table class="nt-table nt-table--short">
       <thead><tr><th>缩写</th><th>展开成</th><th>渲染效果</th><th>说明</th></tr></thead>
       <tbody><tr>
@@ -239,21 +240,87 @@
       <td class="nt__note">符号函数</td>
     </tr><tr>
       <td class="nt__key"><code>\T</code></td>
-      <td class="nt__out"><code>^{\mathrm{T}}</code></td>
-      <td class="nt__demo"><p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>A</mi><mi mathvariant="normal">T</mi></msup></mrow><annotation encoding="application/x-tex">A^{\mathrm{T}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8413em;"></span><span class="mord"><span class="mord mathnormal">A</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8413em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathrm mtight">T</span></span></span></span></span></span></span></span></span></span></span></span></p>
+      <td class="nt__out"><code>^{\top}</code></td>
+      <td class="nt__demo"><p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>A</mi><mi mathvariant="normal">⊤</mi></msup></mrow><annotation encoding="application/x-tex">A^{\top}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8491em;"></span><span class="mord"><span class="mord mathnormal">A</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">⊤</span></span></span></span></span></span></span></span></span></span></span></span></p>
 </td>
-      <td class="nt__note">转置，写在矩阵右上角</td>
+      <td class="nt__note">转置，右上角</td>
     </tr></tbody>
     </table>
   </section>
 
   <section class="section--tight">
-    <div class="rule-head"><h2>还有几条</h2><p>不缩写，但常写错。</p></div>
+    <div class="rule-head"><h2>还有几条</h2></div>
     <ul class="ticks">
       <li>函数名用反斜杠：<code>\sin x</code>、<code>\ln x</code>、<code>\lim_{x\to 0}</code>，不要写 <code>sin x</code>（会被当成三个变量相乘）。</li>
       <li>行内公式用 <code>\( \)</code>，独立公式用 <code>\[ \]</code>；正文里的 <code>$</code> 不解析成公式。</li>
       <li>矩阵用 <code>\begin{pmatrix} … \end{pmatrix}</code>，圆括号；行间公式里的矩阵不要写在一行。</li>
       <li>多重积分与偏导：<code>\iint</code>、<code>\partial</code>；求导撇号直接写 <code>f'(x)</code>。</li>
+    </ul>
+  </section>
+
+  <section class="section--tight">
+    <div class="rule-head"><h2>区块</h2><p>定义、定理、例、注意这类内容用 <code>:::</code> 包起来。类型词决定颜色，标题写在方括号里。</p></div>
+    <div class="nt-blocks">
+      <div class="mdx-block">
+        <pre>:::theorem[中值定理]
+若 $f$ 在 $[a,b]$ 上连续……
+:::</pre>
+        <div class="mdx-block__note"><b>:::theorem[中值定理]</b><span>英文类型 + 方括号标题</span></div>
+      </div><div class="mdx-block">
+        <pre>:::warning[易错]
+分子必须同时出现 $f(x_0+h)$ 与 $f(x_0)$。
+:::</pre>
+        <div class="mdx-block__note"><b>:::warning[易错]</b><span>注意 / 易错，红色线</span></div>
+      </div><div class="mdx-block">
+        <pre>:::info[提示]
+先把公式配成标准形式再算。
+:::</pre>
+        <div class="mdx-block__note"><b>:::info[提示]</b><span>提示、小技巧，蓝色线</span></div>
+      </div><div class="mdx-block">
+        <pre>:::example[3.1]
+求 $x^2$ 的导数。
+:::</pre>
+        <div class="mdx-block__note"><b>:::example[3.1]</b><span>例题，标题写编号</span></div>
+      </div><div class="mdx-block">
+        <pre>:::定义
+设 $f$ 在 $x_0$ 的邻域内有定义……
+:::</pre>
+        <div class="mdx-block__note"><b>:::定义</b><span>中文类型也能直接写</span></div>
+      </div>
+    </div>
+    <table class="nt-table"><thead><tr><th>类型</th><th>显示</th><th>颜色</th></tr></thead><tbody>
+      <tr><td><code>theorem</code> <code>lemma</code> <code>proposition</code></td><td>定理 / 引理 / 命题</td><td>墨色</td></tr>
+      <tr><td><code>definition</code></td><td>定义</td><td>墨色</td></tr>
+      <tr><td><code>corollary</code> <code>conclusion</code></td><td>推论 / 结论</td><td>墨色</td></tr>
+      <tr><td><code>example</code></td><td>例</td><td>蓝色</td></tr>
+      <tr><td><code>warning</code> <code>danger</code> <code>caution</code> <code>note</code></td><td>注意</td><td>红色</td></tr>
+      <tr><td><code>info</code> <code>tip</code> <code>remark</code></td><td>提示</td><td>蓝色</td></tr>
+      <tr><td><code>proof</code></td><td>证明</td><td>灰色</td></tr>
+      <tr><td>中文：<code>定义 定理 引理 命题 性质 结论 推论 例 注意 易错 警告 提示 证明</code></td><td>同上</td><td>同上</td></tr>
+    </tbody></table>
+  </section>
+
+  <section class="section--tight">
+    <div class="rule-head"><h2>Markdown</h2></div>
+    <pre><code>## 二级标题
+### 三级标题
+
+- 无序列表
+1. 有序列表
+
+| 类型 | 字节 |
+| --- | --- |
+| int | 4 |</code></pre>
+    <p>代码块里的 <code>$</code> 与反斜杠不会被当成公式，可以放心写汇编和 LaTeX 源码。</p>
+  </section>
+
+  <section class="section--tight">
+    <div class="rule-head"><h2>题目怎么写</h2></div>
+    <ul class="ticks">
+      <li>题面直接写，不要加「题目：」前缀；分小问用 <code>(1)</code>、<code>(2)</code>。</li>
+      <li><code>## 提示</code>、<code>## 解析</code>、<code>## 常见错误</code> 三段，顺序固定。</li>
+      <li>解析里说清「关键的那一步为什么能想到」，别只贴过程。</li>
+      <li>多行推导用 <code>egin{aligned}</code> 或 <code>egin{cases}</code>，不要用表格写步骤链。</li>
     </ul>
   </section>
 </div>
@@ -287,7 +354,6 @@
           <h3>参与</h3>
           <ul>
             <li><a href="../submit/">投稿一道题</a></li>
-            <li><a href="../markdown/">写法说明</a></li>
             <li><a href="../about/">关于与范围说明</a></li>
             <li><a href="https://github.com/yyxcnasd/reviewer" target="_blank" rel="noopener noreferrer">GitHub 仓库</a></li>
           </ul>
@@ -297,7 +363,7 @@
           <ul>
             <li>2026 秋 期中版</li>
             <li>内容 CC BY-SA 4.0</li>
-            <li>构建于 2026-11-04</li>
+            <li>构建于 2026-11-05</li>
           </ul>
         </div>
       </div>

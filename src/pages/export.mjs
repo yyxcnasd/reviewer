@@ -46,7 +46,7 @@ function buildSelector(ctx) {
     <div class="pagehead__inner">
       <h1 class="pagehead__title">导出 PDF</h1>
       <div class="pagehead__scope">
-        <p>从 ${stats.questions} 道题里挑，挑完生成一份 A4 的卷子：只要题面，或者题面连同解析。浏览器打印对话框里把「目标」选成「另存为 PDF」就行。</p>
+        <p>挑题，生成 A4 卷子；打印对话框里选「另存为 PDF」。</p>
         <div class="pagehead__stats">
           <span>单题 / 整门课 / 一章 / 一个标签 / 手选</span>
           <span>可只出题面，也可题面+解析+答案</span>
@@ -130,7 +130,7 @@ function buildSelector(ctx) {
         <button class="btn btn--tone" type="button" id="ex-clear">清空选择</button>
       </div>
       <p class="exsum" id="ex-sum"></p>
-      <p class="exnote">选中的题会记在这台浏览器里，下次回来还在。链接可以发给同学，他打开就是同一份卷子。</p>
+      <p class="exnote">选择记在本机；链接发给同学即是同一份卷子。</p>
     </aside>
   </div>
 </div>

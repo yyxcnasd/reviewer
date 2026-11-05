@@ -72,7 +72,7 @@ export function buildCheatsheet(ctx) {
     <div class="pagehead__inner">
       <h1 class="pagehead__title">速查表</h1>
       <div class="pagehead__scope sheet-toolbar">
-        <p class="sheet-toolbar__lead">每门课最常用的一批结论。期末版包含期中内容，打印时一门课一张纸。</p>
+        <p class="sheet-toolbar__lead">期末版包含期中内容；一门课一张纸。</p>
         <div class="sheet-toolbar__actions">
           <label class="sr-only" for="sheet-pick">选择科目</label>
           <select class="select" id="sheet-pick">

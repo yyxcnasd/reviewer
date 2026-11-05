@@ -37,6 +37,7 @@ export function page(ctx, opts) {
     { label: '刷题', href: 'practice/', key: 'practice' },
     { label: '速查', href: 'cheatsheet/', key: 'cheatsheet' },
     { label: '进度', href: 'stats/', key: 'stats' },
+    { label: '写法', href: 'notation/', key: 'notation' },
   ]
   const courseMenu = `<li class="nav__menu-wrap">
           <details class="navmenu">
@@ -114,7 +115,6 @@ export function page(ctx, opts) {
           <h3>参与</h3>
           <ul>
             <li><a href="${base}submit/">投稿一道题</a></li>
-            <li><a href="${base}markdown/">写法说明</a></li>
             <li><a href="${base}about/">关于与范围说明</a></li>
             <li><a href="https://github.com/${esc(config.repo)}" target="_blank" rel="noopener noreferrer">GitHub 仓库</a></li>
           </ul>

@@ -62,7 +62,7 @@ export function buildAbout(ctx) {
 
     <h2>内容怎么组织的</h2>
     <p>所有中文内容都是仓库里的 Markdown 文件：一题一个文件放在 <code>content/questions/</code>，一章要点一个文件放在 <code>content/notes/</code>，章节与轮次范围写在 <code>content/courses.yml</code>。构建脚本读这些文件，生成题库、标签页、章节索引和这一页。</p>
-    <p>题目全部自编，难度按「基础、常规、综合、挑战」四档标，个别难题会写明关键那一步怎么想到。图片来自公有领域与开放授权的藏品，出处见下表。</p>
+    <p>题目全部自编，难度分五档；图片来自公有领域，出处见下表。</p>
 
     <h2>技术</h2>
     <p>纯静态站点。一个 Node 脚本把 Markdown 生成 HTML，公式用 KaTeX 在构建时渲染成 HTML，关掉 JavaScript 也能读题。部署在 GitHub Pages，链接都是相对路径，放在任何子路径下都能用。</p>
