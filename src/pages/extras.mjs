@@ -47,7 +47,7 @@ export function buildNotFound(ctx) {
       <li><a href="${url(0, 'questions/')}">题库（${ctx.stats.questions} 道）</a></li>
       <li><a href="${url(0, 'practice/')}">刷题</a></li>
       <li><a href="${url(0, 'cheatsheet/')}">速查表</a></li>
-      <li><a href="${url(0, 'notation/')}">符号与缩写</a></li>
+      <li><a href="${url(0, 'notation/')}">符号与写法</a></li>
       <li><a href="${url(0, 'export/')}">导出 PDF</a></li>
     </ul>
   </div>
