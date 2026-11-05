@@ -41,6 +41,11 @@
       const chip = el.matches('[data-chip]') ? el : el.querySelector('[data-chip]')
       if (chip) {
         chip.textContent = LABEL[state]
+        // 先清掉服务端渲染时留下的状态类，否则期中是「部分在范围」时，期末切过去还留着红框
+        for (const cls of [...chip.classList]) {
+          if (/^(chip|chapter__label)--/.test(cls)) chip.classList.remove(cls)
+        }
+        chip.classList.add('chip--' + state)
         chip.classList.toggle('chip--in', state === 'in')
         chip.classList.toggle('chip--boundary', state === 'boundary')
         chip.classList.toggle('chip--out', state === 'out')
