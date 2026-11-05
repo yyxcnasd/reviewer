@@ -425,27 +425,6 @@ courses:
               final: in
             keywords: [线性空间, 基, 维数, 坐标, 过渡矩阵, 子空间]
 
-  # 「其他」：不挂任何课程的题（课外、竞赛、方法论……）。管理员可以直接在这里加新的大分类。
-  - id: other
-    name: 其他
-    short: 其他
-    accent: ink
-    book: 不限于课本的题
-    scope_line: 不受考纲限制
-    scope_note: 这一类不参与期中/期末的范围判定，投什么都可以。
-    notes_intro: 课外的、竞赛的、或者只是觉得有意思的题放这里。
-    chapters:
-      - id: other-1
-        no: ""
-        title: 其他题目
-        state: in
-        terms:
-          midterm: in
-          final: in
-        summary: 课外的、竞赛的，或者只是觉得有意思的题。
-        sections: []
-
-  # 离散数学1：只有期末，没有期中。
   - id: dm1
     name: 离散数学1
     short: 离散 1
@@ -792,3 +771,25 @@ courses:
             state: in
             terms: { midterm: in, final: in }
             keywords: [缓冲区溢出, 栈溢出, 返回地址覆盖, 栈保护, 不可执行栈, ASLR]
+
+  # 「其他」：不挂任何课程的题（课外、竞赛、方法论……）。管理员可以直接在这里加新的大分类。
+  - id: other
+    name: 其他
+    short: 其他
+    accent: ink
+    book: 不限于课本的题
+    scope_line: 不受考纲限制
+    scope_note: 这一类不参与期中/期末的范围判定，投什么都可以。
+    notes_intro: 课外的、竞赛的、或者只是觉得有意思的题放这里。
+    chapters:
+      - id: other-1
+        no: ""
+        title: 其他题目
+        state: in
+        terms:
+          midterm: in
+          final: in
+        summary: 课外的、竞赛的，或者只是觉得有意思的题。
+        sections: []
+
+  # 离散数学1：只有期末，没有期中。
